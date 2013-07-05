@@ -1,0 +1,18 @@
+<scene>
+  <actor costume="rocket1" x="339" y="330" direction="90.0" start="default"/>
+  <actor costume="stone1a" x="127" y="237" direction="0.0" start="default"/>
+  <actor costume="stone1b" x="355" y="-26" direction="0.0" start="default"/>
+  <actor costume="stone1b" x="601" y="55" direction="0.0" start="default"/>
+  <actor costume="stone1b" x="833" y="132" direction="0.0" start="default"/>
+  <actor costume="stone1a" x="66" y="448" direction="0.0" start="default"/>
+  <actor costume="stone1b" x="99" y="618" direction="0.0" start="default"/>
+  <actor costume="stone1b" x="341" y="710" direction="0.0" start="default"/>
+  <actor costume="stone1b" x="717" y="840" direction="0.0" start="default"/>
+  <actor costume="stone1a" x="963" y="275" direction="0.0" start="default"/>
+  <actor costume="stone1a" x="920" y="507" direction="0.0" start="default"/>
+  <actor costume="stone1a" x="507" y="390" direction="0.0" start="default"/>
+  <actor costume="stone1a" x="190" y="45" direction="0.0" start="default"/>
+  <actor costume="stone1a" x="858" y="742" direction="0.0" start="default"/>
+  <actor costume="stone1b" x="523" y="775" direction="0.0" start="default"/>
+  <actor costume="rocket2Baloon" x="357" y="74" direction="0.0" start="default"/>
+</scene>

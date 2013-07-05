@@ -1,0 +1,36 @@
+<scene>
+  <actor costume="background" x="400" y="300" direction="0.0" start="default"/>
+  <actor costume="level" x="383" y="329" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="1"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="32"/>
+  </actor>
+  <actor costume="level" x="309" y="300" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="2"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="32"/>
+  </actor>
+  <actor costume="level" x="256" y="376" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="3"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="32"/>
+  </actor>
+  <actor costume="level" x="284" y="451" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="4"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="32"/>
+  </actor>
+  <actor costume="level" x="362" y="473" direction="0.0" start="default">
+    <property name="fontColor" value="#ea8138ff"/>
+    <property name="levelNumber" value="5"/>
+    <property name="font" value="blackCasper"/>
+    <property name="fontSize" value="32"/>
+  </actor>
+  <text text="Back" font="boycott" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.ithrust.Button" x="740" y="33" direction="0.0" start="default">
+    <property name="action" value="menu"/>
+  </text>
+</scene>

@@ -1,0 +1,6 @@
+<scene>
+  <text text="Well Done" font="boycott" size="111" color="#22bb22" x="393" y="422" direction="0.0" start="default"/>
+  <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.ithrust.ThrustButtonBehaviour" x="307" y="23" direction="0.0" start="default">
+    <property name="action" value="menu"/>
+  </text>
+</scene>

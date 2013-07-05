@@ -1,0 +1,11 @@
+*~
+/ithrust.jar
+/.project
+/.classpath
+/.settings
+/native
+/docs/api
+/build
+/bin
+/lib/
+/resources/defaultGui

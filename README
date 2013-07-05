@@ -1,0 +1,7 @@
+iThrust is a 2D game set in rocky caverns. Your goal is to collect resources,
+before jumping to the next location. The caverns are narrow, and the lightest
+of touches will damage your hull, killing you instantly.
+
+Written in Java, using Jame and Ichy to do all the heavy lifting.
+
+

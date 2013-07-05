@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="IThrust" default="build" basedir=".">
+
+    <property name="jarfile" value="ithrust.jar" />
+
+    <path id="project.class.path">
+        <fileset dir=".">
+            <include name="ithrust.jar"/>
+        </fileset>
+        <fileset dir="lib">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+	
+    <target name="build">
+        <mkdir dir="../build"/>
+        <javac
+            srcdir="src"
+            destdir="build"
+            classpathref="project.class.path"
+            deprecation="on"
+        	debug="on"
+        	debugLevel="lines,vars,source"
+        	includeantruntime="false"
+        />
+        <jar jarfile="${jarfile}">
+            <fileset dir="build">
+                <include name="**/*.class"/>
+          </fileset>
+        </jar>
+
+    </target>
+
+</project>
