@@ -29,7 +29,17 @@
                 <include name="**/*.class"/>
           </fileset>
         </jar>
-
     </target>
 
+    <!-- Clean -->
+    <target name="clean">
+        <delete includeEmptyDirs="true">
+            <fileset dir=".">
+                <include name="ithrust.jar" />
+                <include name="build/**" />
+                <exclude name="build" />
+            </fileset>
+        </delete>
+    </target>
+	
 </project>

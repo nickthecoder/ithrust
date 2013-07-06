@@ -2,6 +2,7 @@ package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
 
 public class Ball extends Behaviour
 {
@@ -39,7 +40,7 @@ public class Ball extends Behaviour
 	            }
 	        }
 	        
-	        this.speedY += Ship.gravity;
+	        this.speedY += Thrust.gravity;
 	        this.getActor().moveBy( this.speedX, this.speedY );
 		}
 
@@ -51,6 +52,17 @@ public class Ball extends Behaviour
 			this.rod.disconnect();
 		}
         this.deathEvent( "death" );
+        
+        new ExplosionBehaviour()
+        .projectiles(30).projectilesPerClick(3)
+        .distance(20, 40)
+        .gravity(Thrust.gravity)
+        .rotate(true).spin(-10, 10)
+        .scale(0.3, 0.5)
+        .alpha(230,255).fade(0.9, 1.5)
+        .speed(0.1, 1.5).vx(this.speedX / 4).vy(this.speedY / 4)
+        .createActor(this.actor, "fragment")
+        .activate();
 	}
 	
 }

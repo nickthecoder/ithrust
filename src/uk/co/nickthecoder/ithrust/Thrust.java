@@ -22,6 +22,9 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
 public class Thrust extends Game
 {
+    public static double gravity = -0.02;;
+    
+    
     public static final String RESOURCES = "resources/ithrust/thrust.xml";
 
     public static Thrust singleton = new Thrust();
@@ -40,7 +43,7 @@ public class Thrust extends Game
 
     private final Set<Integer> completedLevels = new HashSet<Integer>();
 
-    public static final RGBA BACKGROUND = new RGBA( 0,0,0 );
+    public static final RGBA BACKGROUND = new RGBA( 30,30,30 );
     
     public Thrust()
     {
@@ -49,9 +52,6 @@ public class Thrust extends Game
     private void go()
         throws Exception
     {
-        Itchy.singleton.init( this );
-        this.resources.load( RESOURCES );
-
         this.mainLayer = new ScrollableLayer( new Rect( 0, 0, this.getWidth(), this.getHeight() ), BACKGROUND, false );
         this.mainLayer.enableMouseListener();
         Itchy.singleton.getGameLayer().add( this.mainLayer );
@@ -62,7 +62,8 @@ public class Thrust extends Game
         this.fadeLayer = new ScrollableLayer( new Rect( 0, 0, this.getWidth(), this.getHeight() ), null, false );
         Itchy.singleton.getGameLayer().add( this.fadeLayer );
 
-        this.fadeActor = new Actor( this.resources.getPose( "white" ) );
+        this.fadeActor = new Actor( this.resources.getPose( "background" ) );
+        this.fadeActor.moveTo( 400, 300 );
         this.fadeActor.getAppearance().setAlpha( 0 );
         this.fadeActor.activate();
         this.fadeLayer.add( this.fadeActor );
@@ -250,6 +251,8 @@ public class Thrust extends Game
         System.out.println( "Welcome to Thrust" );
 
         try {
+            Itchy.singleton.init( Thrust.singleton );
+            Thrust.singleton.resources.load( RESOURCES );
             
             if ( (argv.length == 1) && ("--editor".equals( argv[0] )) ) {
                 Thrust.singleton.startEditor();
