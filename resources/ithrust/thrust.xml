@@ -8,28 +8,29 @@
   <ninePatches/>
   <poses>
     <pose name="rod1" filename="rod1.png" offsetX="0"/>
-    <pose name="white" filename="white.png" offsetX="0" offsetY="600"/>
     <pose name="stone1a" filename="stone1a.png"/>
     <pose name="level-completed" filename="level-completed.png" offsetX="34" offsetY="38"/>
     <pose name="stone1c" filename="stone1c.png"/>
     <pose name="stone1b" filename="stone1b.png"/>
-    <pose name="rocket2Baloon" filename="rocket2Baloon.png"/>
     <pose name="level" filename="level.png" offsetX="34" offsetY="33"/>
+    <pose name="wrappedRocket2" filename="wrappedRocket2.png"/>
     <pose name="background" filename="background.png"/>
     <pose name="rocket2" filename="rocket2.png"/>
     <pose name="tile1" filename="tile1.png"/>
     <pose name="rocket1" filename="rocket1.png" direction="90.0"/>
     <pose name="puff" filename="puff.png"/>
+    <pose name="wrapping" filename="wrapping.png"/>
   </poses>
   <sounds>
     <sound name="explode" filename="sounds/explode.ogg"/>
     <sound name="thrust" filename="sounds/thrust.ogg"/>
+    <sound name="ding" filename="sounds/ding.ogg"/>
     <sound name="noise" filename="sounds/noise.ogg"/>
   </sounds>
   <animations>
-    <animation name="fade">
+    <animation name="hide">
       <sequence loops="1">
-        <alpha ticks="50" from="255.0" to="0.0" profile="linear"/>
+        <alpha ticks="50" from="0.0" to="0.0" profile="linear"/>
       </sequence>
     </animation>
   </animations>
@@ -37,6 +38,14 @@
     <costume name="level" behaviour="uk.co.nickthecoder.ithrust.PickLevelBehaviour">
       <pose name="default" pose="level"/>
       <pose name="completed" pose="level-completed"/>
+    </costume>
+    <costume name="wrappedRocket2" behaviour="uk.co.nickthecoder.ithrust.Ball">
+      <pose name="default" pose="wrappedRocket2"/>
+      <pose name="contents" pose="rocket2"/>
+      <pose name="wrapping" pose="wrapping"/>
+      <sound name="death" sound="explode"/>
+      <sound name="touched" sound="ding"/>
+      <sound name="taught" sound="ding"/>
     </costume>
     <costume name="background">
       <pose name="default" pose="background"/>
@@ -64,14 +73,10 @@
       <sound name="thrust" sound="thrust"/>
       <sound name="turn" sound="noise"/>
       <sound name="death" sound="explode"/>
-      <animation name="death" animation="fade"/>
+      <animation name="death" animation="hide"/>
     </costume>
     <costume name="stone1b" behaviour="uk.co.nickthecoder.ithrust.Solid">
       <pose name="default" pose="stone1b"/>
-    </costume>
-    <costume name="rocket2Baloon" behaviour="uk.co.nickthecoder.ithrust.Ball">
-      <pose name="default" pose="rocket2Baloon"/>
-      <sound name="death" sound="explode"/>
     </costume>
   </costumes>
   <scenes>

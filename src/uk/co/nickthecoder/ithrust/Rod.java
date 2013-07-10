@@ -33,7 +33,7 @@ public class Rod extends Behaviour
         rodActor.getAppearance().setScale(0.1);
         rodActor.moveTo(ship.getActor());
         rodActor.setBehaviour(this);
-        ship.getActor().getLayer().add(rodActor);
+        ship.getActor().getLayer().addBelow(rodActor, ship.getActor());
         rodActor.activate();
 
     }
@@ -44,7 +44,6 @@ public class Rod extends Behaviour
         this.actor.moveTo(this.ship.getActor());
         this.actor.getAppearance().setDirection(this.ball.getActor());
 
-
         double shipBallDistance = this.ship.getActor().distanceTo(this.ball.getActor());
 
         if (!this.extended) {
@@ -54,6 +53,7 @@ public class Rod extends Behaviour
                 // Has the rod extended far enough to reach the ball?
                 if (this.actor.getAppearance().getScale() * this.poseWidth >= shipBallDistance) {
                     this.extended = true;
+                    this.ball.event("touched");
                 }
             } else {
                 this.actor.getAppearance().adjustScale(-0.02);
@@ -97,7 +97,7 @@ public class Rod extends Behaviour
                         return;
                     }
                 }
-                
+
                 double dist = this.actor.distanceTo(this.ball.getActor());
                 double dd = dist - this.ship.pickupDistance;
 
@@ -126,6 +126,7 @@ public class Rod extends Behaviour
 
     public void disconnect()
     {
+        this.ball.event("disconnect");
         this.ship.rodDisconnected();
         this.actor.kill();
     }

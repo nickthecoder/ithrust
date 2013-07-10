@@ -58,6 +58,9 @@ Chopped the end to make a little shorter
 Gate online
 online.ogg
 
+39320__the-bizniss__glass-d.wav
+http://www.freesound.org/people/THE_bizniss/sounds/39320/
+ding.ogg
 
 =============
 Plan to use :
@@ -67,7 +70,8 @@ Plan to use :
 http://www.freesound.org/samplesViewSingle.php?id=19931
 Countdown to a building / object exploding (as in thrust).
 
-40969__dobroide__20070915.3explosions.wav
+40969__dobroide__20
+070915.3explosions.wav
 http://www.freesound.org/samplesViewSingle.php?id=40969
 
 12654__mich3d__Drop_Slow_Long_01.wav

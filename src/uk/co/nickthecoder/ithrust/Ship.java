@@ -5,18 +5,21 @@ import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
+import uk.co.nickthecoder.itchy.util.Fragment;
 import uk.co.nickthecoder.itchy.util.ProjectileBehaviour;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Sound;
 
 public class Ship extends Behaviour
 {
-
+    private static final double DEAD_SLOW_DOWN = 0.99;
+    
     public double rotationSpeed = 3;
 
     public double thrust = 0.1;
 
     public double speedX = 0.0;
+    
     public double speedY = 0.0;
 
     public double pickupDistance = 200;
@@ -27,13 +30,23 @@ public class Ship extends Behaviour
     public void init()
     {
         this.actor.addTag("solid");
+
+        // Create the fragments for the explosions when I get shot.
+        new Fragment().actor(this.actor).create("fragment");
     }
 
     @Override
     public void tick()
     {
 
-        this.speedY += Thrust.gravity;
+        if ( this.actor.isDying()) {
+            // Gently brake the ship so that the scroll layer still scrolls, but not too far.
+            this.speedX *= DEAD_SLOW_DOWN;
+            this.speedY *= DEAD_SLOW_DOWN;
+        } else {
+            this.speedY += Thrust.gravity;            
+        }
+        
         this.actor.moveBy(this.speedX, this.speedY);
 
         ((ScrollableLayer) this.actor.getLayer()).ceterOn(this.actor);
@@ -119,15 +132,14 @@ public class Ship extends Behaviour
         }
         this.deathEvent("death");
 
-        new ExplosionBehaviour()
+        new ExplosionBehaviour(this.actor)
             .projectiles(30)
-            .distance(5, 20)
-            .rotate(true).spin(-10, 10)
-            .scale(0.6, 0.8)
-            .alpha(150,200).fade(0.8, 1.6)
-            .speed(2, 3).vx(this.speedX).vy(this.speedY)
+            .forwards()
+            .spin(-.2, .2)
+            .fade(0.8, 1.6)
+            .speed(0.5,2).vx(this.speedX).vy(this.speedY)
             .gravity(Thrust.gravity)
-            .createActor(this.actor, "fragment")
+            .createActor("fragment")
             .activate();
     }
 
