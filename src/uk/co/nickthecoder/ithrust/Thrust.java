@@ -14,7 +14,6 @@ import uk.co.nickthecoder.itchy.animation.AnimationListener;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
 import uk.co.nickthecoder.itchy.editor.Editor;
-
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
@@ -23,11 +22,10 @@ import uk.co.nickthecoder.jame.event.KeyboardEvent;
 public class Thrust extends Game
 {
     public static double gravity = -0.02;;
-    
-    
+
     public static final String RESOURCES = "resources/ithrust/thrust.xml";
 
-    public static Thrust singleton = new Thrust();
+    public static Thrust singleton;
 
     public ScrollableLayer mainLayer;
 
@@ -43,76 +41,78 @@ public class Thrust extends Game
 
     private final Set<Integer> completedLevels = new HashSet<Integer>();
 
-    public static final RGBA BACKGROUND = new RGBA( 30,30,30 );
+    public static final RGBA BACKGROUND = new RGBA(30, 30, 30);
+
     
-    public Thrust()
+    public Thrust() throws Exception
     {
+        Itchy.singleton.init(this);
+        resources.load(RESOURCES);
     }
 
-    private void go()
-        throws Exception
+    @Override
+    public void init()
     {
-        this.mainLayer = new ScrollableLayer( new Rect( 0, 0, this.getWidth(), this.getHeight() ), BACKGROUND, false );
+        Rect screenSize = new Rect(0, 0, this.getWidth(), this.getHeight());
+        this.mainLayer = new ScrollableLayer(screenSize, BACKGROUND);
         this.mainLayer.enableMouseListener();
-        Itchy.singleton.getGameLayer().add( this.mainLayer );
+        Itchy.singleton.getGameLayer().add(this.mainLayer);
 
-        this.glassLayer = new ScrollableLayer( new Rect( 0, 0, this.getWidth(), this.getHeight() ), null, false );
-        Itchy.singleton.getGameLayer().add( this.glassLayer );
+        this.glassLayer = new ScrollableLayer(screenSize);
+        Itchy.singleton.getGameLayer().add(this.glassLayer);
 
-        this.fadeLayer = new ScrollableLayer( new Rect( 0, 0, this.getWidth(), this.getHeight() ), null, false );
-        Itchy.singleton.getGameLayer().add( this.fadeLayer );
+        this.fadeLayer = new ScrollableLayer(screenSize);
+        Itchy.singleton.getGameLayer().add(this.fadeLayer);
 
-        this.fadeActor = new Actor( this.resources.getPose( "background" ) );
-        this.fadeActor.moveTo( 400, 300 );
-        this.fadeActor.getAppearance().setAlpha( 0 );
+        this.fadeActor = new Actor(this.resources.getPose("background"));
+        this.fadeActor.moveTo(400, 300);
+        this.fadeActor.getAppearance().setAlpha(0);
         this.fadeActor.activate();
-        this.fadeLayer.add( this.fadeActor );
+        this.fadeLayer.add(this.fadeActor);
 
         this.levelNumber = 1;
-        
-        Itchy.singleton.addEventListener( this );
-        this.startScene( "menu" );
-        Itchy.singleton.loop();
 
+        Itchy.singleton.addEventListener(this);
+        this.startScene("menu");
     }
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
     {
-        if ( ke.isReleased() ) {
+        if (ke.isReleased()) {
             return false;
         }
 
-        if ( "levels".equals( this.sceneName ) ) {
-            if ( ke.symbol == Keys.RETURN ) {
+        if ("levels".equals(this.sceneName)) {
+            if (ke.symbol == Keys.RETURN) {
                 this.play();
                 return true;
             }
         }
 
-        if ( "menu".equals( this.sceneName ) ) {
-            if ( ke.symbol == Keys.ESCAPE ) {
+        if ("menu".equals(this.sceneName)) {
+            if (ke.symbol == Keys.ESCAPE) {
                 Itchy.singleton.terminate();
                 return true;
             }
 
-            if ( (ke.symbol == Keys.p) || (ke.symbol == Keys.RETURN) ) {
-                this.startScene( "levels" );
+            if ((ke.symbol == Keys.p) || (ke.symbol == Keys.RETURN)) {
+                this.startScene("levels");
                 return true;
             }
 
-            if ( ke.symbol == Keys.a ) {
-                this.startScene( "about" );
+            if (ke.symbol == Keys.a) {
+                this.startScene("about");
             }
 
         } else {
-            if ( ke.symbol == Keys.ESCAPE ) {
-                this.startScene( "menu" );
+            if (ke.symbol == Keys.ESCAPE) {
+                this.startScene("menu");
             }
             return true;
         }
 
-        return super.onKeyDown( ke );
+        return super.onKeyDown(ke);
     }
 
     @Override
@@ -128,41 +128,41 @@ public class Thrust extends Game
 
     public boolean startScene( String sceneName )
     {
-        System.out.println( "Starting scene " + sceneName );
+        System.out.println("Starting scene " + sceneName);
 
         this.sceneName = sceneName;
 
         try {
-            final Scene scene = this.resources.getScene( this.sceneName );
-            if (scene == null)  {
-            	System.out.println( "Scene not found " + sceneName );
+            final Scene scene = this.resources.getScene(this.sceneName);
+            if (scene == null) {
+                System.out.println("Scene not found " + sceneName);
                 return false;
             }
 
             Thrust.this.mainLayer.deactivateAll();
 
-            AlphaAnimation fadeOut = new AlphaAnimation( 10, NumericAnimation.linear, 0, 255 );
-            AlphaAnimation fadeIn = new AlphaAnimation( 10, NumericAnimation.linear, 255, 0 );
-            CompoundAnimation animation = new CompoundAnimation( true );
-            animation.addAnimation( fadeOut );
-            animation.addAnimation( fadeIn );
+            AlphaAnimation fadeOut = new AlphaAnimation(10, NumericAnimation.linear, 0, 255);
+            AlphaAnimation fadeIn = new AlphaAnimation(10, NumericAnimation.linear, 255, 0);
+            CompoundAnimation animation = new CompoundAnimation(true);
+            animation.addAnimation(fadeOut);
+            animation.addAnimation(fadeIn);
 
-            fadeOut.addAnimationListener( new AnimationListener()
+            fadeOut.addAnimationListener(new AnimationListener()
             {
                 @Override
                 public void finished()
                 {
                     Thrust.this.mainLayer.clear();
                     Thrust.this.mainLayer.scrollTo(0, 0);
-                    
-                    scene.create( Thrust.this.mainLayer, false );
+
+                    scene.create(Thrust.this.mainLayer, false);
 
                 }
-            } );
+            });
 
-            this.fadeActor.setAnimation( animation );
+            this.fadeActor.setAnimation(animation);
 
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -171,7 +171,7 @@ public class Thrust extends Game
 
     public boolean completedLevel( int level )
     {
-        return this.completedLevels.contains( level );
+        return this.completedLevels.contains(level);
     }
 
     public void play( int levelNumber )
@@ -182,30 +182,26 @@ public class Thrust extends Game
 
     public boolean play()
     {
-        DecimalFormat df = new DecimalFormat( "00" );
-        return this.startScene(  "level" + df.format( this.levelNumber ) );
+        DecimalFormat df = new DecimalFormat("00");
+        return this.startScene("level" + df.format(this.levelNumber));
     }
 
     public void action( String action )
     {
-        if ( "play".equals( action ) ) {
-            this.startScene( "levels" );
+        if ("play".equals(action)) {
+            this.startScene("levels");
 
-        } else if ( "menu".equals( action ) ) {
-            this.startScene( "menu" );
+        } else if ("menu".equals(action)) {
+            this.startScene("menu");
 
-        } else if ( "about".equals( action ) ) {
-            this.startScene( "about" );
+        } else if ("about".equals(action)) {
+            this.startScene("about");
 
-        } else if ( "editor".equals( action ) ) {
+        } else if ("editor".equals(action)) {
             this.startEditor();
-            try {
-            	this.go();
-            } catch (Exception e) {
-            	e.printStackTrace();
-            }
 
-        } else if ( "quit".equals( action  ) ) {
+
+        } else if ("quit".equals(action)) {
             Itchy.singleton.terminate();
         }
     }
@@ -213,10 +209,10 @@ public class Thrust extends Game
     private void startEditor()
     {
         try {
-            Editor editor = new Editor( Thrust.singleton );
+            Editor editor = new Editor(Thrust.singleton);
             editor.init();
-            editor.go();
-        } catch ( Exception e ) {
+            editor.start();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -245,26 +241,23 @@ public class Thrust extends Game
         return "resources/ithrust/icon.bmp";
     }
 
-
     public static void main( String argv[] )
     {
-        System.out.println( "Welcome to Thrust" );
+        System.out.println("Welcome to Thrust");
 
         try {
-            Itchy.singleton.init( Thrust.singleton );
-            Thrust.singleton.resources.load( RESOURCES );
+            singleton = new Thrust();
             
-            if ( (argv.length == 1) && ("--editor".equals( argv[0] )) ) {
+            if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
                 Thrust.singleton.startEditor();
             } else {
-                Thrust.singleton.go();
+                Thrust.singleton.start();
             }
 
-        } catch ( Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println( "Goodbye from Thrust" );
+        System.out.println("Goodbye from Thrust");
     }
 
 }
-

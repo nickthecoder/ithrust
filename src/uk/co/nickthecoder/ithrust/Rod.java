@@ -108,8 +108,8 @@ public class Rod extends Behaviour
                 double dx1 = cos * dd;
                 double dy1 = sin * dd;
 
-                double ballFactor = 1.0 / (this.ball.weight + 1);
-                double shipFactor = this.ball.weight / (this.ball.weight + 1);
+                double ballFactor = ship.weight / (this.ball.weight + ship.weight);
+                double shipFactor = this.ball.weight / (this.ball.weight + ship.weight);
 
                 this.ship.getActor().moveBy(dx1 * shipFactor, dy1 * shipFactor);
                 this.ship.speedX += dx1 * shipFactor;

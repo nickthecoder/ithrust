@@ -19,7 +19,7 @@
   <actor costume="tile1" x="248" y="149" direction="0.0" start="default"/>
   <actor costume="tile1" x="176" y="308" direction="0.0" start="default"/>
   <actor costume="tile1" x="167" y="492" direction="0.0" start="default"/>
-  <actor costume="rocket1" x="339" y="330" direction="90.0" start="default"/>
+  <actor costume="rocket1" x="352" y="216" direction="90.0" start="default"/>
   <actor costume="stone1a" x="127" y="237" direction="0.0" start="default"/>
   <actor costume="stone1b" x="355" y="-26" direction="0.0" start="default"/>
   <actor costume="stone1b" x="601" y="55" direction="0.0" start="default"/>
@@ -34,5 +34,5 @@
   <actor costume="stone1a" x="190" y="45" direction="0.0" start="default"/>
   <actor costume="stone1a" x="858" y="742" direction="0.0" start="default"/>
   <actor costume="stone1b" x="523" y="775" direction="0.0" start="default"/>
-  <actor costume="wrappedRocket2" x="357" y="74" direction="0.0" start="default"/>
+  <actor costume="wrappedRocket2" x="356" y="74" direction="90.0" start="default"/>
 </scene>

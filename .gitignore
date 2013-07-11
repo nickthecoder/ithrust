@@ -1,11 +1,13 @@
 *~
-/ithrust.jar
 /.project
 /.classpath
 /.settings
-/native
 /docs/api
 /build
 /bin
 /lib/
 /resources/defaultGui
+/resources/ithrust/pod.png
+/resources/ithrust/sounds/orig/
+/resources/ithrust/work/
+

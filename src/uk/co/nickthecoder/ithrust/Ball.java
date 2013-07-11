@@ -2,17 +2,20 @@ package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
-import uk.co.nickthecoder.itchy.util.Fragment;
+import uk.co.nickthecoder.itchy.extras.Fragment;
+import uk.co.nickthecoder.itchy.util.DoubleProperty;
+import uk.co.nickthecoder.itchy.extras.Explosion;
 
 public class Ball extends Behaviour
 {
-
     public double speedX = 0;
+    
     public double speedY = 0;
+    
     public double weight = 1.0;
 
     private boolean moving = false;
+    
     private Rod rod;
 
     @Override
@@ -20,12 +23,22 @@ public class Ball extends Behaviour
     {
         this.actor.addTag("solid");
         this.actor.addTag("ball");
-        
+        createFragments();
+    }
+    
+    @Override
+    public void addProperties()
+    {
+        addProperty(new DoubleProperty("Weight", "weight"));
+    }
+    
+    void createFragments()
+    {
         // Create the fragments for the explosions when I get shot.
-        new Fragment().actor(this.actor).pieces(10).pose("wrapping").create("wrappingFragment");
+        new Fragment().actor(this.actor).pieces(10).pose("shell").create("wrappingFragment");
         new Fragment().actor(this.actor).pieces(4).pose("contents").create("contentsFragment");
     }
-
+    
     public void connect( Rod rod )
     {
         this.moving = true;
@@ -62,7 +75,7 @@ public class Ball extends Behaviour
         }
         this.deathEvent("death");
 
-        new ExplosionBehaviour(this.actor)
+        new Explosion(this.actor)
             .projectiles(12)
             .gravity(Thrust.gravity)
             .forwards()
@@ -72,7 +85,7 @@ public class Ball extends Behaviour
             .createActor("contentsFragment")
             .activate();
 
-        new ExplosionBehaviour(this.actor)
+        new Explosion(this.actor)
             .projectiles(30)
             .gravity(Thrust.gravity)
             .forwards()

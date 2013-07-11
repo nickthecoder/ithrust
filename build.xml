@@ -2,12 +2,9 @@
 <!DOCTYPE project>
 <project name="IThrust" default="build" basedir=".">
 
-    <property name="jarfile" value="ithrust.jar" />
+    <property name="jarfile" value="lib/ithrust.jar" />
 
     <path id="project.class.path">
-        <fileset dir=".">
-            <include name="ithrust.jar"/>
-        </fileset>
         <fileset dir="lib">
             <include name="*.jar"/>
         </fileset>
@@ -35,7 +32,7 @@
     <target name="clean">
         <delete includeEmptyDirs="true">
             <fileset dir=".">
-                <include name="ithrust.jar" />
+                <include name="lib/ithrust.jar" />
                 <include name="build/**" />
                 <exclude name="build" />
             </fileset>

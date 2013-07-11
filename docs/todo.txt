@@ -1,0 +1,35 @@
+Use neighbourhoods to optimise the collision detection.
+    As there are large collidable images, it is vital that they are placed into multiple squares.
+    i.e. they will need a new Collision strategy object. 
+
+Maybe allow the editor to have multiple layers.
+    Background images go on the background layer automatically.
+    If we do that we might as well have a foreground layer too, which allows the ships to be hidden
+    while moving through tunnels.
+    Note, the effects layer would have to be below the foreground layer.
+        i.e. background, main, effets, foreground.
+    Make the first such tunnal objvious, by making the entrance and exit long and thin.
+    Later, you can test for holes using your bullets.
+   
+Explosions and other non-interacting, but moving objects go in their own layer above the others.
+    The background layer, and the main layer can be rendered using neighbourhoods.
+        Useful if the world if large, because then many objects won't be considered for rendering.
+        
+Ensire that the redrawing checks the alpha channel, if it has one, then it
+        
+Game ideas
+==========
+
+Gates to end the level.
+
+Water and other liquids - cause lots of drag.
+    Need to fill up the bucket to get the water/fuel.
+    Maybe the collision is done using math rather than pixels.
+        Pixels *could* tell you when it partually and fully submerged - by using a second image below the sutface.
+        
+Doors and buttons
+    Have them swing back on hinges.
+    
+Gun emplacements (like thrust)
+    Random, aimed, seeking. Laser (use a succession of small lines, till one hits).
+        

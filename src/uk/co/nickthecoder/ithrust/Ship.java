@@ -4,34 +4,58 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
-import uk.co.nickthecoder.itchy.util.ExplosionBehaviour;
-import uk.co.nickthecoder.itchy.util.Fragment;
-import uk.co.nickthecoder.itchy.util.ProjectileBehaviour;
+import uk.co.nickthecoder.itchy.extras.Explosion;
+import uk.co.nickthecoder.itchy.extras.Follower;
+import uk.co.nickthecoder.itchy.extras.Fragment;
+import uk.co.nickthecoder.itchy.extras.Projectile;
+import uk.co.nickthecoder.itchy.util.DoubleProperty;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Sound;
 
 public class Ship extends Behaviour
 {
     private static final double DEAD_SLOW_DOWN = 0.99;
-    
+
     public double rotationSpeed = 3;
 
     public double thrust = 0.1;
 
     public double speedX = 0.0;
-    
+
     public double speedY = 0.0;
+
+    public double weight = 1.0;
 
     public double pickupDistance = 200;
 
+    private boolean switchingEnds = false;
+
     private Rod rod;
+
+    private Follower wrapping;
+
+    private Follower unwrapping;
 
     @Override
     public void init()
     {
         this.actor.addTag("solid");
+        this.createFragments();
+    }
 
-        // Create the fragments for the explosions when I get shot.
+    @Override
+    public void addProperties()
+    {
+        addProperty(new DoubleProperty("Thrust", "thrust"));
+        addProperty(new DoubleProperty("Rotation Speed", "rotationSpeed"));
+        addProperty(new DoubleProperty("Weight", "weight"));
+    }
+
+    /**
+     * Create the fragments for the explosions when I get shot.
+     */
+    void createFragments()
+    {
         new Fragment().actor(this.actor).create("fragment");
     }
 
@@ -39,20 +63,30 @@ public class Ship extends Behaviour
     public void tick()
     {
 
-        if ( this.actor.isDying()) {
+        if (this.actor.isDying()) {
             // Gently brake the ship so that the scroll layer still scrolls, but not too far.
             this.speedX *= DEAD_SLOW_DOWN;
             this.speedY *= DEAD_SLOW_DOWN;
         } else {
-            this.speedY += Thrust.gravity;            
+            this.speedY += Thrust.gravity;
         }
-        
+
         this.actor.moveBy(this.speedX, this.speedY);
 
-        ((ScrollableLayer) this.actor.getLayer()).ceterOn(this.actor);
+        if (!this.switchingEnds) {
+            ((ScrollableLayer) this.actor.getLayer()).ceterOn(this.actor);
+        }
 
         if (this.actor.isDying()) {
             return;
+        }
+
+        if (this.switchingEnds) {
+            return;
+        }
+
+        if (connected() && Itchy.singleton.isKeyDown(Keys.q)) {
+            beginSwitchEnds();
         }
 
         if (Itchy.singleton.isKeyDown(Keys.LEFT)) {
@@ -90,6 +124,94 @@ public class Ship extends Behaviour
         this.rod = null;
     }
 
+    public boolean connected()
+    {
+        if (this.rod == null) {
+            return false;
+        }
+        return this.rod.connected;
+    }
+
+    public void beginSwitchEnds()
+    {
+        if (this.switchingEnds) {
+            return;
+        }
+        this.switchingEnds = true;
+
+        System.out.println("Switching ends");
+        Ball ball = this.rod.ball;
+        Actor ballActor = ball.getActor();
+
+        this.wrapping = new Follower(this.actor);
+        this.wrapping.createActor(ballActor.getCostume()).activate();
+        this.wrapping.event("wrapping");
+
+        this.unwrapping = new Follower(ballActor);
+        this.unwrapping.createActor(ballActor.getCostume()).activate();
+        this.unwrapping.deathEvent("unwrapping");
+        ballActor.event("contents");
+
+        Pod pod = new Pod(this, ball);
+        pod.createActor(this.actor.getLayer(), "pod").activate();
+
+    }
+
+    public void completeSwitchEnds()
+    {
+        System.out.println("completeSwitchEnds");
+        this.switchingEnds = false;
+
+        this.wrapping.getActor().kill();
+        this.unwrapping.getActor().kill();
+        
+        Actor shipActor = this.actor;
+
+        if (this.rod != null) {
+            Ball ball = this.rod.ball;
+            Actor ballActor = ball.getActor();
+
+            ball.event("touched"); // Make a noise
+
+            // Change the costumes.
+            // The ball changes to whatever the current ship looks like when wrapped.
+            // The ship changes to whatever the ball looks like unwrapped.
+            String wrappedCostumeName = this.actor.getCostume().getString("wrappedCostume");
+            String unwrappedCostumeName = ballActor.getCostume().getString("unwrappedCostume");
+
+            System.out.println("Costume for ball : " + wrappedCostumeName);
+            System.out.println("Costume for ship : " + unwrappedCostumeName);
+
+            this.actor.setCostume(Itchy.singleton.getResources().getCostume(unwrappedCostumeName));
+            ballActor.setCostume(Itchy.singleton.getResources().getCostume(wrappedCostumeName));
+            this.actor.event("default");
+            ballActor.event("default");
+
+            // The new costumes may not have their fragments created yet...
+            ball.createFragments();
+            this.createFragments();
+
+            double tx = this.getActor().getX();
+            double ty = this.getActor().getY();
+
+            // MORE switch vx,vy and other attributes.
+            double tmp;
+            tmp = this.speedX;
+            this.speedX = ball.speedX;
+            ball.speedX = tmp;
+            tmp = this.speedY;
+            this.speedY = ball.speedY;
+            ball.speedY = tmp;
+
+            this.getActor().moveTo(ballActor);
+            ballActor.moveTo(tx, ty);
+
+        }
+
+        shipActor.getAppearance().setDirection(90);
+
+    }
+
     public void turn( double amount )
     {
         this.actor.getAppearance().adjustDirection(amount);
@@ -109,7 +231,7 @@ public class Ship extends Behaviour
         this.speedX += this.thrust * cos;
         this.speedY += this.thrust * sin;
 
-        Actor puff = new ProjectileBehaviour()
+        Actor puff = new Projectile()
             .vx(this.speedX).vy(this.speedY)
             .fade(3)
             .speed(1)
@@ -132,12 +254,12 @@ public class Ship extends Behaviour
         }
         this.deathEvent("death");
 
-        new ExplosionBehaviour(this.actor)
+        new Explosion(this.actor)
             .projectiles(30)
             .forwards()
             .spin(-.2, .2)
             .fade(0.8, 1.6)
-            .speed(0.5,2).vx(this.speedX).vy(this.speedY)
+            .speed(0.5, 2).vx(this.speedX).vy(this.speedY)
             .gravity(Thrust.gravity)
             .createActor("fragment")
             .activate();
