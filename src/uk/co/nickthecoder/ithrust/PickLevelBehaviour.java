@@ -21,10 +21,10 @@ public class PickLevelBehaviour extends Behaviour implements MouseListener
     @Property(label="Font Size")
     public int fontSize = 22;
 
-    @Property(label="Font Colour")
+    @Property(label="Font Colour", alpha=false)
     public RGBA fontColor = new RGBA( 255, 255, 255 );
 
-    @Property(label="Shadow Colour")
+    @Property(label="Shadow Colour", alpha=false)
     public RGBA shadowColor = new RGBA( 0,0,0 );
 
     @Override
