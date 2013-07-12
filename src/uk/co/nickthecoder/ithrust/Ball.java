@@ -3,7 +3,7 @@ package uk.co.nickthecoder.ithrust;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.util.DoubleProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 
 public class Ball extends Behaviour
@@ -11,7 +11,8 @@ public class Ball extends Behaviour
     public double speedX = 0;
     
     public double speedY = 0;
-    
+ 
+    @Property(label="Weight")
     public double weight = 1.0;
 
     private boolean moving = false;
@@ -24,12 +25,6 @@ public class Ball extends Behaviour
         this.actor.addTag("solid");
         this.actor.addTag("ball");
         createFragments();
-    }
-    
-    @Override
-    public void addProperties()
-    {
-        addProperty(new DoubleProperty("Weight", "weight"));
     }
     
     void createFragments()

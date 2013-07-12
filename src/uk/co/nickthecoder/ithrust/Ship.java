@@ -8,7 +8,7 @@ import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Follower;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Projectile;
-import uk.co.nickthecoder.itchy.util.DoubleProperty;
+import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Sound;
 
@@ -16,15 +16,18 @@ public class Ship extends Behaviour
 {
     private static final double DEAD_SLOW_DOWN = 0.99;
 
+    @Property(label="Rotation Speed")
     public double rotationSpeed = 3;
 
+    @Property(label="Thrust")
     public double thrust = 0.1;
+
+    @Property(label="Weight")
+    public double weight = 1.0;
 
     public double speedX = 0.0;
 
     public double speedY = 0.0;
-
-    public double weight = 1.0;
 
     public double pickupDistance = 200;
 
@@ -41,14 +44,6 @@ public class Ship extends Behaviour
     {
         this.actor.addTag("solid");
         this.createFragments();
-    }
-
-    @Override
-    public void addProperties()
-    {
-        addProperty(new DoubleProperty("Thrust", "thrust"));
-        addProperty(new DoubleProperty("Rotation Speed", "rotationSpeed"));
-        addProperty(new DoubleProperty("Weight", "weight"));
     }
 
     /**

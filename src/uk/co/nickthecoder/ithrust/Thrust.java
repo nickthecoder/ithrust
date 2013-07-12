@@ -186,22 +186,21 @@ public class Thrust extends Game
         return this.startScene("level" + df.format(this.levelNumber));
     }
 
-    public void action( String action )
+    public void onMessage( String message )
     {
-        if ("play".equals(action)) {
+        if ("play".equals(message)) {
             this.startScene("levels");
 
-        } else if ("menu".equals(action)) {
+        } else if ("menu".equals(message)) {
             this.startScene("menu");
 
-        } else if ("about".equals(action)) {
+        } else if ("about".equals(message)) {
             this.startScene("about");
 
-        } else if ("editor".equals(action)) {
+        } else if ("editor".equals(message)) {
             this.startEditor();
 
-
-        } else if ("quit".equals(action)) {
+        } else if ("quit".equals(message)) {
             Itchy.singleton.terminate();
         }
     }

@@ -30,7 +30,7 @@
     <property name="font" value="blackCasper"/>
     <property name="fontSize" value="32"/>
   </actor>
-  <text text="Back" font="boycott" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.ithrust.Button" x="740" y="33" direction="0.0" start="default">
-    <property name="action" value="menu"/>
+  <text text="Back" font="boycott" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="740" y="33" direction="0.0" start="default">
+    <property name="message" value="menu"/>
   </text>
 </scene>

@@ -1,17 +1,17 @@
 <scene>
   <actor costume="background" x="400" y="300" direction="0.0" start="default"/>
   <text text="THRUST" font="boycott" size="244" color="#222222" x="398" y="470" direction="0.0" start="default"/>
-  <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.ithrust.Button" x="379" y="141" direction="0.0" start="default">
-    <property name="action" value="about"/>
+  <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="379" y="141" direction="0.0" start="default">
+    <property name="message" value="about"/>
   </text>
   <text text="Thrust" font="boycott" size="228" color="#cc2222" x="398" y="479" direction="0.0" start="default"/>
-  <text text="Play" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.ithrust.Button" x="377" y="295" direction="0.0" start="default">
-    <property name="action" value="play"/>
+  <text text="Play" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="377" y="295" direction="0.0" start="default">
+    <property name="message" value="play"/>
   </text>
-  <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.ithrust.Button" x="376" y="215" direction="0.0" start="default">
-    <property name="action" value="editor"/>
+  <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="376" y="215" direction="0.0" start="default">
+    <property name="message" value="editor"/>
   </text>
-  <text text="Quit" font="boycott" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.ithrust.Button" x="722" y="47" direction="0.0" start="default">
-    <property name="action" value="quit"/>
+  <text text="Quit" font="boycott" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="722" y="47" direction="0.0" start="default">
+    <property name="message" value="quit"/>
   </text>
 </scene>
