@@ -32,18 +32,18 @@
   <animations>
     <animation name="hide">
       <sequence loops="1">
-        <alpha ticks="50" from="0.0" to="0.0" profile="linear"/>
+        <alpha ticks="50" target="0.0" profile="linear"/>
       </sequence>
     </animation>
     <animation name="unwrapping">
       <sequence loops="1">
         <move ticks="30" dx="0.0" dy="0.0" profile="unit"/>
-        <alpha ticks="80" from="255.0" to="0.0" profile="linear"/>
+        <alpha ticks="80" target="0.0" profile="linear"/>
       </sequence>
     </animation>
     <animation name="wrapping">
       <sequence loops="1">
-        <alpha ticks="80" from="0.0" to="255.0" profile="linear"/>
+        <alpha ticks="80" target="255.0" profile="linear"/>
       </sequence>
     </animation>
   </animations>

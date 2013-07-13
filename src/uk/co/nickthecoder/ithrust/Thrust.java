@@ -141,8 +141,8 @@ public class Thrust extends Game
 
             Thrust.this.mainLayer.deactivateAll();
 
-            AlphaAnimation fadeOut = new AlphaAnimation(10, NumericAnimation.linear, 0, 255);
-            AlphaAnimation fadeIn = new AlphaAnimation(10, NumericAnimation.linear, 255, 0);
+            AlphaAnimation fadeOut = new AlphaAnimation(10, NumericAnimation.linear, 255);
+            AlphaAnimation fadeIn = new AlphaAnimation(10, NumericAnimation.linear, 0);
             CompoundAnimation animation = new CompoundAnimation(true);
             animation.addAnimation(fadeOut);
             animation.addAnimation(fadeIn);
