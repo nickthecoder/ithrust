@@ -1,11 +1,15 @@
-<scene>
-  <actor costume="background" x="400" y="300" direction="0.0" start="default"/>
-  <text text="Written by Nick Robinson" font="boycott" size="22" color="#ffffff" x="409" y="350" direction="0.0" start="default"/>
-  <text text="Version 0.1" font="boycott" size="22" color="#ffffff" x="412" y="390" direction="0.0" start="default"/>
-  <text text="Back" font="boycott" size="38" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="731" y="41" direction="0.0" start="default">
-    <property name="message" value="menu"/>
-  </text>
-  <text text="THRUST" font="boycott" size="156" color="#222222" x="416" y="493" direction="0.0" start="default"/>
-  <text text="thrust" font="boycott" size="150" color="#cc2222" x="416" y="491" direction="0.0" start="default"/>
-  <text text="©2012" font="veraBold" size="31" color="#000000" x="732" y="576" direction="0.0" start="default"/>
+<scene showMouse="true">
+  <layer name="background">
+    <actor costume="background" x="400" y="300" direction="0.0" start="default"/>
+  </layer>
+  <layer name="main">
+    <text text="Written by Nick Robinson" font="boycott" size="22" color="#ffffff" x="409" y="350" direction="0.0" start="default"/>
+    <text text="Version 0.1" font="boycott" size="22" color="#ffffff" x="412" y="390" direction="0.0" start="default"/>
+    <text text="Back" font="boycott" size="38" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="731" y="41" direction="0.0" start="default">
+      <property name="message" value="menu"/>
+    </text>
+    <text text="THRUST" font="boycott" size="156" color="#222222" x="416" y="493" direction="0.0" start="default"/>
+    <text text="thrust" font="boycott" size="150" color="#cc2222" x="416" y="491" direction="0.0" start="default"/>
+    <text text="©2012" font="veraBold" size="31" color="#000000" x="732" y="576" direction="0.0" start="default"/>
+  </layer>
 </scene>

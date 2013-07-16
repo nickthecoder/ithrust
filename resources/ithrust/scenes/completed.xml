@@ -1,6 +1,12 @@
-<scene>
-  <text text="Well Done" font="boycott" size="111" color="#22bb22" x="393" y="422" direction="0.0" start="default"/>
-  <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="307" y="23" direction="0.0" start="default">
-    <property name="message" value="menu"/>
-  </text>
+<scene showMouse="true">
+  <layer name="background">
+    <actor costume="background" x="400" y="300" direction="0.0" start="default"/>
+  </layer>
+  <layer name="main">
+    <text text="Well Done" font="boycott" size="111" color="#000044" x="386" y="464" direction="0.0" start="default"/>
+    <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="408" y="28" direction="0.0" start="default">
+      <property name="message" value="menu"/>
+    </text>
+    <text text="WELL DONE" font="boycott" size="108" color="#ffffff" x="384" y="460" direction="0.0" start="default"/>
+  </layer>
 </scene>

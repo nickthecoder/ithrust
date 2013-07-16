@@ -3,7 +3,6 @@ package uk.co.nickthecoder.ithrust;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.ScrollableLayer;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Follower;
 import uk.co.nickthecoder.itchy.extras.Fragment;
@@ -69,7 +68,7 @@ public class Ship extends Behaviour
         this.actor.moveBy(this.speedX, this.speedY);
 
         if (!this.switchingEnds) {
-            ((ScrollableLayer) this.actor.getLayer()).ceterOn(this.actor);
+            Thrust.game.centerOn(this.actor);
         }
 
         if (this.actor.isDying()) {

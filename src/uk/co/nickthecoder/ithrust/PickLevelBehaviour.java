@@ -30,7 +30,7 @@ public class PickLevelBehaviour extends Behaviour implements MouseListener
     @Override
     public void init()
     {
-        if ( Thrust.singleton.completedLevel( this.levelNumber ) ) {
+        if ( Thrust.game.completedLevel( this.levelNumber ) ) {
             this.actor.event( "completed" );
         }
 
@@ -52,7 +52,7 @@ public class PickLevelBehaviour extends Behaviour implements MouseListener
     public boolean onMouseDown( MouseButtonEvent event )
     {
         if ( this.actor.contains( event.x, event.y ) ) {
-        	Thrust.singleton.play( this.levelNumber );
+        	Thrust.game.play( this.levelNumber );
             return true;
         }
         return false;

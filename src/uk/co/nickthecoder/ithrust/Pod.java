@@ -1,7 +1,6 @@
 package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.ScrollableLayer;
 
 public class Pod extends Behaviour
 {
@@ -38,7 +37,7 @@ public class Pod extends Behaviour
         double y = this.ship.getActor().getY() * (1 - value) + this.ball.getActor().getY() * value;
 
         this.actor.moveTo(x, y);
-        ((ScrollableLayer) this.actor.getLayer()).ceterOn(this.actor);
+        Thrust.game.centerOn(this.actor);
 
         this.progress += SPEED;
         if (this.progress > 1) {

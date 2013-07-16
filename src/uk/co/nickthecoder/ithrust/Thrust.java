@@ -25,8 +25,12 @@ public class Thrust extends Game
 
     public static final String RESOURCES = "resources/ithrust/thrust.xml";
 
-    public static Thrust singleton;
+    public static Thrust game;
+    
+    
 
+    public ScrollableLayer backgroundLayer;
+    
     public ScrollableLayer mainLayer;
 
     public ScrollableLayer glassLayer;
@@ -48,21 +52,22 @@ public class Thrust extends Game
     {
         Itchy.singleton.init(this);
         resources.load(RESOURCES);
-    }
 
-    @Override
-    public void init()
-    {
         Rect screenSize = new Rect(0, 0, this.getWidth(), this.getHeight());
-        this.mainLayer = new ScrollableLayer(screenSize, BACKGROUND);
-        this.mainLayer.enableMouseListener();
-        Itchy.singleton.getGameLayer().add(this.mainLayer);
+        
+        this.backgroundLayer= new ScrollableLayer("background",screenSize, BACKGROUND);
+        this.layers.add(this.backgroundLayer);
+        
+        this.mainLayer = new ScrollableLayer("main",screenSize, null);
+        this.layers.add(this.mainLayer);
+        
+        this.glassLayer = new ScrollableLayer("glass",screenSize);
+        this.glassLayer.locked = true;
+        this.layers.add(this.glassLayer);
 
-        this.glassLayer = new ScrollableLayer(screenSize);
-        Itchy.singleton.getGameLayer().add(this.glassLayer);
-
-        this.fadeLayer = new ScrollableLayer(screenSize);
-        Itchy.singleton.getGameLayer().add(this.fadeLayer);
+        this.fadeLayer = new ScrollableLayer("fade",screenSize);
+        this.fadeLayer.locked= true;
+        this.layers.add(this.fadeLayer);
 
         this.fadeActor = new Actor(this.resources.getPose("background"));
         this.fadeActor.moveTo(400, 300);
@@ -70,11 +75,27 @@ public class Thrust extends Game
         this.fadeActor.activate();
         this.fadeLayer.add(this.fadeActor);
 
+    }
+
+    @Override
+    public void init()
+    {
         this.levelNumber = 1;
+
+        this.mainLayer.disableMouseListener();
+        this.mainLayer.enableMouseListener();
 
         Itchy.singleton.addEventListener(this);
         this.startScene("menu");
     }
+    
+
+    public void centerOn( Actor actor )
+    {
+        this.mainLayer.ceterOn(actor);
+        this.backgroundLayer.ceterOn(actor);
+    }
+
 
     @Override
     public boolean onKeyDown( KeyboardEvent ke )
@@ -208,7 +229,7 @@ public class Thrust extends Game
     private void startEditor()
     {
         try {
-            Editor editor = new Editor(Thrust.singleton);
+            Editor editor = new Editor(Thrust.game);
             editor.init();
             editor.start();
         } catch (Exception e) {
@@ -245,12 +266,12 @@ public class Thrust extends Game
         System.out.println("Welcome to Thrust");
 
         try {
-            singleton = new Thrust();
+            game = new Thrust();
             
             if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
-                Thrust.singleton.startEditor();
+                Thrust.game.startEditor();
             } else {
-                Thrust.singleton.start();
+                Thrust.game.start();
             }
 
         } catch (Exception e) {
