@@ -1,3 +1,32 @@
-The textures are from mayang.com
+Textures
+========
+The textures including the rocks and main background image are from mayang.com
 http://www.mayang.com/textures/
+
+License (taken from http://www.mayang.com/textures/) :
+
+These textures are Copyright © Mayang Murni Adnin, 2001-2012. They have all been taken by our own cameras or created by ourselves.
+Use:
+
+They are free to use for all uses, whether commercial or non-commercial (you may incorporate them into your derived work with no requirement to pay us any licensing fee etc). Your derived work must involve significant modification to the textures. It would be nice if you could credit us.
+Sell:
+
+You may not sell any of these textures in an unmodified form, or any derived works where the product you are selling is still a texture and is likely to compete with this website.
+Redistribute:
+
+You may redistribute (give/send to somebody else/display on a web site) up to 30 of these textures together, but no more. You must credit this website as the original source (tell them about us).
+
+
+Other Images
+============
+Wrapping, pod, level, level-completed, puff, rod
+
+Created by Nick Robinson using Inkscape and/or gimp.
+Released to the public domain.
+
+Rockets
+=======
+Heavily processed from photos of toy rockets.
+The real objects were much longer (as you would expect for a rocket in stable flight!)
+
 
