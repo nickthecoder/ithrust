@@ -3,10 +3,76 @@
     <actor costume="background" x="400" y="300" direction="0.0" start="default"/>
   </layer>
   <layer name="main">
-    <text text="Well Done" font="boycott" size="111" color="#000044" x="386" y="464" direction="0.0" start="default"/>
-    <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="408" y="28" direction="0.0" start="default">
+    <actor costume="ball" x="410" y="96" direction="0.0" start="default">
+      <property name="weight" value="1.0"/>
+    </actor>
+    <text text="Well Done" font="boycott" size="111" color="#000044" x="386" y="464" direction="0.0" start=""/>
+    <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="410" y="91" direction="0.0" start="">
       <property name="message" value="menu"/>
     </text>
-    <text text="WELL DONE" font="boycott" size="108" color="#ffffff" x="384" y="460" direction="0.0" start="default"/>
+    <text text="WELL DONE" font="boycott" size="108" color="#ffffff" x="384" y="460" direction="0.0" start=""/>
+    <actor costume="stone1b" x="341" y="-28" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="142" y="-21" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="25" y="102" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="533" y="-18" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="735" y="-4" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="841" y="67" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="828" y="245" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="826" y="487" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="507" y="633" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="287" y="624" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="83" y="627" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-12" y="544" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-3" y="330" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="278" y="1387" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="552" y="1374" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="822" y="1365" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1093" y="1360" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="0" y="1388" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="-280" y="1387" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="-557" y="1387" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="-834" y="1392" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-958" y="1255" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-950" y="1033" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-958" y="826" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-962" y="603" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-961" y="404" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-971" y="185" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-979" y="-45" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-968" y="-282" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-971" y="-512" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-951" y="-746" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="-850" y="-786" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="-654" y="-771" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="-411" y="-774" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="-133" y="-777" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="148" y="-778" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="419" y="-782" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="697" y="-780" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="976" y="-782" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1252" y="-789" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1530" y="-792" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1809" y="-795" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="2084" y="-800" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2187" y="-633" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2168" y="-404" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2147" y="-164" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2132" y="63" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2119" y="291" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2099" y="502" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2075" y="732" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2056" y="959" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2042" y="1188" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1931" y="1330" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1652" y="1342" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1373" y="1352" direction="0.0" start="default"/>
+  </layer>
+  <layer name="foreground">
+    <actor costume="rocket2" x="413" y="299" direction="90.0" start="default">
+      <property name="thrust" value="0.1"/>
+      <property name="weight" value="1.0"/>
+      <property name="rotationSpeed" value="3.0"/>
+    </actor>
+    <actor costume="stone1b" x="721" y="632" direction="0.0" start="default"/>
   </layer>
 </scene>

@@ -7,23 +7,22 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.extras.Pieces;
 
-public class Solid extends Behaviour {
-	
-	@Override
-	public void onActivate()
-	{
-        if ( this.actor.getLayer() != Thrust.game.foregroundLayer ) {           
-            this.actor.addTag("solid");
-            this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+public class Rubble extends Pieces implements Fragile
+{
+    public void onActivate()
+    {
+        super.onActivate();
+        if (!getActor().isDead()) {
+            getActor().addTag("fragile");
+            getActor().addTag("solid");
+            this.collisionStrategy = Thrust.game.createCollisionStrategy(getActor());
         }
-	}
-	
-	@Override
-	public void tick()
-	{
-		this.actor.deactivate();
-	}
-	
+    }
+    
+    public void hit()
+    {
+        getActor().kill();
+    }
 }

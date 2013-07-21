@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
@@ -14,22 +12,30 @@ import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Follower;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Projectile;
+import uk.co.nickthecoder.itchy.extras.Recharge;
+import uk.co.nickthecoder.itchy.extras.ShadowText;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Sound;
 
-public class Ship extends Behaviour
+public class Ship extends Behaviour implements Fragile
 {
     private static final double DEAD_SLOW_DOWN = 0.99;
 
-    @Property(label="Rotation Speed")
+    @Property(label = "Rotation Speed")
     public double rotationSpeed = 3;
 
-    @Property(label="Thrust")
-    public double thrust = 0.1;
+    @Property(label = "Thrust")
+    public double thrust = 0.2;
 
-    @Property(label="Weight")
-    public double weight = 1.0;
+    @Property(label = "Weight")
+    public double weight = 2.0;
+
+    @Property(label = "Start Message")
+    public String startMessage;
+
+    @Property(label = "Fire Period (seconds)")
+    public double firePeriod = 1;
 
     public double speedX = 0.0;
 
@@ -39,17 +45,28 @@ public class Ship extends Behaviour
 
     private boolean switchingEnds = false;
 
-    private Rod rod;
+    Rod rod;
 
     private Follower wrapping;
 
     private Follower unwrapping;
 
+    private Sound thrustSound;
+
+    private Sound rotateSound;
+
+    private Recharge fireRecharge;
+
     @Override
     public void init()
     {
-        this.actor.addTag("solid");
+        this.actor.addTag("fragile");
+        this.actor.addTag("ship");
+
+        this.fireRecharge = new Recharge((int) (1000 * this.firePeriod));
+
         this.createFragments();
+        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
     }
 
     /**
@@ -57,29 +74,48 @@ public class Ship extends Behaviour
      */
     void createFragments()
     {
-        new Fragment().actor(this.actor).create("fragment");
+        new Fragment().actor(this.actor).createPoses("fragment");
+    }
+
+    @Override
+    public void onActivate()
+    {
+        if (this.startMessage != null) {
+            Actor message = new ShadowText()
+                .text(this.startMessage)
+                .fontSize(32)
+                .offset(0, -60)
+                .fade(2)
+                .growFactor(0.995)
+                .createActor(getActor());
+
+            message.activate();
+
+            new Explosion(message)
+                .projectiles(15)
+                .below()
+                .forwards()
+                .spin(-.2, .2)
+                .alpha(128).fade(1, 2)
+                .speed(0.5, 2)
+                .gravity(Thrust.gravity)
+                .createActor("fragment")
+                .activate();
+
+        }
+
+        this.pickupDistance = getActor().getCostume().getPose("rod").getSurface().getWidth();
     }
 
     @Override
     public void tick()
     {
-
-        if (this.actor.isDying()) {
-            // Gently brake the ship so that the scroll layer still scrolls, but not too far.
-            this.speedX *= DEAD_SLOW_DOWN;
-            this.speedY *= DEAD_SLOW_DOWN;
-        } else {
-            this.speedY += Thrust.gravity;
-        }
-
+        this.speedY += Thrust.gravity;
         this.actor.moveBy(this.speedX, this.speedY);
+        this.collisionStrategy.update();
 
         if (!this.switchingEnds) {
             Thrust.game.centerOn(this.actor);
-        }
-
-        if (this.actor.isDying()) {
-            return;
         }
 
         if (this.switchingEnds) {
@@ -87,18 +123,43 @@ public class Ship extends Behaviour
         }
 
         if (connected() && Itchy.singleton.isKeyDown(Keys.q)) {
-            beginSwitchEnds();
+            if (this.rod.ball instanceof BallWithShip) {
+                beginSwitchEnds();
+            }
         }
 
         if (Itchy.singleton.isKeyDown(Keys.LEFT)) {
+            if (this.rotateSound == null) {
+                this.rotateSound = getActor().getCostume().getSound("rotate");
+                this.rotateSound.play();
+            }
             turn(this.rotationSpeed);
-        }
-        if (Itchy.singleton.isKeyDown(Keys.RIGHT)) {
+        } else if (Itchy.singleton.isKeyDown(Keys.RIGHT)) {
+            if (this.rotateSound == null) {
+                this.rotateSound = getActor().getCostume().getSound("rotate");
+                this.rotateSound.play();
+            }
             turn(-this.rotationSpeed);
+        } else {
+            if (this.rotateSound != null) {
+                this.rotateSound.fadeOut(1000);
+                this.rotateSound = null;
+            }
         }
-        if (Itchy.singleton.isKeyDown(Keys.SPACE) || Itchy.singleton.isKeyDown(Keys.UP)) {
+
+        if (Itchy.singleton.isKeyDown(Keys.UP)) {
+            if (this.thrustSound == null) {
+                this.thrustSound = getActor().getCostume().getSound("thrust");
+                this.thrustSound.play();
+            }
             this.thrust();
+        } else {
+            if (this.thrustSound != null) {
+                this.thrustSound.fadeOut(1000);
+                this.thrustSound = null;
+            }
         }
+
         if ((this.rod == null) && (Itchy.singleton.isKeyDown(Keys.a))) {
             Actor ballActor = this.actor.nearest("ball");
             if ((ballActor != null) && (ballActor.distanceTo(this.actor) < this.pickupDistance)) {
@@ -109,20 +170,28 @@ public class Ship extends Behaviour
             this.rod.disconnect();
         }
 
-        for (Actor other : Actor.allByTag("solid")) {
-            if (other == this.actor) {
-                continue;
-            }
-            if (this.actor.touching(other)) {
-                this.die();
-                return;
-            }
+        if ((Itchy.singleton.isKeyDown(Keys.SPACE)) && (this.fireRecharge.isCharged())) {
+            this.fireRecharge.reset();
+            fire();
+        }
+
+        if (!touching("solid").isEmpty()) {
+            this.hit();
+            return;
+        }
+        for (Actor actor : touching("gate")) {
+            Gate gate = (Gate) actor.getBehaviour();
+            this.disconnect();
+            getActor().setBehaviour(new NextLevel(gate));
+            return;
         }
     }
 
-    public void rodDisconnected()
+    private void disconnect()
     {
-        this.rod = null;
+        if (this.rod != null) {
+            this.rod.disconnect();
+        }
     }
 
     public boolean connected()
@@ -133,6 +202,15 @@ public class Ship extends Behaviour
         return this.rod.connected;
     }
 
+    private void fire()
+    {
+        Bullet bullet = new Bullet();
+        Actor actor = bullet.createActor(getActor(), "bullet");
+        actor.moveForward(30);
+        bullet.speed(6).gravity(Thrust.gravity);
+        actor.activate();
+    }
+
     public void beginSwitchEnds()
     {
         if (this.switchingEnds) {
@@ -140,7 +218,6 @@ public class Ship extends Behaviour
         }
         this.switchingEnds = true;
 
-        System.out.println("Switching ends");
         Ball ball = this.rod.ball;
         Actor ballActor = ball.getActor();
 
@@ -160,12 +237,11 @@ public class Ship extends Behaviour
 
     public void completeSwitchEnds()
     {
-        System.out.println("completeSwitchEnds");
         this.switchingEnds = false;
 
         this.wrapping.getActor().kill();
         this.unwrapping.getActor().kill();
-        
+
         Actor shipActor = this.actor;
 
         if (this.rod != null) {
@@ -179,9 +255,6 @@ public class Ship extends Behaviour
             // The ship changes to whatever the ball looks like unwrapped.
             String wrappedCostumeName = this.actor.getCostume().getString("wrappedCostume");
             String unwrappedCostumeName = ballActor.getCostume().getString("unwrappedCostume");
-
-            System.out.println("Costume for ball : " + wrappedCostumeName);
-            System.out.println("Costume for ship : " + unwrappedCostumeName);
 
             this.actor.setCostume(Itchy.singleton.getResources().getCostume(unwrappedCostumeName));
             ballActor.setCostume(Itchy.singleton.getResources().getCostume(wrappedCostumeName));
@@ -241,19 +314,15 @@ public class Ship extends Behaviour
         puff.getAppearance().adjustDirection(180);
         puff.moveForward(30);
         puff.activate();
-
-        Sound sound = this.actor.getCostume().getSound("thrust");
-        if (sound != null) {
-            sound.playOnce();
-        }
     }
 
-    public void die()
+    public void hit()
     {
         if (this.rod != null) {
             this.rod.disconnect();
         }
         this.deathEvent("death");
+        this.actor.setBehaviour(new Dying());
 
         new Explosion(this.actor)
             .projectiles(30)
@@ -264,6 +333,68 @@ public class Ship extends Behaviour
             .gravity(Thrust.gravity)
             .createActor("fragment")
             .activate();
+    }
+
+    public class Dying extends Behaviour
+    {
+
+        @Override
+        public void tick()
+        {
+            // Gently brake the ship so that the scroll layer still scrolls, but not too far.
+            Ship.this.speedX *= DEAD_SLOW_DOWN;
+            Ship.this.speedY *= DEAD_SLOW_DOWN;
+
+            this.actor.moveBy(Ship.this.speedX, Ship.this.speedY);
+            this.collisionStrategy.update();
+
+        }
+
+    }
+
+    public class NextLevel extends Behaviour
+    {
+        public Gate gate;
+
+        public double speed = 3;
+
+        public double turnSpeed = 1;
+
+        public NextLevel( Gate gate )
+        {
+            this.gate = gate;
+        }
+
+        @Override
+        public void tick()
+        {
+            Ship.this.speedX *= 0.98;
+            Ship.this.speedY *= 0.98;
+            getActor().moveBy(Ship.this.speedX, Ship.this.speedY);
+            getActor().moveTowards(this.gate.getActor(), this.speed);
+            this.collisionStrategy.update();
+            this.actor.getAppearance().adjustDirection(this.turnSpeed);
+            this.turnSpeed *= 1.005;
+            this.turnSpeed += 0.03;
+
+            if (getActor().distance(this.gate.getActor()) < this.speed) {
+                getActor().moveTo(this.gate.getActor());
+                this.speed = 0;
+                Ship.this.speedX = 0;
+                Ship.this.speedY = 0;
+                this.deathEvent("travelGate");
+            }
+
+        }
+
+        @Override
+        public void onMessage( String message )
+        {
+            if ("exitGate".equals(message)) {
+                Thrust.game.play(this.gate.nextLevel);
+            }
+        }
+
     }
 
 }

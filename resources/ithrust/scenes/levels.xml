@@ -1,43 +1,86 @@
 <scene showMouse="true">
-  <layer name="main">
+  <layer name="background">
     <actor costume="background" x="400" y="300" direction="0.0" start="default"/>
-    <actor costume="level" x="383" y="329" direction="0.0" start="default">
+  </layer>
+  <layer name="main">
+    <actor costume="level" x="408" y="430" direction="0.0" start="default">
       <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="1"/>
       <property name="font" value="blackCasper"/>
+      <property name="levelName" value="beginning-06"/>
+      <property name="label" value=""/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="309" y="300" direction="0.0" start="default">
+    <actor costume="level" x="266" y="345" direction="0.0" start="default">
       <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="2"/>
       <property name="font" value="blackCasper"/>
+      <property name="levelName" value="beginning-05"/>
+      <property name="label" value=""/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="256" y="376" direction="0.0" start="default">
+    <actor costume="path" x="337" y="398" direction="25.544114101061037" start="default">
+      <property name="fromLevelName" value="beginning-05"/>
+      <property name="toLevelName" value="beginning-06"/>
+    </actor>
+    <actor costume="path" x="265" y="263" direction="94.92951720373601" start="default">
+      <property name="fromLevelName" value="beginning-04"/>
+      <property name="toLevelName" value="beginning-05"/>
+    </actor>
+    <actor costume="level" x="425" y="98" direction="0.0" start="default">
       <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="3"/>
       <property name="font" value="blackCasper"/>
+      <property name="levelName" value="beginning-03"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="284" y="451" direction="0.0" start="default">
+    <actor costume="path" x="495" y="133" direction="-147.90058255469847" start="default">
+      <property name="fromLevelName" value="beginning-02"/>
+      <property name="toLevelName" value="beginning-03"/>
+    </actor>
+    <actor costume="level" x="544" y="173" direction="0.0" start="default">
       <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="4"/>
       <property name="font" value="blackCasper"/>
+      <property name="levelName" value="beginning-02"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
-    <actor costume="level" x="362" y="473" direction="0.0" start="default">
+    <actor costume="path" x="534" y="247" direction="-78.51798081384983" start="default">
+      <property name="fromLevelName" value="beginning-01"/>
+      <property name="toLevelName" value="beginning-02"/>
+    </actor>
+    <actor costume="level" x="520" y="302" direction="0.0" start="default">
       <property name="fontColor" value="#ea8138ff"/>
-      <property name="levelNumber" value="5"/>
       <property name="font" value="blackCasper"/>
+      <property name="levelName" value="beginning-01"/>
+      <property name="label" value="Beginning"/>
       <property name="fontSize" value="32"/>
       <property name="shadowColor" value="#000000ff"/>
     </actor>
     <text text="Back" font="boycott" size="22" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="740" y="33" direction="0.0" start="default">
       <property name="message" value="menu"/>
     </text>
+    <actor costume="path" x="441" y="316" direction="0.0" start="default">
+      <property name="fromLevelName" value="tutorial"/>
+      <property name="toLevelName" value="beginning-01"/>
+    </actor>
+    <actor costume="level" x="381" y="315" direction="0.0" start="default">
+      <property name="fontColor" value="#ea8138ff"/>
+      <property name="font" value="blackCasper"/>
+      <property name="levelName" value="tutorial"/>
+      <property name="label" value="Tutorial"/>
+      <property name="fontSize" value="32"/>
+      <property name="shadowColor" value="#000000ff"/>
+    </actor>
+    <actor costume="level" x="288" y="189" direction="0.0" start="default">
+      <property name="fontColor" value="#ffffffff"/>
+      <property name="levelName" value="beginning-04"/>
+      <property name="fontSize" value="22"/>
+      <property name="shadowColor" value="#000000ff"/>
+    </actor>
+    <actor costume="path" x="355" y="139" direction="146.30993247402023" start="default">
+      <property name="fromLevelName" value="beginning-03"/>
+      <property name="toLevelName" value="beginning-04"/>
+    </actor>
   </layer>
 </scene>

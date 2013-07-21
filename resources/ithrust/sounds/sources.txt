@@ -17,8 +17,8 @@ explode.ogg
 
 27568__suonho__MemoryMoon_space_blaster_plays.wav
 http://www.freesound.org/samplesViewSingle.php?id=27568
-Ball going into Collector
-collected.ogg
+Ball going into the Gate
+ballTouchedGate.ogg
 
 45656__csengeri__tuzijatek.wav
 http://www.freesound.org/samplesViewSingle.php?id=45656
@@ -30,6 +30,12 @@ fire.ogg
 http://www.freesound.org/samplesViewSingle.php?id=22456
 When the ship's thrusters are fired
 thrust.ogg
+
+22456__nathanshadow__Thruster_Level_III.aif
+http://www.freesound.org/samplesViewSingle.php?id=22456
+When the ship turns left or right.
+Changed the pitch and decreased the volume a lot.
+rotate.ogg
 
 74395__Benboncan__Ricochet_3.wav
 http://www.freesound.org/samplesViewSingle.php?id=74395
@@ -48,15 +54,15 @@ missile.ogg
 
 31652__ERH__kadel_3.wav
 http://www.freesound.org/samplesViewSingle.php?id=31652
-Ship entering the gate
-exit_gate.ogg
+When the ball has travelled through the gate.
+ballCollected.ogg
 
 
 29594__ERH__choir_c.wav
 http://www.freesound.org/samplesViewSingle.php?id=29594
 Chopped the end to make a little shorter
-Gate online
-online.ogg
+Gate open for a ship to move through.
+gateOpen.ogg
 
 39320__the-bizniss__glass-d.wav
 http://www.freesound.org/people/THE_bizniss/sounds/39320/
@@ -79,9 +85,4 @@ http://www.freesound.org/samplesViewSingle.php?id=40969
 =============
 No Longer Use
 =============
-
-50650__DJ_Chronos__volivieri_small_pipe_bang_REMIX_oneshot.wav
-http://www.freesound.org/samplesViewSingle.php?id=50650
-Gate is on-line
-online.ogg
 

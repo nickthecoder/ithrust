@@ -1,4 +1,4 @@
-<scene showMouse="true">
+<scene showMouse="false">
   <layer name="background">
     <actor costume="tile1" x="192" y="321" direction="0.0" start="default"/>
     <actor costume="tile1" x="340" y="384" direction="0.0" start="default"/>
@@ -25,6 +25,7 @@
     <actor costume="rocket1" x="352" y="216" direction="90.0" start="default">
       <property name="thrust" value="0.1"/>
       <property name="weight" value="1.0"/>
+      <property name="startMessage" value="Start"/>
       <property name="rotationSpeed" value="3.0"/>
     </actor>
     <actor costume="stone1a" x="127" y="237" direction="0.0" start="default"/>
@@ -41,7 +42,32 @@
     <actor costume="stone1a" x="190" y="45" direction="0.0" start="default"/>
     <actor costume="stone1a" x="858" y="742" direction="0.0" start="default"/>
     <actor costume="stone1b" x="523" y="775" direction="0.0" start="default"/>
-    <actor costume="wrappedRocket2" x="356" y="74" direction="90.0" start="default">
+    <actor costume="wrappedRocket2" x="421" y="95" direction="90.0" start="default">
+      <property name="thrust" value="0.1"/>
+      <property name="weight" value="1.0"/>
+      <property name="shipWeight" value="0.1"/>
+      <property name="rotationSpeed" value="3.0"/>
+    </actor>
+    <actor costume="wrappedRocket1" x="711" y="180" direction="90.0" start="default">
+      <property name="thrust" value="0.1"/>
+      <property name="weight" value="1.0"/>
+      <property name="shipWeight" value="0.1"/>
+      <property name="rotationSpeed" value="3.0"/>
+    </actor>
+    <actor costume="ball" x="291" y="70" direction="0.0" start="default">
+      <property name="weight" value="1.0"/>
+    </actor>
+    <actor costume="gate" x="187" y="306" direction="0.0" start="default">
+      <property name="nextLevel" value="level02"/>
+      <property name="requiredBalls" value="2"/>
+    </actor>
+    <actor costume="gate" x="861" y="342" direction="0.0" start="default">
+      <property name="nextLevel" value="level03"/>
+      <property name="requiredBalls" value="3"/>
+    </actor>
+  </layer>
+  <layer name="foreground">
+    <actor costume="wrappedRocket2" x="763" y="717" direction="90.0" start="default">
       <property name="thrust" value="0.1"/>
       <property name="weight" value="1.0"/>
       <property name="shipWeight" value="0.1"/>

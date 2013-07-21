@@ -1,0 +1,66 @@
+<scene showMouse="true">
+  <layer name="background">
+    <actor costume="keyLeft" x="208" y="1077" direction="0.0" start="default"/>
+    <actor costume="keyRight" x="277" y="1078" direction="0.0" start="default"/>
+    <text text="Turn the ship" font="vera" size="22" color="#ffffff" x="245" y="1127" direction="0.0" start="default"/>
+    <text text="Not too fast!" font="vera" size="22" color="#ffffff" x="365" y="836" direction="0.0" start="default"/>
+    <actor costume="keyUp" x="421" y="202" direction="0.0" start="default"/>
+    <text text="Thrust Upwards" font="vera" size="22" color="#ffffff" x="422" y="244" direction="0.0" start="default"/>
+    <actor costume="keyEscape" x="492" y="-26" direction="0.0" start="default"/>
+    <text text="To return to the menu" font="vera" size="22" color="#ffffff" x="490" y="13" direction="0.0" start="default"/>
+    <text text="hover near it and" font="vera" size="22" color="#ffffff" x="1061" y="979" direction="0.0" start="default"/>
+    <text text="hold down  &quot;A&quot;  until you" font="vera" size="22" color="#ffffff" x="1061" y="935" direction="0.0" start="default"/>
+    <actor costume="keyA" x="1070" y="933" direction="0.0" start="default"/>
+    <text text="Guide the ball into the gate >>>" font="vera" size="22" color="#ffffff" x="1666" y="1058" direction="0.0" start="default"/>
+    <text text="hear the ping" font="vera" size="22" color="#ffffff" x="1061" y="892" direction="0.0" start="default"/>
+    <text text="To pick up the ball" font="vera" size="22" color="#ffffff" x="1061" y="1018" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="1153" y="1334" direction="0.0" start="default"/>
+    <text text="When the gate opens, go into it..." font="vera" size="22" color="#ffffff" x="1668" y="1017" direction="0.0" start="default"/>
+  </layer>
+  <layer name="main">
+    <actor costume="rocket2" x="422" y="329" direction="90.0" start="default">
+      <property name="thrust" value="0.2"/>
+      <property name="weight" value="2.0"/>
+      <property name="rotationSpeed" value="3.0"/>
+    </actor>
+    <actor costume="ball" x="1061" y="745" direction="0.0" start="default">
+      <property name="weight" value="1.0"/>
+    </actor>
+    <actor costume="stone1b" x="797" y="-154" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="864" y="22" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="827" y="252" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="588" y="-237" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="350" y="-322" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="234" y="-212" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="174" y="15" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="110" y="230" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="57" y="463" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="774" y="485" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="9" y="703" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="715" y="719" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="653" y="952" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-41" y="944" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="-88" y="1191" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="48" y="1336" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="288" y="1411" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="533" y="1498" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="767" y="1575" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="961" y="1542" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="914" y="616" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1167" y="709" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1412" y="793" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1119" y="1499" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1369" y="1590" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1616" y="1674" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="1904" y="1537" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="1957" y="1324" direction="0.0" start="default"/>
+    <actor costume="gate" x="1922" y="1046" direction="0.0" start="default">
+      <property name="nextLevel" value="beginning-01"/>
+      <property name="requiredBalls" value="1"/>
+    </actor>
+    <actor costume="stone1b" x="1669" y="869" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="1886" y="936" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="2019" y="1083" direction="0.0" start="default"/>
+    <actor costume="stone1d" x="1780" y="1673" direction="0.0" start="default"/>
+  </layer>
+</scene>

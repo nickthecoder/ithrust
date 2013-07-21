@@ -7,23 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.Behaviour;
-
-public class Solid extends Behaviour {
-	
-	@Override
-	public void onActivate()
-	{
-        if ( this.actor.getLayer() != Thrust.game.foregroundLayer ) {           
-            this.actor.addTag("solid");
-            this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
-        }
-	}
-	
-	@Override
-	public void tick()
-	{
-		this.actor.deactivate();
-	}
-	
+public interface Fragile
+{
+    public void hit();
 }

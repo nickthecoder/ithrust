@@ -1,9 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0 which accompanies this
+ * distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
@@ -15,6 +13,10 @@ import uk.co.nickthecoder.jame.Keys;
 
 public class Rod extends Behaviour
 {
+
+    public static final String[] SOLID_TAGS = new String[] { "solid" };
+
+    public static final String[] EXCLUDE_TAGS = new String[] { "gate", "ball", "ship" };
 
     public Ship ship;
 
@@ -42,7 +44,12 @@ public class Rod extends Behaviour
         rodActor.setBehaviour(this);
         ship.getActor().getLayer().addBelow(rodActor, ship.getActor());
         rodActor.activate();
+    }
 
+    @Override
+    public void init()
+    {
+        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
     }
 
     @Override
@@ -89,20 +96,10 @@ public class Rod extends Behaviour
 
             } else {
 
-                for (Actor other : Actor.allByTag("solid")) {
-                    if (other == this.actor) {
-                        continue;
-                    }
-                    if (other == this.ship.getActor()) {
-                        continue;
-                    }
-                    if (other == this.ball.getActor()) {
-                        continue;
-                    }
-                    if (this.actor.touching(other)) {
-                        this.disconnect();
-                        return;
-                    }
+                this.collisionStrategy.update();
+                if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+                    this.disconnect();
+                    return;
                 }
 
                 double dist = this.actor.distanceTo(this.ball.getActor());
@@ -115,8 +112,8 @@ public class Rod extends Behaviour
                 double dx1 = cos * dd;
                 double dy1 = sin * dd;
 
-                double ballFactor = ship.weight / (this.ball.weight + ship.weight);
-                double shipFactor = this.ball.weight / (this.ball.weight + ship.weight);
+                double ballFactor = this.ship.weight / (this.ball.weight + this.ship.weight);
+                double shipFactor = this.ball.weight / (this.ball.weight + this.ship.weight);
 
                 this.ship.getActor().moveBy(dx1 * shipFactor, dy1 * shipFactor);
                 this.ship.speedX += dx1 * shipFactor;
@@ -134,7 +131,7 @@ public class Rod extends Behaviour
     public void disconnect()
     {
         this.ball.event("disconnect");
-        this.ship.rodDisconnected();
+        this.ship.rod = null;
         this.actor.kill();
     }
 

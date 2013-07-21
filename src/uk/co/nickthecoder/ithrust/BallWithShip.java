@@ -7,6 +7,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
+import uk.co.nickthecoder.itchy.extras.Explosion;
+import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.util.Property;
 
 /**
@@ -27,5 +29,24 @@ public class BallWithShip extends Ball
     @Property(label="Ship's Weight")
     public double shipWeight = 0.1;
 
+    public void createFragments()
+    {
+        new Fragment().actor(this.actor).pieces(10).pose("shell").createPoses("fragment");
+        new Fragment().actor(this.actor).pieces(4).pose("contents").createPoses("contentsFragment");
+    }
     
+
+    public void hit()
+    {
+        new Explosion(this.actor)
+            .projectiles(12)
+            .gravity(Thrust.gravity)
+            .forwards()
+            .fade(0.9, 1.5)
+            .speed(0.1, 1.5).vx(this.speedX).vy(this.speedY)
+            .createActor("contentsFragment")
+            .activate();
+        
+        super.hit();
+    }
 }

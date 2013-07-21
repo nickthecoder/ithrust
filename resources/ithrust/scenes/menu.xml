@@ -18,4 +18,7 @@
       <property name="message" value="quit"/>
     </text>
   </layer>
+  <layer name="foreground">
+    <actor costume="keys" x="4" y="17" direction="0.0" start="default"/>
+  </layer>
 </scene>

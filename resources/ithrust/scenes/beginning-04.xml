@@ -1,0 +1,105 @@
+<scene showMouse="true">
+  <layer name="background">
+    <actor costume="tile1" x="180" y="-354" direction="0.0" start="default"/>
+    <actor costume="tile1" x="332" y="-410" direction="0.0" start="default"/>
+    <actor costume="tile1" x="153" y="-195" direction="0.0" start="default"/>
+    <actor costume="tile1" x="335" y="-264" direction="0.0" start="default"/>
+    <actor costume="tile1" x="414" y="-343" direction="0.0" start="default"/>
+    <actor costume="tile1" x="440" y="-179" direction="0.0" start="default"/>
+    <actor costume="tile1" x="181" y="-92" direction="0.0" start="default"/>
+    <actor costume="tile1" x="311" y="-84" direction="0.0" start="default"/>
+    <actor costume="tile1" x="400" y="-35" direction="0.0" start="default"/>
+    <actor costume="tile1" x="276" y="80" direction="0.0" start="default"/>
+    <actor costume="tile1" x="282" y="242" direction="0.0" start="default"/>
+    <actor costume="tile1" x="198" y="363" direction="0.0" start="default"/>
+    <actor costume="tile1" x="328" y="366" direction="0.0" start="default"/>
+    <actor costume="tile1" x="168" y="529" direction="0.0" start="default"/>
+    <actor costume="tile1" x="122" y="695" direction="0.0" start="default"/>
+    <actor costume="tile1" x="254" y="740" direction="0.0" start="default"/>
+    <actor costume="tile1" x="294" y="581" direction="0.0" start="default"/>
+    <actor costume="tile1" x="377" y="484" direction="0.0" start="default"/>
+    <actor costume="tile1" x="563" y="466" direction="0.0" start="default"/>
+    <actor costume="tile1" x="745" y="404" direction="0.0" start="default"/>
+    <actor costume="tile1" x="478" y="629" direction="0.0" start="default"/>
+    <actor costume="tile1" x="434" y="765" direction="0.0" start="default"/>
+    <actor costume="tile1" x="636" y="700" direction="0.0" start="default"/>
+    <actor costume="tile1" x="688" y="564" direction="0.0" start="default"/>
+    <actor costume="tile1" x="851" y="647" direction="0.0" start="default"/>
+    <actor costume="tile1" x="887" y="502" direction="0.0" start="default"/>
+    <actor costume="tile1" x="936" y="595" direction="0.0" start="default"/>
+    <actor costume="tile1" x="874" y="363" direction="0.0" start="default"/>
+  </layer>
+  <layer name="main">
+    <actor costume="door1b" x="124" y="409" direction="180.0" start="default">
+      <property name="buddyId" value="door1a"/>
+      <property name="id" value="door1b"/>
+      <property name="distance" value="0.0"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="4.0"/>
+      <property name="angle" value="90.0"/>
+    </actor>
+    <actor costume="door1a" x="427" y="408" direction="0.0" start="default">
+      <property name="buddyId" value="door1b"/>
+      <property name="id" value="door1a"/>
+      <property name="distance" value="100.0"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="4.0"/>
+      <property name="angle" value="-90.0"/>
+    </actor>
+    <actor costume="door1b" x="73" y="569" direction="180.0" start="default">
+      <property name="buddyId" value="door2a"/>
+      <property name="id" value="door2b"/>
+      <property name="distance" value="100.0"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="4.0"/>
+      <property name="angle" value="0.0"/>
+    </actor>
+    <actor costume="door1a" x="380" y="569" direction="0.0" start="default">
+      <property name="buddyId" value="door2b"/>
+      <property name="id" value="door2a"/>
+      <property name="distance" value="100.0"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="4.0"/>
+      <property name="angle" value="0.0"/>
+    </actor>
+    <actor costume="rocket2" x="289" y="264" direction="90.0" start="default">
+      <property name="thrust" value="0.2"/>
+      <property name="weight" value="2.0"/>
+      <property name="startMessage" value="Getting Narrow"/>
+      <property name="rotationSpeed" value="3.0"/>
+      <property name="firePeriod" value="1.0"/>
+    </actor>
+    <actor costume="ball" x="204" y="-375" direction="0.0" start="default">
+      <property name="weight" value="1.0"/>
+    </actor>
+    <actor costume="ball" x="395" y="-374" direction="0.0" start="default">
+      <property name="weight" value="1.0"/>
+    </actor>
+    <actor costume="stone1c" x="433" y="292" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="131" y="282" direction="0.0" start="default"/>
+    <actor costume="stone1c" x="160" y="90" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="419" y="95" direction="0.0" start="default"/>
+    <actor costume="stone1c" x="56" y="-54" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="536" y="-61" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="69" y="-304" direction="0.0" start="default"/>
+    <actor costume="stone1c" x="518" y="-300" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="405" y="-454" direction="0.0" start="default"/>
+    <actor costume="stone1d" x="189" y="-476" direction="0.0" start="default"/>
+    <actor costume="stone1c" x="354" y="766" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="284" y="766" direction="0.0" start="default"/>
+    <actor costume="stone1d" x="477" y="834" direction="0.0" start="default"/>
+    <actor costume="stone1b" x="124" y="825" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="61" y="503" direction="0.0" start="default"/>
+    <actor costume="stone1a" x="12" y="680" direction="0.0" start="default"/>
+    <actor costume="stone1d" x="719" y="756" direction="0.0" start="default"/>
+    <actor costume="stone1d" x="572" y="338" direction="0.0" start="default"/>
+    <actor costume="stone1d" x="790" y="275" direction="0.0" start="default"/>
+    <actor costume="stone1c" x="952" y="329" direction="0.0" start="default"/>
+    <actor costume="stone1c" x="1012" y="547" direction="0.0" start="default"/>
+    <actor costume="stone1d" x="932" y="699" direction="0.0" start="default"/>
+    <actor costume="gate" x="679" y="397" direction="0.0" start="default">
+      <property name="nextLevel" value="beginning-03"/>
+      <property name="requiredBalls" value="2"/>
+    </actor>
+  </layer>
+</scene>
