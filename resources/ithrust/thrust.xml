@@ -53,6 +53,12 @@
     <sound name="thrust" filename="sounds/thrust.ogg"/>
   </sounds>
   <animations>
+    <animation name="ballRebirth">
+      <sequence loops="1">
+        <alpha ticks="1" target="0.0" profile="linear"/>
+        <alpha ticks="200" target="255.0" profile="linear"/>
+      </sequence>
+    </animation>
     <animation name="hide">
       <sequence loops="1">
         <alpha ticks="50" target="0.0" profile="linear"/>
@@ -90,6 +96,7 @@
       <sound name="death" sound="explode"/>
       <sound name="touched" sound="ding"/>
       <sound name="taught" sound="ding"/>
+      <animation name="rebirth" animation="ballRebirth"/>
       <animation name="unwrapping" animation="unwrapping"/>
       <animation name="travelGate" animation="travelGate"/>
       <animation name="wrapping" animation="wrapping"/>
@@ -229,16 +236,16 @@
     </costume>
   </costumes>
   <scenes>
-    <scene name="about" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/about.xml"/>
-    <scene name="beginning-01" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/beginning-01.xml"/>
-    <scene name="beginning-02" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/beginning-02.xml"/>
-    <scene name="beginning-03" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/beginning-03.xml"/>
-    <scene name="beginning-04" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/beginning-04.xml"/>
-    <scene name="completed" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/completed.xml"/>
-    <scene name="level02" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/level02.xml"/>
-    <scene name="levels" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/levels.xml"/>
-    <scene name="menu" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/menu.xml"/>
-    <scene name="original" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/original.xml"/>
-    <scene name="tutorial" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/tutorial.xml"/>
+    <scene name="about"/>
+    <scene name="beginning-01"/>
+    <scene name="beginning-02"/>
+    <scene name="beginning-03"/>
+    <scene name="beginning-04"/>
+    <scene name="completed"/>
+    <scene name="level02"/>
+    <scene name="levels"/>
+    <scene name="menu"/>
+    <scene name="original"/>
+    <scene name="tutorial"/>
   </scenes>
 </resources>

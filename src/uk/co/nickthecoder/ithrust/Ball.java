@@ -36,6 +36,10 @@ public class Ball extends Behaviour implements Fragile
 
     private double gateSpeed = 3.0;
 
+    private double origX;
+    
+    private double origY;
+    
     @Override
     public void init()
     {
@@ -45,7 +49,11 @@ public class Ball extends Behaviour implements Fragile
 
         createFragments();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+        
+        this.origX = actor.getX();
+        this.origY = actor.getY();
     }
+    
 
     public void createFragments()
     {
@@ -147,7 +155,7 @@ public class Ball extends Behaviour implements Fragile
         if (this.rod != null) {
             this.rod.disconnect();
         }
-        this.deathEvent("death");
+        this.event("death");
 
         new Explosion(this.actor)
             .projectiles(30)
@@ -157,6 +165,16 @@ public class Ball extends Behaviour implements Fragile
             .speed(0.1, 1.5).vx(this.speedX).vy(this.speedY)
             .createActor("fragment")
             .activate();
+        
+        rebirth();
     }
 
+    protected void rebirth()
+    {
+        this.moving = false;
+        this.speedX = 0;
+        this.speedY = 0;
+        actor.moveTo(this.origX, this.origY);
+        actor.event("rebirth");
+    }
 }
