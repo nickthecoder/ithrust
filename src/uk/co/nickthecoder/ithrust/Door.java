@@ -19,8 +19,11 @@ public class Door extends Behaviour implements Fragile
     /**
      * The distance the door opens/closes
      */
-    @Property(label = "Distance")
-    public double distance = 100;
+    @Property(label = "Slide")
+    public double slide = 100;
+
+    @Property(label = "Lift")
+    public double lift = 0;
 
     /**
      * The angle the door opens/closes.
@@ -32,7 +35,7 @@ public class Door extends Behaviour implements Fragile
     public boolean shootable = true;
 
     @Property(label = "Close After (s)")
-    public double closeAfter = 2;
+    public double closeAfter = 0;
 
     @Property(label = "Buddy ID")
     public String buddyId;
@@ -101,16 +104,18 @@ public class Door extends Behaviour implements Fragile
                 return;
             }
 
-            // The update is in three parts, so that if it is rotated AND translated, then the operations
-            // will be done in the reverse order on the way back, ensuring that the door ends up in its
+            // The update is in three parts, so that if it is rotated AND translated, then the
+            // operations
+            // will be done in the reverse order on the way back, ensuring that the door ends up in
+            // its
             // original position.
             if (this.direction == 1) {
-                getActor().moveForward(this.distance / this.ticks);
+                getActor().moveForward(this.slide / this.ticks, this.lift / this.ticks);
             }
             double angle = this.direction * (this.angle / this.ticks);
             getActor().getAppearance().adjustDirection(angle);
             if (this.direction == -1) {
-                getActor().moveForward(-this.distance / this.ticks);
+                getActor().moveForward(-this.slide / this.ticks, -this.lift / this.ticks);
             }
 
             this.tickCount += this.direction;

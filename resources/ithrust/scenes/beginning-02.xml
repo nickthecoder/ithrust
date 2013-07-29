@@ -30,7 +30,7 @@
     <actor costume="tile1" x="874" y="363" direction="0.0" start="default"/>
   </layer>
   <layer name="main">
-    <actor costume="rocket2" x="283" y="375" direction="90.0" start="default">
+    <actor costume="ship2" x="283" y="375" direction="90.0" start="default">
       <property name="thrust" value="0.2"/>
       <property name="weight" value="2.0"/>
       <property name="startMessage" value="Getting Narrow"/>

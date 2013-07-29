@@ -7,6 +7,8 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
+import java.io.File;
+
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Game;
@@ -17,7 +19,6 @@ import uk.co.nickthecoder.itchy.animation.AlphaAnimation;
 import uk.co.nickthecoder.itchy.animation.AnimationListener;
 import uk.co.nickthecoder.itchy.animation.CompoundAnimation;
 import uk.co.nickthecoder.itchy.animation.NumericAnimation;
-import uk.co.nickthecoder.itchy.editor.Editor;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
@@ -32,7 +33,7 @@ public class Thrust extends Game
 
     public static double gravity = -0.02;;
 
-    public static final String RESOURCES = "resources/ithrust/thrust.xml";
+    public static final File RESOURCES = new File("resources/ithrust/thrust.xml");
 
     public static Thrust game;
 
@@ -60,7 +61,8 @@ public class Thrust extends Game
     
     public Thrust() throws Exception
     {
-        Itchy.singleton.init(this);
+        super("Thrust", 800,600);
+        
         resources.load(RESOURCES);
 
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
@@ -258,35 +260,6 @@ public class Thrust extends Game
         } else if ("quit".equals(message)) {
             Itchy.singleton.terminate();
         }
-    }
-
-    private void startEditor()
-    {
-        try {
-            Editor editor = new Editor(Thrust.game);
-            editor.init();
-            editor.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public int getWidth()
-    {
-        return 800;
-    }
-
-    @Override
-    public int getHeight()
-    {
-        return 600;
-    }
-
-    @Override
-    public String getTitle()
-    {
-        return "Thrust";
     }
 
     @Override

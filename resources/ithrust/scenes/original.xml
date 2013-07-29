@@ -22,7 +22,7 @@
     <actor costume="tile1" x="292" y="596" direction="0.0" start="default"/>
   </layer>
   <layer name="main">
-    <actor costume="rocket1" x="352" y="216" direction="90.0" start="default">
+    <actor costume="ship1" x="352" y="216" direction="90.0" start="default">
       <property name="thrust" value="0.1"/>
       <property name="weight" value="1.0"/>
       <property name="startMessage" value="Start"/>

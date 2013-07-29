@@ -1,61 +1,61 @@
 <resources>
   <fonts>
+    <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>
     <font name="vera" filename="fonts/Vera/Vera.ttf"/>
     <font name="veraBold" filename="fonts/Vera/VeraBd.ttf"/>
-    <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
   </fonts>
   <ninePatches/>
   <poses>
-    <pose name="stone1d" filename="stone1d.png"/>
-    <pose name="keyZ" filename="keyZ.png"/>
-    <pose name="stone1a" filename="stone1a.png"/>
-    <pose name="stone1c" filename="stone1c.png"/>
-    <pose name="stone1b" filename="stone1b.png"/>
-    <pose name="bullet1" filename="bullet1.png"/>
-    <pose name="ballLarge" filename="ballLarge.png"/>
-    <pose name="keyRight" filename="keyRight.png"/>
-    <pose name="keyA" filename="keyA.png"/>
-    <pose name="level" filename="level.png" offsetX="34" offsetY="33"/>
-    <pose name="path" filename="path.png"/>
-    <pose name="tile1" filename="tile1.png"/>
-    <pose name="levelComplete" filename="levelComplete.png"/>
-    <pose name="keyUp" filename="keyUp.png"/>
-    <pose name="keyLeft" filename="keyLeft.png"/>
-    <pose name="pod" filename="pod.png"/>
-    <pose name="ball" filename="ball.png"/>
-    <pose name="keys" filename="keys.png" offsetX="0"/>
-    <pose name="rod1" filename="rod1.png" offsetX="0"/>
-    <pose name="keyEscape" filename="keyEscape.png"/>
-    <pose name="gate" filename="gate.png"/>
-    <pose name="wrappedRocket2" filename="wrappedRocket2.png" direction="90.0"/>
-    <pose name="wrappedRocket1" filename="wrappedRocket1.png" direction="90.0"/>
     <pose name="background" filename="background.png"/>
-    <pose name="door1b" filename="door.png" direction="180.0" offsetX="6" offsetY="9"/>
-    <pose name="rocket2" filename="rocket2.png" direction="90.0"/>
-    <pose name="door1a" filename="door.png" offsetX="150"/>
-    <pose name="rocket1" filename="rocket1.png" direction="90.0"/>
+    <pose name="ball" filename="ball.png"/>
+    <pose name="ballLarge" filename="ballLarge.png"/>
+    <pose name="bullet1" filename="bullet1.png"/>
+    <pose name="button" filename="button.png"/>
+    <pose name="door1a" filename="door1.png" direction="180.0" offsetX="7" offsetY="9"/>
+    <pose name="door1b" filename="door1.png" offsetX="154" offsetY="9"/>
+    <pose name="door2a" filename="door2.png" direction="180.0" offsetX="9"/>
+    <pose name="door2b" filename="door2.png" offsetX="214"/>
+    <pose name="door3a" filename="door3.png" direction="180.0" offsetX="7"/>
+    <pose name="door3b" filename="door3.png" offsetX="251"/>
+    <pose name="gate" filename="gate.png"/>
+    <pose name="keyA" filename="keyA.png"/>
+    <pose name="keyEscape" filename="keyEscape.png"/>
+    <pose name="keyLeft" filename="keyLeft.png"/>
+    <pose name="keyRight" filename="keyRight.png"/>
+    <pose name="keyUp" filename="keyUp.png"/>
+    <pose name="keyZ" filename="keyZ.png"/>
+    <pose name="keys" filename="keys.png" offsetX="0"/>
+    <pose name="level" filename="level.png" offsetX="34" offsetY="33"/>
+    <pose name="levelComplete" filename="levelComplete.png"/>
+    <pose name="path" filename="path.png"/>
+    <pose name="pod" filename="pod.png"/>
     <pose name="puff" filename="puff.png"/>
+    <pose name="rod1" filename="rod1.png" offsetX="0"/>
+    <pose name="ship1" filename="ship1.png" direction="90.0"/>
+    <pose name="ship2" filename="ship2.png" direction="90.0"/>
+    <pose name="soft" filename="soft.png"/>
+    <pose name="stone1a" filename="stone1a.png"/>
+    <pose name="stone1b" filename="stone1b.png"/>
+    <pose name="stone1c" filename="stone1c.png"/>
+    <pose name="stone1d" filename="stone1d.png"/>
+    <pose name="tile1" filename="tile1.png"/>
+    <pose name="wrappedShip1" filename="wrappedShip1.png" direction="90.0"/>
+    <pose name="wrappedShip2" filename="wrappedShip2.png" direction="90.0"/>
   </poses>
   <sounds>
-    <sound name="explode" filename="sounds/explode.ogg"/>
-    <sound name="thrust" filename="sounds/thrust.ogg"/>
-    <sound name="ding" filename="sounds/ding.ogg"/>
-    <sound name="rotate" filename="sounds/rotate.ogg"/>
-    <sound name="gateOpen" filename="sounds/gateOpen.ogg"/>
-    <sound name="ballTouchedGate" filename="sounds/ballTouchedGate.ogg"/>
     <sound name="ballCollected" filename="sounds/ballCollected.ogg"/>
+    <sound name="ballTouchedGate" filename="sounds/ballTouchedGate.ogg"/>
+    <sound name="ding" filename="sounds/ding.ogg"/>
+    <sound name="explode" filename="sounds/explode.ogg"/>
+    <sound name="gateOpen" filename="sounds/gateOpen.ogg"/>
+    <sound name="rotate" filename="sounds/rotate.ogg"/>
+    <sound name="thrust" filename="sounds/thrust.ogg"/>
   </sounds>
   <animations>
     <animation name="hide">
       <sequence loops="1">
         <alpha ticks="50" target="0.0" profile="linear"/>
-      </sequence>
-    </animation>
-    <animation name="unwrapping">
-      <sequence loops="1">
-        <move ticks="30" dx="0.0" dy="0.0" profile="unit"/>
-        <alpha ticks="80" target="0.0" profile="linear"/>
       </sequence>
     </animation>
     <animation name="travelGate">
@@ -67,6 +67,12 @@
         </sequence>
       </parallel>
     </animation>
+    <animation name="unwrapping">
+      <sequence loops="1">
+        <move ticks="30" dx="0.0" dy="0.0" profile="unit"/>
+        <alpha ticks="80" target="0.0" profile="linear"/>
+      </sequence>
+    </animation>
     <animation name="wrapping">
       <sequence loops="1">
         <alpha ticks="80" target="255.0" profile="linear"/>
@@ -74,23 +80,12 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="stone1d" behaviour="uk.co.nickthecoder.ithrust.Solid">
-      <pose name="default" pose="stone1d"/>
-    </costume>
-    <costume name="stone1a" behaviour="uk.co.nickthecoder.ithrust.Solid">
-      <pose name="default" pose="stone1a"/>
-    </costume>
-    <costume name="keyZ">
-      <pose name="default" pose="keyZ"/>
-    </costume>
-    <costume name="stone1c" behaviour="uk.co.nickthecoder.ithrust.Solid">
-      <pose name="default" pose="stone1c"/>
-    </costume>
-    <costume name="stone1b" behaviour="uk.co.nickthecoder.ithrust.Solid">
-      <pose name="default" pose="stone1b"/>
+    <costume name="background">
+      <pose name="default" pose="background"/>
     </costume>
     <costume name="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
       <pose name="default" pose="ball"/>
+      <string name="weight">1</string>
       <sound name="touchedGate" sound="ballTouchedGate"/>
       <sound name="death" sound="explode"/>
       <sound name="touched" sound="ding"/>
@@ -101,21 +96,75 @@
     </costume>
     <costume name="ballLarge" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
       <pose name="default" pose="ballLarge"/>
+      <string name="weight">2</string>
+    </costume>
+    <costume name="button" behaviour="uk.co.nickthecoder.ithrust.Door">
+      <pose name="default" pose="button"/>
+      <string name="ticks">20</string>
+      <string name="slide">0</string>
+      <string name="angle">90</string>
+    </costume>
+    <costume name="door1a" behaviour="uk.co.nickthecoder.ithrust.Door">
+      <pose name="default" pose="door1a"/>
+      <string name="slide">150</string>
+    </costume>
+    <costume name="door1b" behaviour="uk.co.nickthecoder.ithrust.Door">
+      <pose name="default" pose="door1b"/>
+      <string name="slide">150</string>
+    </costume>
+    <costume name="door2a" extends="door1a" behaviour="uk.co.nickthecoder.ithrust.Door">
+      <pose name="default" pose="door2a"/>
+      <string name="slide">205</string>
+    </costume>
+    <costume name="door2b" extends="door1b" behaviour="uk.co.nickthecoder.ithrust.Door">
+      <pose name="default" pose="door2b"/>
+      <string name="slide">205</string>
+    </costume>
+    <costume name="door3a" extends="door1a" behaviour="uk.co.nickthecoder.ithrust.Door">
+      <pose name="default" pose="door3a"/>
+      <string name="slide">253</string>
+    </costume>
+    <costume name="door3b" extends="door1b" behaviour="uk.co.nickthecoder.ithrust.Door">
+      <pose name="default" pose="door3b"/>
+      <string name="slide">253</string>
+    </costume>
+    <costume name="gate" behaviour="uk.co.nickthecoder.ithrust.Gate">
+      <pose name="default" pose="gate"/>
+      <sound name="open" sound="gateOpen"/>
+      <sound name="collected" sound="ballCollected"/>
     </costume>
     <costume name="keyA">
       <pose name="default" pose="keyA"/>
     </costume>
+    <costume name="keyEscape">
+      <pose name="default" pose="keyEscape"/>
+    </costume>
+    <costume name="keyLeft">
+      <pose name="default" pose="keyLeft"/>
+    </costume>
     <costume name="keyRight">
       <pose name="default" pose="keyRight"/>
+    </costume>
+    <costume name="keyUp">
+      <pose name="default" pose="keyUp"/>
+    </costume>
+    <costume name="keyZ">
+      <pose name="default" pose="keyZ"/>
+    </costume>
+    <costume name="keys">
+      <pose name="default" pose="keys"/>
     </costume>
     <costume name="level" behaviour="uk.co.nickthecoder.ithrust.PickLevelBehaviour">
       <pose name="default" pose="level"/>
       <pose name="complete" pose="levelComplete"/>
     </costume>
-    <costume name="wrappedRocket" extends="ball" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
-      <pose name="shell" pose="ballLarge"/>
+    <costume name="path" behaviour="uk.co.nickthecoder.ithrust.Path">
+      <pose name="default" pose="path"/>
     </costume>
-    <costume name="rocket" behaviour="uk.co.nickthecoder.ithrust.Ship">
+    <costume name="pod">
+      <pose name="default" pose="pod"/>
+    </costume>
+    <costume name="ship" behaviour="uk.co.nickthecoder.ithrust.Ship">
       <pose name="rod" pose="rod1"/>
       <pose name="exhaust" pose="puff"/>
       <pose name="bullet" pose="bullet1"/>
@@ -125,71 +174,71 @@
       <animation name="death" animation="hide"/>
       <animation name="travelGate" animation="travelGate"/>
     </costume>
+    <costume name="ship1" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship">
+      <pose name="default" pose="ship1"/>
+      <string name="thrust">0.2</string>
+      <string name="shipWeight">3</string>
+      <string name="rotationSpeed">0.2</string>
+      <string name="wrappedCostume">wrappedShip1</string>
+      <string name="firePeriod">2</string>
+    </costume>
+    <costume name="ship2" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship">
+      <pose name="default" pose="ship2"/>
+      <string name="thrust">0.1</string>
+      <string name="weight">2</string>
+      <string name="rotationSpeed">0.3</string>
+      <string name="wrappedCostume">wrappedShip2</string>
+      <string name="firePeriod">1</string>
+    </costume>
+    <costume name="soft" behaviour="uk.co.nickthecoder.ithrust.Soft">
+      <pose name="default" pose="soft"/>
+    </costume>
+    <costume name="stone1a" behaviour="uk.co.nickthecoder.ithrust.Solid">
+      <pose name="default" pose="stone1a"/>
+    </costume>
+    <costume name="stone1b" behaviour="uk.co.nickthecoder.ithrust.Solid">
+      <pose name="default" pose="stone1b"/>
+    </costume>
+    <costume name="stone1c" behaviour="uk.co.nickthecoder.ithrust.Solid">
+      <pose name="default" pose="stone1c"/>
+    </costume>
+    <costume name="stone1d" behaviour="uk.co.nickthecoder.ithrust.Solid">
+      <pose name="default" pose="stone1d"/>
+    </costume>
     <costume name="tile1">
       <pose name="default" pose="tile1"/>
     </costume>
-    <costume name="path" behaviour="uk.co.nickthecoder.ithrust.Path">
-      <pose name="default" pose="path"/>
+    <costume name="wrappedShip" extends="ball" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
+      <pose name="shell" pose="ballLarge"/>
     </costume>
-    <costume name="keyUp">
-      <pose name="default" pose="keyUp"/>
+    <costume name="wrappedShip1" extends="wrappedShip" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
+      <pose name="default" pose="wrappedShip1"/>
+      <pose name="contents" pose="ship1"/>
+      <string name="thrust">0.2</string>
+      <string name="shipWeight">3</string>
+      <string name="unwrappedCostume">ship1</string>
+      <string name="rotationSpeed">2</string>
     </costume>
-    <costume name="keyLeft">
-      <pose name="default" pose="keyLeft"/>
-    </costume>
-    <costume name="pod">
-      <pose name="default" pose="pod"/>
-    </costume>
-    <costume name="keys">
-      <pose name="default" pose="keys"/>
-    </costume>
-    <costume name="keyEscape">
-      <pose name="default" pose="keyEscape"/>
-    </costume>
-    <costume name="gate" behaviour="uk.co.nickthecoder.ithrust.Gate">
-      <pose name="default" pose="gate"/>
-      <sound name="open" sound="gateOpen"/>
-      <sound name="collected" sound="ballCollected"/>
-    </costume>
-    <costume name="wrappedRocket2" extends="wrappedRocket" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
-      <pose name="default" pose="wrappedRocket2"/>
-      <pose name="contents" pose="rocket2"/>
-      <string name="unwrappedCostume">rocket2</string>
-    </costume>
-    <costume name="background">
-      <pose name="default" pose="background"/>
-    </costume>
-    <costume name="wrappedRocket1" extends="wrappedRocket" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
-      <pose name="default" pose="wrappedRocket1"/>
-      <pose name="contents" pose="rocket1"/>
-      <string name="unwrappedCostume">rocket1</string>
-    </costume>
-    <costume name="rocket2" extends="rocket" behaviour="uk.co.nickthecoder.ithrust.Ship">
-      <pose name="default" pose="rocket2"/>
-      <string name="wrappedCostume">wrappedRocket2</string>
-    </costume>
-    <costume name="door1b" behaviour="uk.co.nickthecoder.ithrust.Door">
-      <pose name="default" pose="door1b"/>
-    </costume>
-    <costume name="door1a" behaviour="uk.co.nickthecoder.ithrust.Door">
-      <pose name="default" pose="door1a"/>
-    </costume>
-    <costume name="rocket1" extends="rocket" behaviour="uk.co.nickthecoder.ithrust.Ship">
-      <pose name="default" pose="rocket1"/>
-      <string name="wrappedCostume">wrappedRocket1</string>
+    <costume name="wrappedShip2" extends="wrappedShip" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
+      <pose name="default" pose="wrappedShip2"/>
+      <pose name="contents" pose="ship2"/>
+      <string name="thrust">0.1</string>
+      <string name="shipWeight">2</string>
+      <string name="unwrappedCostume">ship2</string>
+      <string name="rotationSpeed">3</string>
     </costume>
   </costumes>
   <scenes>
-    <scene name="beginning-01" filename="scenes/beginning-01.xml"/>
-    <scene name="beginning-03" filename="scenes/beginning-03.xml"/>
-    <scene name="beginning-02" filename="scenes/beginning-02.xml"/>
-    <scene name="levels" filename="scenes/levels.xml"/>
-    <scene name="beginning-04" filename="scenes/beginning-04.xml"/>
-    <scene name="menu" filename="scenes/menu.xml"/>
-    <scene name="tutorial" filename="scenes/tutorial.xml"/>
-    <scene name="original" filename="scenes/original.xml"/>
-    <scene name="about" filename="scenes/about.xml"/>
-    <scene name="level02" filename="scenes/level02.xml"/>
-    <scene name="completed" filename="scenes/completed.xml"/>
+    <scene name="about" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/about.xml"/>
+    <scene name="beginning-01" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/beginning-01.xml"/>
+    <scene name="beginning-02" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/beginning-02.xml"/>
+    <scene name="beginning-03" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/beginning-03.xml"/>
+    <scene name="beginning-04" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/beginning-04.xml"/>
+    <scene name="completed" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/completed.xml"/>
+    <scene name="level02" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/level02.xml"/>
+    <scene name="levels" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/levels.xml"/>
+    <scene name="menu" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/menu.xml"/>
+    <scene name="original" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/original.xml"/>
+    <scene name="tutorial" filename="/media/home/nick/projects/ithrust/resources/ithrust/scenes/tutorial.xml"/>
   </scenes>
 </resources>

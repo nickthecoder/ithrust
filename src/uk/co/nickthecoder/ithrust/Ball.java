@@ -9,17 +9,20 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.extras.Recharge;
 import uk.co.nickthecoder.itchy.util.Property;
 
 public class Ball extends Behaviour implements Fragile
 {
+
     public static final String[] SOLID_TAGS = new String[] { "solid" };
 
-    public static final String[] EXCLUDE_TAGS = new String[] { "gate" };
+    public static final String[] EXCLUDE_TAGS = new String[] { "gate", "soft" };
 
     @Property(label = "Weight")
     public double weight = 1.0;
+
+    @Property(label = "Landing Speed")
+    public double landingSpeed = 2.0;
 
     private boolean moving = false;
 
@@ -32,14 +35,14 @@ public class Ball extends Behaviour implements Fragile
     private Gate gate;
 
     private double gateSpeed = 3.0;
-    
+
     @Override
     public void init()
     {
         this.actor.addTag("fragile");
         this.actor.addTag("solid");
         this.actor.addTag("ball");
-                
+
         createFragments();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
     }
@@ -47,13 +50,6 @@ public class Ball extends Behaviour implements Fragile
     public void createFragments()
     {
         new Fragment().actor(this.actor).pieces(10).pose("default").createPoses("fragment");
-    }
-
-    public void connect( Rod rod )
-    {
-        this.moving = true;
-        this.rod = rod;
-        this.event("taught");
     }
 
     @Override
@@ -80,7 +76,7 @@ public class Ball extends Behaviour implements Fragile
             this.speedY += Thrust.gravity;
             this.getActor().moveBy(this.speedX, this.speedY);
             this.collisionStrategy.update();
-            
+
             if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
                 hit();
                 return;
@@ -95,6 +91,22 @@ public class Ball extends Behaviour implements Fragile
                 break;
             }
 
+            if (!touching("soft").isEmpty()) {
+                if (this.rod == null) {
+                    double speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
+                    if (speed < this.landingSpeed) {
+                        this.moving = false;
+                        getActor().moveBy(-this.speedX, -this.speedY);
+                        this.speedX = 0;
+                        this.speedY = 0;
+                    } else {
+                        hit();
+                    }
+                } else {
+                    hit();
+                }
+            }
+
         }
 
     }
@@ -107,6 +119,19 @@ public class Ball extends Behaviour implements Fragile
                 this.gate.collected(this);
             }
         }
+    }
+
+    public void connected( Rod rod )
+    {
+        this.moving = true;
+        this.rod = rod;
+        this.event("taught");
+    }
+
+    public void disconnected()
+    {
+        event("disconnect");
+        this.rod = null;
     }
 
     public void disconnect()

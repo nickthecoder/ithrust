@@ -90,7 +90,7 @@ public class Rod extends Behaviour
             if (!this.connected) {
 
                 if (this.actor.distanceTo(this.ball.getActor()) >= this.ship.pickupDistance) {
-                    this.ball.connect(this);
+                    this.ball.connected(this);
                     this.connected = true;
                 }
 
@@ -130,8 +130,8 @@ public class Rod extends Behaviour
 
     public void disconnect()
     {
-        this.ball.event("disconnect");
-        this.ship.rod = null;
+        this.ball.disconnected();
+        this.ship.disconnected();
         this.actor.kill();
     }
 

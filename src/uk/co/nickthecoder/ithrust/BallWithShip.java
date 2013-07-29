@@ -27,7 +27,7 @@ public class BallWithShip extends Ball
     public double thrust = 0.1;
 
     @Property(label="Ship's Weight")
-    public double shipWeight = 0.1;
+    public double shipWeight = 2;
 
     public void createFragments()
     {

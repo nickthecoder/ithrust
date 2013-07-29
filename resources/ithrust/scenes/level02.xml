@@ -14,7 +14,7 @@
     <actor costume="stone1a" x="29" y="473" direction="0.0" start="default"/>
     <actor costume="stone1b" x="298" y="626" direction="0.0" start="default"/>
     <actor costume="stone1a" x="467" y="541" direction="0.0" start="default"/>
-    <actor costume="rocket2" x="286" y="316" direction="90.0" start="default">
+    <actor costume="ship2" x="286" y="316" direction="90.0" start="default">
       <property name="thrust" value="0.1"/>
       <property name="weight" value="1.0"/>
       <property name="rotationSpeed" value="3.0"/>

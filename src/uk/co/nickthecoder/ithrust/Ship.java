@@ -7,6 +7,7 @@ package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Follower;
@@ -22,27 +23,35 @@ public class Ship extends Behaviour implements Fragile
 {
     private static final double DEAD_SLOW_DOWN = 0.99;
 
-    @Property(label = "Rotation Speed")
-    public double rotationSpeed = 3;
+    public static final String[] SOLID_TAGS = new String[] { "solid" };
 
-    @Property(label = "Thrust")
-    public double thrust = 0.2;
-
-    @Property(label = "Weight")
-    public double weight = 2.0;
+    public static final String[] EXCLUDE_TAGS = new String[] { "soft" };
 
     @Property(label = "Start Message")
     public String startMessage;
 
-    @Property(label = "Fire Period (seconds)")
-    public double firePeriod = 1;
+    // The following attributes can vary from one costume to another.
+    public double rotationSpeed;
 
+    public double rotationDamper;
+    
+    public double thrust;
+
+    public double weight;
+
+    public double firePeriod;
+
+    public double landingSpeed;
+
+    public double pickupDistance;
+    // End of costume attributes.
+    
     public double speedX = 0.0;
 
     public double speedY = 0.0;
 
-    public double pickupDistance = 200;
-
+    private double currentRotationSpeed;
+    
     private boolean switchingEnds = false;
 
     Rod rod;
@@ -67,8 +76,24 @@ public class Ship extends Behaviour implements Fragile
 
         this.createFragments();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+        this.updateCostumeData();
     }
 
+    /**
+     * Takes info from the costume, such as the thrust force, so that each type of ship handles differently.
+     */
+    private void updateCostumeData()
+    {
+        Costume costume = getActor().getCostume();
+        this.rotationSpeed = costume.getDouble("rotationSpeed", 0.5 );
+        this.rotationDamper = costume.getDouble("rotationDamper", 0.94 );
+        this.thrust = costume.getDouble( "thrust", 0.2 );
+        this.weight = costume.getDouble( "weight", 2.0);
+        this.firePeriod = costume.getDouble("firePeriod", 1); 
+        this.landingSpeed = costume.getDouble( "landingSpeed", 2.0);
+        this.pickupDistance = costume.getDouble( "pickupDistance", 200);
+    }
+    
     /**
      * Create the fragments for the explosions when I get shot.
      */
@@ -79,7 +104,7 @@ public class Ship extends Behaviour implements Fragile
 
     @Override
     public void onActivate()
-    {
+    {        
         if (this.startMessage != null) {
             Actor message = new ShadowText()
                 .text(this.startMessage)
@@ -110,81 +135,114 @@ public class Ship extends Behaviour implements Fragile
     @Override
     public void tick()
     {
+
+        if (!this.switchingEnds) {
+
+            if (isConnected() && Itchy.singleton.isKeyDown(Keys.q)) {
+                if (this.rod.ball instanceof BallWithShip) {
+                    beginSwitchEnds();
+                }
+            }
+
+            if (Itchy.singleton.isKeyDown(Keys.UP)) {
+                if (this.thrustSound == null) {
+                    this.thrustSound = getActor().getCostume().getSound("thrust");
+                    this.thrustSound.play();
+                }
+                this.thrust();
+            } else {
+                if (this.thrustSound != null) {
+                    this.thrustSound.fadeOut(1000);
+                    this.thrustSound = null;
+                }
+            }
+
+            if ((this.rod == null) && (Itchy.singleton.isKeyDown(Keys.a))) {
+                Actor ballActor = this.actor.nearest("ball");
+                if ((ballActor != null) && (ballActor.distanceTo(this.actor) < this.pickupDistance)) {
+                    this.rod = new Rod(this, (Ball) ballActor.getBehaviour());
+                }
+            }
+            if ((this.rod != null) && (Itchy.singleton.isKeyDown(Keys.z))) {
+                this.rod.disconnect();
+            }
+
+            if ((Itchy.singleton.isKeyDown(Keys.SPACE)) && (this.fireRecharge.isCharged())) {
+                this.fireRecharge.reset();
+                fire();
+            }
+
+            for (Actor actor : touching("gate")) {
+                Gate gate = (Gate) actor.getBehaviour();
+                this.disconnect();
+                getActor().setBehaviour(new NextLevel(gate));
+                return;
+            }
+        }
+
         this.speedY += Thrust.gravity;
         this.actor.moveBy(this.speedX, this.speedY);
         this.collisionStrategy.update();
 
-        if (!this.switchingEnds) {
-            Thrust.game.centerOn(this.actor);
-        }
-
-        if (this.switchingEnds) {
-            return;
-        }
-
-        if (connected() && Itchy.singleton.isKeyDown(Keys.q)) {
-            if (this.rod.ball instanceof BallWithShip) {
-                beginSwitchEnds();
-            }
-        }
-
+        this.currentRotationSpeed *= this.rotationDamper;
         if (Itchy.singleton.isKeyDown(Keys.LEFT)) {
             if (this.rotateSound == null) {
                 this.rotateSound = getActor().getCostume().getSound("rotate");
                 this.rotateSound.play();
             }
-            turn(this.rotationSpeed);
+            this.currentRotationSpeed += this.rotationSpeed;
         } else if (Itchy.singleton.isKeyDown(Keys.RIGHT)) {
             if (this.rotateSound == null) {
                 this.rotateSound = getActor().getCostume().getSound("rotate");
                 this.rotateSound.play();
             }
-            turn(-this.rotationSpeed);
+            this.currentRotationSpeed -= this.rotationSpeed;
         } else {
             if (this.rotateSound != null) {
                 this.rotateSound.fadeOut(1000);
                 this.rotateSound = null;
             }
+            this.currentRotationSpeed *= this.rotationDamper;
         }
-
-        if (Itchy.singleton.isKeyDown(Keys.UP)) {
-            if (this.thrustSound == null) {
-                this.thrustSound = getActor().getCostume().getSound("thrust");
-                this.thrustSound.play();
+        turn(this.currentRotationSpeed);
+        
+        if (!touching("soft").isEmpty()) {
+            if (this.rod == null) {
+                double speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
+                double upright = Math.abs(getActor().getAppearance().getDirection() - 90) % 360.0;
+                if (upright > 180) {
+                    upright = 360 - upright;
+                }
+                if ((speed < this.landingSpeed) && (upright < 5)) {
+                    getActor().moveBy(-this.speedX, -this.speedY);
+                    turn(-this.currentRotationSpeed);
+                    this.speedX = 0;
+                    this.speedY = 0;
+                } else {
+                    hit();
+                }
+            } else {
+                hit();
             }
-            this.thrust();
+
         } else {
-            if (this.thrustSound != null) {
-                this.thrustSound.fadeOut(1000);
-                this.thrustSound = null;
-            }
+
         }
 
-        if ((this.rod == null) && (Itchy.singleton.isKeyDown(Keys.a))) {
-            Actor ballActor = this.actor.nearest("ball");
-            if ((ballActor != null) && (ballActor.distanceTo(this.actor) < this.pickupDistance)) {
-                this.rod = new Rod(this, (Ball) ballActor.getBehaviour());
-            }
-        }
-        if ((this.rod != null) && (Itchy.singleton.isKeyDown(Keys.z))) {
-            this.rod.disconnect();
+        if (!this.switchingEnds) {
+            Thrust.game.centerOn(this.actor);
         }
 
-        if ((Itchy.singleton.isKeyDown(Keys.SPACE)) && (this.fireRecharge.isCharged())) {
-            this.fireRecharge.reset();
-            fire();
-        }
-
-        if (!touching("solid").isEmpty()) {
+        if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
             this.hit();
             return;
         }
-        for (Actor actor : touching("gate")) {
-            Gate gate = (Gate) actor.getBehaviour();
-            this.disconnect();
-            getActor().setBehaviour(new NextLevel(gate));
-            return;
-        }
+
+    }
+
+    public void disconnected()
+    {
+        this.rod = null;
     }
 
     private void disconnect()
@@ -194,7 +252,7 @@ public class Ship extends Behaviour implements Fragile
         }
     }
 
-    public boolean connected()
+    public boolean isConnected()
     {
         if (this.rod == null) {
             return false;
@@ -316,6 +374,7 @@ public class Ship extends Behaviour implements Fragile
         puff.activate();
     }
 
+    @Override
     public void hit()
     {
         if (this.rod != null) {
