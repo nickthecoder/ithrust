@@ -6,8 +6,6 @@
 package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.NullSceneBehaviour;
-import uk.co.nickthecoder.jame.Keys;
-import uk.co.nickthecoder.jame.event.KeyboardEvent;
 
 public class Menu extends NullSceneBehaviour
 {

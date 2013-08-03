@@ -7,7 +7,6 @@ package uk.co.nickthecoder.ithrust;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import uk.co.nickthecoder.itchy.Actor;
@@ -20,13 +19,14 @@ public class EscapeRoute extends Behaviour
 
     public List<EscapeRoute> feeds;
 
-    public HashMap<Gate, EscapeRoute> waysBack;
+    public EscapeRoute wayBack;
+
+    public boolean used;
 
     @Override
     public void init()
     {
         this.feeds = new ArrayList<EscapeRoute>();
-        this.waysBack = new HashMap<Gate, EscapeRoute>();
         getActor().addTag(ESCAPE_ROUTE);
     }
 
@@ -45,7 +45,7 @@ public class EscapeRoute extends Behaviour
 
         // Escape routes are never seen, so remove them from their layer.
         // Its quicker than setting their alpha to zero.
-        // this.getActor().getLayer().remove(this.getActor());
+        this.getActor().getLayer().remove(this.getActor());
 
         this.actor.deactivate();
     }
@@ -75,12 +75,14 @@ public class EscapeRoute extends Behaviour
         // +
         // " dir=" + this.getActor().getAppearance().getDirection());
 
-        if (this.waysBack.containsKey(gate)) {
+        if (this.used) {
             System.out.println("Already linked back to that gate");
             return;
         }
+        this.used = true;
+
         // System.out.println("Add way back : " + previousEscapeRoute);
-        this.waysBack.put(gate, previousEscapeRoute);
+        this.wayBack = previousEscapeRoute;
 
         Point2D.Double otherEnd = getOtherEnd();
 
@@ -97,14 +99,14 @@ public class EscapeRoute extends Behaviour
 
     }
 
-    public EscapeRoute getWayBack( Gate gate )
+    public EscapeRoute getWayBack()
     {
-        return this.waysBack.get(gate);
+        return this.wayBack;
     }
 
-    public boolean hasWayBack( Gate gate )
+    public boolean hasWayBack()
     {
-        return this.waysBack.containsKey(gate);
+        return this.used;
     }
 
     @Override
@@ -112,22 +114,5 @@ public class EscapeRoute extends Behaviour
     {
         return "ER (" + getActor().getX() + "," + getActor().getY() + ") dir=" +
             getActor().getAppearance().getDirection();
-    }
-
-    public void debug()
-    {
-        System.out.println("Escape Route @ " + getActor().getX() + "," + getActor().getY());
-        for (Gate gate : this.waysBack.keySet()) {
-            System.out.println("  Route to gate : " + gate.getActor().getX() + "," +
-                gate.getActor().getY());
-
-            System.out.print("    ");
-            EscapeRoute er = this.waysBack.get(gate);
-            while (er != null) {
-                System.out.print("(" + er.getActor().getX() + "," + er.getActor().getY() + ")  ");
-                er = er.getWayBack(gate);
-            }
-            System.out.println("\n");
-        }
     }
 }

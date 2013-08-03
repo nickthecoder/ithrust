@@ -62,7 +62,7 @@ public class Gate extends Behaviour
         }
         for (Actor actor : Actor.allByTag(EscapeRoute.ESCAPE_ROUTE)) {
             EscapeRoute er = (EscapeRoute) actor.getBehaviour();
-            if (! er.hasWayBack(this)) {
+            if (! er.hasWayBack()) {
                 actor.kill();
             }
         }   

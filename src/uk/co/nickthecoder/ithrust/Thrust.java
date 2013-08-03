@@ -168,9 +168,7 @@ public class Thrust extends Game
     private void debug()
     {
         System.out.println( "Debug\n");
-        for (Actor escapeRoute : Actor.allByTag("escapeRoute")) {
-            ((EscapeRoute) (escapeRoute.getBehaviour())).debug();
-        }
+        
         System.out.println( "\nEnd Debug\n");
     }
 

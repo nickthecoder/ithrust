@@ -504,7 +504,7 @@ public class Ship extends Behaviour implements Fragile
             
             while (er != null) {
                 spline.add(er.getActor().getX(), er.getActor().getY());
-                er = er.getWayBack(Ship.this.startGate);
+                er = er.getWayBack();
             }
             spline.add( startGate.getActor().getX(), startGate.getActor().getY() );
             spline.steps = 30;
