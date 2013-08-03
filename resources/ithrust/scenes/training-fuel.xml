@@ -1,0 +1,76 @@
+<scene showMouse="true" behaviour="">
+  <layer name="background">
+    <actor costume="stone1c" x="1262" y="414" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="1270" y="635" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="1227" y="799" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="1086" y="932" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="1096" y="275" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="833" y="271" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="671" y="419" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="601" y="420" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="439" y="300" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="217" y="286" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="63" y="428" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="8" y="660" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="-3" y="875" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="123" y="1030" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="369" y="1100" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="618" y="1082" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="849" y="990" direction="0.0" startEvent="default"/>
+    <actor costume="ball" x="636" y="578" direction="0.0" startEvent="default">
+      <property name="weight" value="1.0"/>
+      <property name="landingSpeed" value="2.0"/>
+    </actor>
+    <text text="This gate isn't open" font="vera" size="22" color="#ffffff" x="309" y="643" direction="0.0" startEvent="default"/>
+    <text text="You can't fly through it yet." font="vera" size="22" color="#ffffff" x="316" y="613" direction="0.0" startEvent="default"/>
+    <text text="It needs some fuel, to start it up." font="vera" size="22" color="#ffffff" x="326" y="544" direction="0.0" startEvent="default"/>
+    <text text="Here's some fuel. To pick it up, get close to it" font="vera" size="22" color="#ffffff" x="816" y="763" direction="0.0" startEvent="default"/>
+    <text text="and hold down          till you hear the ping" font="vera" size="22" color="#ffffff" x="818" y="727" direction="0.0" startEvent="default"/>
+    <actor costume="keyA" x="785" y="723" direction="0.0" startEvent="default"/>
+    <text text="Place it into the gate." font="vera" size="22" color="#ffffff" x="966" y="652" direction="0.0" startEvent="default"/>
+    <text text="Press         to drop your load." font="vera" size="22" color="#ffffff" x="966" y="544" direction="0.0" startEvent="default"/>
+    <actor costume="keyZ" x="896" y="544" direction="0.0" startEvent="default"/>
+    <actor costume="ball" x="775" y="370" direction="0.0" startEvent="default">
+      <property name="weight" value="1.0"/>
+      <property name="landingSpeed" value="2.0"/>
+    </actor>
+    <actor costume="ball" x="854" y="370" direction="0.0" startEvent="default">
+      <property name="weight" value="1.0"/>
+      <property name="landingSpeed" value="2.0"/>
+    </actor>
+    <actor costume="ball" x="928" y="312" direction="0.0" startEvent="default">
+      <property name="weight" value="1.0"/>
+      <property name="landingSpeed" value="2.0"/>
+    </actor>
+    <actor costume="ball" x="998" y="314" direction="0.0" startEvent="default">
+      <property name="weight" value="1.0"/>
+      <property name="landingSpeed" value="2.0"/>
+    </actor>
+    <actor costume="ball" x="1066" y="347" direction="0.0" startEvent="default">
+      <property name="weight" value="1.0"/>
+      <property name="landingSpeed" value="2.0"/>
+    </actor>
+    <actor costume="ball" x="1126" y="359" direction="0.0" startEvent="default">
+      <property name="weight" value="1.0"/>
+      <property name="landingSpeed" value="2.0"/>
+    </actor>
+    <text text="Practice with these before you leave." font="vera" size="22" color="#ffffff" x="963" y="498" direction="0.0" startEvent="default"/>
+  </layer>
+  <layer name="foreground">
+    <actor costume="gate" x="322" y="357" direction="0.0" startEvent="default">
+      <property name="exitDirection" value="90.0"/>
+      <property name="nextLevel" value="training-hub"/>
+      <property name="requiredBalls" value="0"/>
+    </actor>
+    <actor costume="ship2" x="216" y="449" direction="90.0" startEvent="default"/>
+    <actor costume="escapeRoute" x="322" y="407" direction="89.79021943067967" startEvent="default"/>
+    <actor costume="escapeRoute" x="323" y="642" direction="58.995567040409014" startEvent="default" scale="0.8577235772357723"/>
+    <actor costume="escapeRoute" x="436" y="806" direction="-3.692342281652063" startEvent="default" scale="0.9069094622191967"/>
+    <actor costume="escapeRoute" x="662" y="790" direction="-18.43494882292201" startEvent="default"/>
+    <actor costume="escapeRoute" x="886" y="707" direction="-66.9670652469775" startEvent="default"/>
+    <actor costume="escapeRoute" x="354" y="397" direction="44.975645915434555" startEvent="default"/>
+    <actor costume="escapeRoute" x="293" y="408" direction="125.64647479188801" startEvent="default"/>
+    <actor costume="escapeRoute" x="155" y="599" direction="94.29804582607301" startEvent="default"/>
+    <actor costume="escapeRoute" x="651" y="782" direction="-66.80140948635182" startEvent="default"/>
+  </layer>
+</scene>

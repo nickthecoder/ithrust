@@ -1,24 +1,27 @@
-<scene showMouse="true">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.ithrust.MainMenu">
   <layer name="background">
-    <actor costume="background" x="400" y="300" direction="0.0" start="default"/>
+    <actor costume="background" x="1" y="600" direction="0.0" startEvent="default"/>
   </layer>
   <layer name="main">
-    <text text="THRUST" font="boycott" size="244" color="#222222" x="398" y="470" direction="0.0" start="default"/>
-    <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="379" y="141" direction="0.0" start="default">
+    <text text="THRUST" font="boycott" size="244" color="#222222" x="400" y="458" direction="0.0" startEvent="default"/>
+    <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="713" y="54" direction="0.0" startEvent="default">
       <property name="message" value="about"/>
     </text>
-    <text text="Thrust" font="boycott" size="228" color="#cc2222" x="398" y="479" direction="0.0" start="default"/>
-    <text text="Play" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="377" y="295" direction="0.0" start="default">
-      <property name="message" value="play"/>
+    <text text="Thrust" font="boycott" size="228" color="#cc2222" x="400" y="462" direction="0.0" startEvent="default"/>
+    <text text="New Game" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="388" y="233" direction="0.0" startEvent="default">
+      <property name="message" value="newGame"/>
     </text>
-    <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="376" y="215" direction="0.0" start="default">
+    <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="70" y="51" direction="0.0" startEvent="default">
       <property name="message" value="editor"/>
     </text>
-    <text text="Quit" font="boycott" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="722" y="47" direction="0.0" start="default">
+    <text text="Quit" font="boycott" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="400" y="59" direction="0.0" startEvent="default">
       <property name="message" value="quit"/>
+    </text>
+    <text text="Training" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="392" y="297" direction="0.0" startEvent="default">
+      <property name="message" value="training"/>
     </text>
   </layer>
   <layer name="foreground">
-    <actor costume="keys" x="4" y="17" direction="0.0" start="default"/>
+    <actor costume="keys" x="296" y="14" direction="0.0" startEvent="default"/>
   </layer>
 </scene>

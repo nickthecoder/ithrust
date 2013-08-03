@@ -1,0 +1,191 @@
+<scene showMouse="true" behaviour="">
+  <layer name="background">
+    <actor costume="door1b" x="614" y="343" direction="69.67686317033706" startEvent="default">
+      <property name="buddyId" value="door5d"/>
+      <property name="id" value="door5c"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="0.0"/>
+      <property name="shootable" value="false"/>
+      <property name="angle" value="80.0"/>
+    </actor>
+    <actor costume="door1a" x="493" y="27" direction="-111.25050550713324" startEvent="default">
+      <property name="buddyId" value="door5c"/>
+      <property name="id" value="door5b"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="0.0"/>
+      <property name="shootable" value="false"/>
+      <property name="angle" value="-70.0"/>
+    </actor>
+    <actor costume="door3a" x="964" y="-42" direction="180.0" startEvent="default">
+      <property name="buddyId" value="door5a"/>
+      <property name="id" value="door5e"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="-150.0"/>
+      <property name="shootable" value="false"/>
+      <property name="angle" value="0.0"/>
+    </actor>
+    <actor costume="door3b" x="878" y="-261" direction="-90.06850355727745" startEvent="default">
+      <property name="buddyId" value="door5e"/>
+      <property name="id" value="door5d"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="-140.0"/>
+      <property name="shootable" value="false"/>
+      <property name="angle" value="0.0"/>
+    </actor>
+    <actor costume="stone1a" x="78" y="256" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="220" y="131" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="429" y="9" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="571" y="404" direction="0.0" startEvent="default"/>
+    <actor costume="door1b" x="361" y="571" direction="0.0" startEvent="default">
+      <property name="buddyId" value="door1a"/>
+      <property name="id" value="door1b"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="0.0"/>
+      <property name="shootable" value="true"/>
+      <property name="angle" value="-50.0"/>
+    </actor>
+    <actor costume="door1a" x="22" y="570" direction="180.0" startEvent="default">
+      <property name="buddyId" value="door1b"/>
+      <property name="id" value="door1a"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="0.0"/>
+      <property name="shootable" value="true"/>
+      <property name="angle" value="50.0"/>
+    </actor>
+    <actor costume="stone1a" x="431" y="513" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="22" y="464" direction="0.0" startEvent="default"/>
+    <text text="Shoot the doors" font="vera" size="22" color="#ffffff" x="219" y="503" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="-34" y="681" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="411" y="712" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="-60" y="911" direction="0.0" startEvent="default"/>
+    <actor costume="door1a" x="362" y="1454" direction="90.0" startEvent="default">
+      <property name="buddyId" value="door3c"/>
+      <property name="id" value="door3b"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="48.0"/>
+      <property name="shootable" value="false"/>
+      <property name="angle" value="0.0"/>
+    </actor>
+    <actor costume="button" x="118" y="1382" direction="0.0" startEvent="default">
+      <property name="buddyId" value="door3b"/>
+      <property name="id" value="door3a"/>
+      <property name="ticks" value="20"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="0.0"/>
+      <property name="shootable" value="true"/>
+      <property name="angle" value="90.0"/>
+    </actor>
+    <actor costume="stone1a" x="394" y="862" direction="0.0" startEvent="default"/>
+    <text text="Some doors close" font="vera" size="22" color="#ffffff" x="74" y="970" direction="0.0" startEvent="default"/>
+    <text text="automatically" font="vera" size="22" color="#ffffff" x="76" y="945" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="-21" y="1313" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="118" y="1444" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="371" y="1446" direction="0.0" startEvent="default"/>
+    <text text="Some doors have" font="vera" size="22" color="#ffffff" x="158" y="1323" direction="0.0" startEvent="default"/>
+    <actor costume="button" x="993" y="293" direction="-9.276409564682352" startEvent="default">
+      <property name="buddyId" value="door5b"/>
+      <property name="id" value="door5a"/>
+      <property name="ticks" value="20"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="0.0"/>
+      <property name="shootable" value="true"/>
+      <property name="angle" value="90.0"/>
+    </actor>
+    <text text="buttons to shoot" font="vera" size="22" color="#ffffff" x="161" y="1299" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="607" y="1367" direction="0.0" startEvent="default"/>
+    <actor costume="door1a" x="-105" y="1021" direction="180.0" startEvent="default">
+      <property name="buddyId" value="door2a"/>
+      <property name="id" value="door2b"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="50.0"/>
+      <property name="shootable" value="true"/>
+      <property name="angle" value="0.0"/>
+    </actor>
+    <actor costume="stone1d" x="501" y="1142" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="-78" y="1123" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="808" y="1291" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="987" y="1153" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="651" y="1001" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="1020" y="952" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="710" y="813" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="1072" y="737" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="732" y="446" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="761" y="661" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="1083" y="518" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="1037" y="296" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="923" y="116" direction="0.0" startEvent="default"/>
+    <actor costume="door1a" x="356" y="1104" direction="-90.0" startEvent="default">
+      <property name="buddyId" value="door3a"/>
+      <property name="id" value="door3c"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="150.0"/>
+      <property name="shootable" value="false"/>
+      <property name="angle" value="0.0"/>
+    </actor>
+    <actor costume="stone1b" x="693" y="25" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-79" y="339" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="270" y="-26" direction="0.0" startEvent="default"/>
+    <text text="This button operates" font="vera" size="22" color="#ffffff" x="885" y="379" direction="0.0" startEvent="default"/>
+    <text text="two sets of doors" font="vera" size="22" color="#ffffff" x="888" y="349" direction="0.0" startEvent="default"/>
+    <actor costume="ship2" x="286" y="391" direction="90.0" startEvent="default"/>
+    <actor costume="door1b" x="237" y="1021" direction="0.0" startEvent="default">
+      <property name="buddyId" value="door2b"/>
+      <property name="id" value="door2a"/>
+      <property name="ticks" value="100"/>
+      <property name="closeAfter" value="0.0"/>
+      <property name="lift" value="0.0"/>
+      <property name="slide" value="50.0"/>
+      <property name="shootable" value="true"/>
+      <property name="angle" value="0.0"/>
+    </actor>
+    <actor costume="stone1d" x="290" y="981" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="364" y="1091" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-182" y="1017" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-428" y="1095" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-627" y="1165" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="393" y="1024" direction="0.0" startEvent="default"/>
+  </layer>
+  <layer name="main">
+    <actor costume="gate" x="171" y="252" direction="0.0" startEvent="default">
+      <property name="exitDirection" value="90.0"/>
+      <property name="nextLevel" value="training-hub"/>
+      <property name="requiredBalls" value="0"/>
+    </actor>
+  </layer>
+  <layer name="foreground">
+    <actor costume="keySpace" x="219" y="468" direction="0.0" startEvent="default"/>
+    <actor costume="escapeRoute" x="180" y="319" direction="87.17935968050303" startEvent="default" scale="1.0731080253478602"/>
+    <actor costume="escapeRoute" x="195" y="570" direction="103.2405199151872" startEvent="default"/>
+    <actor costume="escapeRoute" x="138" y="799" direction="107.05815614971708" startEvent="default"/>
+    <actor costume="escapeRoute" x="70" y="1019" direction="72.91639880393407" startEvent="default"/>
+    <actor costume="escapeRoute" x="144" y="1232" direction="13.3944055611859" startEvent="default"/>
+    <actor costume="escapeRoute" x="369" y="1281" direction="-5.710593137499643" startEvent="default"/>
+    <actor costume="escapeRoute" x="599" y="1253" direction="-25.820991974189283" startEvent="default"/>
+    <actor costume="escapeRoute" x="800" y="1147" direction="-69.71055431920246" startEvent="default"/>
+    <actor costume="escapeRoute" x="882" y="920" direction="-78.0306895762324" startEvent="default"/>
+    <actor costume="escapeRoute" x="927" y="688" direction="-90.44135576255721" startEvent="default"/>
+    <actor costume="escapeRoute" x="924" y="454" direction="-105.85404967260446" startEvent="default"/>
+    <actor costume="escapeRoute" x="850" y="235" direction="-164.62526760389036" startEvent="default"/>
+    <actor costume="escapeRoute" x="207" y="259" direction="3.2480024531340304" startEvent="default"/>
+  </layer>
+</scene>

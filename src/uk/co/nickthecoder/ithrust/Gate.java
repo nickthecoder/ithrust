@@ -21,20 +21,61 @@ public class Gate extends Behaviour
     @Property(label = "Next Level")
     public String nextLevel = "menu";
 
+    @Property(label = "Exit Direction")
+    public double exitDirection;
+
     private int collected = 0;
 
     @Override
     public void init()
     {
         this.actor.addTag("gate");
-        this.actor.addTag("solid");
+        updateState();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
     }
 
+    public void onActivate()
+    {
+        if (this.nextLevel.equals(Thrust.game.getPreviousScene())) {
+            Ship ship = Thrust.game.getPreviousSceneShip();
+            if (ship != null) {
+                findRoutesBack();
+                ship.startGate(this);
+            }
+        }
+    }
+    
     @Override
     public void tick()
     {
         this.actor.deactivate();
+    }
+    
+    public void findRoutesBack()
+    {
+        System.out.println( "Gate finding routes back" );
+        for (Actor escapeRoute : Actor.allByTag(EscapeRoute.ESCAPE_ROUTE)) {
+            double distance = escapeRoute.distanceTo(this.actor);
+            if (distance < 150) {
+                ((EscapeRoute) (escapeRoute.getBehaviour())).addGate(this);
+            }
+        }
+        for (Actor actor : Actor.allByTag(EscapeRoute.ESCAPE_ROUTE)) {
+            EscapeRoute er = (EscapeRoute) actor.getBehaviour();
+            if (! er.hasWayBack(this)) {
+                actor.kill();
+            }
+        }   
+    }
+
+    public void updateState()
+    {
+        if (this.collected >= this.requiredBalls) {
+            this.event("open");
+        } else {
+            this.actor.addTag("solid");
+            this.event("off");
+        }
     }
 
     public void collected( Ball ball )
@@ -42,9 +83,11 @@ public class Gate extends Behaviour
         this.collected++;
         String text;
 
+        updateState();
+
         if (this.collected >= this.requiredBalls) {
 
-            this.event("open");
+            this.event("opening");
             this.actor.removeTag("solid");
             text = "Open";
 
@@ -56,9 +99,9 @@ public class Gate extends Behaviour
         Actor message = new ShadowText()
             .text(text)
             .fontSize(32)
-            .color(new RGBA(190,190,190))
+            .color(new RGBA(190, 190, 190))
             .fade(2)
-            .offset(0,-4)
+            .offset(0, -4)
             .createActor(getActor());
 
         message.activate();

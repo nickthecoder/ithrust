@@ -7,7 +7,7 @@
   </fonts>
   <ninePatches/>
   <poses>
-    <pose name="background" filename="background.png"/>
+    <pose name="background" filename="background.png" offsetX="0" offsetY="0"/>
     <pose name="ball" filename="ball.png"/>
     <pose name="ballLarge" filename="ballLarge.png"/>
     <pose name="bullet1" filename="bullet1.png"/>
@@ -18,11 +18,17 @@
     <pose name="door2b" filename="door2.png" offsetX="214"/>
     <pose name="door3a" filename="door3.png" direction="180.0" offsetX="7"/>
     <pose name="door3b" filename="door3.png" offsetX="251"/>
+    <pose name="escapeRoute" filename="escapeRoute.png" offsetX="21"/>
+    <pose name="escapeRoute2" filename="escapeRoute.png" offsetX="240" offsetY="39"/>
     <pose name="gate" filename="gate.png"/>
+    <pose name="gate-amber" filename="gate-amber.png"/>
+    <pose name="gate-green" filename="gate-green.png"/>
+    <pose name="gate-red" filename="gate-red.png"/>
     <pose name="keyA" filename="keyA.png"/>
     <pose name="keyEscape" filename="keyEscape.png"/>
     <pose name="keyLeft" filename="keyLeft.png"/>
     <pose name="keyRight" filename="keyRight.png"/>
+    <pose name="keySpace" filename="keySpace.png"/>
     <pose name="keyUp" filename="keyUp.png"/>
     <pose name="keyZ" filename="keyZ.png"/>
     <pose name="keys" filename="keys.png" offsetX="0"/>
@@ -56,7 +62,21 @@
     <animation name="ballRebirth">
       <sequence loops="1">
         <alpha ticks="1" target="0.0" profile="linear"/>
-        <alpha ticks="200" target="255.0" profile="linear"/>
+        <scale ticks="1" target="0.0" profile="linear"/>
+        <parallel loops="1">
+          <alpha ticks="20" target="255.0" profile="linear"/>
+          <scale ticks="100" target="1.0" profile="linear"/>
+        </parallel>
+      </sequence>
+    </animation>
+    <animation name="exitGate">
+      <sequence loops="1">
+        <parallel loops="1">
+          <turn ticks="200" turn="3600.0" profile="easeOutCubic"/>
+          <alpha ticks="100" target="255.0" profile="linear"/>
+          <scale ticks="150" target="1.0" profile="easeInCirc"/>
+        </parallel>
+        <forwards ticks="50" forwards="100.0" sideways="0.0" profile="ease" finishedMessage="exitGate"/>
       </sequence>
     </animation>
     <animation name="hide">
@@ -75,7 +95,7 @@
     </animation>
     <animation name="unwrapping">
       <sequence loops="1">
-        <move ticks="30" dx="0.0" dy="0.0" profile="unit"/>
+        <move ticks="30" dx="0.0" dy="0.0" profile="linear"/>
         <alpha ticks="80" target="0.0" profile="linear"/>
       </sequence>
     </animation>
@@ -92,13 +112,13 @@
     <costume name="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
       <pose name="default" pose="ball"/>
       <string name="weight">1</string>
-      <sound name="touchedGate" sound="ballTouchedGate"/>
       <sound name="death" sound="explode"/>
-      <sound name="touched" sound="ding"/>
       <sound name="taught" sound="ding"/>
+      <sound name="touched" sound="ding"/>
+      <sound name="touchedGate" sound="ballTouchedGate"/>
       <animation name="rebirth" animation="ballRebirth"/>
-      <animation name="unwrapping" animation="unwrapping"/>
       <animation name="travelGate" animation="travelGate"/>
+      <animation name="unwrapping" animation="unwrapping"/>
       <animation name="wrapping" animation="wrapping"/>
     </costume>
     <costume name="ballLarge" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
@@ -107,9 +127,9 @@
     </costume>
     <costume name="button" behaviour="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="button"/>
-      <string name="ticks">20</string>
-      <string name="slide">0</string>
       <string name="angle">90</string>
+      <string name="slide">0</string>
+      <string name="ticks">20</string>
     </costume>
     <costume name="door1a" behaviour="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door1a"/>
@@ -135,10 +155,18 @@
       <pose name="default" pose="door3b"/>
       <string name="slide">253</string>
     </costume>
+    <costume name="escapeRoute" behaviour="uk.co.nickthecoder.ithrust.EscapeRoute">
+      <pose name="default" pose="escapeRoute"/>
+      <pose name="reverse" pose="escapeRoute2"/>
+    </costume>
     <costume name="gate" behaviour="uk.co.nickthecoder.ithrust.Gate">
       <pose name="default" pose="gate"/>
-      <sound name="open" sound="gateOpen"/>
+      <pose name="no-coolant" pose="gate-amber"/>
+      <pose name="no-exotic" pose="gate-red"/>
+      <pose name="off" pose="gate"/>
+      <pose name="open" pose="gate-green"/>
       <sound name="collected" sound="ballCollected"/>
+      <sound name="opening" sound="gateOpen"/>
     </costume>
     <costume name="keyA">
       <pose name="default" pose="keyA"/>
@@ -152,6 +180,9 @@
     <costume name="keyRight">
       <pose name="default" pose="keyRight"/>
     </costume>
+    <costume name="keySpace">
+      <pose name="default" pose="keySpace"/>
+    </costume>
     <costume name="keyUp">
       <pose name="default" pose="keyUp"/>
     </costume>
@@ -161,41 +192,36 @@
     <costume name="keys">
       <pose name="default" pose="keys"/>
     </costume>
-    <costume name="level" behaviour="uk.co.nickthecoder.ithrust.PickLevelBehaviour">
-      <pose name="default" pose="level"/>
-      <pose name="complete" pose="levelComplete"/>
-    </costume>
-    <costume name="path" behaviour="uk.co.nickthecoder.ithrust.Path">
-      <pose name="default" pose="path"/>
-    </costume>
     <costume name="pod">
       <pose name="default" pose="pod"/>
     </costume>
     <costume name="ship" behaviour="uk.co.nickthecoder.ithrust.Ship">
-      <pose name="rod" pose="rod1"/>
-      <pose name="exhaust" pose="puff"/>
       <pose name="bullet" pose="bullet1"/>
-      <sound name="thrust" sound="thrust"/>
-      <sound name="rotate" sound="rotate"/>
+      <pose name="escapePod" pose="pod"/>
+      <pose name="exhaust" pose="puff"/>
+      <pose name="rod" pose="rod1"/>
       <sound name="death" sound="explode"/>
-      <animation name="death" animation="hide"/>
+      <sound name="rotate" sound="rotate"/>
+      <sound name="thrust" sound="thrust"/>
+      <animation name="escapePodAtGate" animation="hide"/>
+      <animation name="exitGate" animation="exitGate"/>
       <animation name="travelGate" animation="travelGate"/>
     </costume>
     <costume name="ship1" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship">
       <pose name="default" pose="ship1"/>
-      <string name="thrust">0.2</string>
-      <string name="shipWeight">3</string>
-      <string name="rotationSpeed">0.2</string>
-      <string name="wrappedCostume">wrappedShip1</string>
       <string name="firePeriod">2</string>
+      <string name="rotationSpeed">0.2</string>
+      <string name="shipWeight">3</string>
+      <string name="thrust">0.2</string>
+      <string name="wrappedCostume">wrappedShip1</string>
     </costume>
     <costume name="ship2" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship">
       <pose name="default" pose="ship2"/>
+      <string name="firePeriod">1</string>
+      <string name="rotationSpeed">0.3</string>
       <string name="thrust">0.1</string>
       <string name="weight">2</string>
-      <string name="rotationSpeed">0.3</string>
       <string name="wrappedCostume">wrappedShip2</string>
-      <string name="firePeriod">1</string>
     </costume>
     <costume name="soft" behaviour="uk.co.nickthecoder.ithrust.Soft">
       <pose name="default" pose="soft"/>
@@ -219,20 +245,20 @@
       <pose name="shell" pose="ballLarge"/>
     </costume>
     <costume name="wrappedShip1" extends="wrappedShip" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
-      <pose name="default" pose="wrappedShip1"/>
       <pose name="contents" pose="ship1"/>
-      <string name="thrust">0.2</string>
-      <string name="shipWeight">3</string>
-      <string name="unwrappedCostume">ship1</string>
+      <pose name="default" pose="wrappedShip1"/>
       <string name="rotationSpeed">2</string>
+      <string name="shipWeight">3</string>
+      <string name="thrust">0.2</string>
+      <string name="unwrappedCostume">ship1</string>
     </costume>
     <costume name="wrappedShip2" extends="wrappedShip" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
-      <pose name="default" pose="wrappedShip2"/>
       <pose name="contents" pose="ship2"/>
-      <string name="thrust">0.1</string>
-      <string name="shipWeight">2</string>
-      <string name="unwrappedCostume">ship2</string>
+      <pose name="default" pose="wrappedShip2"/>
       <string name="rotationSpeed">3</string>
+      <string name="shipWeight">2</string>
+      <string name="thrust">0.1</string>
+      <string name="unwrappedCostume">ship2</string>
     </costume>
   </costumes>
   <scenes>
@@ -246,6 +272,10 @@
     <scene name="levels"/>
     <scene name="menu"/>
     <scene name="original"/>
+    <scene name="training-doors"/>
+    <scene name="training-fuel"/>
+    <scene name="training-hub"/>
+    <scene name="training-ships"/>
     <scene name="tutorial"/>
   </scenes>
 </resources>

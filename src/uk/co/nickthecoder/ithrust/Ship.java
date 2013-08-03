@@ -5,7 +5,11 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
+import java.awt.geom.Point2D;
+import java.util.Iterator;
+
 import uk.co.nickthecoder.itchy.Actor;
+import uk.co.nickthecoder.itchy.ActorsLayer;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
@@ -14,8 +18,7 @@ import uk.co.nickthecoder.itchy.extras.Follower;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Projectile;
 import uk.co.nickthecoder.itchy.extras.Recharge;
-import uk.co.nickthecoder.itchy.extras.ShadowText;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.util.CubicSpline;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Sound;
 
@@ -27,14 +30,11 @@ public class Ship extends Behaviour implements Fragile
 
     public static final String[] EXCLUDE_TAGS = new String[] { "soft" };
 
-    @Property(label = "Start Message")
-    public String startMessage;
-
     // The following attributes can vary from one costume to another.
     public double rotationSpeed;
 
     public double rotationDamper;
-    
+
     public double thrust;
 
     public double weight;
@@ -45,13 +45,13 @@ public class Ship extends Behaviour implements Fragile
 
     public double pickupDistance;
     // End of costume attributes.
-    
+
     public double speedX = 0.0;
 
     public double speedY = 0.0;
 
     private double currentRotationSpeed;
-    
+
     private boolean switchingEnds = false;
 
     Rod rod;
@@ -77,59 +77,54 @@ public class Ship extends Behaviour implements Fragile
         this.createFragments();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
         this.updateCostumeData();
+
+    }
+
+    @Override
+    public void onActivate()
+    {
+        this.pickupDistance = getActor().getCostume().getPose("rod").getSurface().getWidth();
+
+        // If this is the first level, then use this ship and have it come out of the appropriate
+        // gate if there is one.
+        if (Thrust.game.getPreviousSceneShip() == null) {
+            Actor actor = getActor().nearest("gate");
+            if (actor != null) {
+                Gate gate = (Gate) (actor.getBehaviour());
+                gate.findRoutesBack();
+                this.startGate(gate);
+                return;
+            }
+        
+        } else {
+            // This isn't the first level, and so we can destroy this ship. It was added into the
+            // scene to allow running a single scene on its own, for debugging.
+            this.getActor().kill();
+        }
     }
 
     /**
-     * Takes info from the costume, such as the thrust force, so that each type of ship handles differently.
+     * Takes info from the costume, such as the thrust force, so that each type of ship handles
+     * differently.
      */
     private void updateCostumeData()
     {
         Costume costume = getActor().getCostume();
-        this.rotationSpeed = costume.getDouble("rotationSpeed", 0.5 );
-        this.rotationDamper = costume.getDouble("rotationDamper", 0.94 );
-        this.thrust = costume.getDouble( "thrust", 0.2 );
-        this.weight = costume.getDouble( "weight", 2.0);
-        this.firePeriod = costume.getDouble("firePeriod", 1); 
-        this.landingSpeed = costume.getDouble( "landingSpeed", 2.0);
-        this.pickupDistance = costume.getDouble( "pickupDistance", 200);
+        this.rotationSpeed = costume.getDouble("rotationSpeed", 0.5);
+        this.rotationDamper = costume.getDouble("rotationDamper", 0.94);
+        this.thrust = costume.getDouble("thrust", 0.2);
+        this.weight = costume.getDouble("weight", 2.0);
+        this.firePeriod = costume.getDouble("firePeriod", 1);
+        this.landingSpeed = costume.getDouble("landingSpeed", 2.0);
+        this.pickupDistance = costume.getDouble("pickupDistance", 200);
     }
-    
+
     /**
      * Create the fragments for the explosions when I get shot.
      */
     void createFragments()
     {
         new Fragment().actor(this.actor).createPoses("fragment");
-    }
-
-    @Override
-    public void onActivate()
-    {        
-        if (this.startMessage != null) {
-            Actor message = new ShadowText()
-                .text(this.startMessage)
-                .fontSize(32)
-                .offset(0, -60)
-                .fade(2)
-                .growFactor(0.995)
-                .createActor(getActor());
-
-            message.activate();
-
-            new Explosion(message)
-                .projectiles(15)
-                .below()
-                .forwards()
-                .spin(-.2, .2)
-                .alpha(128).fade(1, 2)
-                .speed(0.5, 2)
-                .gravity(Thrust.gravity)
-                .createActor("fragment")
-                .activate();
-
-        }
-
-        this.pickupDistance = getActor().getCostume().getPose("rod").getSurface().getWidth();
     }
 
     @Override
@@ -205,7 +200,7 @@ public class Ship extends Behaviour implements Fragile
             this.currentRotationSpeed *= this.rotationDamper;
         }
         turn(this.currentRotationSpeed);
-        
+
         if (!touching("soft").isEmpty()) {
             if (this.rod == null) {
                 double speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
@@ -234,7 +229,7 @@ public class Ship extends Behaviour implements Fragile
         }
 
         if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
-            this.hit();
+            hit();
             return;
         }
 
@@ -380,8 +375,16 @@ public class Ship extends Behaviour implements Fragile
         if (this.rod != null) {
             this.rod.disconnect();
         }
-        this.deathEvent("death");
-        this.actor.setBehaviour(new Dying());
+
+        System.out.println("Ship hit StartGate = " + startGate );
+        if (this.startGate != null) {
+            this.event("death");
+            this.event("escapePod");
+            this.actor.setBehaviour(new EscapePod());
+        } else {
+            this.deathEvent("death");
+            this.actor.setBehaviour(new Dying());
+        }
 
         new Explosion(this.actor)
             .projectiles(30)
@@ -392,6 +395,56 @@ public class Ship extends Behaviour implements Fragile
             .gravity(Thrust.gravity)
             .createActor("fragment")
             .activate();
+
+    }
+
+    private Gate startGate;
+
+    /**
+     * This ship needs to appear from the gate specified. The animation is roughly the opposite of
+     * the ship entering a gate.
+     * 
+     * @param gate
+     */
+    public void startGate( Gate gate )
+    {        
+        System.out.println("Ship setting start gate to " + gate );
+        this.startGate = gate;
+        double direction = gate.exitDirection;
+
+        this.actor.getAppearance().setDirection(direction);
+        this.actor.getAppearance().setScale(0.01);
+        this.actor.getAppearance().setAlpha(0);
+
+        this.actor.moveTo(gate.getActor());
+        this.actor.activate();
+        this.actor.setBehaviour(new ExitingGate());
+        ActorsLayer layer = gate.getActor().getLayer();
+        layer.add(this.actor);
+        this.actor.event("default"); // Ensure its got the right pose
+        this.actor.event("exitGate");
+
+    }
+
+    public class ExitingGate extends Behaviour
+    {
+        @Override
+        public void tick()
+        {
+            Thrust.game.centerOn(this.actor);
+        }
+
+        @Override
+        public void onMessage( String message )
+        {
+            System.out.println("ExitingGate Message " + message);
+            if ("exitGate".equals(message)) {
+                Ship.this.speedX = 0;
+                Ship.this.speedY = 0;
+                this.actor.setBehaviour(Ship.this);
+                System.out.println("Ship back to self");
+            }
+        }
     }
 
     public class Dying extends Behaviour
@@ -400,12 +453,80 @@ public class Ship extends Behaviour implements Fragile
         @Override
         public void tick()
         {
+            this.actor.getAppearance().setAlpha(0);
+
             // Gently brake the ship so that the scroll layer still scrolls, but not too far.
             Ship.this.speedX *= DEAD_SLOW_DOWN;
             Ship.this.speedY *= DEAD_SLOW_DOWN;
 
             this.actor.moveBy(Ship.this.speedX, Ship.this.speedY);
             this.collisionStrategy.update();
+
+        }
+
+    }
+
+    public class EscapePod extends Behaviour
+    {
+        public double speed;
+
+        public Actor target;
+
+        Iterator<Point2D.Float> path;
+
+        @Override
+        public void init()
+        {
+            this.speed = 5;
+            this.target = Ship.this.startGate.getActor();
+
+            Actor escapeRoute = getActor().nearest("escapeRoute");
+            if (escapeRoute != null) {
+                double erDist = escapeRoute.distance(getActor());
+                double gateDist = Ship.this.startGate.getActor().distance(getActor());
+                if (erDist < gateDist) {
+                    buildPath((EscapeRoute) escapeRoute.getBehaviour());
+                } else {
+                    buildPath( null );
+                }
+            }
+        }
+
+        private void buildPath( EscapeRoute er )
+        {
+            CubicSpline spline = new CubicSpline();
+            spline.add(getActor().getX(), getActor().getY());
+
+            if ( er == null ) {
+                spline.add( getActor().getX(), getActor().getY());
+                spline.add( startGate.getActor().getX(), startGate.getActor().getY() );
+            }
+            
+            while (er != null) {
+                spline.add(er.getActor().getX(), er.getActor().getY());
+                er = er.getWayBack(Ship.this.startGate);
+            }
+            spline.add( startGate.getActor().getX(), startGate.getActor().getY() );
+            spline.steps = 30;
+            
+            path = spline.iterate();
+        }
+        
+
+        @Override
+        public void tick()
+        {
+            if (path.hasNext()) {
+                
+                Point2D.Float point = path.next();
+                getActor().moveTo( point.x, point.y );
+                
+            } else {
+                getActor().setBehaviour(Ship.this);
+                Ship.this.startGate(Ship.this.startGate);        
+            }
+            
+            Thrust.game.centerOn(this.actor);
 
         }
 
@@ -450,7 +571,7 @@ public class Ship extends Behaviour implements Fragile
         public void onMessage( String message )
         {
             if ("exitGate".equals(message)) {
-                Thrust.game.play(this.gate.nextLevel);
+                Thrust.game.nextScene(Ship.this, this.gate.nextLevel);
             }
         }
 
