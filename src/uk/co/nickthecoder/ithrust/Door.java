@@ -46,6 +46,13 @@ public class Door extends Behaviour implements Fragile
     @Property(label = "Ticks")
     public int ticks = 100;
 
+    /**
+     * The number of ticks from the initial position to the position needed for an escape pod to get
+     * through.
+     */
+    @Property(label = "ajar")
+    public int ajar = 30;
+
     private Door buddy;
 
     private Recharge closeRecharge;
@@ -60,6 +67,11 @@ public class Door extends Behaviour implements Fragile
      * The amount of ticks away from its start position.
      */
     private int tickCount = 0;
+
+    /**
+     * The target position of the door. When target == tickCount, then the door will stop moving.
+     */
+    private int target = 0;
 
     @Override
     public void init()
@@ -89,20 +101,19 @@ public class Door extends Behaviour implements Fragile
     @Override
     public void tick()
     {
-        if ((this.closeRecharge != null) && (this.closeRecharge.isCharged())) {
+        if ((this.target != this.ajar) && (this.closeRecharge != null) &&
+            (this.closeRecharge.isCharged())) {
+
             this.close();
             this.closeRecharge = null;
         }
 
+        if (this.target == this.tickCount) {
+            this.direction = 0;
+            return;
+        }
+
         if (this.direction != 0) {
-            if ((this.tickCount == 0) && (this.direction == -1)) {
-                this.direction = 0;
-                return;
-            }
-            if ((this.tickCount == this.ticks) && (this.direction == 1)) {
-                this.direction = 0;
-                return;
-            }
 
             // The update is in three parts, so that if it is rotated AND translated, then the
             // operations
@@ -128,6 +139,7 @@ public class Door extends Behaviour implements Fragile
     {
         if (this.direction != 1) {
             this.direction = 1;
+            this.target = this.ticks;
             if (this.closeAfter > 0) {
                 this.closeRecharge = new Recharge((int) (this.closeAfter * 1000));
                 this.closeRecharge.reset();
@@ -141,10 +153,21 @@ public class Door extends Behaviour implements Fragile
     public void close()
     {
         if (this.direction != -1) {
+            this.target = 0;
             this.direction = -1;
             if (this.buddy != null) {
                 this.buddy.close();
             }
+        }
+    }
+
+    public void ajar()
+    {
+        this.target = this.ajar;
+        if (this.target == this.tickCount) {
+            this.direction = 0;
+        } else {
+            this.direction = this.tickCount < this.target ? 1 : -1;
         }
     }
 
@@ -162,6 +185,16 @@ public class Door extends Behaviour implements Fragile
             } else {
                 this.open();
             }
+        }
+    }
+
+    @Override
+    public void onMessage( String message )
+    {
+        if ("escapePod".equals(message)) {
+            this.ajar();
+        } else if ("reset".equals(message)) {
+            this.close();
         }
     }
 

@@ -82,8 +82,6 @@ public class Thrust extends Game
     {
         this.mainLayer.disableMouseListener();
         this.mainLayer.enableMouseListener();
-
-        this.startScene("menu");
     }
 
     public ActorCollisionStrategy createCollisionStrategy( Actor actor )
@@ -177,7 +175,7 @@ public class Thrust extends Game
         System.out.println("Welcome to Thrust");
 
         try {
-            game = new Thrust();
+            Thrust.game = new Thrust();
 
             if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
                 Thrust.game.startEditor();
@@ -189,6 +187,12 @@ public class Thrust extends Game
             e.printStackTrace();
         }
         System.out.println("Goodbye from Thrust");
+    }
+
+    @Override
+    public String getInitialSceneName()
+    {
+        return "menu";
     }
 
 }

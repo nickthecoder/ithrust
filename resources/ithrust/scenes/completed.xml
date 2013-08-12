@@ -1,21 +1,18 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.ithrust.Menu">
+<scene showMouse="true" behaviour="">
   <layer name="background">
-    <actor costume="background" x="400" y="300" direction="0.0" startEvent="default"/>
+    <actor costume="background" x="1" y="600" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="307" y="20" direction="0.0" startEvent="default"/>
+    <text text="Menu" font="boycott" size="22" color="#ffffff" x="399" y="163" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="510" y="26" direction="0.0" startEvent="default"/>
   </layer>
   <layer name="main">
-    <actor costume="ball" x="410" y="96" direction="0.0" startEvent="default">
+    <actor costume="fuel" x="589" y="128" direction="0.0" startEvent="default">
       <property name="weight" value="1.0"/>
+      <property name="landingSpeed" value="2.0"/>
     </actor>
-    <text text="Well Done" font="boycott" size="111" color="#000044" x="386" y="464" direction="0.0" startEvent="default"/>
-    <text text="MENU" font="blackCasper" size="53" color="#000000" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="410" y="91" direction="0.0" startEvent="default">
-      <property name="message" value="menu"/>
-    </text>
-    <text text="WELL DONE" font="boycott" size="108" color="#ffffff" x="384" y="460" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="341" y="-28" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="142" y="-21" direction="0.0" startEvent="default"/>
+    <text text="Well Done" font="boycott" size="111" color="#000044" x="401" y="462" direction="0.0" startEvent="default"/>
+    <text text="WELL DONE" font="boycott" size="108" color="#ffffff" x="400" y="471" direction="0.0" startEvent="default"/>
     <actor costume="stone1a" x="25" y="102" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="533" y="-18" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="735" y="-4" direction="0.0" startEvent="default"/>
     <actor costume="stone1a" x="841" y="67" direction="0.0" startEvent="default"/>
     <actor costume="stone1a" x="828" y="245" direction="0.0" startEvent="default"/>
     <actor costume="stone1a" x="826" y="487" direction="0.0" startEvent="default"/>
@@ -66,9 +63,25 @@
     <actor costume="stone1b" x="1931" y="1330" direction="0.0" startEvent="default"/>
     <actor costume="stone1b" x="1652" y="1342" direction="0.0" startEvent="default"/>
     <actor costume="stone1b" x="1373" y="1352" direction="0.0" startEvent="default"/>
+    <actor costume="ball" x="237" y="125" direction="0.0" startEvent="default">
+      <property name="weight" value="1.0"/>
+      <property name="landingSpeed" value="2.0"/>
+    </actor>
+    <actor costume="stone1d" x="734" y="5" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="136" y="15" direction="0.0" startEvent="default"/>
+    <actor costume="gate" x="400" y="300" direction="0.0" startEvent="default">
+      <property name="exitDirection" value="-90.0"/>
+      <property name="nextLevel" value="menu"/>
+      <property name="requiredBalls" value="3"/>
+    </actor>
+    <actor costume="gate" x="398" y="87" direction="0.0" startEvent="default">
+      <property name="exitDirection" value="90.0"/>
+      <property name="nextLevel" value="menu"/>
+      <property name="requiredBalls" value="0"/>
+    </actor>
   </layer>
   <layer name="foreground">
-    <actor costume="ship2" x="413" y="299" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" x="318" y="355" direction="90.0" startEvent="default"/>
     <actor costume="stone1b" x="721" y="632" direction="0.0" startEvent="default"/>
   </layer>
 </scene>

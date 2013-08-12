@@ -1,0 +1,61 @@
+<scene showMouse="true" behaviour="">
+  <layer name="background">
+    <actor costume="stone1a" x="84" y="280" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="166" y="162" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="407" y="184" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="635" y="274" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="40" y="505" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="767" y="420" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="676" y="808" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="812" y="877" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="443" y="868" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="220" y="875" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="49" y="726" direction="0.0" startEvent="default"/>
+    <text text="This means it needs water" font="vera" size="22" color="#ffffff" x="265" y="524" direction="0.0" startEvent="default"/>
+    <text text="to help cool it down." font="vera" size="22" color="#ffffff" x="270" y="490" direction="0.0" startEvent="default"/>
+    <text text="The gate's indicator is orange." font="vera" size="22" color="#ffffff" x="269" y="560" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="952" y="929" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="1191" y="844" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="797" y="237" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="1030" y="159" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="1239" y="151" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="1376" y="275" direction="0.0" startEvent="default"/>
+    <text text="Pick up the container. Get close" font="vera" size="22" color="#ffffff" x="1047" y="500" direction="0.0" startEvent="default"/>
+    <text text="until you hear a ping." font="vera" size="22" color="#ffffff" x="1047" y="421" direction="0.0" startEvent="default"/>
+    <actor costume="keyA" x="1155" y="461" direction="0.0" startEvent="default"/>
+    <text text="to it, and hold down " font="vera" size="22" color="#ffffff" x="1020" y="462" direction="0.0" startEvent="default"/>
+    <actor costume="bucket" x="987" y="288" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="2079" y="198" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="2094" y="412" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="2049" y="595" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="1907" y="766" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="1709" y="833" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="1467" y="838" direction="0.0" startEvent="default"/>
+    <text text="Fill the empty container with water" font="vera" size="22" color="#ffffff" x="1723" y="496" direction="0.0" startEvent="default"/>
+    <text text="Hold the container under the surface" font="vera" size="22" color="#ffffff" x="1727" y="454" direction="0.0" startEvent="default"/>
+  </layer>
+  <layer name="main">
+    <actor costume="gate" x="269" y="228" direction="0.0" startEvent="default">
+      <property name="requiredWater" value="3"/>
+      <property name="exitDirection" value="90.0"/>
+      <property name="nextLevel" value="training-hub"/>
+      <property name="requiredFuel" value="0"/>
+    </actor>
+    <text text="Training" font="boycott" size="22" color="#ffffff" x="267" y="300" direction="0.0" startEvent="default"/>
+    <actor costume="ship1" x="341" y="338" direction="90.0" startEvent="default"/>
+  </layer>
+  <layer name="foreground">
+    <actor costume="waterSurface" x="1425" y="72" direction="0.0" startEvent="default"/>
+    <actor costume="waterSurface" x="1687" y="72" direction="0.0" startEvent="default"/>
+    <actor costume="waterSurface" x="1905" y="72" direction="0.0" startEvent="default"/>
+    <actor costume="water" x="1898" y="-56" direction="0.0" startEvent="default"/>
+    <actor costume="water" x="1689" y="-56" direction="0.0" startEvent="default"/>
+    <actor costume="water" x="1422" y="-58" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="1290" y="10" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="1403" y="-151" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="1551" y="-162" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="1778" y="-168" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="1917" y="-136" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="2041" y="0" direction="0.0" startEvent="default"/>
+  </layer>
+</scene>

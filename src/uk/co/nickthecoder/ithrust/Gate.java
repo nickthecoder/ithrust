@@ -15,16 +15,17 @@ import uk.co.nickthecoder.jame.RGBA;
 public class Gate extends Behaviour
 {
 
-    @Property(label = "Required")
-    public int requiredBalls = 1;
+    @Property(label = "Required Fuel")
+    public int requiredFuel = 0;
+
+    @Property(label = "Required Water")
+    public int requiredWater = 0;
 
     @Property(label = "Next Level")
     public String nextLevel = "menu";
 
     @Property(label = "Exit Direction")
-    public double exitDirection;
-
-    private int collected = 0;
+    public double exitDirection = 90;
 
     @Override
     public void init()
@@ -34,6 +35,7 @@ public class Gate extends Behaviour
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
     }
 
+    @Override
     public void onActivate()
     {
         if (this.nextLevel.equals(Thrust.game.getPreviousScene())) {
@@ -44,16 +46,16 @@ public class Gate extends Behaviour
             }
         }
     }
-    
+
     @Override
     public void tick()
     {
         this.actor.deactivate();
     }
-    
+
     public void findRoutesBack()
     {
-        System.out.println( "Gate finding routes back" );
+        // System.out.println( "Gate finding routes back" );
         for (Actor escapeRoute : Actor.allByTag(EscapeRoute.ESCAPE_ROUTE)) {
             double distance = escapeRoute.distanceTo(this.actor);
             if (distance < 150) {
@@ -62,38 +64,49 @@ public class Gate extends Behaviour
         }
         for (Actor actor : Actor.allByTag(EscapeRoute.ESCAPE_ROUTE)) {
             EscapeRoute er = (EscapeRoute) actor.getBehaviour();
-            if (! er.hasWayBack()) {
+            if (!er.hasWayBack()) {
                 actor.kill();
             }
-        }   
+        }
     }
 
     public void updateState()
     {
-        if (this.collected >= this.requiredBalls) {
-            this.event("open");
+        if ((this.requiredFuel <= 0) && (this.requiredWater <= 0)) {
+            this.event("on");
+            this.actor.removeTag("solid");
         } else {
             this.actor.addTag("solid");
-            this.event("off");
+            if ( this.requiredFuel > 0 ) {
+                this.event("off");
+            } else {
+                this.event("standby");
+            }
         }
     }
 
     public void collected( Ball ball )
     {
-        this.collected++;
+        this.requiredFuel -= ball.fuel;
+        this.requiredWater -= ball.water;
         String text;
 
         updateState();
 
-        if (this.collected >= this.requiredBalls) {
+        if ((this.requiredFuel <= 0) && (this.requiredWater <= 0)) {
 
             this.event("opening");
-            this.actor.removeTag("solid");
             text = "Open";
 
         } else {
             this.event("collected");
-            text = String.valueOf(this.requiredBalls - this.collected);
+            if ( this.requiredFuel > 0 ) {
+                text = "Needs Fuel";
+            } else if ( this.requiredWater > 0 ) {
+                text = "Needs Water";
+            } else {
+                text = "";
+            }
         }
 
         Actor message = new ShadowText()

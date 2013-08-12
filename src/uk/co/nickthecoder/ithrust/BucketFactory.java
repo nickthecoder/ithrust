@@ -7,21 +7,13 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+public class BucketFactory extends BallFactory
+{
 
-public class Solid extends Behaviour {
-	
-	@Override
-	public void onActivate()
-	{
-        this.actor.addTag("solid");
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
-	}
-	
-	@Override
-	public void tick()
-	{
-		this.actor.deactivate();
-	}
-	
+    public Ball createBehaviour()
+    {
+        Bucket bucket = new Bucket();
+        return bucket;
+    }
+    
 }

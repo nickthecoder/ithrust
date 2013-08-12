@@ -9,7 +9,6 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.util.Property;
 
 public class Ball extends Behaviour implements Fragile
 {
@@ -18,10 +17,8 @@ public class Ball extends Behaviour implements Fragile
 
     public static final String[] EXCLUDE_TAGS = new String[] { "gate", "soft" };
 
-    @Property(label = "Weight")
     public double weight = 1.0;
 
-    @Property(label = "Landing Speed")
     public double landingSpeed = 2.0;
 
     private boolean moving = false;
@@ -31,15 +28,13 @@ public class Ball extends Behaviour implements Fragile
     public double speedY = 0;
 
     private Rod rod;
-
-    private Gate gate;
-
-    private double gateSpeed = 3.0;
-
-    private double origX;
     
-    private double origY;
+    public int fuel;
     
+    public int water;
+
+    public BallFactory ballFactory = null;
+
     @Override
     public void init()
     {
@@ -49,39 +44,32 @@ public class Ball extends Behaviour implements Fragile
 
         createFragments();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
-        
-        this.origX = actor.getX();
-        this.origY = actor.getY();
+
+        this.fuel = getActor().getCostume().getInt( "fuel", 0 );
+        this.water = getActor().getCostume().getInt( "water", 0 );
+        this.weight = getActor().getCostume().getDouble( "weight", 1 );
     }
-    
 
     public void createFragments()
     {
         new Fragment().actor(this.actor).pieces(10).pose("default").createPoses("fragment");
     }
-
+    
     @Override
     public void tick()
     {
-        if (this.gate != null) {
 
-            if (this.gateSpeed > 0) {
-                this.speedX *= 0.98;
-                this.speedY *= 0.98;
-                getActor().moveBy(this.speedX, this.speedY);
-                getActor().moveTowards(this.gate.getActor(), this.gateSpeed);
-                this.collisionStrategy.update();
-
-                if (getActor().distance(this.gate.getActor()) < this.gateSpeed) {
-                    getActor().moveTo(this.gate.getActor());
-                    this.gateSpeed = 0;
-                    this.deathEvent("travelGate");
-                }
+        if (this.moving) {
+            
+            // Damp down the velocity when touching liquids
+            if ( touching("liquid").size() > 0 ) {
+                this.speedX *= 0.95;
+                this.speedY *= 0.95;
+                this.speedY += Thrust.gravity / 5; // Make the ball buoyant
+            } else {
+                this.speedY += Thrust.gravity;
             }
-
-        } else if (this.moving) {
-
-            this.speedY += Thrust.gravity;
+            
             this.getActor().moveBy(this.speedX, this.speedY);
             this.collisionStrategy.update();
 
@@ -92,11 +80,8 @@ public class Ball extends Behaviour implements Fragile
 
             for (Actor actor : touching("gate")) {
                 Gate gate = (Gate) actor.getBehaviour();
-                this.event("touchedGate");
-                this.gate = gate;
-                getActor().removeTag("ball");
-                disconnect();
-                break;
+                getActor().setBehaviour(new EnterGate(gate));
+                return;
             }
 
             if (!touching("soft").isEmpty()) {
@@ -119,21 +104,14 @@ public class Ball extends Behaviour implements Fragile
 
     }
 
-    @Override
-    public void onMessage( String message )
-    {
-        if ("collected".equals(message)) {
-            if (this.gate != null) {
-                this.gate.collected(this);
-            }
-        }
-    }
-
     public void connected( Rod rod )
     {
         this.moving = true;
         this.rod = rod;
         this.event("taught");
+        if (ballFactory!=null) {
+            ballFactory.sendMessage("taken");
+        }
     }
 
     public void disconnected()
@@ -155,7 +133,7 @@ public class Ball extends Behaviour implements Fragile
         if (this.rod != null) {
             this.rod.disconnect();
         }
-        this.event("death");
+        this.deathEvent("death");
 
         new Explosion(this.actor)
             .projectiles(30)
@@ -165,16 +143,58 @@ public class Ball extends Behaviour implements Fragile
             .speed(0.1, 1.5).vx(this.speedX).vy(this.speedY)
             .createActor("fragment")
             .activate();
-        
-        rebirth();
     }
 
-    protected void rebirth()
+
+    public class EnterGate extends Behaviour
     {
-        this.moving = false;
-        this.speedX = 0;
-        this.speedY = 0;
-        actor.moveTo(this.origX, this.origY);
-        actor.event("rebirth");
+        private Gate gate;
+
+        private double gateSpeed = 3.0;
+
+        public EnterGate( Gate gate )
+        {
+            this.gate = gate;
+        }
+
+        @Override
+        public void init()
+        {
+            disconnect();
+            getActor().removeTag("ball");
+            event("touchedGate");
+        }
+
+        @Override
+        public void tick()
+        {
+            if (this.gateSpeed > 0) {
+                Ball.this.speedX *= 0.98;
+                Ball.this.speedY *= 0.98;
+                getActor().moveBy(Ball.this.speedX, Ball.this.speedY);
+                getActor().moveTowards(this.gate.getActor(), this.gateSpeed);
+                this.collisionStrategy.update();
+
+                if (getActor().distance(this.gate.getActor()) < this.gateSpeed) {
+                    getActor().moveTo(this.gate.getActor());
+                    this.gateSpeed = 0;
+                    this.deathEvent("travelGate");
+                }
+            }
+
+        }
+
+        @Override
+        public void onMessage( String message )
+        {
+            if ("collected".equals(message)) {
+                if (this.gate != null) {
+                    this.gate.collected(Ball.this);
+                }
+            }
+        }
+
     }
+
+
 }

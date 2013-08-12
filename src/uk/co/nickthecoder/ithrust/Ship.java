@@ -66,10 +66,14 @@ public class Ship extends Behaviour implements Fragile
 
     private Recharge fireRecharge;
 
+    private Gate startGate;
+
+    
     @Override
     public void init()
     {
         this.actor.addTag("fragile");
+        this.actor.addTag("solid");
         this.actor.addTag("ship");
 
         this.fireRecharge = new Recharge((int) (1000 * this.firePeriod));
@@ -77,7 +81,6 @@ public class Ship extends Behaviour implements Fragile
         this.createFragments();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
         this.updateCostumeData();
-
     }
 
     @Override
@@ -95,7 +98,7 @@ public class Ship extends Behaviour implements Fragile
                 this.startGate(gate);
                 return;
             }
-        
+
         } else {
             // This isn't the first level, and so we can destroy this ship. It was added into the
             // scene to allow running a single scene on its own, for debugging.
@@ -116,7 +119,6 @@ public class Ship extends Behaviour implements Fragile
         this.weight = costume.getDouble("weight", 2.0);
         this.firePeriod = costume.getDouble("firePeriod", 1);
         this.landingSpeed = costume.getDouble("landingSpeed", 2.0);
-        this.pickupDistance = costume.getDouble("pickupDistance", 200);
     }
 
     /**
@@ -226,6 +228,11 @@ public class Ship extends Behaviour implements Fragile
 
         if (!this.switchingEnds) {
             Thrust.game.centerOn(this.actor);
+        }
+
+        if (!touching("liquid").isEmpty()) {
+            hit();
+            return;
         }
 
         if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
@@ -376,7 +383,6 @@ public class Ship extends Behaviour implements Fragile
             this.rod.disconnect();
         }
 
-        System.out.println("Ship hit StartGate = " + startGate );
         if (this.startGate != null) {
             this.event("death");
             this.event("escapePod");
@@ -398,8 +404,6 @@ public class Ship extends Behaviour implements Fragile
 
     }
 
-    private Gate startGate;
-
     /**
      * This ship needs to appear from the gate specified. The animation is roughly the opposite of
      * the ship entering a gate.
@@ -407,8 +411,7 @@ public class Ship extends Behaviour implements Fragile
      * @param gate
      */
     public void startGate( Gate gate )
-    {        
-        System.out.println("Ship setting start gate to " + gate );
+    {
         this.startGate = gate;
         double direction = gate.exitDirection;
 
@@ -437,12 +440,10 @@ public class Ship extends Behaviour implements Fragile
         @Override
         public void onMessage( String message )
         {
-            System.out.println("ExitingGate Message " + message);
             if ("exitGate".equals(message)) {
                 Ship.this.speedX = 0;
                 Ship.this.speedY = 0;
                 this.actor.setBehaviour(Ship.this);
-                System.out.println("Ship back to self");
             }
         }
     }
@@ -468,8 +469,6 @@ public class Ship extends Behaviour implements Fragile
 
     public class EscapePod extends Behaviour
     {
-        public double speed;
-
         public Actor target;
 
         Iterator<Point2D.Float> path;
@@ -477,7 +476,11 @@ public class Ship extends Behaviour implements Fragile
         @Override
         public void init()
         {
-            this.speed = 5;
+            // Make any doors open slightly to allow the pod through.
+            for (Actor actor : Actor.allByTag("door")) {
+                actor.getBehaviour().onMessage("escapePod");
+            }
+
             this.target = Ship.this.startGate.getActor();
 
             Actor escapeRoute = getActor().nearest("escapeRoute");
@@ -487,8 +490,10 @@ public class Ship extends Behaviour implements Fragile
                 if (erDist < gateDist) {
                     buildPath((EscapeRoute) escapeRoute.getBehaviour());
                 } else {
-                    buildPath( null );
+                    buildPath(null);
                 }
+            } else {
+                buildPath(null);
             }
         }
 
@@ -497,35 +502,39 @@ public class Ship extends Behaviour implements Fragile
             CubicSpline spline = new CubicSpline();
             spline.add(getActor().getX(), getActor().getY());
 
-            if ( er == null ) {
-                spline.add( getActor().getX(), getActor().getY());
-                spline.add( startGate.getActor().getX(), startGate.getActor().getY() );
+            if (er == null) {
+                spline.add(getActor().getX(), getActor().getY());
+                spline.add(Ship.this.startGate.getActor().getX(), Ship.this.startGate.getActor()
+                    .getY());
             }
-            
+
             while (er != null) {
                 spline.add(er.getActor().getX(), er.getActor().getY());
                 er = er.getWayBack();
             }
-            spline.add( startGate.getActor().getX(), startGate.getActor().getY() );
+            spline
+                .add(Ship.this.startGate.getActor().getX(), Ship.this.startGate.getActor().getY());
             spline.steps = 30;
-            
-            path = spline.iterate();
+
+            this.path = spline.iterate();
         }
-        
 
         @Override
         public void tick()
         {
-            if (path.hasNext()) {
-                
-                Point2D.Float point = path.next();
-                getActor().moveTo( point.x, point.y );
-                
+            if (this.path.hasNext()) {
+
+                Point2D.Float point = this.path.next();
+                getActor().moveTo(point.x, point.y);
+
             } else {
                 getActor().setBehaviour(Ship.this);
-                Ship.this.startGate(Ship.this.startGate);        
+                for (Actor actor : Actor.allByTag("door")) {
+                    actor.getBehaviour().onMessage("reset");
+                }
+                Ship.this.startGate(Ship.this.startGate);
             }
-            
+
             Thrust.game.centerOn(this.actor);
 
         }

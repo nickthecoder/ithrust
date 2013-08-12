@@ -8,8 +8,9 @@
   <ninePatches/>
   <poses>
     <pose name="background" filename="background.png" offsetX="0" offsetY="0"/>
-    <pose name="ball" filename="ball.png"/>
-    <pose name="ballLarge" filename="ballLarge.png"/>
+    <pose name="ballOfWater" filename="ballOfWater.png"/>
+    <pose name="bucket" filename="ball.png"/>
+    <pose name="bucketFactory" filename="bucketFactory.png" offsetX="69" offsetY="66"/>
     <pose name="bullet1" filename="bullet1.png"/>
     <pose name="button" filename="button.png"/>
     <pose name="door1a" filename="door1.png" direction="180.0" offsetX="7" offsetY="9"/>
@@ -18,8 +19,12 @@
     <pose name="door2b" filename="door2.png" offsetX="214"/>
     <pose name="door3a" filename="door3.png" direction="180.0" offsetX="7"/>
     <pose name="door3b" filename="door3.png" offsetX="251"/>
+    <pose name="droplet" filename="droplet.png"/>
+    <pose name="droplet-fragment" filename="droplet-fragment.png"/>
     <pose name="escapeRoute" filename="escapeRoute.png" offsetX="21"/>
     <pose name="escapeRoute2" filename="escapeRoute.png" offsetX="240" offsetY="39"/>
+    <pose name="fuel" filename="fuel.png"/>
+    <pose name="fuelFactory" filename="fuelFactory.png" offsetX="40" offsetY="33"/>
     <pose name="gate" filename="gate.png"/>
     <pose name="gate-amber" filename="gate-amber.png"/>
     <pose name="gate-green" filename="gate-green.png"/>
@@ -46,6 +51,9 @@
     <pose name="stone1c" filename="stone1c.png"/>
     <pose name="stone1d" filename="stone1d.png"/>
     <pose name="tile1" filename="tile1.png"/>
+    <pose name="water" filename="water.png"/>
+    <pose name="waterDroplet" filename="waterDroplet.png"/>
+    <pose name="waterSurface" filename="waterSurface.png"/>
     <pose name="wrappedShip1" filename="wrappedShip1.png" direction="90.0"/>
     <pose name="wrappedShip2" filename="wrappedShip2.png" direction="90.0"/>
   </poses>
@@ -53,6 +61,7 @@
     <sound name="ballCollected" filename="sounds/ballCollected.ogg"/>
     <sound name="ballTouchedGate" filename="sounds/ballTouchedGate.ogg"/>
     <sound name="ding" filename="sounds/ding.ogg"/>
+    <sound name="drip" filename="sounds/drip.ogg"/>
     <sound name="explode" filename="sounds/explode.ogg"/>
     <sound name="gateOpen" filename="sounds/gateOpen.ogg"/>
     <sound name="rotate" filename="sounds/rotate.ogg"/>
@@ -84,6 +93,16 @@
         <alpha ticks="50" target="0.0" profile="linear"/>
       </sequence>
     </animation>
+    <animation name="popup120">
+      <sequence loops="1">
+        <move ticks="50" dx="0.0" dy="120.0" profile="easeOutBack"/>
+      </sequence>
+    </animation>
+    <animation name="popup60">
+      <sequence loops="1">
+        <move ticks="50" dx="0.0" dy="65.0" profile="easeOutBack"/>
+      </sequence>
+    </animation>
     <animation name="travelGate">
       <parallel loops="1">
         <scale ticks="200" target="0.25" profile="linear"/>
@@ -110,8 +129,6 @@
       <pose name="default" pose="background"/>
     </costume>
     <costume name="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
-      <pose name="default" pose="ball"/>
-      <string name="weight">1</string>
       <sound name="death" sound="explode"/>
       <sound name="taught" sound="ding"/>
       <sound name="touched" sound="ding"/>
@@ -121,9 +138,20 @@
       <animation name="unwrapping" animation="unwrapping"/>
       <animation name="wrapping" animation="wrapping"/>
     </costume>
-    <costume name="ballLarge" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
-      <pose name="default" pose="ballLarge"/>
-      <string name="weight">2</string>
+    <costume name="bucket" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Bucket">
+      <pose name="contents" pose="waterDroplet"/>
+      <pose name="default" pose="bucket"/>
+      <pose name="fillWithWater" pose="ballOfWater"/>
+      <string name="volume">1</string>
+      <string name="water">0</string>
+      <string name="waterWeight">3</string>
+      <string name="weight">0.5</string>
+      <sound name="fillWithWater" sound="ding"/>
+    </costume>
+    <costume name="bucketFactory" behaviour="uk.co.nickthecoder.ithrust.BucketFactory">
+      <pose name="default" pose="bucketFactory"/>
+      <string name="ballCostume">bucket</string>
+      <animation name="appear" animation="popup120"/>
     </costume>
     <costume name="button" behaviour="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="button"/>
@@ -155,16 +183,29 @@
       <pose name="default" pose="door3b"/>
       <string name="slide">253</string>
     </costume>
+    <costume name="droplet" behaviour="uk.co.nickthecoder.ithrust.DropletFactory">
+      <pose name="default" pose="droplet"/>
+      <pose name="fragments" pose="droplet-fragment"/>
+      <sound name="death" sound="drip"/>
+    </costume>
     <costume name="escapeRoute" behaviour="uk.co.nickthecoder.ithrust.EscapeRoute">
       <pose name="default" pose="escapeRoute"/>
       <pose name="reverse" pose="escapeRoute2"/>
     </costume>
+    <costume name="fuel" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
+      <pose name="default" pose="fuel"/>
+      <string name="fuel">1</string>
+      <string name="weight">3</string>
+    </costume>
+    <costume name="fuelFactory" behaviour="uk.co.nickthecoder.ithrust.FuelFactory">
+      <pose name="default" pose="fuelFactory"/>
+      <animation name="appear" animation="popup60"/>
+    </costume>
     <costume name="gate" behaviour="uk.co.nickthecoder.ithrust.Gate">
       <pose name="default" pose="gate"/>
-      <pose name="no-coolant" pose="gate-amber"/>
-      <pose name="no-exotic" pose="gate-red"/>
       <pose name="off" pose="gate"/>
-      <pose name="open" pose="gate-green"/>
+      <pose name="on" pose="gate-green"/>
+      <pose name="standby" pose="gate-amber"/>
       <sound name="collected" sound="ballCollected"/>
       <sound name="opening" sound="gateOpen"/>
     </costume>
@@ -241,8 +282,15 @@
     <costume name="tile1">
       <pose name="default" pose="tile1"/>
     </costume>
+    <costume name="water" behaviour="uk.co.nickthecoder.ithrust.Liquid">
+      <pose name="default" pose="water"/>
+      <string name="water">true</string>
+    </costume>
+    <costume name="waterSurface" behaviour="uk.co.nickthecoder.ithrust.Liquid">
+      <pose name="default" pose="waterSurface"/>
+    </costume>
     <costume name="wrappedShip" extends="ball" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
-      <pose name="shell" pose="ballLarge"/>
+      <pose name="shell" pose="water"/>
     </costume>
     <costume name="wrappedShip1" extends="wrappedShip" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
       <pose name="contents" pose="ship1"/>
@@ -263,19 +311,15 @@
   </costumes>
   <scenes>
     <scene name="about"/>
-    <scene name="beginning-01"/>
-    <scene name="beginning-02"/>
-    <scene name="beginning-03"/>
-    <scene name="beginning-04"/>
     <scene name="completed"/>
-    <scene name="level02"/>
     <scene name="levels"/>
     <scene name="menu"/>
-    <scene name="original"/>
+    <scene name="start"/>
+    <scene name="start-lakeside"/>
     <scene name="training-doors"/>
     <scene name="training-fuel"/>
     <scene name="training-hub"/>
     <scene name="training-ships"/>
-    <scene name="tutorial"/>
+    <scene name="training-water"/>
   </scenes>
 </resources>

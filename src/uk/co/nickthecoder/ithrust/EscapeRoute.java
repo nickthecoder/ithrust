@@ -38,15 +38,15 @@ public class EscapeRoute extends Behaviour
     @Override
     public void tick()
     {
-        System.out.println("Reversing ER");
         Point2D.Double otherEnd = this.getOtherEnd();
         this.getActor().moveTo(otherEnd.x, otherEnd.y);
-        this.getActor().event("reverse");
 
         // Escape routes are never seen, so remove them from their layer.
         // Its quicker than setting their alpha to zero.
         this.getActor().getLayer().remove(this.getActor());
-
+        // this.getActor().event("reverse");
+        // To debug the escape routes, uncomment the "event", and comment out the Layer.remove
+        
         this.actor.deactivate();
     }
 
@@ -54,8 +54,9 @@ public class EscapeRoute extends Behaviour
     {
         Appearance appearance = getActor().getAppearance();
 
-        double length = appearance.getPose().getSurface().getWidth() * appearance.getScale();
+        double length = appearance.getPose().getSurface().getWidth();
         length -= appearance.getPose().getOffsetX() * 2;
+        length *= appearance.getScale();
 
         double x = this.actor.getX() + Math.cos(appearance.getDirectionRadians()) * length;
         double y = this.actor.getY() + Math.sin(appearance.getDirectionRadians()) * length;
@@ -76,7 +77,7 @@ public class EscapeRoute extends Behaviour
         // " dir=" + this.getActor().getAppearance().getDirection());
 
         if (this.used) {
-            System.out.println("Already linked back to that gate");
+            // System.out.println("Already linked back to that gate");
             return;
         }
         this.used = true;

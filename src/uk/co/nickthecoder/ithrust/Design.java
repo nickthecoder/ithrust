@@ -7,21 +7,16 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+public class Design
+{
+    public static void main(String[] argv) throws Exception
+    {
+        String sceneName = "start-lakeside";
 
-public class Solid extends Behaviour {
-	
-	@Override
-	public void onActivate()
-	{
-        this.actor.addTag("solid");
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
-	}
-	
-	@Override
-	public void tick()
-	{
-		this.actor.deactivate();
-	}
-	
+        if (argv.length > 0) {
+            sceneName = argv[0];
+        }
+        Thrust.game = new Thrust();
+        Thrust.game.startEditor( sceneName );
+    }
 }

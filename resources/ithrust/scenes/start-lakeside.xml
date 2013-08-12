@@ -1,0 +1,115 @@
+<scene showMouse="true" behaviour="">
+  <layer name="background">
+    <actor costume="stone1c" x="233" y="114" direction="0.0" startEvent="default"/>
+    <text text="Start" font="boycott" size="22" color="#ffffff" x="283" y="350" direction="0.0" startEvent="default"/>
+    <text text="Shipyard" font="boycott" size="22" color="#ffffff" x="187" y="-307" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="186" y="-501" direction="0.0" startEvent="default"/>
+    <actor costume="gate" x="188" y="-386" direction="0.0" startEvent="default">
+      <property name="requiredWater" value="0"/>
+      <property name="exitDirection" value="90.0"/>
+      <property name="nextLevel" value="start-shipyard"/>
+      <property name="requiredFuel" value="0"/>
+    </actor>
+  </layer>
+  <layer name="main">
+    <actor costume="gate" x="284" y="274" direction="0.0" startEvent="default">
+      <property name="requiredWater" value="0"/>
+      <property name="exitDirection" value="90.0"/>
+      <property name="nextLevel" value="start"/>
+      <property name="requiredFuel" value="0"/>
+    </actor>
+    <actor costume="ship1" x="207" y="364" direction="90.0" startEvent="default"/>
+    <actor costume="bucketFactory" x="576" y="584" direction="0.0" startEvent="default">
+      <property name="quantity" value="-1"/>
+      <property name="delay" value="5"/>
+    </actor>
+  </layer>
+  <layer name="foreground">
+    <actor costume="water" x="774" y="-103" direction="0.0" startEvent="default"/>
+    <actor costume="water" x="502" y="35" direction="0.0" startEvent="default"/>
+    <actor costume="water" x="770" y="35" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="700" y="-93" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="478" y="18" direction="0.0" startEvent="default"/>
+    <actor costume="waterSurface" x="502" y="161" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="359" y="114" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="391" y="-59" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="285" y="40" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="509" y="-77" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="711" y="-185" direction="0.0" startEvent="default"/>
+    <actor costume="waterSurface" x="769" y="161" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="917" y="97" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="869" y="-111" direction="0.0" startEvent="default"/>
+    <actor costume="droplet" x="465" y="462" direction="0.0" startEvent="default">
+      <property name="minimumPeriod" value="1.0"/>
+      <property name="maximumPeriod" value="4.0"/>
+    </actor>
+    <actor costume="droplet" x="592" y="456" direction="0.0" startEvent="default">
+      <property name="minimumPeriod" value="1.0"/>
+      <property name="maximumPeriod" value="4.0"/>
+    </actor>
+    <actor costume="stone1c" x="936" y="-170" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="989" y="37" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="1021" y="269" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="887" y="67" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="401" y="109" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="559" y="-12" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="1070" y="467" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="1087" y="687" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="946" y="848" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="718" y="904" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="484" y="894" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="605" y="505" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="452" y="600" direction="0.0" startEvent="default"/>
+    <actor costume="stone1b" x="237" y="849" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="65" y="711" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="38" y="519" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="95" y="10" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-103" y="81" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="-246" y="167" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-89" y="609" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-322" y="670" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="-496" y="599" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="-549" y="363" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="-601" y="167" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-561" y="-128" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="-643" y="-19" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-255" y="-357" direction="0.0" startEvent="default"/>
+    <actor costume="stone1a" x="-395" y="-246" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="-106" y="-353" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="-59" y="-430" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="416" y="-579" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="889" y="-406" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="834" y="-610" direction="0.0" startEvent="default"/>
+    <actor costume="stone1d" x="665" y="-666" direction="0.0" startEvent="default"/>
+    <actor costume="escapeRoute" x="344" y="299" direction="7.594643368591445" startEvent="default"/>
+    <actor costume="escapeRoute" x="576" y="328" direction="0.0" startEvent="default"/>
+    <actor costume="escapeRoute" x="809" y="329" direction="66.03751102542182" startEvent="default"/>
+    <actor costume="escapeRoute" x="903" y="540" direction="154.50244850666223" startEvent="default"/>
+    <actor costume="escapeRoute" x="702" y="644" direction="143.67317404787977" startEvent="default"/>
+    <actor costume="escapeRoute" x="281" y="350" direction="94.72944808664306" startEvent="default"/>
+    <actor costume="escapeRoute" x="273" y="571" direction="90.0" startEvent="default" scale="0.7846153846153846"/>
+    <actor costume="escapeRoute" x="233" y="284" direction="171.86989764584402" startEvent="default"/>
+    <actor costume="escapeRoute" x="7" y="319" direction="157.7965214679426" startEvent="default"/>
+    <actor costume="escapeRoute" x="-202" y="404" direction="-152.35402463626133" startEvent="default"/>
+    <actor costume="escapeRoute" x="-393" y="292" direction="-100.30484646876603" startEvent="default"/>
+    <actor costume="escapeRoute" x="-424" y="67" direction="-37.184706453233126" startEvent="default"/>
+    <actor costume="escapeRoute" x="-239" y="-71" direction="-7.594643368591445" startEvent="default"/>
+    <actor costume="escapeRoute" x="-10" y="-103" direction="-18.43494882292201" startEvent="default"/>
+    <actor costume="escapeRoute" x="208" y="-176" direction="-20.136303428248134" startEvent="default"/>
+    <actor costume="escapeRoute" x="429" y="-256" direction="-21.80140948635181" startEvent="default"/>
+    <actor costume="escapeRoute" x="206" y="-267" direction="167.59469822247183" startEvent="default" scale="0.810077519379845"/>
+    <actor costume="escapeRoute" x="17" y="-231" direction="153.99459263606818" startEvent="default" scale="0.8537735849056604"/>
+    <actor costume="escapeRoute" x="-158" y="-146" direction="150.2551187030578" startEvent="default"/>
+    <actor costume="escapeRoute" x="-354" y="-36" direction="120.25643716352927" startEvent="default"/>
+    <actor costume="escapeRoute" x="-459" y="163" direction="64.02560603756868" startEvent="default"/>
+    <actor costume="escapeRoute" x="-355" y="368" direction="0.0" startEvent="default"/>
+    <actor costume="escapeRoute" x="-118" y="373" direction="-36.02527378664239" startEvent="default"/>
+    <actor costume="escapeRoute" x="72" y="247" direction="62.41354709258801" startEvent="default"/>
+    <actor costume="escapeRoute" x="185" y="466" direction="68.72937189425465" startEvent="default"/>
+    <actor costume="escapeRoute" x="385" y="436" direction="-29.53416073627963" startEvent="default"/>
+    <actor costume="escapeRoute" x="189" y="446" direction="0.0" startEvent="default" scale="0.8160919540229885"/>
+    <actor costume="escapeRoute" x="366" y="-338" direction="155.77225468204583" startEvent="default" scale="0.7777777777777778"/>
+    <actor costume="escapeRoute" x="314" y="-442" direction="63.71215396057542" startEvent="default" scale="0.4889705882352941"/>
+    <actor costume="escapeRoute" x="196" y="-385" direction="-30.6536526875007" startEvent="default" scale="0.597125581344629"/>
+  </layer>
+</scene>

@@ -7,21 +7,19 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.util.Property;
 
-public class Solid extends Behaviour {
-	
-	@Override
-	public void onActivate()
-	{
-        this.actor.addTag("solid");
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
-	}
-	
-	@Override
-	public void tick()
-	{
-		this.actor.deactivate();
-	}
-	
+public class FuelFactory extends BallFactory
+{
+    @Property(label = "Fuel")
+    public int fuel = 1;
+
+    public Ball createBehaviour()
+    {
+        Ball ball = new Ball();
+        ball.fuel = this.fuel;    
+        
+        return ball;
+    }
+
 }

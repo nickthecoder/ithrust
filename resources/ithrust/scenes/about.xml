@@ -1,6 +1,6 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.ithrust.Menu">
+<scene showMouse="true" behaviour="">
   <layer name="background">
-    <actor costume="background" x="400" y="300" direction="0.0" startEvent="default"/>
+    <actor costume="background" x="0" y="600" direction="0.0" startEvent="default"/>
   </layer>
   <layer name="main">
     <text text="Written by Nick Robinson" font="boycott" size="22" color="#ffffff" x="409" y="350" direction="0.0" startEvent="default"/>

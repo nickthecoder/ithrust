@@ -42,7 +42,7 @@ public class Rod extends Behaviour
         rodActor.getAppearance().setScale(0.1);
         rodActor.moveTo(ship.getActor());
         rodActor.setBehaviour(this);
-        ship.getActor().getLayer().addBelow(rodActor, ship.getActor());
+        ball.getActor().getLayer().addBottom(rodActor);
         rodActor.activate();
     }
 
@@ -86,7 +86,7 @@ public class Rod extends Behaviour
         } else {
 
             this.actor.getAppearance().setScale(shipBallDistance / this.poseWidth);
-
+            
             if (!this.connected) {
 
                 if (this.actor.distanceTo(this.ball.getActor()) >= this.ship.pickupDistance) {
