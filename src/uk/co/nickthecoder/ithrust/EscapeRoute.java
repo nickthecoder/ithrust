@@ -24,7 +24,7 @@ public class EscapeRoute extends Behaviour
     public boolean used;
 
     @Override
-    public void init()
+    public void onAttach()
     {
         this.feeds = new ArrayList<EscapeRoute>();
         getActor().addTag(ESCAPE_ROUTE);

@@ -47,7 +47,7 @@ public class Rod extends Behaviour
     }
 
     @Override
-    public void init()
+    public void onAttach()
     {
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
     }

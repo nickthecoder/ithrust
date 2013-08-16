@@ -36,7 +36,7 @@ public class Ball extends Behaviour implements Fragile
     public BallFactory ballFactory = null;
 
     @Override
-    public void init()
+    public void onAttach()
     {
         this.actor.addTag("fragile");
         this.actor.addTag("solid");
@@ -158,7 +158,7 @@ public class Ball extends Behaviour implements Fragile
         }
 
         @Override
-        public void init()
+        public void onAttach()
         {
             disconnect();
             getActor().removeTag("ball");

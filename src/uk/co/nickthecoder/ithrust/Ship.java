@@ -60,17 +60,12 @@ public class Ship extends Behaviour implements Fragile
 
     private Follower unwrapping;
 
-    private Sound thrustSound;
-
-    private Sound rotateSound;
-
     private Recharge fireRecharge;
 
     private Gate startGate;
 
-    
     @Override
-    public void init()
+    public void onAttach()
     {
         this.actor.addTag("fragile");
         this.actor.addTag("solid");
@@ -104,6 +99,13 @@ public class Ship extends Behaviour implements Fragile
             // scene to allow running a single scene on its own, for debugging.
             this.getActor().kill();
         }
+    }
+
+    @Override
+    public void onDetach()
+    {
+        endEvent("rotate");
+        endEvent("thrust");
     }
 
     /**
@@ -142,16 +144,18 @@ public class Ship extends Behaviour implements Fragile
             }
 
             if (Itchy.singleton.isKeyDown(Keys.UP)) {
-                if (this.thrustSound == null) {
-                    this.thrustSound = getActor().getCostume().getSound("thrust");
-                    this.thrustSound.play();
-                }
+                this.event("thrust");
+//                if (this.thrustSound == null) {
+//                    this.thrustSound = getActor().getCostume().getSound("thrust");
+//                    this.thrustSound.play();
+//                }
                 this.thrust();
             } else {
-                if (this.thrustSound != null) {
-                    this.thrustSound.fadeOut(1000);
-                    this.thrustSound = null;
-                }
+                this.endEvent("thrust");
+//                if (this.thrustSound != null) {
+//                    this.thrustSound.fadeOut(1000);
+//                    this.thrustSound = null;
+//                }
             }
 
             if ((this.rod == null) && (Itchy.singleton.isKeyDown(Keys.a))) {
@@ -183,22 +187,13 @@ public class Ship extends Behaviour implements Fragile
 
         this.currentRotationSpeed *= this.rotationDamper;
         if (Itchy.singleton.isKeyDown(Keys.LEFT)) {
-            if (this.rotateSound == null) {
-                this.rotateSound = getActor().getCostume().getSound("rotate");
-                this.rotateSound.play();
-            }
+            event("rotate");
             this.currentRotationSpeed += this.rotationSpeed;
         } else if (Itchy.singleton.isKeyDown(Keys.RIGHT)) {
-            if (this.rotateSound == null) {
-                this.rotateSound = getActor().getCostume().getSound("rotate");
-                this.rotateSound.play();
-            }
+            event("rotate");
             this.currentRotationSpeed -= this.rotationSpeed;
         } else {
-            if (this.rotateSound != null) {
-                this.rotateSound.fadeOut(1000);
-                this.rotateSound = null;
-            }
+            endEvent("rotate");
             this.currentRotationSpeed *= this.rotationDamper;
         }
         turn(this.currentRotationSpeed);
@@ -474,7 +469,7 @@ public class Ship extends Behaviour implements Fragile
         Iterator<Point2D.Float> path;
 
         @Override
-        public void init()
+        public void onAttach()
         {
             // Make any doors open slightly to allow the pod through.
             for (Actor actor : Actor.allByTag("door")) {

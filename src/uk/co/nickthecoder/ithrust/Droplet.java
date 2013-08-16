@@ -13,9 +13,9 @@ public class Droplet extends Projectile
     private double oy;
 
     @Override
-    public void init()
+    public void onAttach()
     {
-        super.init();
+        super.onAttach();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(getActor());
 
     }

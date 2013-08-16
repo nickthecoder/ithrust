@@ -21,7 +21,7 @@ public class DropletFactory extends Behaviour
     private Recharge recharge;
 
     @Override
-    public void init()
+    public void onAttach()
     {
         this.recharge = Recharge.createRechargeSeconds(this.minimumPeriod, this.maximumPeriod);
         getActor().getAppearance().setScale(this.recharge.getCharge());

@@ -28,7 +28,7 @@ public class Gate extends Behaviour
     public double exitDirection = 90;
 
     @Override
-    public void init()
+    public void onAttach()
     {
         this.actor.addTag("gate");
         updateState();

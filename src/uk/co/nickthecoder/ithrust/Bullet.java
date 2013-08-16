@@ -18,7 +18,7 @@ public class Bullet extends Projectile implements Fragile
     private static final String[] EXCLUDE_TAGS = new String[] { "ship" };
 
     @Override
-    public void init()
+    public void onAttach()
     {
         getActor().addTag("fragile");
         this.collisionStrategy = Thrust.game.createCollisionStrategy(getActor());

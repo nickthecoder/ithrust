@@ -74,7 +74,7 @@ public class Door extends Behaviour implements Fragile
     private int target = 0;
 
     @Override
-    public void init()
+    public void onAttach()
     {
         getActor().addTag("door");
         getActor().addTag("solid");

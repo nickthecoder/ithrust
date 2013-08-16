@@ -11,7 +11,7 @@ public class Design
 {
     public static void main(String[] argv) throws Exception
     {
-        String sceneName = "start-lakeside";
+        String sceneName = "start";
 
         if (argv.length > 0) {
             sceneName = argv[0];
