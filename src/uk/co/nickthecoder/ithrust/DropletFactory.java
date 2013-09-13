@@ -7,7 +7,7 @@ package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.extras.Recharge;
+import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.util.Property;
 
 public class DropletFactory extends Behaviour
@@ -18,24 +18,24 @@ public class DropletFactory extends Behaviour
     @Property(label = "Maximum Period (s)")
     public double maximumPeriod = 4;
 
-    private Recharge recharge;
+    private Timer timer;
 
     @Override
     public void onAttach()
     {
-        this.recharge = Recharge.createRechargeSeconds(this.minimumPeriod, this.maximumPeriod);
-        getActor().getAppearance().setScale(this.recharge.getCharge());
+        this.timer = Timer.createTimerSeconds(this.minimumPeriod, this.maximumPeriod);
+        getActor().getAppearance().setScale(this.timer.getProgress());
     }
 
     @Override
     public void tick()
     {
-        if (this.recharge.isCharged()) {
-            this.recharge.reset();
+        if (this.timer.isFinished()) {
+            this.timer.reset();
 
             createDroplet();
         } else {
-            getActor().getAppearance().setScale(this.recharge.getCharge());
+            getActor().getAppearance().setScale(this.timer.getProgress());
         }
     }
 

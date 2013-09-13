@@ -85,7 +85,7 @@
           <alpha ticks="100" target="255.0" profile="linear"/>
           <scale ticks="150" target="1.0" profile="easeInCirc"/>
         </parallel>
-        <forwards ticks="50" forwards="100.0" sideways="0.0" profile="ease" finishedMessage="exitGate"/>
+        <forwards ticks="50" forwards="100.0" sideways="0.0" profile="default" finishedMessage="exitGate"/>
       </sequence>
     </animation>
     <animation name="hide">

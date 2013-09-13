@@ -7,7 +7,7 @@ package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.extras.Recharge;
+import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.util.Property;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
@@ -55,7 +55,7 @@ public class Door extends Behaviour implements Fragile
 
     private Door buddy;
 
-    private Recharge closeRecharge;
+    private Timer closeTimer;
 
     /**
      * -1 when returning to its original position, 0 for stationary and 1 for moving away from its
@@ -101,11 +101,11 @@ public class Door extends Behaviour implements Fragile
     @Override
     public void tick()
     {
-        if ((this.target != this.ajar) && (this.closeRecharge != null) &&
-            (this.closeRecharge.isCharged())) {
+        if ((this.target != this.ajar) && (this.closeTimer != null) &&
+            (this.closeTimer.isFinished())) {
 
             this.close();
-            this.closeRecharge = null;
+            this.closeTimer = null;
         }
 
         if (this.target == this.tickCount) {
@@ -141,8 +141,8 @@ public class Door extends Behaviour implements Fragile
             this.direction = 1;
             this.target = this.ticks;
             if (this.closeAfter > 0) {
-                this.closeRecharge = new Recharge((int) (this.closeAfter * 1000));
-                this.closeRecharge.reset();
+                this.closeTimer = new Timer((int) (this.closeAfter * 1000));
+                this.closeTimer.reset();
             }
             if (this.buddy != null) {
                 this.buddy.open();

@@ -17,7 +17,7 @@ import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Follower;
 import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Projectile;
-import uk.co.nickthecoder.itchy.extras.Recharge;
+import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.util.CubicSpline;
 import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Sound;
@@ -60,7 +60,7 @@ public class Ship extends Behaviour implements Fragile
 
     private Follower unwrapping;
 
-    private Recharge fireRecharge;
+    private Timer fireTimer;
 
     private Gate startGate;
 
@@ -71,7 +71,7 @@ public class Ship extends Behaviour implements Fragile
         this.actor.addTag("solid");
         this.actor.addTag("ship");
 
-        this.fireRecharge = new Recharge((int) (1000 * this.firePeriod));
+        this.fireTimer = new Timer((int) (1000 * this.firePeriod));
 
         this.createFragments();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
@@ -145,17 +145,9 @@ public class Ship extends Behaviour implements Fragile
 
             if (Itchy.singleton.isKeyDown(Keys.UP)) {
                 this.event("thrust");
-//                if (this.thrustSound == null) {
-//                    this.thrustSound = getActor().getCostume().getSound("thrust");
-//                    this.thrustSound.play();
-//                }
                 this.thrust();
             } else {
                 this.endEvent("thrust");
-//                if (this.thrustSound != null) {
-//                    this.thrustSound.fadeOut(1000);
-//                    this.thrustSound = null;
-//                }
             }
 
             if ((this.rod == null) && (Itchy.singleton.isKeyDown(Keys.a))) {
@@ -168,8 +160,8 @@ public class Ship extends Behaviour implements Fragile
                 this.rod.disconnect();
             }
 
-            if ((Itchy.singleton.isKeyDown(Keys.SPACE)) && (this.fireRecharge.isCharged())) {
-                this.fireRecharge.reset();
+            if ((Itchy.singleton.isKeyDown(Keys.SPACE)) && (this.fireTimer.isFinished())) {
+                this.fireTimer.reset();
                 fire();
             }
 
