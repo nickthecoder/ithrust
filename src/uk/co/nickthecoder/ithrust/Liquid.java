@@ -13,7 +13,7 @@ public class Liquid extends Behaviour
     @Override
     public void onAttach()
     {
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
         getActor().addTag("liquid");
         
         if ( getActor().getCostume().getString("water") != null ) {

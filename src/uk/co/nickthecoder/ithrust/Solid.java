@@ -14,14 +14,14 @@ public class Solid extends Behaviour {
 	@Override
 	public void onActivate()
 	{
-        this.actor.addTag("solid");
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+        this.getActor().addTag("solid");
+        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
 	}
 	
 	@Override
 	public void tick()
 	{
-		this.actor.deactivate();
+		this.getActor().deactivate();
 	}
 	
 }

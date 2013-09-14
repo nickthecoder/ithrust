@@ -30,9 +30,9 @@ public class Gate extends Behaviour
     @Override
     public void onAttach()
     {
-        this.actor.addTag("gate");
+        this.getActor().addTag("gate");
         updateState();
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
     }
 
     @Override
@@ -50,14 +50,14 @@ public class Gate extends Behaviour
     @Override
     public void tick()
     {
-        this.actor.deactivate();
+        this.getActor().deactivate();
     }
 
     public void findRoutesBack()
     {
         // System.out.println( "Gate finding routes back" );
         for (Actor escapeRoute : Actor.allByTag(EscapeRoute.ESCAPE_ROUTE)) {
-            double distance = escapeRoute.distanceTo(this.actor);
+            double distance = escapeRoute.distanceTo(this.getActor());
             if (distance < 150) {
                 ((EscapeRoute) (escapeRoute.getBehaviour())).addGate(this);
             }
@@ -74,9 +74,9 @@ public class Gate extends Behaviour
     {
         if ((this.requiredFuel <= 0) && (this.requiredWater <= 0)) {
             this.event("on");
-            this.actor.removeTag("solid");
+            this.getActor().removeTag("solid");
         } else {
-            this.actor.addTag("solid");
+            this.getActor().addTag("solid");
             if ( this.requiredFuel > 0 ) {
                 this.event("off");
             } else {

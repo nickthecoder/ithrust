@@ -47,7 +47,7 @@ public class EscapeRoute extends Behaviour
         // this.getActor().event("reverse");
         // To debug the escape routes, uncomment the "event", and comment out the Layer.remove
         
-        this.actor.deactivate();
+        this.getActor().deactivate();
     }
 
     private Point2D.Double getOtherEnd()
@@ -58,8 +58,8 @@ public class EscapeRoute extends Behaviour
         length -= appearance.getPose().getOffsetX() * 2;
         length *= appearance.getScale();
 
-        double x = this.actor.getX() + Math.cos(appearance.getDirectionRadians()) * length;
-        double y = this.actor.getY() + Math.sin(appearance.getDirectionRadians()) * length;
+        double x = this.getActor().getX() + Math.cos(appearance.getDirectionRadians()) * length;
+        double y = this.getActor().getY() + Math.sin(appearance.getDirectionRadians()) * length;
 
         return new Point2D.Double(x, y);
     }
@@ -89,7 +89,7 @@ public class EscapeRoute extends Behaviour
 
         // System.out.println("Looking for other ER near " + otherEnd.x + "," + otherEnd.y);
         for (Actor other : Actor.allByTag(ESCAPE_ROUTE)) {
-            if (other != this.actor) {
+            if (other != this.getActor()) {
                 double distance = other.distanceTo(otherEnd.x, otherEnd.y);
                 // System.out.println("Found " + other + " distance " + distance);
                 if (distance < 50) {

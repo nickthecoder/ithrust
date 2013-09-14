@@ -67,14 +67,14 @@ public class Ship extends Behaviour implements Fragile
     @Override
     public void onAttach()
     {
-        this.actor.addTag("fragile");
-        this.actor.addTag("solid");
-        this.actor.addTag("ship");
+        this.getActor().addTag("fragile");
+        this.getActor().addTag("solid");
+        this.getActor().addTag("ship");
 
         this.fireTimer = new Timer((int) (1000 * this.firePeriod));
 
         this.createFragments();
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
         this.updateCostumeData();
     }
 
@@ -128,7 +128,7 @@ public class Ship extends Behaviour implements Fragile
      */
     void createFragments()
     {
-        new Fragment().actor(this.actor).createPoses("fragment");
+        new Fragment().actor(this.getActor()).createPoses("fragment");
     }
 
     @Override
@@ -151,8 +151,8 @@ public class Ship extends Behaviour implements Fragile
             }
 
             if ((this.rod == null) && (Itchy.singleton.isKeyDown(Keys.a))) {
-                Actor ballActor = this.actor.nearest("ball");
-                if ((ballActor != null) && (ballActor.distanceTo(this.actor) < this.pickupDistance)) {
+                Actor ballActor = this.getActor().nearest("ball");
+                if ((ballActor != null) && (ballActor.distanceTo(this.getActor()) < this.pickupDistance)) {
                     this.rod = new Rod(this, (Ball) ballActor.getBehaviour());
                 }
             }
@@ -174,7 +174,7 @@ public class Ship extends Behaviour implements Fragile
         }
 
         this.speedY += Thrust.gravity;
-        this.actor.moveBy(this.speedX, this.speedY);
+        this.getActor().moveBy(this.speedX, this.speedY);
         this.collisionStrategy.update();
 
         this.currentRotationSpeed *= this.rotationDamper;
@@ -214,7 +214,7 @@ public class Ship extends Behaviour implements Fragile
         }
 
         if (!this.switchingEnds) {
-            Thrust.game.centerOn(this.actor);
+            Thrust.game.centerOn(this.getActor());
         }
 
         if (!touching("liquid").isEmpty()) {
@@ -268,7 +268,7 @@ public class Ship extends Behaviour implements Fragile
         Ball ball = this.rod.ball;
         Actor ballActor = ball.getActor();
 
-        this.wrapping = new Follower(this.actor);
+        this.wrapping = new Follower(this.getActor());
         this.wrapping.createActor(ballActor.getCostume()).activate();
         this.wrapping.event("wrapping");
 
@@ -278,7 +278,7 @@ public class Ship extends Behaviour implements Fragile
         ballActor.event("contents");
 
         Pod pod = new Pod(this, ball);
-        pod.createActor(this.actor.getLayer(), "pod").activate();
+        pod.createActor(this.getActor().getLayer(), "pod").activate();
 
     }
 
@@ -289,7 +289,7 @@ public class Ship extends Behaviour implements Fragile
         this.wrapping.getActor().kill();
         this.unwrapping.getActor().kill();
 
-        Actor shipActor = this.actor;
+        Actor shipActor = this.getActor();
 
         if (this.rod != null) {
             Ball ball = this.rod.ball;
@@ -300,12 +300,12 @@ public class Ship extends Behaviour implements Fragile
             // Change the costumes.
             // The ball changes to whatever the current ship looks like when wrapped.
             // The ship changes to whatever the ball looks like unwrapped.
-            String wrappedCostumeName = this.actor.getCostume().getString("wrappedCostume");
+            String wrappedCostumeName = this.getActor().getCostume().getString("wrappedCostume");
             String unwrappedCostumeName = ballActor.getCostume().getString("unwrappedCostume");
 
-            this.actor.setCostume(Itchy.singleton.getResources().getCostume(unwrappedCostumeName));
+            this.getActor().setCostume(Itchy.singleton.getResources().getCostume(unwrappedCostumeName));
             ballActor.setCostume(Itchy.singleton.getResources().getCostume(wrappedCostumeName));
-            this.actor.event("default");
+            this.getActor().event("default");
             ballActor.event("default");
 
             // The new costumes may not have their fragments created yet...
@@ -335,9 +335,9 @@ public class Ship extends Behaviour implements Fragile
 
     public void turn( double amount )
     {
-        this.actor.getAppearance().adjustDirection(amount);
+        this.getActor().getAppearance().adjustDirection(amount);
 
-        Sound sound = this.actor.getCostume().getSound("turn");
+        Sound sound = this.getActor().getCostume().getSound("turn");
         if (sound != null) {
             sound.playOnce();
         }
@@ -345,7 +345,7 @@ public class Ship extends Behaviour implements Fragile
 
     public void thrust()
     {
-        double direction = this.actor.getAppearance().getDirectionRadians();
+        double direction = this.getActor().getAppearance().getDirectionRadians();
         double cos = Math.cos(direction);
         double sin = Math.sin(direction);
 
@@ -356,7 +356,7 @@ public class Ship extends Behaviour implements Fragile
             .vx(this.speedX).vy(this.speedY)
             .fade(3)
             .speed(1)
-            .createActor(this.actor, "exhaust");
+            .createActor(this.getActor(), "exhaust");
 
         puff.getAppearance().adjustDirection(180);
         puff.moveForward(30);
@@ -373,13 +373,13 @@ public class Ship extends Behaviour implements Fragile
         if (this.startGate != null) {
             this.event("death");
             this.event("escapePod");
-            this.actor.setBehaviour(new EscapePod());
+            this.getActor().setBehaviour(new EscapePod());
         } else {
             this.deathEvent("death");
-            this.actor.setBehaviour(new Dying());
+            this.getActor().setBehaviour(new Dying());
         }
 
-        new Explosion(this.actor)
+        new Explosion(this.getActor())
             .projectiles(30)
             .forwards()
             .spin(-.2, .2)
@@ -402,17 +402,17 @@ public class Ship extends Behaviour implements Fragile
         this.startGate = gate;
         double direction = gate.exitDirection;
 
-        this.actor.getAppearance().setDirection(direction);
-        this.actor.getAppearance().setScale(0.01);
-        this.actor.getAppearance().setAlpha(0);
+        this.getActor().getAppearance().setDirection(direction);
+        this.getActor().getAppearance().setScale(0.01);
+        this.getActor().getAppearance().setAlpha(0);
 
-        this.actor.moveTo(gate.getActor());
-        this.actor.activate();
-        this.actor.setBehaviour(new ExitingGate());
+        this.getActor().moveTo(gate.getActor());
+        this.getActor().activate();
+        this.getActor().setBehaviour(new ExitingGate());
         ActorsLayer layer = gate.getActor().getLayer();
-        layer.add(this.actor);
-        this.actor.event("default"); // Ensure its got the right pose
-        this.actor.event("exitGate");
+        layer.add(this.getActor());
+        this.getActor().event("default"); // Ensure its got the right pose
+        this.getActor().event("exitGate");
 
     }
 
@@ -421,7 +421,7 @@ public class Ship extends Behaviour implements Fragile
         @Override
         public void tick()
         {
-            Thrust.game.centerOn(this.actor);
+            Thrust.game.centerOn(this.getActor());
         }
 
         @Override
@@ -430,7 +430,7 @@ public class Ship extends Behaviour implements Fragile
             if ("exitGate".equals(message)) {
                 Ship.this.speedX = 0;
                 Ship.this.speedY = 0;
-                this.actor.setBehaviour(Ship.this);
+                this.getActor().setBehaviour(Ship.this);
             }
         }
     }
@@ -441,13 +441,13 @@ public class Ship extends Behaviour implements Fragile
         @Override
         public void tick()
         {
-            this.actor.getAppearance().setAlpha(0);
+            this.getActor().getAppearance().setAlpha(0);
 
             // Gently brake the ship so that the scroll layer still scrolls, but not too far.
             Ship.this.speedX *= DEAD_SLOW_DOWN;
             Ship.this.speedY *= DEAD_SLOW_DOWN;
 
-            this.actor.moveBy(Ship.this.speedX, Ship.this.speedY);
+            this.getActor().moveBy(Ship.this.speedX, Ship.this.speedY);
             this.collisionStrategy.update();
 
         }
@@ -522,7 +522,7 @@ public class Ship extends Behaviour implements Fragile
                 Ship.this.startGate(Ship.this.startGate);
             }
 
-            Thrust.game.centerOn(this.actor);
+            Thrust.game.centerOn(this.getActor());
 
         }
 
@@ -549,7 +549,7 @@ public class Ship extends Behaviour implements Fragile
             getActor().moveBy(Ship.this.speedX, Ship.this.speedY);
             getActor().moveTowards(this.gate.getActor(), this.speed);
             this.collisionStrategy.update();
-            this.actor.getAppearance().adjustDirection(this.turnSpeed);
+            this.getActor().getAppearance().adjustDirection(this.turnSpeed);
             this.turnSpeed *= 1.005;
             this.turnSpeed += 0.03;
 

@@ -36,7 +36,7 @@ public class Droplet extends Projectile
         if ( oy - getActor().getY() > 20 ) {
             if (! touching("solid", "liquid").isEmpty()) {
 
-                new Explosion(this.actor)
+                new Explosion(this.getActor())
                     .projectiles(10)
                     .gravity(Thrust.gravity)
                     .forwards()

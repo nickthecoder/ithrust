@@ -31,14 +31,14 @@ public class BallWithShip extends Ball
 
     public void createFragments()
     {
-        new Fragment().actor(this.actor).pieces(10).pose("shell").createPoses("fragment");
-        new Fragment().actor(this.actor).pieces(4).pose("contents").createPoses("contentsFragment");
+        new Fragment().actor(this.getActor()).pieces(10).pose("shell").createPoses("fragment");
+        new Fragment().actor(this.getActor()).pieces(4).pose("contents").createPoses("contentsFragment");
     }
     
 
     public void hit()
     {
-        new Explosion(this.actor)
+        new Explosion(this.getActor())
             .projectiles(12)
             .gravity(Thrust.gravity)
             .forwards()

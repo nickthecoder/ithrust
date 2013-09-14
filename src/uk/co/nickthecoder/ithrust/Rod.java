@@ -49,29 +49,29 @@ public class Rod extends Behaviour
     @Override
     public void onAttach()
     {
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
     }
 
     @Override
     public void tick()
     {
-        this.actor.moveTo(this.ship.getActor());
-        this.actor.getAppearance().setDirection(this.ball.getActor());
+        this.getActor().moveTo(this.ship.getActor());
+        this.getActor().getAppearance().setDirection(this.ball.getActor());
 
         double shipBallDistance = this.ship.getActor().distanceTo(this.ball.getActor());
 
         if (!this.extended) {
 
             if (Itchy.singleton.isKeyDown(Keys.a)) {
-                this.actor.getAppearance().adjustScale(0.01);
+                this.getActor().getAppearance().adjustScale(0.01);
                 // Has the rod extended far enough to reach the ball?
-                if (this.actor.getAppearance().getScale() * this.poseWidth >= shipBallDistance) {
+                if (this.getActor().getAppearance().getScale() * this.poseWidth >= shipBallDistance) {
                     this.extended = true;
                     this.ball.event("touched");
                 }
             } else {
-                this.actor.getAppearance().adjustScale(-0.02);
-                if (this.actor.getAppearance().getScale() <= 0) {
+                this.getActor().getAppearance().adjustScale(-0.02);
+                if (this.getActor().getAppearance().getScale() <= 0) {
                     this.disconnect();
                     return;
                 }
@@ -85,11 +85,11 @@ public class Rod extends Behaviour
 
         } else {
 
-            this.actor.getAppearance().setScale(shipBallDistance / this.poseWidth);
+            this.getActor().getAppearance().setScale(shipBallDistance / this.poseWidth);
             
             if (!this.connected) {
 
-                if (this.actor.distanceTo(this.ball.getActor()) >= this.ship.pickupDistance) {
+                if (this.getActor().distanceTo(this.ball.getActor()) >= this.ship.pickupDistance) {
                     this.ball.connected(this);
                     this.connected = true;
                 }
@@ -102,10 +102,10 @@ public class Rod extends Behaviour
                     return;
                 }
 
-                double dist = this.actor.distanceTo(this.ball.getActor());
+                double dist = this.getActor().distanceTo(this.ball.getActor());
                 double dd = dist - this.ship.pickupDistance;
 
-                double angle = this.actor.getAppearance().getDirectionRadians();
+                double angle = this.getActor().getAppearance().getDirectionRadians();
                 double cos = Math.cos(angle);
                 double sin = Math.sin(angle);
 
@@ -132,7 +132,7 @@ public class Rod extends Behaviour
     {
         this.ball.disconnected();
         this.ship.disconnected();
-        this.actor.kill();
+        this.getActor().kill();
     }
 
 }

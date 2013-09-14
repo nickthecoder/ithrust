@@ -43,8 +43,8 @@ public class Pod extends Behaviour
         double x = this.ship.getActor().getX() * (1 - value) + this.ball.getActor().getX() * value;
         double y = this.ship.getActor().getY() * (1 - value) + this.ball.getActor().getY() * value;
 
-        this.actor.moveTo(x, y);
-        Thrust.game.centerOn(this.actor);
+        this.getActor().moveTo(x, y);
+        Thrust.game.centerOn(this.getActor());
 
         this.progress += SPEED;
         if (this.progress > 1) {

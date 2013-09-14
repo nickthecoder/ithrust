@@ -38,12 +38,12 @@ public class Ball extends Behaviour implements Fragile
     @Override
     public void onAttach()
     {
-        this.actor.addTag("fragile");
-        this.actor.addTag("solid");
-        this.actor.addTag("ball");
+        this.getActor().addTag("fragile");
+        this.getActor().addTag("solid");
+        this.getActor().addTag("ball");
 
         createFragments();
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
 
         this.fuel = getActor().getCostume().getInt( "fuel", 0 );
         this.water = getActor().getCostume().getInt( "water", 0 );
@@ -52,7 +52,7 @@ public class Ball extends Behaviour implements Fragile
 
     public void createFragments()
     {
-        new Fragment().actor(this.actor).pieces(10).pose("default").createPoses("fragment");
+        new Fragment().actor(this.getActor()).pieces(10).pose("default").createPoses("fragment");
     }
     
     @Override
@@ -135,7 +135,7 @@ public class Ball extends Behaviour implements Fragile
         }
         this.deathEvent("death");
 
-        new Explosion(this.actor)
+        new Explosion(this.getActor())
             .projectiles(30)
             .gravity(Thrust.gravity)
             .forwards()

@@ -36,7 +36,7 @@ public class Bucket extends Ball
     {
         
         if ( ! empty ) {
-            new Explosion(this.actor)
+            new Explosion(this.getActor())
             .projectiles(30)
             .gravity(Thrust.gravity)
             .forwards()

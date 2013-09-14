@@ -14,14 +14,14 @@ public class Soft extends Behaviour
     @Override
     public void onActivate()
     {
-        this.actor.addTag("soft");
-        this.actor.addTag("solid");
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.actor);
+        this.getActor().addTag("soft");
+        this.getActor().addTag("solid");
+        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
     }
     
     @Override
     public void tick()
     {
-        this.actor.deactivate();
+        this.getActor().deactivate();
     }
 }

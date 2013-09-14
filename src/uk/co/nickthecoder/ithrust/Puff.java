@@ -37,12 +37,12 @@ public class Puff extends Behaviour
     @Override
     public void tick()
     {
-        actor.moveBy( vx, vy );
-        actor.moveForward( this.speed );
-        actor.getAppearance().setScale( actor.getAppearance().getScale() * scale );
-        actor.getAppearance().adjustAlpha( - fade );
-        if ( actor.getAppearance().getAlpha() < 0 ) {
-            this.actor.kill();
+        getActor().moveBy( vx, vy );
+        getActor().moveForward( this.speed );
+        getActor().getAppearance().setScale( getActor().getAppearance().getScale() * scale );
+        getActor().getAppearance().adjustAlpha( - fade );
+        if ( getActor().getAppearance().getAlpha() < 0 ) {
+            this.getActor().kill();
         }
     }
 
