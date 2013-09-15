@@ -137,30 +137,30 @@ public class Ship extends Behaviour implements Fragile
 
         if (!this.switchingEnds) {
 
-            if (isConnected() && Itchy.singleton.isKeyDown(Keys.q)) {
+            if (isConnected() && Itchy.isKeyDown(Keys.q)) {
                 if (this.rod.ball instanceof BallWithShip) {
                     beginSwitchEnds();
                 }
             }
 
-            if (Itchy.singleton.isKeyDown(Keys.UP)) {
+            if (Itchy.isKeyDown(Keys.UP)) {
                 this.event("thrust");
                 this.thrust();
             } else {
                 this.endEvent("thrust");
             }
 
-            if ((this.rod == null) && (Itchy.singleton.isKeyDown(Keys.a))) {
+            if ((this.rod == null) && (Itchy.isKeyDown(Keys.a))) {
                 Actor ballActor = this.getActor().nearest("ball");
                 if ((ballActor != null) && (ballActor.distanceTo(this.getActor()) < this.pickupDistance)) {
                     this.rod = new Rod(this, (Ball) ballActor.getBehaviour());
                 }
             }
-            if ((this.rod != null) && (Itchy.singleton.isKeyDown(Keys.z))) {
+            if ((this.rod != null) && (Itchy.isKeyDown(Keys.z))) {
                 this.rod.disconnect();
             }
 
-            if ((Itchy.singleton.isKeyDown(Keys.SPACE)) && (this.fireTimer.isFinished())) {
+            if ((Itchy.isKeyDown(Keys.SPACE)) && (this.fireTimer.isFinished())) {
                 this.fireTimer.reset();
                 fire();
             }
@@ -178,10 +178,10 @@ public class Ship extends Behaviour implements Fragile
         this.collisionStrategy.update();
 
         this.currentRotationSpeed *= this.rotationDamper;
-        if (Itchy.singleton.isKeyDown(Keys.LEFT)) {
+        if (Itchy.isKeyDown(Keys.LEFT)) {
             event("rotate");
             this.currentRotationSpeed += this.rotationSpeed;
-        } else if (Itchy.singleton.isKeyDown(Keys.RIGHT)) {
+        } else if (Itchy.isKeyDown(Keys.RIGHT)) {
             event("rotate");
             this.currentRotationSpeed -= this.rotationSpeed;
         } else {
@@ -303,8 +303,8 @@ public class Ship extends Behaviour implements Fragile
             String wrappedCostumeName = this.getActor().getCostume().getString("wrappedCostume");
             String unwrappedCostumeName = ballActor.getCostume().getString("unwrappedCostume");
 
-            this.getActor().setCostume(Itchy.singleton.getResources().getCostume(unwrappedCostumeName));
-            ballActor.setCostume(Itchy.singleton.getResources().getCostume(wrappedCostumeName));
+            this.getActor().setCostume(Itchy.getResources().getCostume(unwrappedCostumeName));
+            ballActor.setCostume(Itchy.getResources().getCostume(wrappedCostumeName));
             this.getActor().event("default");
             ballActor.event("default");
 

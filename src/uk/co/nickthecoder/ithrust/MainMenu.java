@@ -30,7 +30,7 @@ public class MainMenu extends Menu
             Thrust.game.startEditor();
         
         } else if ("quit".equals(message)) {
-            Itchy.singleton.terminate();
+            Itchy.terminate();
         }
 
         super.onMessage(message);

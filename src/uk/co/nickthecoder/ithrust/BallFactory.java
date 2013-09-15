@@ -10,6 +10,7 @@ import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.AnimationListener;
+import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.util.Property;
 
 public abstract class BallFactory extends Behaviour
@@ -18,7 +19,10 @@ public abstract class BallFactory extends Behaviour
     public int quantity = -1;
 
     @Property(label = "Delay")
-    public int delay = 5;
+    public int delay = 2;
+
+    private Timer newBallTimer;
+    
 
     @Override
     public void onActivate()
@@ -31,6 +35,12 @@ public abstract class BallFactory extends Behaviour
     @Override
     public void tick()
     {
+        if (newBallTimer != null) {
+            if (newBallTimer.isFinished()) {
+                createBall();
+                newBallTimer = null;
+            }
+        }
     }
 
     public void createBall()
@@ -63,12 +73,8 @@ public abstract class BallFactory extends Behaviour
 
     public abstract Ball createBehaviour();
 
-    @Override
-    public void onMessage( String message )
+    public void onTaken()
     {
-        if ("taken".equals(message)) {
-            sleep(this.delay);
-            createBall();
-        }
+        newBallTimer = Timer.createTimerSeconds(this.delay);
     }
 }

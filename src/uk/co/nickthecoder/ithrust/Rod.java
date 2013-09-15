@@ -62,7 +62,7 @@ public class Rod extends Behaviour
 
         if (!this.extended) {
 
-            if (Itchy.singleton.isKeyDown(Keys.a)) {
+            if (Itchy.isKeyDown(Keys.a)) {
                 this.getActor().getAppearance().adjustScale(0.01);
                 // Has the rod extended far enough to reach the ball?
                 if (this.getActor().getAppearance().getScale() * this.poseWidth >= shipBallDistance) {

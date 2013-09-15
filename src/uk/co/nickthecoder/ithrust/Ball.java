@@ -110,7 +110,7 @@ public class Ball extends Behaviour implements Fragile
         this.rod = rod;
         this.event("taught");
         if (ballFactory!=null) {
-            ballFactory.sendMessage("taken");
+            ballFactory.onTaken();
         }
     }
 
