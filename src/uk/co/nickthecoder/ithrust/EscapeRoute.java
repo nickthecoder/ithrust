@@ -38,16 +38,21 @@ public class EscapeRoute extends Behaviour
     @Override
     public void tick()
     {
+        getActor().deactivate();
+    }
+
+    private boolean reversed = false;
+
+    public void reverse()
+    {
+        if (this.reversed) {
+            return;
+        }
+        this.reversed = true;
+
         Point2D.Double otherEnd = this.getOtherEnd();
         this.getActor().moveTo(otherEnd.x, otherEnd.y);
 
-        // Escape routes are never seen, so remove them from their layer.
-        // Its quicker than setting their alpha to zero.
-        this.getActor().getLayer().remove(this.getActor());
-        // this.getActor().event("reverse");
-        // To debug the escape routes, uncomment the "event", and comment out the Layer.remove
-        
-        this.getActor().deactivate();
     }
 
     private Point2D.Double getOtherEnd()
@@ -87,12 +92,13 @@ public class EscapeRoute extends Behaviour
 
         Point2D.Double otherEnd = getOtherEnd();
 
-        // System.out.println("Looking for other ER near " + otherEnd.x + "," + otherEnd.y);
+        //System.out.println("Looking for other ER near " + otherEnd.x + "," + otherEnd.y);
         for (Actor other : Actor.allByTag(ESCAPE_ROUTE)) {
             if (other != this.getActor()) {
                 double distance = other.distanceTo(otherEnd.x, otherEnd.y);
-                // System.out.println("Found " + other + " distance " + distance);
                 if (distance < 50) {
+                    //System.out.println("Found " + other + otherEnd.x + "," + otherEnd.y +
+                    //    " distance " + distance);
                     ((EscapeRoute) (other.getBehaviour())).findRoutes(gate, this);
                 }
             }

@@ -136,7 +136,9 @@ public class Thrust extends Game
     public boolean startScene( final String sceneName )
     {
         System.out.println("\nStarting Scene " + sceneName + "\n");
-        this.currentSceneBehaviour = new FadeTransition(sceneName,
+        
+        this.currentSceneBehaviour = new FadeTransition(
+            sceneName,
             this.resources.getPose("background"));
         
         return true;

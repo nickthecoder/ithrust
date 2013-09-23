@@ -83,9 +83,10 @@ public class Ship extends Behaviour implements Fragile
     {
         this.pickupDistance = getActor().getCostume().getPose("rod").getSurface().getWidth();
 
+        Ship ship = Thrust.game.getPreviousSceneShip();
         // If this is the first level, then use this ship and have it come out of the appropriate
         // gate if there is one.
-        if (Thrust.game.getPreviousSceneShip() == null) {
+        if (ship == null) {
             Actor actor = getActor().nearest("gate");
             if (actor != null) {
                 Gate gate = (Gate) (actor.getBehaviour());
@@ -95,9 +96,11 @@ public class Ship extends Behaviour implements Fragile
             }
 
         } else {
-            // This isn't the first level, and so we can destroy this ship. It was added into the
-            // scene to allow running a single scene on its own, for debugging.
-            this.getActor().kill();
+            if (ship != this) {
+                // This isn't the first level, and so we can destroy this ship. It was added into the
+                // scene to allow running a single scene on its own, for debugging.
+                this.getActor().kill();
+            }
         }
     }
 
@@ -131,6 +134,8 @@ public class Ship extends Behaviour implements Fragile
         new Fragment().actor(this.getActor()).createPoses("fragment");
     }
 
+    private boolean cheating = false;
+
     @Override
     public void tick()
     {
@@ -152,12 +157,17 @@ public class Ship extends Behaviour implements Fragile
 
             if ((this.rod == null) && (Itchy.isKeyDown(Keys.a))) {
                 Actor ballActor = this.getActor().nearest("ball");
-                if ((ballActor != null) && (ballActor.distanceTo(this.getActor()) < this.pickupDistance)) {
+                if ((ballActor != null) &&
+                    (ballActor.distanceTo(this.getActor()) < this.pickupDistance)) {
                     this.rod = new Rod(this, (Ball) ballActor.getBehaviour());
                 }
             }
             if ((this.rod != null) && (Itchy.isKeyDown(Keys.z))) {
                 this.rod.disconnect();
+            }
+
+            if (Itchy.isKeyDown(Keys.c)) {
+                this.cheating = true;
             }
 
             if ((Itchy.isKeyDown(Keys.SPACE)) && (this.fireTimer.isFinished())) {
@@ -223,8 +233,10 @@ public class Ship extends Behaviour implements Fragile
         }
 
         if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
-            hit();
-            return;
+            if (!this.cheating) {
+                hit();
+                return;
+            }
         }
 
     }
@@ -399,6 +411,7 @@ public class Ship extends Behaviour implements Fragile
      */
     public void startGate( Gate gate )
     {
+
         this.startGate = gate;
         double direction = gate.exitDirection;
 

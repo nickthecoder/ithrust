@@ -28,7 +28,7 @@
       <property name="requiredWater" value="0"/>
       <property name="exitDirection" value="90.0"/>
       <property name="nextLevel" value="start-lakeside"/>
-      <property name="requiredFuel" value="2"/>
+      <property name="requiredFuel" value="0"/>
     </actor>
     <actor costume="gate" x="457" y="215" direction="0.0" startEvent="default">
       <property name="requiredWater" value="0"/>
@@ -95,6 +95,8 @@
     <actor costume="escapeRoute" x="837" y="960" direction="-146.80243420778356" startEvent="default"/>
     <actor costume="escapeRoute" x="656" y="829" direction="-97.76516601842535" startEvent="default"/>
     <actor costume="escapeRoute" x="630" y="598" direction="-101.6893691754392" startEvent="default"/>
-    <actor costume="escapeRoute" x="588" y="371" direction="-174.21760767763598" startEvent="default"/>
+    <actor costume="escapeRoute" x="588" y="371" direction="-179.95677651631664" startEvent="default"/>
+    <actor costume="escapeRoute" x="419" y="253" direction="155.60139312576229" startEvent="default" scale="0.7159090909090909"/>
+    <actor costume="escapeRoute" x="505" y="223" direction="0.0" startEvent="default" scale="0.4789272030651341"/>
   </layer>
 </scene>

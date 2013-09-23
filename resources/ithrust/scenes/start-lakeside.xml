@@ -48,7 +48,7 @@
       <property name="maximumPeriod" value="4.0"/>
     </actor>
     <actor costume="stone1c" x="936" y="-170" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="989" y="37" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="982" y="39" direction="0.0" startEvent="default"/>
     <actor costume="stone1c" x="1021" y="269" direction="0.0" startEvent="default"/>
     <actor costume="stone1a" x="887" y="67" direction="0.0" startEvent="default"/>
     <actor costume="stone1d" x="401" y="109" direction="0.0" startEvent="default"/>
@@ -106,7 +106,6 @@
     <actor costume="escapeRoute" x="-118" y="373" direction="-36.02527378664239" startEvent="default"/>
     <actor costume="escapeRoute" x="72" y="247" direction="62.41354709258801" startEvent="default"/>
     <actor costume="escapeRoute" x="185" y="466" direction="68.72937189425465" startEvent="default"/>
-    <actor costume="escapeRoute" x="-91" y="665" direction="-29.53416073627963" startEvent="default"/>
     <actor costume="escapeRoute" x="189" y="446" direction="0.0" startEvent="default" scale="0.8160919540229885"/>
     <actor costume="escapeRoute" x="366" y="-338" direction="155.77225468204583" startEvent="default" scale="0.7777777777777778"/>
     <actor costume="escapeRoute" x="314" y="-442" direction="63.71215396057542" startEvent="default" scale="0.4889705882352941"/>
