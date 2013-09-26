@@ -69,59 +69,59 @@
   </sounds>
   <animations>
     <animation name="ballRebirth">
-      <sequence loops="1">
-        <alpha ticks="1" target="0.0" profile="linear"/>
-        <scale ticks="1" target="0.0" profile="linear"/>
-        <parallel loops="1">
-          <alpha ticks="20" target="255.0" profile="linear"/>
-          <scale ticks="100" target="1.0" profile="linear"/>
-        </parallel>
-      </sequence>
+      <compound sequence="true" loops="1">
+        <alpha target="0.0" ticks="1" ease="linear"/>
+        <scale target="0.0" ticks="1" ease="linear"/>
+        <compound sequence="false" loops="1">
+          <alpha target="255.0" ticks="20" ease="linear"/>
+          <scale target="1.0" ticks="100" ease="linear"/>
+        </compound>
+      </compound>
     </animation>
     <animation name="exitGate">
-      <sequence loops="1">
-        <parallel loops="1">
-          <turn ticks="200" turn="3600.0" profile="easeOutCubic"/>
-          <alpha ticks="100" target="255.0" profile="linear"/>
-          <scale ticks="150" target="1.0" profile="easeInCirc"/>
-        </parallel>
-        <forwards ticks="50" forwards="100.0" sideways="0.0" profile="default" finishedMessage="exitGate"/>
-      </sequence>
+      <compound sequence="true" loops="1">
+        <compound sequence="false" loops="1">
+          <turn turn="3600.0" ticks="200" ease="easeOutCubic"/>
+          <alpha target="255.0" ticks="100" ease="linear"/>
+          <scale target="1.0" ticks="150" ease="easeInCirc"/>
+        </compound>
+        <forwards finishedMessage="exitGate" forwards="100.0" sideways="0.0" ticks="50" ease="default"/>
+      </compound>
     </animation>
     <animation name="hide">
-      <sequence loops="1">
-        <alpha ticks="50" target="0.0" profile="linear"/>
-      </sequence>
+      <compound sequence="true" loops="1">
+        <alpha target="0.0" ticks="50" ease="linear"/>
+      </compound>
     </animation>
     <animation name="popup120">
-      <sequence loops="1">
-        <move ticks="50" dx="0.0" dy="120.0" profile="easeOutBack"/>
-      </sequence>
+      <compound sequence="true" loops="1">
+        <move dx="0.0" dy="120.0" ticks="50" ease="easeOutBack"/>
+      </compound>
     </animation>
     <animation name="popup60">
-      <sequence loops="1">
-        <move ticks="50" dx="0.0" dy="65.0" profile="easeOutBack"/>
-      </sequence>
+      <compound sequence="true" loops="1">
+        <move dx="0.0" dy="65.0" ticks="50" ease="easeOutBack"/>
+      </compound>
     </animation>
     <animation name="travelGate">
-      <parallel loops="1">
-        <scale ticks="200" target="0.25" profile="linear"/>
-        <sequence loops="1">
-          <alpha ticks="100" target="255.0" profile="linear" finishedMessage="collected"/>
-          <alpha ticks="100" target="0.0" profile="linear" finishedMessage="exitGate"/>
-        </sequence>
-      </parallel>
+      <compound sequence="false" loops="1">
+        <scale target="0.25" ticks="200" ease="linear"/>
+        <compound sequence="true" loops="1">
+          <alpha finishedMessage="collected" target="255.0" ticks="100" ease="linear"/>
+          <alpha finishedMessage="exitGate" target="0.0" ticks="100" ease="linear"/>
+        </compound>
+      </compound>
     </animation>
     <animation name="unwrapping">
-      <sequence loops="1">
-        <move ticks="30" dx="0.0" dy="0.0" profile="linear"/>
-        <alpha ticks="80" target="0.0" profile="linear"/>
-      </sequence>
+      <compound sequence="true" loops="1">
+        <move dx="0.0" dy="0.0" ticks="30" ease="linear"/>
+        <alpha target="0.0" ticks="80" ease="linear"/>
+      </compound>
     </animation>
     <animation name="wrapping">
-      <sequence loops="1">
-        <alpha ticks="80" target="255.0" profile="linear"/>
-      </sequence>
+      <compound sequence="true" loops="1">
+        <alpha target="255.0" ticks="80" ease="linear"/>
+      </compound>
     </animation>
   </animations>
   <costumes>
@@ -129,24 +129,21 @@
       <pose name="default" pose="background"/>
     </costume>
     <costume name="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
-      <sound name="death" sound="explode"/>
-      <sound name="taught" sound="ding"/>
-      <sound name="touched" sound="ding"/>
-      <sound name="touchedGate" sound="ballTouchedGate"/>
+      <sound name="death" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="taught" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="touched" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="touchedGate" sound="ballTouchedGate" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <animation name="rebirth" animation="ballRebirth"/>
       <animation name="travelGate" animation="travelGate"/>
       <animation name="unwrapping" animation="unwrapping"/>
       <animation name="wrapping" animation="wrapping"/>
     </costume>
-    <costume name="bucket" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Bucket">
+    <costume name="bucket" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
       <pose name="contents" pose="waterDroplet"/>
       <pose name="default" pose="bucket"/>
       <pose name="fillWithWater" pose="ballOfWater"/>
-      <string name="volume">1</string>
-      <string name="water">0</string>
-      <string name="waterWeight">3</string>
-      <string name="weight">0.5</string>
-      <sound name="fillWithWater" sound="ding"/>
+      <sound name="fillWithWater" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <properties waterWeight="3.0" volume="1" weight="0.5" water="0" fuel="0"/>
     </costume>
     <costume name="bucketFactory" behaviour="uk.co.nickthecoder.ithrust.BucketFactory">
       <pose name="default" pose="bucketFactory"/>
@@ -186,16 +183,15 @@
     <costume name="droplet" behaviour="uk.co.nickthecoder.ithrust.DropletFactory">
       <pose name="default" pose="droplet"/>
       <pose name="fragments" pose="droplet-fragment"/>
-      <sound name="death" sound="drip"/>
+      <sound name="death" sound="drip" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
     </costume>
     <costume name="escapeRoute" behaviour="uk.co.nickthecoder.ithrust.EscapeRoute">
       <pose name="default" pose="escapeRoute"/>
       <pose name="reverse" pose="escapeRoute2"/>
     </costume>
-    <costume name="fuel" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
+    <costume name="fuel" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Ball" properties="uk.co.nickthecoder.ithrust.BallProperties">
       <pose name="default" pose="fuel"/>
-      <string name="fuel">1</string>
-      <string name="weight">3</string>
+      <properties weight="3.0" water="0" fuel="1"/>
     </costume>
     <costume name="fuelFactory" behaviour="uk.co.nickthecoder.ithrust.FuelFactory">
       <pose name="default" pose="fuelFactory"/>
@@ -206,8 +202,8 @@
       <pose name="off" pose="gate"/>
       <pose name="on" pose="gate-green"/>
       <pose name="standby" pose="gate-amber"/>
-      <sound name="collected" sound="ballCollected"/>
-      <sound name="opening" sound="gateOpen"/>
+      <sound name="collected" sound="ballCollected" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="opening" sound="gateOpen" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
     </costume>
     <costume name="keyA">
       <pose name="default" pose="keyA"/>
@@ -236,33 +232,36 @@
     <costume name="pod">
       <pose name="default" pose="pod"/>
     </costume>
-    <costume name="ship" behaviour="uk.co.nickthecoder.ithrust.Ship">
+    <costume name="ship" behaviour="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="bullet" pose="bullet1"/>
       <pose name="escapePod" pose="pod"/>
       <pose name="exhaust" pose="puff"/>
       <pose name="rod" pose="rod1"/>
-      <sound name="death" sound="explode"/>
-      <sound name="rotate" sound="rotate"/>
-      <sound name="thrust" sound="thrust"/>
+      <sound name="death" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="rotate" sound="rotate" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="thrust" sound="thrust" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <animation name="escapePodAtGate" animation="hide"/>
       <animation name="exitGate" animation="exitGate"/>
       <animation name="travelGate" animation="travelGate"/>
+      <properties firePeriod="0.0" rotationSpeed="0.0" rotationDamper="0.2" weight="0.0" thrust="0.0" wrappedCostumeName="wrappedShip1" landingSpeed="2.0"/>
     </costume>
-    <costume name="ship1" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship">
+    <costume name="ship1" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="default" pose="ship1"/>
       <string name="firePeriod">2</string>
       <string name="rotationSpeed">0.2</string>
       <string name="shipWeight">3</string>
       <string name="thrust">0.2</string>
       <string name="wrappedCostume">wrappedShip1</string>
+      <properties firePeriod="2.0" rotationSpeed="2.0" rotationDamper="0.2" weight="3.0" thrust="0.2" wrappedCostumeName="wrappedShip1" landingSpeed="2.0"/>
     </costume>
-    <costume name="ship2" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship">
+    <costume name="ship2" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="default" pose="ship2"/>
       <string name="firePeriod">1</string>
       <string name="rotationSpeed">0.3</string>
       <string name="thrust">0.1</string>
       <string name="weight">2</string>
       <string name="wrappedCostume">wrappedShip2</string>
+      <properties firePeriod="1.0" rotationSpeed="0.3" rotationDamper="0.2" weight="0.1" thrust="2.0" wrappedCostumeName="wrappedShip2" landingSpeed="2.0"/>
     </costume>
     <costume name="soft" behaviour="uk.co.nickthecoder.ithrust.Soft">
       <pose name="default" pose="soft"/>

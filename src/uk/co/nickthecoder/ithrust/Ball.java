@@ -45,9 +45,10 @@ public class Ball extends Behaviour implements Fragile
         createFragments();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
 
-        this.fuel = getActor().getCostume().getInt( "fuel", 0 );
-        this.water = getActor().getCostume().getInt( "water", 0 );
-        this.weight = getActor().getCostume().getDouble( "weight", 1 );
+        BallProperties properties = (BallProperties) getActor().getCostume().getProperties();
+        this.fuel = properties.fuel;
+        this.water = properties.water;
+        this.weight = properties.weight;
     }
 
     public void createFragments()

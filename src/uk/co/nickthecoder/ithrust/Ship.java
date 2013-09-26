@@ -118,12 +118,22 @@ public class Ship extends Behaviour implements Fragile
     private void updateCostumeData()
     {
         Costume costume = getActor().getCostume();
-        this.rotationSpeed = costume.getDouble("rotationSpeed", 0.5);
-        this.rotationDamper = costume.getDouble("rotationDamper", 0.94);
-        this.thrust = costume.getDouble("thrust", 0.2);
-        this.weight = costume.getDouble("weight", 2.0);
-        this.firePeriod = costume.getDouble("firePeriod", 1);
-        this.landingSpeed = costume.getDouble("landingSpeed", 2.0);
+        ShipProperties properties;
+        
+        try {
+            properties = (ShipProperties) costume.getProperties();
+        } catch (Exception e) {
+            e.printStackTrace();
+            properties = new ShipProperties();
+        }
+
+        this.rotationSpeed = properties.rotationSpeed;
+        this.thrust = properties.thrust;
+        this.weight = properties.weight;
+        this.firePeriod = properties.firePeriod;
+
+        this.landingSpeed = properties.landingSpeed;
+        this.rotationDamper = properties.rotationDamper;
     }
 
     /**

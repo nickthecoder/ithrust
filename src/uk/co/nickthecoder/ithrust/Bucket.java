@@ -20,10 +20,11 @@ public class Bucket extends Ball
         if (this.empty) {
 
             if (touching("water").size() > 0) {
+                BucketProperties properties = (BucketProperties) getActor().getCostume().getProperties();
                 System.out.println("Filling bucket with water");
                 event("fillWithWater");
-                this.weight += getActor().getCostume().getInt("waterWeight", 2);
-                this.water += getActor().getCostume().getInt("volume", 1);
+                this.weight += properties.waterWeight;
+                this.water += properties.volume;
                 empty = false;
             }
         }
