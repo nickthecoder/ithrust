@@ -12,9 +12,13 @@ import java.util.List;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
 import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.util.Tag;
 
+@Tag(names={EscapeRoute.POSSIBLE_ROUTE})
 public class EscapeRoute extends Behaviour
 {
+    public static final String POSSIBLE_ROUTE = "possibleRoute";
+    
     public static final String ESCAPE_ROUTE = "escapeRoute";
 
     public List<EscapeRoute> feeds;
@@ -27,7 +31,6 @@ public class EscapeRoute extends Behaviour
     public void onAttach()
     {
         this.feeds = new ArrayList<EscapeRoute>();
-        getActor().addTag(ESCAPE_ROUTE);
     }
 
     @Override
@@ -52,6 +55,7 @@ public class EscapeRoute extends Behaviour
 
         Point2D.Double otherEnd = this.getOtherEnd();
         this.getActor().moveTo(otherEnd.x, otherEnd.y);
+        event("reverse");
 
     }
 
@@ -93,7 +97,7 @@ public class EscapeRoute extends Behaviour
         Point2D.Double otherEnd = getOtherEnd();
 
         //System.out.println("Looking for other ER near " + otherEnd.x + "," + otherEnd.y);
-        for (Actor other : Actor.allByTag(ESCAPE_ROUTE)) {
+        for (Actor other : Actor.allByTag(POSSIBLE_ROUTE)) {
             if (other != this.getActor()) {
                 double distance = other.distanceTo(otherEnd.x, otherEnd.y);
                 if (distance < 50) {

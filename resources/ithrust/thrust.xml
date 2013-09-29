@@ -8,9 +8,11 @@
   <ninePatches/>
   <poses>
     <pose name="background" filename="background.png" offsetX="0" offsetY="0"/>
-    <pose name="ballOfWater" filename="ballOfWater.png"/>
     <pose name="bucket" filename="ball.png"/>
+    <pose name="bucket2" filename="ball2.png"/>
     <pose name="bucketFactory" filename="bucketFactory.png" offsetX="69" offsetY="66"/>
+    <pose name="bucketOfWater" filename="ballOfWater.png"/>
+    <pose name="bucketOfWater2" filename="ballOfWater2.png"/>
     <pose name="bullet1" filename="bullet1.png"/>
     <pose name="button" filename="button.png"/>
     <pose name="door1a" filename="door1.png" direction="180.0" offsetX="7" offsetY="9"/>
@@ -130,6 +132,7 @@
     </costume>
     <costume name="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
       <sound name="death" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="fillWithWater" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <sound name="taught" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <sound name="touched" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
       <sound name="touchedGate" sound="ballTouchedGate" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
@@ -141,9 +144,14 @@
     <costume name="bucket" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
       <pose name="contents" pose="waterDroplet"/>
       <pose name="default" pose="bucket"/>
-      <pose name="fillWithWater" pose="ballOfWater"/>
-      <sound name="fillWithWater" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <pose name="fillWithWater" pose="bucketOfWater"/>
       <properties waterWeight="3.0" volume="1" weight="0.5" water="0" fuel="0"/>
+    </costume>
+    <costume name="bucket2" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
+      <pose name="contents" pose="waterDroplet"/>
+      <pose name="default" pose="bucket2"/>
+      <pose name="fillWithWater" pose="bucketOfWater2"/>
+      <properties waterWeight="6.0" volume="3" weight="1.0" water="0" fuel="0"/>
     </costume>
     <costume name="bucketFactory" behaviour="uk.co.nickthecoder.ithrust.BucketFactory">
       <pose name="default" pose="bucketFactory"/>
@@ -247,21 +255,11 @@
     </costume>
     <costume name="ship1" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="default" pose="ship1"/>
-      <string name="firePeriod">2</string>
-      <string name="rotationSpeed">0.2</string>
-      <string name="shipWeight">3</string>
-      <string name="thrust">0.2</string>
-      <string name="wrappedCostume">wrappedShip1</string>
-      <properties firePeriod="2.0" rotationSpeed="2.0" rotationDamper="0.2" weight="3.0" thrust="0.2" wrappedCostumeName="wrappedShip1" landingSpeed="2.0"/>
+      <properties firePeriod="0.2" rotationSpeed="2.0" rotationDamper="0.2" weight="3.0" thrust="0.2" wrappedCostumeName="wrappedShip1" landingSpeed="2.0"/>
     </costume>
     <costume name="ship2" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="default" pose="ship2"/>
-      <string name="firePeriod">1</string>
-      <string name="rotationSpeed">0.3</string>
-      <string name="thrust">0.1</string>
-      <string name="weight">2</string>
-      <string name="wrappedCostume">wrappedShip2</string>
-      <properties firePeriod="1.0" rotationSpeed="0.3" rotationDamper="0.2" weight="0.1" thrust="2.0" wrappedCostumeName="wrappedShip2" landingSpeed="2.0"/>
+      <properties firePeriod="0.2" rotationSpeed="0.3" rotationDamper="0.2" weight="0.1" thrust="2.0" wrappedCostumeName="wrappedShip2" landingSpeed="2.0"/>
     </costume>
     <costume name="soft" behaviour="uk.co.nickthecoder.ithrust.Soft">
       <pose name="default" pose="soft"/>

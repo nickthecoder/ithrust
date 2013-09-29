@@ -141,7 +141,7 @@ public class Door extends Behaviour implements Fragile
             this.direction = 1;
             this.target = this.ticks;
             if (this.closeAfter > 0) {
-                this.closeTimer = new Timer((int) (this.closeAfter * 1000));
+                this.closeTimer = Timer.createTimerSeconds(this.closeAfter);
                 this.closeTimer.reset();
             }
             if (this.buddy != null) {

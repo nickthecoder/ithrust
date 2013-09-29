@@ -43,7 +43,6 @@ public class Gate extends Behaviour
             if (ship != null) {
                 findRoutesBack();
 
-                System.out.println("Creating a new ship based on " + ship + " : " + ship.getActor());
                 Actor actor = new Actor(ship.getActor().getCostume());
                 actor.setBehaviour(ship);
                 ship.startGate(this);
@@ -59,29 +58,27 @@ public class Gate extends Behaviour
 
     public void findRoutesBack()
     {
-        for (Actor escapeRoute : Actor.allByTag(EscapeRoute.ESCAPE_ROUTE)) {
+        for (Actor escapeRoute : Actor.allByTag(EscapeRoute.POSSIBLE_ROUTE)) {
             double distance = escapeRoute.distanceTo(this.getActor());
             if (distance < 150) {
                 ((EscapeRoute) (escapeRoute.getBehaviour())).addGate(this);
             }
         }
         
-        for (Actor actor : Actor.allByTag(EscapeRoute.ESCAPE_ROUTE)) {
+        for (Actor actor : Actor.allByTag(EscapeRoute.POSSIBLE_ROUTE)) {
             EscapeRoute er = (EscapeRoute) actor.getBehaviour();
             
             if (er.hasWayBack()) {
-                // er.reverse(); // Debug
-                // actor.event("reverse"); // Debug
-                // actor.getAppearance().setColorize(new RGBA(0,200,0)); // Debug
+                er.reverse();
                 
-                // Comment out the following line to debug the active escape routes.
-                actor.removeFromLayer();
-                
+                actor.getAppearance().setColorize(new RGBA(0,200,0)); // Debug
+                actor.addTag(EscapeRoute.ESCAPE_ROUTE);
+      
             } else {
-                // actor.getAppearance().setColorize(new RGBA(200,0,0)); // Debug
+                actor.getAppearance().setColorize(new RGBA(200,0,0)); // Debug
                 
                 // Comment out the following line to debug unused escape routes.
-                actor.kill();
+                // actor.kill();
             }
         }
     }

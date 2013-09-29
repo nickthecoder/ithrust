@@ -11,7 +11,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
-import uk.co.nickthecoder.itchy.extras.FadeTransition;
+import uk.co.nickthecoder.itchy.extras.FilmTransition;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
@@ -36,9 +36,9 @@ public class Thrust extends Game
 
     public ScrollableLayer mainLayer;
 
-    public ScrollableLayer glassLayer;
+    public ScrollableLayer escapeRouteLayer;
 
-    public ScrollableLayer fadeLayer;
+    public ScrollableLayer glassLayer;
 
     private Neighbourhood neighbourhood;
 
@@ -67,13 +67,13 @@ public class Thrust extends Game
         this.foregroundLayer = new ScrollableLayer("foreground", screenSize, null);
         this.layers.add(this.foregroundLayer);
 
+        this.escapeRouteLayer = new ScrollableLayer("escapeRoute", screenSize, null);
+        this.layers.add(this.escapeRouteLayer);
+        //this.escapeRouteLayer.setVisible(false);
+
         this.glassLayer = new ScrollableLayer("glass", screenSize);
         this.glassLayer.locked = true;
         this.layers.add(this.glassLayer);
-
-        this.fadeLayer = new ScrollableLayer("fade", screenSize);
-        this.fadeLayer.locked = true;
-        this.layers.add(this.fadeLayer);
 
     }
 
@@ -94,6 +94,7 @@ public class Thrust extends Game
         this.mainLayer.ceterOn(actor);
         this.backgroundLayer.ceterOn(actor);
         this.foregroundLayer.ceterOn(actor);
+        this.escapeRouteLayer.ceterOn(actor);
     }
 
     public void training()
@@ -137,9 +138,7 @@ public class Thrust extends Game
     {
         System.out.println("\nStarting Scene " + sceneName + "\n");
         
-        this.currentSceneBehaviour = new FadeTransition(
-            sceneName,
-            this.resources.getPose("background"));
+        new FilmTransition().transition(sceneName);
         
         return true;
     }

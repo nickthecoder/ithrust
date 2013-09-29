@@ -7,9 +7,10 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
+import uk.co.nickthecoder.itchy.CostumeProperties;
 import uk.co.nickthecoder.itchy.util.Property;
 
-public class ShipProperties
+public class ShipProperties extends CostumeProperties
 {
 
     @Property(label="Fire Period")

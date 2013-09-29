@@ -39,7 +39,7 @@ public class Bullet extends Projectile implements Fragile
             this.hit();
         }
 
-        if (!touching(SOLID_TAGS).isEmpty()) {
+        if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
             this.hit();
         }
     }

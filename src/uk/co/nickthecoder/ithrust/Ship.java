@@ -70,12 +70,12 @@ public class Ship extends Behaviour implements Fragile
         this.getActor().addTag("fragile");
         this.getActor().addTag("solid");
         this.getActor().addTag("ship");
+        this.updateCostumeData();
 
-        this.fireTimer = new Timer((int) (1000 * this.firePeriod));
+        this.fireTimer = Timer.createTimerSeconds(this.firePeriod);
 
         this.createFragments();
         this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
-        this.updateCostumeData();
     }
 
     @Override
@@ -176,10 +176,10 @@ public class Ship extends Behaviour implements Fragile
                 this.rod.disconnect();
             }
 
-            if (Itchy.isKeyDown(Keys.c)) {
+            if (Itchy.isKeyDown(Keys.c) && Itchy.isKeyDown(Keys.h)&& Itchy.isKeyDown(Keys.e) ) {
                 this.cheating = true;
             }
-
+            
             if ((Itchy.isKeyDown(Keys.SPACE)) && (this.fireTimer.isFinished())) {
                 this.fireTimer.reset();
                 fire();
@@ -493,7 +493,7 @@ public class Ship extends Behaviour implements Fragile
 
             this.target = Ship.this.startGate.getActor();
 
-            Actor escapeRoute = getActor().nearest("escapeRoute");
+            Actor escapeRoute = getActor().nearest(EscapeRoute.ESCAPE_ROUTE);
             if (escapeRoute != null) {
                 double erDist = escapeRoute.distance(getActor());
                 double gateDist = Ship.this.startGate.getActor().distance(getActor());

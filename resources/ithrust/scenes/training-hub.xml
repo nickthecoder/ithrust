@@ -87,41 +87,41 @@
     </actor>
     <text text="Water" font="boycott" size="22" color="#ffffff" x="2619" y="663" direction="0.0" startEvent="default"/>
   </layer>
-  <layer name="foreground">
-    <actor costume="escapeRoute" x="494" y="208" direction="67.99200255326349" startEvent="default"/>
+  <layer name="escapeRoute">
+    <actor costume="escapeRoute" x="492" y="219" direction="112.78240573048168" startEvent="default"/>
     <actor costume="escapeRoute" x="394" y="424" direction="172.22435717657825" startEvent="default"/>
+    <actor costume="escapeRoute" x="404" y="440" direction="123.95905981967627" startEvent="default"/>
+    <actor costume="escapeRoute" x="511" y="564" direction="-169.90249561592472" startEvent="default"/>
+    <actor costume="escapeRoute" x="494" y="208" direction="67.99200255326349" startEvent="default"/>
+    <actor costume="escapeRoute" x="816" y="444" direction="-0.9222557041060335" startEvent="default"/>
     <actor costume="escapeRoute" x="585" y="418" direction="6.4224906063790375" startEvent="default"/>
     <actor costume="escapeRoute" x="573" y="437" direction="94.80001499252052" startEvent="default"/>
-    <actor costume="escapeRoute" x="816" y="444" direction="-0.9222557041060335" startEvent="default"/>
+    <actor costume="escapeRoute" x="747" y="551" direction="174.66645176322956" startEvent="default"/>
+    <actor costume="escapeRoute" x="981" y="547" direction="179.10482628978895" startEvent="default"/>
+    <actor costume="escapeRoute" x="519" y="594" direction="102.87500155961247" startEvent="default"/>
+    <actor costume="escapeRoute" x="1207" y="547" direction="-179.08435181879662" startEvent="default"/>
     <actor costume="escapeRoute" x="1050" y="443" direction="9.684747062324162" startEvent="default"/>
     <actor costume="escapeRoute" x="1281" y="484" direction="14.910981642582827" startEvent="default"/>
-    <actor costume="escapeRoute" x="1504" y="544" direction="17.761395432297054" startEvent="default"/>
-    <actor costume="escapeRoute" x="2432" y="686" direction="11.152977823954712" startEvent="default"/>
-    <actor costume="escapeRoute" x="1882" y="523" direction="70.32584090047814" startEvent="default" scale="0.7192982456140351"/>
-    <actor costume="escapeRoute" x="2123" y="480" direction="73.0382664178026" startEvent="default" scale="0.8041926417158289"/>
-    <actor costume="escapeRoute" x="2387" y="543" direction="77.28273062777387" startEvent="default" scale="0.6320611098057644"/>
-    <actor costume="escapeRoute" x="1724" y="612" direction="17.113328218243705" startEvent="default" scale="0.9358695652173913"/>
-    <actor costume="escapeRoute" x="1947" y="673" direction="-3.0955746729827807" startEvent="default"/>
-    <actor costume="escapeRoute" x="2664" y="728" direction="0.0" startEvent="default"/>
-    <actor costume="escapeRoute" x="2186" y="663" direction="5.093696100411811" startEvent="default"/>
-    <actor costume="escapeRoute" x="2298" y="761" direction="-174.3171136824511" startEvent="default"/>
-    <actor costume="escapeRoute" x="2064" y="734" direction="178.03732579583937" startEvent="default"/>
-    <actor costume="escapeRoute" x="1829" y="741" direction="-165.70290791499104" startEvent="default" scale="1.0246163622433888"/>
-    <actor costume="escapeRoute" x="1649" y="687" direction="-161.489350147801" startEvent="default"/>
     <actor costume="escapeRoute" x="1428" y="612" direction="-164.05460409907712" startEvent="default"/>
-    <actor costume="escapeRoute" x="1207" y="547" direction="-179.08435181879662" startEvent="default"/>
-    <actor costume="escapeRoute" x="981" y="547" direction="179.10482628978895" startEvent="default"/>
-    <actor costume="escapeRoute" x="747" y="551" direction="174.66645176322956" startEvent="default"/>
-    <actor costume="escapeRoute" x="404" y="440" direction="123.95905981967627" startEvent="default"/>
-    <actor costume="escapeRoute" x="519" y="594" direction="102.87500155961247" startEvent="default"/>
-    <actor costume="escapeRoute" x="511" y="564" direction="-169.90249561592472" startEvent="default"/>
-    <actor costume="escapeRoute" x="2903" y="728" direction="-16.69924423399362" startEvent="default"/>
-    <actor costume="escapeRoute" x="2380" y="552" direction="109.14466823625916" startEvent="default" scale="0.9724017073934836"/>
-    <actor costume="escapeRoute" x="2124" y="492" direction="101.61597702797917" startEvent="default" scale="1.127906976744186"/>
+    <actor costume="escapeRoute" x="1649" y="687" direction="-161.489350147801" startEvent="default"/>
+    <actor costume="escapeRoute" x="1504" y="544" direction="17.761395432297054" startEvent="default"/>
+    <actor costume="escapeRoute" x="1829" y="741" direction="-165.70290791499104" startEvent="default" scale="1.0246163622433888"/>
+    <actor costume="escapeRoute" x="1724" y="612" direction="17.113328218243705" startEvent="default" scale="0.9358695652173913"/>
     <actor costume="escapeRoute" x="1881" y="523" direction="101.9996748904067" startEvent="default"/>
-    <actor costume="escapeRoute" x="492" y="219" direction="112.78240573048168" startEvent="default"/>
-    <actor costume="escapeRoute" x="2604" y="640" direction="115.40771810894849" startEvent="default" scale="0.7333333333333333"/>
+    <actor costume="escapeRoute" x="2064" y="734" direction="178.03732579583937" startEvent="default"/>
+    <actor costume="escapeRoute" x="1947" y="673" direction="-3.0955746729827807" startEvent="default"/>
+    <actor costume="escapeRoute" x="1882" y="523" direction="70.32584090047814" startEvent="default" scale="0.7192982456140351"/>
+    <actor costume="escapeRoute" x="2124" y="492" direction="101.61597702797917" startEvent="default" scale="1.127906976744186"/>
+    <actor costume="escapeRoute" x="2123" y="480" direction="73.0382664178026" startEvent="default" scale="0.8041926417158289"/>
+    <actor costume="escapeRoute" x="2298" y="761" direction="-174.3171136824511" startEvent="default"/>
+    <actor costume="escapeRoute" x="2186" y="663" direction="5.093696100411811" startEvent="default"/>
+    <actor costume="escapeRoute" x="2380" y="552" direction="109.14466823625916" startEvent="default" scale="0.9724017073934836"/>
     <actor costume="escapeRoute" x="2527" y="782" direction="-174.66178482849813" startEvent="default"/>
-    <actor costume="escapeRoute" x="2676" y="633" direction="23.048025627703183" startEvent="default"/>
+    <actor costume="escapeRoute" x="2432" y="686" direction="11.152977823954712" startEvent="default"/>
+    <actor costume="escapeRoute" x="2387" y="543" direction="77.28273062777387" startEvent="default" scale="0.6320611098057644"/>
+    <actor costume="escapeRoute" x="2604" y="640" direction="115.40771810894849" startEvent="default" scale="0.7333333333333333"/>
+    <actor costume="escapeRoute" x="2664" y="728" direction="0.0" startEvent="default"/>
+    <actor costume="escapeRoute" x="2677" y="643" direction="23.048025627703183" startEvent="default"/>
+    <actor costume="escapeRoute" x="2903" y="728" direction="-16.69924423399362" startEvent="default"/>
   </layer>
 </scene>

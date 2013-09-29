@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="">
+<scene showMouse="true" behaviour="uk.co.nickthecoder.ithrust.Menu">
   <layer name="background">
     <actor costume="background" x="0" y="600" direction="0.0" startEvent="default"/>
   </layer>

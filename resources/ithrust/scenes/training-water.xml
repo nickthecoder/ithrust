@@ -2,6 +2,10 @@
   <layer name="background">
     <actor costume="stone1a" x="84" y="280" direction="0.0" startEvent="default"/>
     <actor costume="stone1d" x="166" y="162" direction="0.0" startEvent="default"/>
+    <actor costume="bucketFactory" x="1106" y="200" direction="0.0" startEvent="default">
+      <property name="quantity" value="-1"/>
+      <property name="delay" value="2"/>
+    </actor>
     <actor costume="stone1b" x="407" y="184" direction="0.0" startEvent="default"/>
     <actor costume="stone1b" x="635" y="274" direction="0.0" startEvent="default"/>
     <actor costume="stone1a" x="40" y="505" direction="0.0" startEvent="default"/>
@@ -24,7 +28,6 @@
     <text text="until you hear a ping." font="vera" size="22" color="#ffffff" x="1047" y="421" direction="0.0" startEvent="default"/>
     <actor costume="keyA" x="1155" y="461" direction="0.0" startEvent="default"/>
     <text text="to it, and hold down " font="vera" size="22" color="#ffffff" x="1020" y="462" direction="0.0" startEvent="default"/>
-    <actor costume="bucket" x="987" y="288" direction="0.0" startEvent="default"/>
     <actor costume="stone1c" x="2079" y="198" direction="0.0" startEvent="default"/>
     <actor costume="stone1a" x="2094" y="412" direction="0.0" startEvent="default"/>
     <actor costume="stone1a" x="2049" y="595" direction="0.0" startEvent="default"/>
@@ -57,5 +60,19 @@
     <actor costume="stone1d" x="1778" y="-168" direction="0.0" startEvent="default"/>
     <actor costume="stone1b" x="1917" y="-136" direction="0.0" startEvent="default"/>
     <actor costume="stone1c" x="2041" y="0" direction="0.0" startEvent="default"/>
+  </layer>
+  <layer name="escapeRoute">
+    <actor costume="escapeRoute" x="268" y="295" direction="91.97493401088198" startEvent="default"/>
+    <actor costume="escapeRoute" x="261" y="536" direction="74.9315118405078" startEvent="default"/>
+    <actor costume="escapeRoute" x="314" y="280" direction="57.80426606528675" startEvent="default"/>
+    <actor costume="escapeRoute" x="446" y="486" direction="45.0" startEvent="default"/>
+    <actor costume="escapeRoute" x="622" y="652" direction="0.0" startEvent="default"/>
+    <actor costume="escapeRoute" x="865" y="652" direction="-47.418749288505694" startEvent="default"/>
+    <actor costume="escapeRoute" x="1026" y="484" direction="-46.46880071438582" startEvent="default"/>
+    <actor costume="escapeRoute" x="888" y="655" direction="0.0" startEvent="default"/>
+    <actor costume="escapeRoute" x="1132" y="654" direction="-9.462322208025617" startEvent="default"/>
+    <actor costume="escapeRoute" x="1373" y="617" direction="-10.619655276155134" startEvent="default"/>
+    <actor costume="escapeRoute" x="1614" y="568" direction="-57.528807709151515" startEvent="default"/>
+    <actor costume="escapeRoute" x="1735" y="381" direction="-92.04540848888723" startEvent="default" scale="0.7689393939393939"/>
   </layer>
 </scene>
