@@ -9,7 +9,7 @@ import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
-import uk.co.nickthecoder.jame.Keys;
+import uk.co.nickthecoder.jame.event.Keys;
 
 public class Rod extends Behaviour
 {

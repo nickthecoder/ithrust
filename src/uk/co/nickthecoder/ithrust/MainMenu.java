@@ -8,8 +8,8 @@
 package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 
 public class MainMenu extends Menu
 {

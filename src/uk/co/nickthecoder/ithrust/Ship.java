@@ -19,8 +19,8 @@ import uk.co.nickthecoder.itchy.extras.Fragment;
 import uk.co.nickthecoder.itchy.extras.Projectile;
 import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.util.CubicSpline;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.Sound;
+import uk.co.nickthecoder.jame.event.Keys;
 
 public class Ship extends Behaviour implements Fragile
 {

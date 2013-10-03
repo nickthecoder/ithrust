@@ -15,10 +15,10 @@ import uk.co.nickthecoder.itchy.extras.FilmTransition;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
-import uk.co.nickthecoder.jame.Keys;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
+import uk.co.nickthecoder.jame.event.Keys;
 
 public class Thrust extends Game
 {
@@ -69,7 +69,7 @@ public class Thrust extends Game
 
         this.escapeRouteLayer = new ScrollableLayer("escapeRoute", screenSize, null);
         this.layers.add(this.escapeRouteLayer);
-        //this.escapeRouteLayer.setVisible(false);
+        // this.escapeRouteLayer.setVisible(false);
 
         this.glassLayer = new ScrollableLayer("glass", screenSize);
         this.glassLayer.locked = true;
@@ -78,7 +78,7 @@ public class Thrust extends Game
     }
 
     @Override
-    public void init()
+    public void onActivate()
     {
         this.mainLayer.disableMouseListener();
         this.mainLayer.enableMouseListener();
@@ -134,13 +134,12 @@ public class Thrust extends Game
         return this.previousLevelShip;
     }
 
-    public boolean startScene( final String sceneName )
+    @Override
+    public void startScene( final String sceneName )
     {
         System.out.println("\nStarting Scene " + sceneName + "\n");
-        
+
         new FilmTransition().transition(sceneName);
-        
-        return true;
     }
 
     @Override
@@ -150,25 +149,25 @@ public class Thrust extends Game
             return true;
         }
 
-        if ( ke.isPressed()) {
+        if (ke.isPressed()) {
             if (ke.symbol == Keys.ESCAPE) {
                 startScene("menu");
                 return true;
             }
-            
-            if (ke.symbol == Keys.F1){
+
+            if (ke.symbol == Keys.F1) {
                 debug();
             }
         }
-        
+
         return false;
     }
-    
+
     private void debug()
     {
-        System.out.println( "Debug\n");
-        
-        System.out.println( "\nEnd Debug\n");
+        System.out.println("Debug\n");
+
+        System.out.println("\nEnd Debug\n");
     }
 
     public static void main( String argv[] )
