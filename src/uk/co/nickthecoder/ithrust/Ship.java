@@ -185,7 +185,7 @@ public class Ship extends Behaviour implements Fragile
                 fire();
             }
 
-            for (Actor actor : touching("gate")) {
+            for (Actor actor : pixelOverlap("gate")) {
                 Gate gate = (Gate) actor.getBehaviour();
                 this.disconnect();
                 getActor().setBehaviour(new NextLevel(gate));
@@ -210,7 +210,7 @@ public class Ship extends Behaviour implements Fragile
         }
         turn(this.currentRotationSpeed);
 
-        if (!touching("soft").isEmpty()) {
+        if (!pixelOverlap("soft").isEmpty()) {
             if (this.rod == null) {
                 double speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
                 double upright = Math.abs(getActor().getAppearance().getDirection() - 90) % 360.0;
@@ -237,12 +237,12 @@ public class Ship extends Behaviour implements Fragile
             Thrust.game.centerOn(this.getActor());
         }
 
-        if (!touching("liquid").isEmpty()) {
+        if (!pixelOverlap("liquid").isEmpty()) {
             hit();
             return;
         }
 
-        if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+        if (!pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
             if (!this.cheating) {
                 hit();
                 return;
@@ -273,8 +273,8 @@ public class Ship extends Behaviour implements Fragile
 
     private void fire()
     {
-        Bullet bullet = new Bullet();
-        Actor actor = bullet.createActor(getActor(), "bullet");
+        Bullet bullet = new Bullet(this.getActor());
+        Actor actor = bullet.poseName("bullet").createActor();
         actor.moveForward(30);
         bullet.speed(6).gravity(Thrust.gravity);
         actor.activate();
@@ -290,12 +290,12 @@ public class Ship extends Behaviour implements Fragile
         Ball ball = this.rod.ball;
         Actor ballActor = ball.getActor();
 
-        this.wrapping = new Follower(this.getActor());
-        this.wrapping.createActor(ballActor.getCostume()).activate();
+        this.wrapping = new Follower(this.getActor()).costume(ballActor.getCostume());
+        this.wrapping.createActor().activate();
         this.wrapping.event("wrapping");
 
-        this.unwrapping = new Follower(ballActor);
-        this.unwrapping.createActor(ballActor.getCostume()).activate();
+        this.unwrapping = new Follower(ballActor).costume(ballActor.getCostume());
+        this.unwrapping.createActor().activate();
         this.unwrapping.deathEvent("unwrapping");
         ballActor.event("contents");
 
@@ -374,11 +374,12 @@ public class Ship extends Behaviour implements Fragile
         this.speedX += this.thrust * cos;
         this.speedY += this.thrust * sin;
 
-        Actor puff = new Projectile()
+        Actor puff = new Projectile(this.getActor())
             .vx(this.speedX).vy(this.speedY)
             .fade(3)
             .speed(1)
-            .createActor(this.getActor(), "exhaust");
+            .poseName("exhaust")
+            .createActor();
 
         puff.getAppearance().adjustDirection(180);
         puff.moveForward(30);
@@ -433,7 +434,7 @@ public class Ship extends Behaviour implements Fragile
         this.getActor().activate();
         this.getActor().setBehaviour(new ExitingGate());
         ActorsLayer layer = gate.getActor().getLayer();
-        layer.add(this.getActor());
+        layer.addTop(this.getActor());
         this.getActor().event("default"); // Ensure its got the right pose
         this.getActor().event("exitGate");
 

@@ -63,7 +63,7 @@ public class Ball extends Behaviour implements Fragile
         if (this.moving) {
             
             // Damp down the velocity when touching liquids
-            if ( touching("liquid").size() > 0 ) {
+            if ( pixelOverlap("liquid").size() > 0 ) {
                 this.speedX *= 0.95;
                 this.speedY *= 0.95;
                 this.speedY += Thrust.gravity / 5; // Make the ball buoyant
@@ -74,18 +74,18 @@ public class Ball extends Behaviour implements Fragile
             this.getActor().moveBy(this.speedX, this.speedY);
             this.collisionStrategy.update();
 
-            if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+            if (!pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
                 hit();
                 return;
             }
 
-            for (Actor actor : touching("gate")) {
+            for (Actor actor : pixelOverlap("gate")) {
                 Gate gate = (Gate) actor.getBehaviour();
                 getActor().setBehaviour(new EnterGate(gate));
                 return;
             }
 
-            if (!touching("soft").isEmpty()) {
+            if (!pixelOverlap("soft").isEmpty()) {
                 if (this.rod == null) {
                     double speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
                     if (speed < this.landingSpeed) {

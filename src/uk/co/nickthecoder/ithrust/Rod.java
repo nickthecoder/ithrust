@@ -97,7 +97,7 @@ public class Rod extends Behaviour
             } else {
 
                 this.collisionStrategy.update();
-                if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+                if (!pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
                     this.disconnect();
                     return;
                 }

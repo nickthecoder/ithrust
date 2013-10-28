@@ -5,12 +5,18 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
+import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.extras.Explosion;
 import uk.co.nickthecoder.itchy.extras.Projectile;
 
 public class Droplet extends Projectile
 {
     private double oy;
+
+    public Droplet( Actor source )
+    {
+        super(source);
+    }
 
     @Override
     public void onAttach()
@@ -33,8 +39,8 @@ public class Droplet extends Projectile
 
         this.collisionStrategy.update();
 
-        if ( oy - getActor().getY() > 20 ) {
-            if (! touching("solid", "liquid").isEmpty()) {
+        if (this.oy - getActor().getY() > 20) {
+            if (!pixelOverlap("solid", "liquid").isEmpty()) {
 
                 new Explosion(this.getActor())
                     .projectiles(10)

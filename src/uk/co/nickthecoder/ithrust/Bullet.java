@@ -17,6 +17,11 @@ public class Bullet extends Projectile implements Fragile
 
     private static final String[] EXCLUDE_TAGS = new String[] { "ship" };
 
+    public Bullet( Actor source )
+    {
+        super(source);
+    }
+
     @Override
     public void onAttach()
     {
@@ -30,7 +35,7 @@ public class Bullet extends Projectile implements Fragile
         super.tick();
         this.collisionStrategy.update();
 
-        for (Actor hit : touching(TARGET_TAGS, EXCLUDE_TAGS)) {
+        for (Actor hit : pixelOverlap(TARGET_TAGS, EXCLUDE_TAGS)) {
             Behaviour behaviour = hit.getBehaviour();
 
             if (behaviour instanceof Fragile) {
@@ -39,7 +44,7 @@ public class Bullet extends Projectile implements Fragile
             this.hit();
         }
 
-        if (!touching(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+        if (!pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
             this.hit();
         }
     }

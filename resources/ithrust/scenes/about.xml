@@ -5,7 +5,7 @@
   <layer name="main">
     <text text="Written by Nick Robinson" font="boycott" size="22" color="#ffffff" x="409" y="350" direction="0.0" startEvent="default"/>
     <text text="Version 0.1" font="boycott" size="22" color="#ffffff" x="412" y="390" direction="0.0" startEvent="default"/>
-    <text text="Back" font="boycott" size="38" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="731" y="41" direction="0.0" startEvent="default">
+    <text text="Back" font="boycott" size="38" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="731" y="41" direction="0.0" startEvent="default">
       <property name="message" value="menu"/>
     </text>
     <text text="THRUST" font="boycott" size="156" color="#222222" x="416" y="493" direction="0.0" startEvent="default"/>

@@ -4,20 +4,20 @@
   </layer>
   <layer name="main">
     <text text="THRUST" font="boycott" size="244" color="#222222" x="400" y="458" direction="0.0" startEvent="default"/>
-    <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="713" y="54" direction="0.0" startEvent="default">
+    <text text="Credits" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="713" y="54" direction="0.0" startEvent="default">
       <property name="message" value="about"/>
     </text>
     <text text="Thrust" font="boycott" size="228" color="#cc2222" x="400" y="462" direction="0.0" startEvent="default"/>
-    <text text="New Game" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="388" y="233" direction="0.0" startEvent="default">
+    <text text="New Game" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="388" y="233" direction="0.0" startEvent="default">
       <property name="message" value="newGame"/>
     </text>
-    <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="70" y="51" direction="0.0" startEvent="default">
+    <text text="Editor" font="blackCasper" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="70" y="51" direction="0.0" startEvent="default">
       <property name="message" value="editor"/>
     </text>
-    <text text="Quit" font="boycott" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="400" y="59" direction="0.0" startEvent="default">
+    <text text="Quit" font="boycott" size="46" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="400" y="59" direction="0.0" startEvent="default">
       <property name="message" value="quit"/>
     </text>
-    <text text="Training" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.Button" x="392" y="297" direction="0.0" startEvent="default">
+    <text text="Training" font="blackCasper" size="56" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="392" y="297" direction="0.0" startEvent="default">
       <property name="message" value="training"/>
     </text>
   </layer>

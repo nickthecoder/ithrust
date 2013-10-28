@@ -41,12 +41,12 @@ public class DropletFactory extends Behaviour
 
     public void createDroplet()
     {
-        Actor actor = new Actor(getActor().getCostume());
-        Droplet droplet = new Droplet();
+        Droplet droplet = new Droplet(getActor());
+        Actor actor = droplet.createActor();
+        
         droplet.gravity = Thrust.gravity;
         actor.setBehaviour(droplet);
         actor.moveTo(getActor());
-        getActor().getLayer().addAbove(actor, getActor());
         actor.activate();
     }
 }

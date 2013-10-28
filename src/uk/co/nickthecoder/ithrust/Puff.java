@@ -29,7 +29,7 @@ public class Puff extends Behaviour
         actor.getAppearance().setDirection( source.getAppearance().getDirection() + 180 );
         actor.moveForward( distance );
         actor.setBehaviour(this);
-        source.getLayer().add(actor);
+        source.getLayer().addTop(actor);
         
         return actor;
     }

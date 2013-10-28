@@ -19,7 +19,7 @@ public class Bucket extends Ball
     {
         if (this.empty) {
 
-            if (touching("water").size() > 0) {
+            if (pixelOverlap("water").size() > 0) {
                 BucketProperties properties = (BucketProperties) getActor().getCostume().getProperties();
                 System.out.println("Filling bucket with water");
                 event("fillWithWater");

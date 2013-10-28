@@ -123,12 +123,9 @@ public class Gate extends Behaviour
         }
 
         Actor message = new ShadowText()
-            .text(text)
-            .fontSize(32)
-            .color(new RGBA(190, 190, 190))
-            .fade(2)
-            .offset(0, -4)
-            .createActor(getActor());
+            .text(text).fontSize(32).color(new RGBA(190, 190, 190))
+            .projectile(this.getActor()).fade(2)
+            .createActor();
 
         message.activate();
 
@@ -140,7 +137,7 @@ public class Gate extends Behaviour
             .alpha(128).fade(1, 2)
             .speed(0.5, 2)
             .gravity(Thrust.gravity)
-            .createActor("fragment")
+            .createActor()
             .activate();
 
     }

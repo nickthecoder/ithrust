@@ -1,4 +1,5 @@
 <resources>
+  <game initialScene="menu" className="uk.co.nickthecoder.itchy.Launcher" width="800" height="600" title="Thrust" iconFilename="icon.bmp"/>
   <fonts>
     <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -87,7 +88,7 @@
           <alpha target="255.0" ticks="100" ease="linear"/>
           <scale target="1.0" ticks="150" ease="easeInCirc"/>
         </compound>
-        <forwards finishedMessage="exitGate" forwards="100.0" sideways="0.0" ticks="50" ease="default"/>
+        <forwards finishedMessage="exitGate" forwards="100.0" sidewards="0.0" ticks="50" ease="default"/>
       </compound>
     </animation>
     <animation name="hide">

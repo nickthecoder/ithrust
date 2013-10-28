@@ -10,8 +10,9 @@ import java.io.File;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.Game;
+import uk.co.nickthecoder.itchy.Resources;
 import uk.co.nickthecoder.itchy.ScrollableLayer;
-import uk.co.nickthecoder.itchy.extras.FilmTransition;
+import uk.co.nickthecoder.itchy.extras.SceneTransition;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
 import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
@@ -48,30 +49,32 @@ public class Thrust extends Game
 
     private String previousSceneName;
 
-    public Thrust() throws Exception
+    public Thrust(Resources resources) throws Exception
     {
-        super("Thrust", 800, 600);
-
-        this.resources.load(RESOURCES);
+        super(resources);
 
         this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
+    }
 
-        Rect screenSize = new Rect(0, 0, this.getWidth(), this.getHeight());
+    @Override
+    public void createLayers()
+    {
+        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
 
-        this.backgroundLayer = new ScrollableLayer("background", screenSize, BACKGROUND);
+        this.backgroundLayer = new ScrollableLayer("background", screenRect, BACKGROUND);
         this.layers.add(this.backgroundLayer);
 
-        this.mainLayer = new ScrollableLayer("main", screenSize, null);
+        this.mainLayer = new ScrollableLayer("main", screenRect, null);
         this.layers.add(this.mainLayer);
 
-        this.foregroundLayer = new ScrollableLayer("foreground", screenSize, null);
+        this.foregroundLayer = new ScrollableLayer("foreground", screenRect, null);
         this.layers.add(this.foregroundLayer);
 
-        this.escapeRouteLayer = new ScrollableLayer("escapeRoute", screenSize, null);
+        this.escapeRouteLayer = new ScrollableLayer("escapeRoute", screenRect, null);
         this.layers.add(this.escapeRouteLayer);
-        // this.escapeRouteLayer.setVisible(false);
+        this.escapeRouteLayer.setVisible(false);
 
-        this.glassLayer = new ScrollableLayer("glass", screenSize);
+        this.glassLayer = new ScrollableLayer("glass", screenRect);
         this.glassLayer.locked = true;
         this.layers.add(this.glassLayer);
 
@@ -80,8 +83,10 @@ public class Thrust extends Game
     @Override
     public void onActivate()
     {
-        this.mainLayer.disableMouseListener();
-        this.mainLayer.enableMouseListener();
+        super.onActivate();
+
+        this.mainLayer.disableMouseListener(this);
+        this.mainLayer.enableMouseListener(this);
     }
 
     public ActorCollisionStrategy createCollisionStrategy( Actor actor )
@@ -139,7 +144,7 @@ public class Thrust extends Game
     {
         System.out.println("\nStarting Scene " + sceneName + "\n");
 
-        new FilmTransition().transition(sceneName);
+        new SceneTransition().transition(sceneName);
     }
 
     @Override
@@ -175,7 +180,10 @@ public class Thrust extends Game
         System.out.println("Welcome to Thrust");
 
         try {
-            Thrust.game = new Thrust();
+            Resources resources = new Resources();
+            resources.load(RESOURCES);
+
+            Thrust.game = new Thrust(resources);
 
             if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
                 Thrust.game.startEditor();
@@ -187,12 +195,6 @@ public class Thrust extends Game
             e.printStackTrace();
         }
         System.out.println("Goodbye from Thrust");
-    }
-
-    @Override
-    public String getInitialSceneName()
-    {
-        return "menu";
     }
 
 }
