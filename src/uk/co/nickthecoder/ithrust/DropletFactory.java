@@ -5,12 +5,12 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
 
-public class DropletFactory extends Behaviour
+public class DropletFactory extends AbstractRole
 {
     @Property(label = "Minimum Period (s)")
     public double minimumPeriod = 1;
@@ -43,10 +43,9 @@ public class DropletFactory extends Behaviour
     {
         Droplet droplet = new Droplet(getActor());
         Actor actor = droplet.createActor();
-        
+
         droplet.gravity = Thrust.gravity;
-        actor.setBehaviour(droplet);
+        actor.setRole(droplet);
         actor.moveTo(getActor());
-        actor.activate();
     }
 }

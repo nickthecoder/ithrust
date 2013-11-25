@@ -7,14 +7,14 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class FuelFactory extends BallFactory
 {
     @Property(label = "Fuel")
     public int fuel = 1;
 
-    public Ball createBehaviour()
+    public Ball createRole()
     {
         Ball ball = new Ball();
         ball.fuel = this.fuel;    

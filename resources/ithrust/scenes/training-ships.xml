@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="">
+<scene showMouse="true" role="">
   <layer name="background">
     <actor costume="soft" x="0" y="-81" direction="0.0" startEvent="default"/>
     <actor costume="stone1c" x="-111" y="11" direction="0.0" startEvent="default"/>
@@ -68,45 +68,45 @@
     <text text="Training" font="boycott" size="22" color="#ffffff" x="349" y="365" direction="0.0" startEvent="default"/>
   </layer>
   <layer name="main">
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="-24" y="-19" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="23" y="-19" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="69" y="-22" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="117" y="-23" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="165" y="-22" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="217" y="-21" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="269" y="-23" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="326" y="-19" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="-22" y="-195" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="27" y="-195" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="77" y="-194" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="125" y="-195" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="178" y="-196" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="233" y="-192" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="286" y="-195" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="342" y="-194" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="14" y="-577" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="67" y="-580" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="122" y="-582" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="175" y="-580" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="228" y="-579" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="278" y="-582" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="336" y="-581" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="321" y="-388" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="13" y="-392" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="224" y="-390" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="168" y="-391" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="113" y="-391" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="64" y="-391" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="273" y="-388" direction="90.0" startEvent="default"/>
-    <actor costume="ship1" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="-42" y="-391" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="361" y="-749" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="310" y="-749" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="256" y="-747" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="201" y="-748" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="138" y="-749" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="79" y="-746" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="20" y="-746" direction="90.0" startEvent="default"/>
-    <actor costume="ship2" behaviour="uk.co.nickthecoder.itchy.NullBehaviour" x="-29" y="-746" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="-24" y="-19" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="23" y="-19" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="69" y="-22" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="117" y="-23" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="165" y="-22" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="217" y="-21" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="269" y="-23" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="326" y="-19" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="-22" y="-195" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="27" y="-195" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="77" y="-194" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="125" y="-195" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="178" y="-196" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="233" y="-192" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="286" y="-195" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="342" y="-194" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="14" y="-577" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="67" y="-580" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="122" y="-582" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="175" y="-580" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="228" y="-579" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="278" y="-582" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="336" y="-581" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="321" y="-388" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="13" y="-392" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="224" y="-390" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="168" y="-391" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="113" y="-391" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="64" y="-391" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="273" y="-388" direction="90.0" startEvent="default"/>
+    <actor costume="ship1" role="uk.co.nickthecoder.itchy.role.NullRole" x="-42" y="-391" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="361" y="-749" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="310" y="-749" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="256" y="-747" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="201" y="-748" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="138" y="-749" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="79" y="-746" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="20" y="-746" direction="90.0" startEvent="default"/>
+    <actor costume="ship2" role="uk.co.nickthecoder.itchy.role.NullRole" x="-29" y="-746" direction="90.0" startEvent="default"/>
     <actor costume="ship1" x="360" y="439" direction="90.0" startEvent="default"/>
   </layer>
   <layer name="escapeRoute">

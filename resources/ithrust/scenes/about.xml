@@ -1,15 +1,16 @@
-<scene showMouse="true" behaviour="uk.co.nickthecoder.ithrust.Menu">
+<scene showMouse="true" role="uk.co.nickthecoder.ithrust.Menu" background="#000000ff">
+  <properties/>
   <layer name="background">
-    <actor costume="background" x="0" y="600" direction="0.0" startEvent="default"/>
+    <actor costume="background" x="0" y="600" direction="0.0" heading="0.0" startEvent="default" zOrder="1"/>
   </layer>
   <layer name="main">
-    <text text="Written by Nick Robinson" font="boycott" size="22" color="#ffffff" x="409" y="350" direction="0.0" startEvent="default"/>
-    <text text="Version 0.1" font="boycott" size="22" color="#ffffff" x="412" y="390" direction="0.0" startEvent="default"/>
-    <text text="Back" font="boycott" size="38" color="#ffffff" behaviour="uk.co.nickthecoder.itchy.extras.MessageButton" x="731" y="41" direction="0.0" startEvent="default">
-      <property name="message" value="menu"/>
+    <text text="Written by Nick Robinson" font="boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="409" y="350" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
+    <text text="Version 0.1" font="boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="412" y="390" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
+    <text text="Back" font="boycott" size="38" color="#ffffff" xAlignment="0.5" yAlignment="0.5" role="uk.co.nickthecoder.itchy.role.SceneButton" x="731" y="41" direction="0.0" heading="0.0" startEvent="default" zOrder="4">
+      <property name="sceneName" value="menu"/>
     </text>
-    <text text="THRUST" font="boycott" size="156" color="#222222" x="416" y="493" direction="0.0" startEvent="default"/>
-    <text text="thrust" font="boycott" size="150" color="#cc2222" x="416" y="491" direction="0.0" startEvent="default"/>
-    <text text="©2012" font="veraBold" size="31" color="#000000" x="732" y="576" direction="0.0" startEvent="default"/>
+    <text text="THRUST" font="boycott" size="156" color="#222222" xAlignment="0.5" yAlignment="0.5" x="416" y="493" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <text text="thrust" font="boycott" size="150" color="#cc2222" xAlignment="0.5" yAlignment="0.5" x="416" y="491" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
+    <text text="©2012" font="veraBold" size="31" color="#000000" xAlignment="0.5" yAlignment="0.5" x="732" y="576" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
   </layer>
 </scene>

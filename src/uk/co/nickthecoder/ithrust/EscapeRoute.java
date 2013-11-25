@@ -9,16 +9,17 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Appearance;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.util.Tag;
 
-@Tag(names={EscapeRoute.POSSIBLE_ROUTE})
-public class EscapeRoute extends Behaviour
+@Tag(names = { EscapeRoute.POSSIBLE_ROUTE })
+public class EscapeRoute extends AbstractRole
 {
     public static final String POSSIBLE_ROUTE = "possibleRoute";
-    
+
     public static final String ESCAPE_ROUTE = "escapeRoute";
 
     public List<EscapeRoute> feeds;
@@ -28,20 +29,14 @@ public class EscapeRoute extends Behaviour
     public boolean used;
 
     @Override
-    public void onAttach()
+    public void onBirth()
     {
         this.feeds = new ArrayList<EscapeRoute>();
     }
 
     @Override
-    public void onActivate()
-    {
-    }
-
-    @Override
     public void tick()
     {
-        getActor().deactivate();
     }
 
     private boolean reversed = false;
@@ -54,7 +49,7 @@ public class EscapeRoute extends Behaviour
         this.reversed = true;
 
         Point2D.Double otherEnd = this.getOtherEnd();
-        this.getActor().moveTo(otherEnd.x, otherEnd.y);
+        getActor().moveTo(otherEnd.x, otherEnd.y);
         event("reverse");
 
     }
@@ -67,8 +62,8 @@ public class EscapeRoute extends Behaviour
         length -= appearance.getPose().getOffsetX() * 2;
         length *= appearance.getScale();
 
-        double x = this.getActor().getX() + Math.cos(appearance.getDirectionRadians()) * length;
-        double y = this.getActor().getY() + Math.sin(appearance.getDirectionRadians()) * length;
+        double x = getActor().getX() + Math.cos(appearance.getDirectionRadians()) * length;
+        double y = getActor().getY() + Math.sin(appearance.getDirectionRadians()) * length;
 
         return new Point2D.Double(x, y);
     }
@@ -81,10 +76,6 @@ public class EscapeRoute extends Behaviour
 
     protected void findRoutes( Gate gate, EscapeRoute previousEscapeRoute )
     {
-        // System.out.println("Find Routes " + this.getActor().getX() + "," + this.getActor().getY()
-        // +
-        // " dir=" + this.getActor().getAppearance().getDirection());
-
         if (this.used) {
             // System.out.println("Already linked back to that gate");
             return;
@@ -96,14 +87,16 @@ public class EscapeRoute extends Behaviour
 
         Point2D.Double otherEnd = getOtherEnd();
 
-        //System.out.println("Looking for other ER near " + otherEnd.x + "," + otherEnd.y);
-        for (Actor other : Actor.allByTag(POSSIBLE_ROUTE)) {
-            if (other != this.getActor()) {
+        // System.out.println("Looking for other ER near " + otherEnd.x + "," + otherEnd.y);
+        for (Role role : AbstractRole.allByTag(POSSIBLE_ROUTE)) {
+            Actor other = role.getActor();
+            
+            if (role != this) {
                 double distance = other.distanceTo(otherEnd.x, otherEnd.y);
                 if (distance < 50) {
-                    //System.out.println("Found " + other + otherEnd.x + "," + otherEnd.y +
-                    //    " distance " + distance);
-                    ((EscapeRoute) (other.getBehaviour())).findRoutes(gate, this);
+                    // System.out.println("Found " + other + otherEnd.x + "," + otherEnd.y +
+                    // " distance " + distance);
+                    ((EscapeRoute) role).findRoutes(gate, this);
                 }
             }
         }

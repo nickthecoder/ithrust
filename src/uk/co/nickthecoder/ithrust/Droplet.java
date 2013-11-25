@@ -6,8 +6,8 @@
 package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.extras.Explosion;
-import uk.co.nickthecoder.itchy.extras.Projectile;
+import uk.co.nickthecoder.itchy.role.Explosion;
+import uk.co.nickthecoder.itchy.role.Projectile;
 
 public class Droplet extends Projectile
 {
@@ -19,16 +19,10 @@ public class Droplet extends Projectile
     }
 
     @Override
-    public void onAttach()
+    public void onBirth()
     {
         super.onAttach();
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(getActor());
-
-    }
-
-    @Override
-    public void onActivate()
-    {
+        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
         this.oy = getActor().getY();
     }
 
@@ -37,19 +31,18 @@ public class Droplet extends Projectile
     {
         super.tick();
 
-        this.collisionStrategy.update();
+        getActor().getCollisionStrategy().update();
 
         if (this.oy - getActor().getY() > 20) {
-            if (!pixelOverlap("solid", "liquid").isEmpty()) {
+            if (!getActor().pixelOverlap("solid", "liquid").isEmpty()) {
 
-                new Explosion(this.getActor())
+                new Explosion(getActor())
                     .projectiles(10)
                     .gravity(Thrust.gravity)
-                    .forwards()
                     .fade(0.9, 1.5)
                     .speed(0.1, 1.5).vx(this.vx).vy(-this.vy / 4)
-                    .createActor("fragments")
-                    .activate();
+                    .pose("fragments")
+                    .createActor();
 
                 deathEvent("death");
                 return;

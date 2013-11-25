@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="">
+<scene showMouse="true" role="">
   <layer name="background">
     <actor costume="stone1c" x="233" y="114" direction="0.0" startEvent="default"/>
     <text text="Start" font="boycott" size="22" color="#ffffff" x="283" y="350" direction="0.0" startEvent="default"/>

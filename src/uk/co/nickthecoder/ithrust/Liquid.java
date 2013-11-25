@@ -5,25 +5,24 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
 
-public class Liquid extends Behaviour
+public class Liquid extends AbstractRole
 {
 
     @Override
-    public void onAttach()
+    public void onBirth()
     {
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
-        getActor().addTag("liquid");
-        
-        if ( getActor().getCostume().getString("water") != null ) {
-            getActor().addTag("water");
+        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
+        addTag("liquid");
+
+        if (getActor().getCostume().getString("water") != null) {
+            addTag("water");
         }
     }
 
     @Override
     public void tick()
     {
-        getActor().deactivate();
     }
 }

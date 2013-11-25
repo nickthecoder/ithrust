@@ -5,7 +5,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.extras.Explosion;
+import uk.co.nickthecoder.itchy.role.Explosion;
 
 /**
  * A container, which can pick up liquids
@@ -19,33 +19,30 @@ public class Bucket extends Ball
     {
         if (this.empty) {
 
-            if (pixelOverlap("water").size() > 0) {
+            if (getActor().pixelOverlap("water").size() > 0) {
                 BucketProperties properties = (BucketProperties) getActor().getCostume().getProperties();
-                System.out.println("Filling bucket with water");
                 event("fillWithWater");
                 this.weight += properties.waterWeight;
                 this.water += properties.volume;
-                empty = false;
+                this.empty = false;
             }
         }
 
         super.tick();
     }
-    
+
     @Override
     public void hit()
     {
-        
-        if ( ! empty ) {
-            new Explosion(this.getActor())
-            .projectiles(30)
-            .gravity(Thrust.gravity)
-            .forwards()
-            .fade(0.9, 1.5)
-            .speed(0.1, 1.5).vx(this.speedX).vy(this.speedY)
-            .createActor("contents")
-            .activate();
 
+        if (!this.empty) {
+            new Explosion(getActor())
+                .projectiles(30)
+                .gravity(Thrust.gravity)
+                .fade(0.9, 1.5)
+                .speed(0.1, 1.5).vx(this.speedX).vy(this.speedY)
+                .pose("contents")
+                .createActor();
         }
 
         super.hit();

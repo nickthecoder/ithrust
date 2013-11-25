@@ -6,8 +6,8 @@
 package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.extras.Projectile;
+import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.role.Projectile;
 
 public class Bullet extends Projectile implements Fragile
 {
@@ -25,26 +25,25 @@ public class Bullet extends Projectile implements Fragile
     @Override
     public void onAttach()
     {
-        getActor().addTag("fragile");
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(getActor());
+        addTag("fragile");
+        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
     }
 
     @Override
     public void tick()
     {
         super.tick();
-        this.collisionStrategy.update();
+        getActor().getCollisionStrategy().update();
 
-        for (Actor hit : pixelOverlap(TARGET_TAGS, EXCLUDE_TAGS)) {
-            Behaviour behaviour = hit.getBehaviour();
+        for (Role role: getActor().pixelOverlap(TARGET_TAGS, EXCLUDE_TAGS)) {
 
-            if (behaviour instanceof Fragile) {
-                ((Fragile) behaviour).hit();
+            if (role instanceof Fragile) {
+                ((Fragile) role).hit();
             }
             this.hit();
         }
 
-        if (!pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+        if (!getActor().pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
             this.hit();
         }
     }

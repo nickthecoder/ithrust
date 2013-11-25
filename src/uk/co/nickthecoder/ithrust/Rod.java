@@ -5,13 +5,13 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Pose;
 import uk.co.nickthecoder.jame.event.Keys;
 
-public class Rod extends Behaviour
+public class Rod extends AbstractRole
 {
 
     public static final String[] SOLID_TAGS = new String[] { "solid" };
@@ -41,37 +41,37 @@ public class Rod extends Behaviour
         this.poseWidth = pose.getSurface().getWidth();
         rodActor.getAppearance().setScale(0.1);
         rodActor.moveTo(ship.getActor());
-        rodActor.setBehaviour(this);
-        ball.getActor().getLayer().addBottom(rodActor);
-        rodActor.activate();
+        rodActor.setRole(this);
+        rodActor.setZOrder(0);
+        ball.getActor().getStage().add(rodActor);
     }
 
     @Override
-    public void onAttach()
+    public void onBirth()
     {
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
+        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(this.getActor()));
     }
 
     @Override
     public void tick()
     {
-        this.getActor().moveTo(this.ship.getActor());
-        this.getActor().getAppearance().setDirection(this.ball.getActor());
+        getActor().moveTo(this.ship.getActor());
+        getActor().setDirection( this.ship.getActor().directionOf(this.ball.getActor()));
 
         double shipBallDistance = this.ship.getActor().distanceTo(this.ball.getActor());
 
         if (!this.extended) {
 
             if (Itchy.isKeyDown(Keys.a)) {
-                this.getActor().getAppearance().adjustScale(0.01);
+                getActor().getAppearance().adjustScale(0.01);
                 // Has the rod extended far enough to reach the ball?
-                if (this.getActor().getAppearance().getScale() * this.poseWidth >= shipBallDistance) {
+                if (getActor().getAppearance().getScale() * this.poseWidth >= shipBallDistance) {
                     this.extended = true;
                     this.ball.event("touched");
                 }
             } else {
-                this.getActor().getAppearance().adjustScale(-0.02);
-                if (this.getActor().getAppearance().getScale() <= 0) {
+                getActor().getAppearance().adjustScale(-0.02);
+                if (getActor().getAppearance().getScale() <= 0) {
                     this.disconnect();
                     return;
                 }
@@ -85,27 +85,27 @@ public class Rod extends Behaviour
 
         } else {
 
-            this.getActor().getAppearance().setScale(shipBallDistance / this.poseWidth);
-            
+            getActor().getAppearance().setScale(shipBallDistance / this.poseWidth);
+
             if (!this.connected) {
 
-                if (this.getActor().distanceTo(this.ball.getActor()) >= this.ship.pickupDistance) {
+                if (getActor().distanceTo(this.ball.getActor()) >= this.ship.pickupDistance) {
                     this.ball.connected(this);
                     this.connected = true;
                 }
 
             } else {
 
-                this.collisionStrategy.update();
-                if (!pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+                getActor().getCollisionStrategy().update();
+                if (!getActor().pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
                     this.disconnect();
                     return;
                 }
 
-                double dist = this.getActor().distanceTo(this.ball.getActor());
+                double dist = getActor().distanceTo(this.ball.getActor());
                 double dd = dist - this.ship.pickupDistance;
 
-                double angle = this.getActor().getAppearance().getDirectionRadians();
+                double angle = getActor().getAppearance().getDirectionRadians();
                 double cos = Math.cos(angle);
                 double sin = Math.sin(angle);
 
@@ -132,7 +132,7 @@ public class Rod extends Behaviour
     {
         this.ball.disconnected();
         this.ship.disconnected();
-        this.getActor().kill();
+        getActor().kill();
     }
 
 }

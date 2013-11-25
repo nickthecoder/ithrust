@@ -10,7 +10,7 @@ package uk.co.nickthecoder.ithrust;
 public class BucketFactory extends BallFactory
 {
 
-    public Ball createBehaviour()
+    public Ball createRole()
     {
         Bucket bucket = new Bucket();
         return bucket;

@@ -5,15 +5,15 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.NullSceneBehaviour;
+import uk.co.nickthecoder.itchy.PlainSceneDirector;
 
-public class Menu extends NullSceneBehaviour
+public class Menu extends PlainSceneDirector
 {
     @Override
     public void onMessage( String message )
     {
         if ("menu".equals(message)) {
-            Thrust.game.startScene("menu");
+            Thrust.director.startScene("menu");
         }
         super.onMessage(message);
     }

@@ -5,15 +5,16 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.AnimationListener;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
 
-public abstract class BallFactory extends Behaviour
+public abstract class BallFactory extends AbstractRole
 {
     @Property(label = "Quantitfy")
     public int quantity = -1;
@@ -22,23 +23,22 @@ public abstract class BallFactory extends Behaviour
     public int delay = 2;
 
     private Timer newBallTimer;
-    
 
     @Override
-    public void onActivate()
+    public void onBirth()
     {
-        getActor().addTag("solid");
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(getActor());
+        addTag("solid");
+        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
         createBall();
     }
 
     @Override
     public void tick()
     {
-        if (newBallTimer != null) {
-            if (newBallTimer.isFinished()) {
+        if (this.newBallTimer != null) {
+            if (this.newBallTimer.isFinished()) {
                 createBall();
-                newBallTimer = null;
+                this.newBallTimer = null;
             }
         }
     }
@@ -49,7 +49,7 @@ public abstract class BallFactory extends Behaviour
             this.quantity -= 1;
 
             String costumeName = getActor().getCostume().getString("ballCostume", "fuel");
-            Costume costume = Thrust.game.resources.getCostume(costumeName);
+            Costume costume = Thrust.director.getGame().resources.getCostume(costumeName);
             final Actor actor = new Actor(costume);
 
             Animation animation = getActor().getCostume().getAnimation("appear");
@@ -59,22 +59,23 @@ public abstract class BallFactory extends Behaviour
                 @Override
                 public void finished()
                 {
-                    Ball ball = createBehaviour();
+                    Ball ball = createRole();
                     ball.ballFactory = BallFactory.this;
 
-                    actor.setBehaviour(ball);
+                    actor.setRole(ball);
                 }
             });
+            actor.setRole(new PlainRole());
             actor.moveTo(getActor());
-            getActor().getLayer().addBelow(actor, getActor());
-            actor.activate();
+            actor.setZOrder(getActor().getZOrder()-1);
+            getActor().getStage().add(actor);
         }
     }
 
-    public abstract Ball createBehaviour();
+    public abstract Ball createRole();
 
     public void onTaken()
     {
-        newBallTimer = Timer.createTimerSeconds(this.delay);
+        this.newBallTimer = Timer.createTimerSeconds(this.delay);
     }
 }

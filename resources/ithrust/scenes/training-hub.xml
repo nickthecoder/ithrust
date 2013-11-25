@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="">
+<scene showMouse="true" role="">
   <layer name="background">
     <actor costume="stone1d" x="317" y="166" direction="0.0" startEvent="default"/>
     <actor costume="stone1b" x="609" y="131" direction="0.0" startEvent="default"/>

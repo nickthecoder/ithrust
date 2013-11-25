@@ -5,14 +5,15 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
-import uk.co.nickthecoder.itchy.extras.Explosion;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.ShadowText;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.role.Explosion;
 import uk.co.nickthecoder.jame.RGBA;
 
-public class Gate extends Behaviour
+public class Gate extends AbstractRole
 {
 
     @Property(label = "Required Fuel")
@@ -27,56 +28,57 @@ public class Gate extends Behaviour
     @Property(label = "Exit Direction")
     public double exitDirection = 90;
 
+    private boolean doRoutesBack = true;
+    
     @Override
-    public void onAttach()
+    public void onBirth()
     {
-        this.getActor().addTag("gate");
+        addTag("gate");
         updateState();
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
-    }
-
-    @Override
-    public void onActivate()
-    {
-        if (this.nextLevel.equals(Thrust.game.getPreviousScene())) {
-            Ship ship = Thrust.game.getPreviousSceneShip();
-            if (ship != null) {
-                findRoutesBack();
-
-                Actor actor = new Actor(ship.getActor().getCostume());
-                actor.setBehaviour(ship);
-                ship.startGate(this);
-            }
-        }
+        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
     }
 
     @Override
     public void tick()
     {
-        this.getActor().deactivate();
+        if (this.doRoutesBack) {
+            String previousSceneName = Thrust.director.getPreviousScene();
+            if (this.nextLevel.equals(previousSceneName)) {
+                findRoutesBack();
+                Ship ship = Thrust.director.getPreviousSceneShip();
+                if (ship != null) {
+                    Actor actor = new Actor(ship.getActor().getCostume());
+                    actor.setRole(ship);
+                    ship.startGate(this);
+                }
+            }
+            this.doRoutesBack = false;
+        }
     }
 
     public void findRoutesBack()
     {
-        for (Actor escapeRoute : Actor.allByTag(EscapeRoute.POSSIBLE_ROUTE)) {
-            double distance = escapeRoute.distanceTo(this.getActor());
+        for (Role role : AbstractRole.allByTag(EscapeRoute.POSSIBLE_ROUTE)) {
+            EscapeRoute escapeRoute = (EscapeRoute) role;
+            double distance = escapeRoute.getActor().distanceTo(getActor());
             if (distance < 150) {
-                ((EscapeRoute) (escapeRoute.getBehaviour())).addGate(this);
+                escapeRoute.addGate(this);
             }
         }
-        
-        for (Actor actor : Actor.allByTag(EscapeRoute.POSSIBLE_ROUTE)) {
-            EscapeRoute er = (EscapeRoute) actor.getBehaviour();
-            
+
+        for (Role role : AbstractRole.allByTag(EscapeRoute.POSSIBLE_ROUTE)) {
+            EscapeRoute er = (EscapeRoute) role;
+            Actor actor = er.getActor();
+
             if (er.hasWayBack()) {
                 er.reverse();
-                
-                actor.getAppearance().setColorize(new RGBA(0,200,0)); // Debug
-                actor.addTag(EscapeRoute.ESCAPE_ROUTE);
-      
+
+                actor.getAppearance().setColorize(new RGBA(0, 200, 0)); // Debug
+                er.addTag(EscapeRoute.ESCAPE_ROUTE);
+
             } else {
-                actor.getAppearance().setColorize(new RGBA(200,0,0)); // Debug
-                
+                actor.getAppearance().setColorize(new RGBA(200, 0, 0)); // Debug
+
                 // Comment out the following line to debug unused escape routes.
                 // actor.kill();
             }
@@ -87,10 +89,10 @@ public class Gate extends Behaviour
     {
         if ((this.requiredFuel <= 0) && (this.requiredWater <= 0)) {
             this.event("on");
-            this.getActor().removeTag("solid");
+            removeTag("solid");
         } else {
-            this.getActor().addTag("solid");
-            if ( this.requiredFuel > 0 ) {
+            addTag("solid");
+            if (this.requiredFuel > 0) {
                 this.event("off");
             } else {
                 this.event("standby");
@@ -113,9 +115,9 @@ public class Gate extends Behaviour
 
         } else {
             this.event("collected");
-            if ( this.requiredFuel > 0 ) {
+            if (this.requiredFuel > 0) {
                 text = "Needs Fuel";
-            } else if ( this.requiredWater > 0 ) {
+            } else if (this.requiredWater > 0) {
                 text = "Needs Water";
             } else {
                 text = "";
@@ -124,21 +126,16 @@ public class Gate extends Behaviour
 
         Actor message = new ShadowText()
             .text(text).fontSize(32).color(new RGBA(190, 190, 190))
-            .projectile(this.getActor()).fade(2)
+            .projectile(getActor()).fade(2)
             .createActor();
-
-        message.activate();
 
         new Explosion(message)
             .projectiles(15)
-            .below()
-            .forwards()
+            .adjustZOrder(-1)
             .spin(-.2, .2)
             .alpha(128).fade(1, 2)
             .speed(0.5, 2)
             .gravity(Thrust.gravity)
-            .createActor()
-            .activate();
-
+            .createActor();
     }
 }

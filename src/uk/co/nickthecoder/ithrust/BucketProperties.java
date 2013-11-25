@@ -7,7 +7,7 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
 
 public class BucketProperties extends BallProperties
 {

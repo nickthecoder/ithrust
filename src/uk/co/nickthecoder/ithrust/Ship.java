@@ -1,28 +1,27 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
 import java.awt.geom.Point2D;
 import java.util.Iterator;
 
+import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.ActorsLayer;
-import uk.co.nickthecoder.itchy.Behaviour;
 import uk.co.nickthecoder.itchy.Costume;
 import uk.co.nickthecoder.itchy.Itchy;
-import uk.co.nickthecoder.itchy.extras.Explosion;
-import uk.co.nickthecoder.itchy.extras.Follower;
+import uk.co.nickthecoder.itchy.Role;
+import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.itchy.extras.Fragment;
-import uk.co.nickthecoder.itchy.extras.Projectile;
 import uk.co.nickthecoder.itchy.extras.Timer;
+import uk.co.nickthecoder.itchy.role.Explosion;
+import uk.co.nickthecoder.itchy.role.Follower;
 import uk.co.nickthecoder.itchy.util.CubicSpline;
 import uk.co.nickthecoder.jame.Sound;
 import uk.co.nickthecoder.jame.event.Keys;
 
-public class Ship extends Behaviour implements Fragile
+public class Ship extends AbstractRole implements Fragile
 {
     private static final double DEAD_SLOW_DOWN = 0.99;
 
@@ -65,43 +64,48 @@ public class Ship extends Behaviour implements Fragile
     private Gate startGate;
 
     @Override
-    public void onAttach()
+    public void onBirth()
     {
-        this.getActor().addTag("fragile");
-        this.getActor().addTag("solid");
-        this.getActor().addTag("ship");
         this.updateCostumeData();
 
         this.fireTimer = Timer.createTimerSeconds(this.firePeriod);
 
         this.createFragments();
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(this.getActor());
-    }
 
-    @Override
-    public void onActivate()
-    {
-        this.pickupDistance = getActor().getCostume().getPose("rod").getSurface().getWidth();
-
-        Ship ship = Thrust.game.getPreviousSceneShip();
+        Ship ship = Thrust.director.getPreviousSceneShip();
         // If this is the first level, then use this ship and have it come out of the appropriate
         // gate if there is one.
         if (ship == null) {
-            Actor actor = getActor().nearest("gate");
-            if (actor != null) {
-                Gate gate = (Gate) (actor.getBehaviour());
-                gate.findRoutesBack();
+            Role role = getActor().nearest("gate");
+            if (role != null) {
+                Gate gate = (Gate) role;
+                // gate.findRoutesBack();
                 this.startGate(gate);
                 return;
             }
+            exited();
 
         } else {
             if (ship != this) {
-                // This isn't the first level, and so we can destroy this ship. It was added into the
-                // scene to allow running a single scene on its own, for debugging.
-                this.getActor().kill();
+                // This isn't the first level, and so we can destroy this ship. It was added into
+                // the scene to allow running a single scene on its own, for debugging.
+                getActor().kill();
             }
         }
+    }
+
+    /**
+     * Called after the ship has exited the gate at after the scene has just begun. May also be called from Ship.onBirth if there was no
+     * gate to come through, but this shouldn't happen during real game play.
+     */
+    public void exited()
+    {
+        addTag("fragile");
+        addTag("solid");
+        addTag("ship");
+        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
+        this.pickupDistance = getActor().getCostume().getPose("rod").getSurface().getWidth();
+
     }
 
     @Override
@@ -112,14 +116,13 @@ public class Ship extends Behaviour implements Fragile
     }
 
     /**
-     * Takes info from the costume, such as the thrust force, so that each type of ship handles
-     * differently.
+     * Takes info from the costume, such as the thrust force, so that each type of ship handles differently.
      */
     private void updateCostumeData()
     {
         Costume costume = getActor().getCostume();
         ShipProperties properties;
-        
+
         try {
             properties = (ShipProperties) costume.getProperties();
         } catch (Exception e) {
@@ -141,7 +144,7 @@ public class Ship extends Behaviour implements Fragile
      */
     void createFragments()
     {
-        new Fragment().actor(this.getActor()).createPoses("fragment");
+        new Fragment().actor(getActor()).createPoses("fragment");
     }
 
     private boolean cheating = false;
@@ -166,36 +169,36 @@ public class Ship extends Behaviour implements Fragile
             }
 
             if ((this.rod == null) && (Itchy.isKeyDown(Keys.a))) {
-                Actor ballActor = this.getActor().nearest("ball");
-                if ((ballActor != null) &&
-                    (ballActor.distanceTo(this.getActor()) < this.pickupDistance)) {
-                    this.rod = new Rod(this, (Ball) ballActor.getBehaviour());
+                Ball ball = (Ball) getActor().nearest("ball");
+                if ((ball != null) &&
+                    (ball.getActor().distanceTo(getActor()) < this.pickupDistance)) {
+                    this.rod = new Rod(this, ball);
                 }
             }
             if ((this.rod != null) && (Itchy.isKeyDown(Keys.z))) {
                 this.rod.disconnect();
             }
 
-            if (Itchy.isKeyDown(Keys.c) && Itchy.isKeyDown(Keys.h)&& Itchy.isKeyDown(Keys.e) ) {
+            if (Itchy.isKeyDown(Keys.c) && Itchy.isKeyDown(Keys.h) && Itchy.isKeyDown(Keys.e)) {
                 this.cheating = true;
             }
-            
+
             if ((Itchy.isKeyDown(Keys.SPACE)) && (this.fireTimer.isFinished())) {
                 this.fireTimer.reset();
                 fire();
             }
 
-            for (Actor actor : pixelOverlap("gate")) {
-                Gate gate = (Gate) actor.getBehaviour();
+            for (Role role : getActor().pixelOverlap("gate")) {
+                Gate gate = (Gate) role;
                 this.disconnect();
-                getActor().setBehaviour(new NextLevel(gate));
+                getActor().setRole(new NextLevel(gate));
                 return;
             }
         }
 
         this.speedY += Thrust.gravity;
-        this.getActor().moveBy(this.speedX, this.speedY);
-        this.collisionStrategy.update();
+        getActor().moveBy(this.speedX, this.speedY);
+        getActor().getCollisionStrategy().update();
 
         this.currentRotationSpeed *= this.rotationDamper;
         if (Itchy.isKeyDown(Keys.LEFT)) {
@@ -210,7 +213,7 @@ public class Ship extends Behaviour implements Fragile
         }
         turn(this.currentRotationSpeed);
 
-        if (!pixelOverlap("soft").isEmpty()) {
+        if (!getActor().pixelOverlap("soft").isEmpty()) {
             if (this.rod == null) {
                 double speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
                 double upright = Math.abs(getActor().getAppearance().getDirection() - 90) % 360.0;
@@ -234,15 +237,15 @@ public class Ship extends Behaviour implements Fragile
         }
 
         if (!this.switchingEnds) {
-            Thrust.game.centerOn(this.getActor());
+            Thrust.director.centerOn(getActor());
         }
 
-        if (!pixelOverlap("liquid").isEmpty()) {
+        if (!getActor().pixelOverlap("liquid").isEmpty()) {
             hit();
             return;
         }
 
-        if (!pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+        if (!getActor().pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
             if (!this.cheating) {
                 hit();
                 return;
@@ -273,11 +276,11 @@ public class Ship extends Behaviour implements Fragile
 
     private void fire()
     {
-        Bullet bullet = new Bullet(this.getActor());
-        Actor actor = bullet.poseName("bullet").createActor();
-        actor.moveForward(30);
+        Bullet bullet = new Bullet(getActor());
+        bullet.direction(getActor().getDirection());
+        Actor actor = bullet.pose("bullet").createActor();
+        actor.moveForwards(30);
         bullet.speed(6).gravity(Thrust.gravity);
-        actor.activate();
     }
 
     public void beginSwitchEnds()
@@ -290,18 +293,20 @@ public class Ship extends Behaviour implements Fragile
         Ball ball = this.rod.ball;
         Actor ballActor = ball.getActor();
 
-        this.wrapping = new Follower(this.getActor()).costume(ballActor.getCostume());
-        this.wrapping.createActor().activate();
+        this.wrapping = new Follower(getActor()).costume(ballActor.getCostume());
+        this.wrapping.createActor();
         this.wrapping.event("wrapping");
 
         this.unwrapping = new Follower(ballActor).costume(ballActor.getCostume());
-        this.unwrapping.createActor().activate();
+        this.unwrapping.createActor();
         this.unwrapping.deathEvent("unwrapping");
         ballActor.event("contents");
 
         Pod pod = new Pod(this, ball);
-        pod.createActor(this.getActor().getLayer(), "pod").activate();
-
+        Actor actor = new Actor(getActor().getCostume(), "pod");
+        actor.setRole(pod);
+        actor.setZOrder(getActor().getZOrder());
+        getActor().getStage().add(actor);
     }
 
     public void completeSwitchEnds()
@@ -322,20 +327,20 @@ public class Ship extends Behaviour implements Fragile
             // Change the costumes.
             // The ball changes to whatever the current ship looks like when wrapped.
             // The ship changes to whatever the ball looks like unwrapped.
-            String wrappedCostumeName = this.getActor().getCostume().getString("wrappedCostume");
+            String wrappedCostumeName = getActor().getCostume().getString("wrappedCostume");
             String unwrappedCostumeName = ballActor.getCostume().getString("unwrappedCostume");
 
-            this.getActor().setCostume(Itchy.getResources().getCostume(unwrappedCostumeName));
+            getActor().setCostume(Itchy.getResources().getCostume(unwrappedCostumeName));
             ballActor.setCostume(Itchy.getResources().getCostume(wrappedCostumeName));
-            this.getActor().event("default");
+            getActor().event("default");
             ballActor.event("default");
 
             // The new costumes may not have their fragments created yet...
             ball.createFragments();
             this.createFragments();
 
-            double tx = this.getActor().getX();
-            double ty = this.getActor().getY();
+            double tx = getActor().getX();
+            double ty = getActor().getY();
 
             // MORE switch vx,vy and other attributes.
             double tmp;
@@ -346,20 +351,20 @@ public class Ship extends Behaviour implements Fragile
             this.speedY = ball.speedY;
             ball.speedY = tmp;
 
-            this.getActor().moveTo(ballActor);
+            getActor().moveTo(ballActor);
             ballActor.moveTo(tx, ty);
 
         }
 
-        shipActor.getAppearance().setDirection(90);
+        shipActor.setDirection(90);
 
     }
 
     public void turn( double amount )
     {
-        this.getActor().getAppearance().adjustDirection(amount);
+        getActor().adjustDirection(amount);
 
-        Sound sound = this.getActor().getCostume().getSound("turn");
+        Sound sound = getActor().getCostume().getSound("turn");
         if (sound != null) {
             sound.playOnce();
         }
@@ -367,23 +372,19 @@ public class Ship extends Behaviour implements Fragile
 
     public void thrust()
     {
-        double direction = this.getActor().getAppearance().getDirectionRadians();
+        double direction = getActor().getAppearance().getDirectionRadians();
         double cos = Math.cos(direction);
         double sin = Math.sin(direction);
 
         this.speedX += this.thrust * cos;
         this.speedY += this.thrust * sin;
 
-        Actor puff = new Projectile(this.getActor())
-            .vx(this.speedX).vy(this.speedY)
-            .fade(3)
-            .speed(1)
-            .poseName("exhaust")
+        new Explosion(getActor())
+            .projectiles(4).follow().projectilesPerTick(1)
+            .spread(getActor().getHeading() + 160, getActor().getHeading() + 200).distance(40)
+            .randomSpread().speed(1, 2, 0, 0).fade(3).pose("exhaust")
             .createActor();
 
-        puff.getAppearance().adjustDirection(180);
-        puff.moveForward(30);
-        puff.activate();
     }
 
     @Override
@@ -396,56 +397,51 @@ public class Ship extends Behaviour implements Fragile
         if (this.startGate != null) {
             this.event("death");
             this.event("escapePod");
-            this.getActor().setBehaviour(new EscapePod());
+            getActor().setRole(new EscapePod());
         } else {
             this.deathEvent("death");
-            this.getActor().setBehaviour(new Dying());
+            getActor().setRole(new Dying());
         }
 
-        new Explosion(this.getActor())
+        new Explosion(getActor())
             .projectiles(30)
-            .forwards()
             .spin(-.2, .2)
             .fade(0.8, 1.6)
             .speed(0.5, 2).vx(this.speedX).vy(this.speedY)
             .gravity(Thrust.gravity)
-            .createActor("fragment")
-            .activate();
-
+            .pose("fragment")
+            .createActor();
     }
 
     /**
-     * This ship needs to appear from the gate specified. The animation is roughly the opposite of
-     * the ship entering a gate.
+     * This ship needs to appear from the gate specified. The animation is roughly the opposite of the ship entering a gate.
      * 
      * @param gate
      */
     public void startGate( Gate gate )
     {
-
         this.startGate = gate;
         double direction = gate.exitDirection;
 
-        this.getActor().getAppearance().setDirection(direction);
-        this.getActor().getAppearance().setScale(0.01);
-        this.getActor().getAppearance().setAlpha(0);
+        getActor().setDirection(direction);
+        getActor().getAppearance().setScale(0.01);
+        getActor().getAppearance().setAlpha(0);
 
-        this.getActor().moveTo(gate.getActor());
-        this.getActor().activate();
-        this.getActor().setBehaviour(new ExitingGate());
-        ActorsLayer layer = gate.getActor().getLayer();
-        layer.addTop(this.getActor());
-        this.getActor().event("default"); // Ensure its got the right pose
-        this.getActor().event("exitGate");
-
+        getActor().setRole(new ExitingGate());
+        getActor().moveTo(gate.getActor());
+        Stage stage = gate.getActor().getStage();
+        getActor().setZOrder(gate.getActor().getZOrder() + 1);
+        stage.add(getActor());
+        getActor().event("default"); // Ensure its got the right pose
+        getActor().event("exitGate");
     }
 
-    public class ExitingGate extends Behaviour
+    public class ExitingGate extends AbstractRole
     {
         @Override
         public void tick()
         {
-            Thrust.game.centerOn(this.getActor());
+            Thrust.director.centerOn(getActor());
         }
 
         @Override
@@ -454,31 +450,32 @@ public class Ship extends Behaviour implements Fragile
             if ("exitGate".equals(message)) {
                 Ship.this.speedX = 0;
                 Ship.this.speedY = 0;
-                this.getActor().setBehaviour(Ship.this);
+                getActor().setRole(Ship.this);
+                Ship.this.exited();
             }
         }
     }
 
-    public class Dying extends Behaviour
+    public class Dying extends AbstractRole
     {
 
         @Override
         public void tick()
         {
-            this.getActor().getAppearance().setAlpha(0);
+            getActor().getAppearance().setAlpha(0);
 
             // Gently brake the ship so that the scroll layer still scrolls, but not too far.
             Ship.this.speedX *= DEAD_SLOW_DOWN;
             Ship.this.speedY *= DEAD_SLOW_DOWN;
 
-            this.getActor().moveBy(Ship.this.speedX, Ship.this.speedY);
-            this.collisionStrategy.update();
+            getActor().moveBy(Ship.this.speedX, Ship.this.speedY);
+            getActor().getCollisionStrategy().update();
 
         }
 
     }
 
-    public class EscapePod extends Behaviour
+    public class EscapePod extends AbstractRole
     {
         public Actor target;
 
@@ -488,18 +485,18 @@ public class Ship extends Behaviour implements Fragile
         public void onAttach()
         {
             // Make any doors open slightly to allow the pod through.
-            for (Actor actor : Actor.allByTag("door")) {
-                actor.getBehaviour().onMessage("escapePod");
+            for (Role role : AbstractRole.allByTag("door")) {
+                role.onMessage("escapePod");
             }
 
             this.target = Ship.this.startGate.getActor();
 
-            Actor escapeRoute = getActor().nearest(EscapeRoute.ESCAPE_ROUTE);
+            EscapeRoute escapeRoute = (EscapeRoute) getActor().nearest(EscapeRoute.ESCAPE_ROUTE);
             if (escapeRoute != null) {
-                double erDist = escapeRoute.distance(getActor());
+                double erDist = escapeRoute.getActor().distance(getActor());
                 double gateDist = Ship.this.startGate.getActor().distance(getActor());
                 if (erDist < gateDist) {
-                    buildPath((EscapeRoute) escapeRoute.getBehaviour());
+                    buildPath(escapeRoute);
                 } else {
                     buildPath(null);
                 }
@@ -539,20 +536,20 @@ public class Ship extends Behaviour implements Fragile
                 getActor().moveTo(point.x, point.y);
 
             } else {
-                getActor().setBehaviour(Ship.this);
-                for (Actor actor : Actor.allByTag("door")) {
-                    actor.getBehaviour().onMessage("reset");
+                getActor().setRole(Ship.this);
+                for (Role role : AbstractRole.allByTag("door")) {
+                    role.onMessage("reset");
                 }
                 Ship.this.startGate(Ship.this.startGate);
             }
 
-            Thrust.game.centerOn(this.getActor());
+            Thrust.director.centerOn(getActor());
 
         }
 
     }
 
-    public class NextLevel extends Behaviour
+    public class NextLevel extends AbstractRole
     {
         public Gate gate;
 
@@ -572,8 +569,8 @@ public class Ship extends Behaviour implements Fragile
             Ship.this.speedY *= 0.98;
             getActor().moveBy(Ship.this.speedX, Ship.this.speedY);
             getActor().moveTowards(this.gate.getActor(), this.speed);
-            this.collisionStrategy.update();
-            this.getActor().getAppearance().adjustDirection(this.turnSpeed);
+            getActor().getCollisionStrategy().update();
+            getActor().getAppearance().adjustDirection(this.turnSpeed);
             this.turnSpeed *= 1.005;
             this.turnSpeed += 0.03;
 
@@ -591,7 +588,7 @@ public class Ship extends Behaviour implements Fragile
         public void onMessage( String message )
         {
             if ("exitGate".equals(message)) {
-                Thrust.game.nextScene(Ship.this, this.gate.nextLevel);
+                Thrust.director.nextScene(Ship.this, this.gate.nextLevel);
             }
         }
 

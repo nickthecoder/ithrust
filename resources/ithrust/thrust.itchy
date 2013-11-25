@@ -1,5 +1,5 @@
 <resources>
-  <game initialScene="menu" className="uk.co.nickthecoder.itchy.Launcher" width="800" height="600" title="Thrust" iconFilename="icon.bmp"/>
+  <game directorClassName="uk.co.nickthecoder.ithrust.Thrust" height="600" initialScene="menu" title="Thrust" width="800"/>
   <fonts>
     <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -72,225 +72,226 @@
   </sounds>
   <animations>
     <animation name="ballRebirth">
-      <compound sequence="true" loops="1">
-        <alpha target="0.0" ticks="1" ease="linear"/>
-        <scale target="0.0" ticks="1" ease="linear"/>
-        <compound sequence="false" loops="1">
-          <alpha target="255.0" ticks="20" ease="linear"/>
-          <scale target="1.0" ticks="100" ease="linear"/>
-        </compound>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <alpha ease="linear" target="0.0" ticks="1"/>
+        <scale ease="linear" target="0.0" ticks="1"/>
+        <parallel loops="1" sequence="false">
+          <alpha ease="linear" target="255.0" ticks="20"/>
+          <scale ease="linear" target="1.0" ticks="100"/>
+        </parallel>
+      </sequence>
     </animation>
     <animation name="exitGate">
-      <compound sequence="true" loops="1">
-        <compound sequence="false" loops="1">
-          <turn turn="3600.0" ticks="200" ease="easeOutCubic"/>
-          <alpha target="255.0" ticks="100" ease="linear"/>
-          <scale target="1.0" ticks="150" ease="easeInCirc"/>
-        </compound>
-        <forwards finishedMessage="exitGate" forwards="100.0" sidewards="0.0" ticks="50" ease="default"/>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <parallel loops="1" sequence="false">
+          <turn ease="easeOutCubic" headingToo="false" ticks="200" turn="3600.0"/>
+          <alpha ease="linear" target="255.0" ticks="100"/>
+          <scale ease="easeInCirc" target="1.0" ticks="150"/>
+        </parallel>
+        <forwards ease="default" finishedMessage="exitGate" forwards="100.0" sidewards="0.0" ticks="50"/>
+      </sequence>
     </animation>
     <animation name="hide">
-      <compound sequence="true" loops="1">
-        <alpha target="0.0" ticks="50" ease="linear"/>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <alpha ease="linear" target="0.0" ticks="50"/>
+      </sequence>
     </animation>
     <animation name="popup120">
-      <compound sequence="true" loops="1">
-        <move dx="0.0" dy="120.0" ticks="50" ease="easeOutBack"/>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <move ease="easeOutBack" ticks="50" dx="0.0" dy="120.0"/>
+      </sequence>
     </animation>
     <animation name="popup60">
-      <compound sequence="true" loops="1">
-        <move dx="0.0" dy="65.0" ticks="50" ease="easeOutBack"/>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <move ease="easeOutBack" ticks="50" dx="0.0" dy="65.0"/>
+      </sequence>
     </animation>
     <animation name="travelGate">
-      <compound sequence="false" loops="1">
-        <scale target="0.25" ticks="200" ease="linear"/>
-        <compound sequence="true" loops="1">
-          <alpha finishedMessage="collected" target="255.0" ticks="100" ease="linear"/>
-          <alpha finishedMessage="exitGate" target="0.0" ticks="100" ease="linear"/>
-        </compound>
-      </compound>
+      <parallel loops="1" sequence="false">
+        <scale ease="linear" target="0.25" ticks="200"/>
+        <turn ease="easeIn" headingToo="false" ticks="200" turn="3600.0"/>
+        <sequence loops="1" sequence="true">
+          <alpha ease="linear" finishedMessage="collected" target="255.0" ticks="100"/>
+          <alpha ease="linear" finishedMessage="exitGate" target="0.0" ticks="100"/>
+        </sequence>
+      </parallel>
     </animation>
     <animation name="unwrapping">
-      <compound sequence="true" loops="1">
-        <move dx="0.0" dy="0.0" ticks="30" ease="linear"/>
-        <alpha target="0.0" ticks="80" ease="linear"/>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <move ease="linear" ticks="30" dx="0.0" dy="0.0"/>
+        <alpha ease="linear" target="0.0" ticks="80"/>
+      </sequence>
     </animation>
     <animation name="wrapping">
-      <compound sequence="true" loops="1">
-        <alpha target="255.0" ticks="80" ease="linear"/>
-      </compound>
+      <sequence loops="1" sequence="true">
+        <alpha ease="linear" target="255.0" ticks="80"/>
+      </sequence>
     </animation>
   </animations>
   <costumes>
-    <costume name="background">
+    <costume name="background" defaultZOrder="0">
       <pose name="default" pose="background"/>
     </costume>
-    <costume name="ball" behaviour="uk.co.nickthecoder.ithrust.Ball">
-      <sound name="death" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="fillWithWater" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="taught" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="touched" sound="ding" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="touchedGate" sound="ballTouchedGate" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+    <costume name="ball" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Ball">
+      <sound name="death" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="fillWithWater" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="taught" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="touched" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="touchedGate" sound="ballTouchedGate" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <animation name="rebirth" animation="ballRebirth"/>
       <animation name="travelGate" animation="travelGate"/>
       <animation name="unwrapping" animation="unwrapping"/>
       <animation name="wrapping" animation="wrapping"/>
     </costume>
-    <costume name="bucket" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
+    <costume name="bucket" defaultZOrder="0" extends="ball" role="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
       <pose name="contents" pose="waterDroplet"/>
       <pose name="default" pose="bucket"/>
       <pose name="fillWithWater" pose="bucketOfWater"/>
-      <properties waterWeight="3.0" volume="1" weight="0.5" water="0" fuel="0"/>
+      <properties fuel="0" water="0" weight="0.5" volume="1" waterWeight="3.0"/>
     </costume>
-    <costume name="bucket2" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
+    <costume name="bucket2" defaultZOrder="0" extends="ball" role="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
       <pose name="contents" pose="waterDroplet"/>
       <pose name="default" pose="bucket2"/>
       <pose name="fillWithWater" pose="bucketOfWater2"/>
-      <properties waterWeight="6.0" volume="3" weight="1.0" water="0" fuel="0"/>
+      <properties fuel="0" water="0" weight="1.0" volume="3" waterWeight="6.0"/>
     </costume>
-    <costume name="bucketFactory" behaviour="uk.co.nickthecoder.ithrust.BucketFactory">
+    <costume name="bucketFactory" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.BucketFactory">
       <pose name="default" pose="bucketFactory"/>
       <string name="ballCostume">bucket</string>
       <animation name="appear" animation="popup120"/>
     </costume>
-    <costume name="button" behaviour="uk.co.nickthecoder.ithrust.Door">
+    <costume name="button" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="button"/>
       <string name="angle">90</string>
       <string name="slide">0</string>
       <string name="ticks">20</string>
     </costume>
-    <costume name="door1a" behaviour="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door1a" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door1a"/>
       <string name="slide">150</string>
     </costume>
-    <costume name="door1b" behaviour="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door1b" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door1b"/>
       <string name="slide">150</string>
     </costume>
-    <costume name="door2a" extends="door1a" behaviour="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door2a" defaultZOrder="0" extends="door1a" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door2a"/>
       <string name="slide">205</string>
     </costume>
-    <costume name="door2b" extends="door1b" behaviour="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door2b" defaultZOrder="0" extends="door1b" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door2b"/>
       <string name="slide">205</string>
     </costume>
-    <costume name="door3a" extends="door1a" behaviour="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door3a" defaultZOrder="0" extends="door1a" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door3a"/>
       <string name="slide">253</string>
     </costume>
-    <costume name="door3b" extends="door1b" behaviour="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door3b" defaultZOrder="0" extends="door1b" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door3b"/>
       <string name="slide">253</string>
     </costume>
-    <costume name="droplet" behaviour="uk.co.nickthecoder.ithrust.DropletFactory">
+    <costume name="droplet" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.DropletFactory">
       <pose name="default" pose="droplet"/>
       <pose name="fragments" pose="droplet-fragment"/>
-      <sound name="death" sound="drip" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="death" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
     </costume>
-    <costume name="escapeRoute" behaviour="uk.co.nickthecoder.ithrust.EscapeRoute">
+    <costume name="escapeRoute" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.EscapeRoute">
       <pose name="default" pose="escapeRoute"/>
       <pose name="reverse" pose="escapeRoute2"/>
     </costume>
-    <costume name="fuel" extends="ball" behaviour="uk.co.nickthecoder.ithrust.Ball" properties="uk.co.nickthecoder.ithrust.BallProperties">
+    <costume name="fuel" defaultZOrder="0" extends="ball" role="uk.co.nickthecoder.ithrust.Ball" properties="uk.co.nickthecoder.ithrust.BallProperties">
       <pose name="default" pose="fuel"/>
-      <properties weight="3.0" water="0" fuel="1"/>
+      <properties fuel="1" water="0" weight="3.0"/>
     </costume>
-    <costume name="fuelFactory" behaviour="uk.co.nickthecoder.ithrust.FuelFactory">
+    <costume name="fuelFactory" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.FuelFactory">
       <pose name="default" pose="fuelFactory"/>
       <animation name="appear" animation="popup60"/>
     </costume>
-    <costume name="gate" behaviour="uk.co.nickthecoder.ithrust.Gate">
+    <costume name="gate" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Gate">
       <pose name="default" pose="gate"/>
       <pose name="off" pose="gate"/>
       <pose name="on" pose="gate-green"/>
       <pose name="standby" pose="gate-amber"/>
-      <sound name="collected" sound="ballCollected" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="opening" sound="gateOpen" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="collected" sound="ballCollected" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="opening" sound="gateOpen" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
     </costume>
-    <costume name="keyA">
+    <costume name="keyA" defaultZOrder="0">
       <pose name="default" pose="keyA"/>
     </costume>
-    <costume name="keyEscape">
+    <costume name="keyEscape" defaultZOrder="0">
       <pose name="default" pose="keyEscape"/>
     </costume>
-    <costume name="keyLeft">
+    <costume name="keyLeft" defaultZOrder="0">
       <pose name="default" pose="keyLeft"/>
     </costume>
-    <costume name="keyRight">
+    <costume name="keyRight" defaultZOrder="0">
       <pose name="default" pose="keyRight"/>
     </costume>
-    <costume name="keySpace">
+    <costume name="keySpace" defaultZOrder="0">
       <pose name="default" pose="keySpace"/>
     </costume>
-    <costume name="keyUp">
+    <costume name="keyUp" defaultZOrder="0">
       <pose name="default" pose="keyUp"/>
     </costume>
-    <costume name="keyZ">
+    <costume name="keyZ" defaultZOrder="0">
       <pose name="default" pose="keyZ"/>
     </costume>
-    <costume name="keys">
+    <costume name="keys" defaultZOrder="0">
       <pose name="default" pose="keys"/>
     </costume>
-    <costume name="pod">
+    <costume name="pod" defaultZOrder="0">
       <pose name="default" pose="pod"/>
     </costume>
-    <costume name="ship" behaviour="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
+    <costume name="ship" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="bullet" pose="bullet1"/>
       <pose name="escapePod" pose="pod"/>
       <pose name="exhaust" pose="puff"/>
       <pose name="rod" pose="rod1"/>
-      <sound name="death" sound="explode" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="rotate" sound="rotate" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
-      <sound name="thrust" sound="thrust" priority="1" fadeOutSeconds="1.0" fadeOnDeath="false" multipleBehaviour="IGNORE_SECOND"/>
+      <sound name="death" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="rotate" sound="rotate" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+      <sound name="thrust" sound="thrust" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <animation name="escapePodAtGate" animation="hide"/>
       <animation name="exitGate" animation="exitGate"/>
       <animation name="travelGate" animation="travelGate"/>
-      <properties firePeriod="0.0" rotationSpeed="0.0" rotationDamper="0.2" weight="0.0" thrust="0.0" wrappedCostumeName="wrappedShip1" landingSpeed="2.0"/>
+      <properties firePeriod="0.0" landingSpeed="2.0" rotationDamper="0.2" rotationSpeed="0.0" thrust="0.0" weight="0.0" wrappedCostumeName="wrappedShip1"/>
     </costume>
-    <costume name="ship1" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
+    <costume name="ship1" defaultZOrder="0" extends="ship" role="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="default" pose="ship1"/>
-      <properties firePeriod="0.2" rotationSpeed="2.0" rotationDamper="0.2" weight="3.0" thrust="0.2" wrappedCostumeName="wrappedShip1" landingSpeed="2.0"/>
+      <properties firePeriod="0.2" landingSpeed="2.0" rotationDamper="0.2" rotationSpeed="2.0" thrust="0.2" weight="3.0" wrappedCostumeName="wrappedShip1"/>
     </costume>
-    <costume name="ship2" extends="ship" behaviour="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
+    <costume name="ship2" defaultZOrder="0" extends="ship" role="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="default" pose="ship2"/>
-      <properties firePeriod="0.2" rotationSpeed="0.3" rotationDamper="0.2" weight="0.1" thrust="2.0" wrappedCostumeName="wrappedShip2" landingSpeed="2.0"/>
+      <properties firePeriod="0.2" landingSpeed="2.0" rotationDamper="0.2" rotationSpeed="0.3" thrust="2.0" weight="0.1" wrappedCostumeName="wrappedShip2"/>
     </costume>
-    <costume name="soft" behaviour="uk.co.nickthecoder.ithrust.Soft">
+    <costume name="soft" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Soft">
       <pose name="default" pose="soft"/>
     </costume>
-    <costume name="stone1a" behaviour="uk.co.nickthecoder.ithrust.Solid">
+    <costume name="stone1a" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Solid">
       <pose name="default" pose="stone1a"/>
     </costume>
-    <costume name="stone1b" behaviour="uk.co.nickthecoder.ithrust.Solid">
+    <costume name="stone1b" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Solid">
       <pose name="default" pose="stone1b"/>
     </costume>
-    <costume name="stone1c" behaviour="uk.co.nickthecoder.ithrust.Solid">
+    <costume name="stone1c" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Solid">
       <pose name="default" pose="stone1c"/>
     </costume>
-    <costume name="stone1d" behaviour="uk.co.nickthecoder.ithrust.Solid">
+    <costume name="stone1d" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Solid">
       <pose name="default" pose="stone1d"/>
     </costume>
-    <costume name="tile1">
+    <costume name="tile1" defaultZOrder="0">
       <pose name="default" pose="tile1"/>
     </costume>
-    <costume name="water" behaviour="uk.co.nickthecoder.ithrust.Liquid">
+    <costume name="water" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Liquid">
       <pose name="default" pose="water"/>
       <string name="water">true</string>
     </costume>
-    <costume name="waterSurface" behaviour="uk.co.nickthecoder.ithrust.Liquid">
+    <costume name="waterSurface" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Liquid">
       <pose name="default" pose="waterSurface"/>
     </costume>
-    <costume name="wrappedShip" extends="ball" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
+    <costume name="wrappedShip" defaultZOrder="0" extends="ball" role="uk.co.nickthecoder.ithrust.BallWithShip">
       <pose name="shell" pose="water"/>
     </costume>
-    <costume name="wrappedShip1" extends="wrappedShip" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
+    <costume name="wrappedShip1" defaultZOrder="0" extends="wrappedShip" role="uk.co.nickthecoder.ithrust.BallWithShip">
       <pose name="contents" pose="ship1"/>
       <pose name="default" pose="wrappedShip1"/>
       <string name="rotationSpeed">2</string>
@@ -298,7 +299,7 @@
       <string name="thrust">0.2</string>
       <string name="unwrappedCostume">ship1</string>
     </costume>
-    <costume name="wrappedShip2" extends="wrappedShip" behaviour="uk.co.nickthecoder.ithrust.BallWithShip">
+    <costume name="wrappedShip2" defaultZOrder="0" extends="wrappedShip" role="uk.co.nickthecoder.ithrust.BallWithShip">
       <pose name="contents" pose="ship2"/>
       <pose name="default" pose="wrappedShip2"/>
       <string name="rotationSpeed">3</string>

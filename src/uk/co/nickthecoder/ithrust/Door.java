@@ -5,13 +5,13 @@
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
-import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.Behaviour;
+import uk.co.nickthecoder.itchy.AbstractRole;
+import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.extras.Timer;
-import uk.co.nickthecoder.itchy.util.Property;
+import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.util.StringUtils;
 
-public class Door extends Behaviour implements Fragile
+public class Door extends AbstractRole implements Fragile
 {
     @Property(label = "ID")
     public String id = "door1";
@@ -76,20 +76,16 @@ public class Door extends Behaviour implements Fragile
     @Override
     public void onAttach()
     {
-        getActor().addTag("door");
-        getActor().addTag("solid");
+        addTag("door");
+        addTag("solid");
         if (this.shootable) {
-            getActor().addTag("fragile");
+            addTag("fragile");
         }
-        this.collisionStrategy = Thrust.game.createCollisionStrategy(getActor());
-    }
+        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
 
-    @Override
-    public void onActivate()
-    {
         if (!StringUtils.isBlank(this.buddyId)) {
-            for (Actor actor : Actor.allByTag("door")) {
-                Door other = (Door) actor.getBehaviour();
+            for (Role role : AbstractRole.allByTag("door")) {
+                Door other = (Door) role;
                 if (this.buddyId.equals(other.id)) {
                     this.buddy = other;
                     break;
@@ -121,17 +117,17 @@ public class Door extends Behaviour implements Fragile
             // its
             // original position.
             if (this.direction == 1) {
-                getActor().moveForward(this.slide / this.ticks, this.lift / this.ticks);
+                getActor().moveForwards(this.slide / this.ticks, this.lift / this.ticks);
             }
             double angle = this.direction * (this.angle / this.ticks);
             getActor().getAppearance().adjustDirection(angle);
             if (this.direction == -1) {
-                getActor().moveForward(-this.slide / this.ticks, -this.lift / this.ticks);
+                getActor().moveForwards(-this.slide / this.ticks, -this.lift / this.ticks);
             }
 
             this.tickCount += this.direction;
 
-            this.collisionStrategy.update();
+            getActor().getCollisionStrategy().update();
         }
     }
 

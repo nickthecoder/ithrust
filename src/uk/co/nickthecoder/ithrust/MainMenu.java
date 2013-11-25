@@ -18,16 +18,16 @@ public class MainMenu extends Menu
     public void onMessage( String message )
     {
         if ("training".equals(message)) {
-            Thrust.game.training();
+            Thrust.director.training();
 
         } else if ("newGame".equals(message)) {
-            Thrust.game.newGame();
+            Thrust.director.newGame();
         
         } else if ("about".equals(message)) {
-            Thrust.game.startScene("about");
+            Thrust.director.startScene("about");
         
         } else if ("editor".equals(message)) {
-            Thrust.game.startEditor();
+            Thrust.director.getGame().startEditor();
         
         } else if ("quit".equals(message)) {
             Itchy.terminate();
@@ -39,11 +39,11 @@ public class MainMenu extends Menu
     public boolean onKeyDown( KeyboardEvent ke )
     {
         if (ke.symbol == Keys.F12){
-            Thrust.game.startEditor();
+            Thrust.director.getGame().startEditor();
             return true;
 
         } else if (ke.symbol == Keys.a) {
-            Thrust.game.startScene("about");
+            Thrust.director.startScene("about");
             return true;
             
         } else if (ke.symbol == Keys.ESCAPE) {

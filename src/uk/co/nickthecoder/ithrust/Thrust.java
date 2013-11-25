@@ -6,12 +6,18 @@
 package uk.co.nickthecoder.ithrust;
 
 import java.io.File;
+import java.util.List;
 
+import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
+import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
-import uk.co.nickthecoder.itchy.ScrollableLayer;
+import uk.co.nickthecoder.itchy.Stage;
+import uk.co.nickthecoder.itchy.StageView;
+import uk.co.nickthecoder.itchy.View;
+import uk.co.nickthecoder.itchy.ZOrderStage;
 import uk.co.nickthecoder.itchy.extras.SceneTransition;
 import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
 import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
@@ -21,25 +27,32 @@ import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
 import uk.co.nickthecoder.jame.event.Keys;
 
-public class Thrust extends Game
+public class Thrust extends AbstractDirector
 {
     public static final int NEIGHBOURHOOD_SQUARE_SIZE = 60;
 
     public static double gravity = -0.02;;
 
-    public static final File RESOURCES = new File("resources/ithrust/thrust.xml");
+    public static final File RESOURCES = new File("resources/ithrust/thrust.itchy");
 
-    public static Thrust game;
+    public static Thrust director;
 
-    public ScrollableLayer backgroundLayer;
+    public ZOrderStage backgroundStage;
 
-    public ScrollableLayer foregroundLayer;
+    public ZOrderStage foregroundStage;
 
-    public ScrollableLayer mainLayer;
+    public ZOrderStage escapeRouteStage;
 
-    public ScrollableLayer escapeRouteLayer;
+    // TODO Can we use Game's glass stage?
+    public ZOrderStage glassStage;
 
-    public ScrollableLayer glassLayer;
+    public StageView backgroundView;
+
+    public StageView foregroundView;
+
+    public StageView escapeRouteView;
+
+    public StageView glassView;
 
     private Neighbourhood neighbourhood;
 
@@ -49,44 +62,49 @@ public class Thrust extends Game
 
     private String previousSceneName;
 
-    public Thrust(Resources resources) throws Exception
-    {
-        super(resources);
-
-        this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
-    }
-
     @Override
-    public void createLayers()
+    public void onStarted()
     {
-        Rect screenRect = new Rect(0, 0, getWidth(), getHeight());
+        this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
 
-        this.backgroundLayer = new ScrollableLayer("background", screenRect, BACKGROUND);
-        this.layers.add(this.backgroundLayer);
+        Rect screenRect = new Rect(0, 0, this.game.getWidth(), this.game.getHeight());
 
-        this.mainLayer = new ScrollableLayer("main", screenRect, null);
-        this.layers.add(this.mainLayer);
+        this.backgroundStage = new ZOrderStage("background");
+        this.foregroundStage = new ZOrderStage("foreground");
+        this.glassStage = new ZOrderStage("glass");
+        this.escapeRouteStage = new ZOrderStage("escapeRoute");
 
-        this.foregroundLayer = new ScrollableLayer("foreground", screenRect, null);
-        this.layers.add(this.foregroundLayer);
+        this.backgroundView = new StageView(screenRect, this.backgroundStage);
+        this.foregroundView = new StageView(screenRect, this.foregroundStage);
+        this.glassView = new StageView(screenRect, this.glassStage);
+        this.escapeRouteView = new StageView(screenRect, this.escapeRouteStage);
 
-        this.escapeRouteLayer = new ScrollableLayer("escapeRoute", screenRect, null);
-        this.layers.add(this.escapeRouteLayer);
-        this.escapeRouteLayer.setVisible(false);
+        GenericCompoundView<View> views = this.game.getViews();
+        views.add(this.backgroundView);
+        List<Stage> stages = this.game.getStages();
 
-        this.glassLayer = new ScrollableLayer("glass", screenRect);
-        this.glassLayer.locked = true;
-        this.layers.add(this.glassLayer);
+        stages.add(this.backgroundStage);
 
+        this.mainStage = new ZOrderStage("main");
+        this.mainView = new StageView(screenRect, this.mainStage);
+        stages.add(this.mainStage);
+        views.add(this.mainView);
+
+        this.mainView.enableMouseListener(this.game);
+        views.add(this.foregroundView);
+        views.add(this.escapeRouteView);
+        views.add(this.glassView);
+
+        stages.add(this.foregroundStage);
+        stages.add(this.glassStage);
+        stages.add(this.escapeRouteStage);
     }
 
     @Override
     public void onActivate()
     {
+        director = this;
         super.onActivate();
-
-        this.mainLayer.disableMouseListener(this);
-        this.mainLayer.enableMouseListener(this);
     }
 
     public ActorCollisionStrategy createCollisionStrategy( Actor actor )
@@ -96,10 +114,10 @@ public class Thrust extends Game
 
     public void centerOn( Actor actor )
     {
-        this.mainLayer.ceterOn(actor);
-        this.backgroundLayer.ceterOn(actor);
-        this.foregroundLayer.ceterOn(actor);
-        this.escapeRouteLayer.ceterOn(actor);
+        this.backgroundView.ceterOn(actor);
+        this.mainView.ceterOn(actor);
+        this.foregroundView.ceterOn(actor);
+        this.escapeRouteView.ceterOn(actor);
     }
 
     public void training()
@@ -114,13 +132,14 @@ public class Thrust extends Game
         startScene("start");
     }
 
-    @Override
-    public void testScene( String sceneName )
-    {
-        this.previousLevelShip = null;
-        this.previousSceneName = null;
-        super.testScene(sceneName);
-    }
+    // TODO Put this back
+//    @Override
+//    public void testScene( String sceneName )
+//    {
+//        this.previousLevelShip = null;
+//        this.previousSceneName = null;
+//        super.testScene(sceneName);
+//    }
 
     public String getPreviousScene()
     {
@@ -129,7 +148,6 @@ public class Thrust extends Game
 
     public void nextScene( Ship ship, String sceneName )
     {
-        this.previousSceneName = getSceneName();
         this.previousLevelShip = ship;
         startScene(sceneName);
     }
@@ -140,11 +158,10 @@ public class Thrust extends Game
     }
 
     @Override
-    public void startScene( final String sceneName )
+    public boolean startScene( final String sceneName )
     {
-        System.out.println("\nStarting Scene " + sceneName + "\n");
-
-        new SceneTransition().transition(sceneName);
+        this.previousSceneName = this.game.getSceneName();
+        return new SceneTransition().transition(sceneName);
     }
 
     @Override
@@ -183,12 +200,12 @@ public class Thrust extends Game
             Resources resources = new Resources();
             resources.load(RESOURCES);
 
-            Thrust.game = new Thrust(resources);
+            Game game = resources.getGame();
 
             if ((argv.length == 1) && ("--editor".equals(argv[0]))) {
-                Thrust.game.startEditor();
+                game.startEditor();
             } else {
-                Thrust.game.start();
+                game.start();
             }
 
         } catch (Exception e) {

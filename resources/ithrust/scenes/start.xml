@@ -1,4 +1,4 @@
-<scene showMouse="true" behaviour="">
+<scene showMouse="true" role="">
   <layer name="background">
     <actor costume="fuelFactory" x="808" y="742" direction="0.0" startEvent="default">
       <property name="fuel" value="1"/>
