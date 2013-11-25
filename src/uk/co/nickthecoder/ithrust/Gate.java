@@ -1,16 +1,16 @@
 /*******************************************************************************
- * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0 which accompanies this
- * distribution, and is available at http://www.gnu.org/licenses/gpl.html
+ * Copyright (c) 2013 Nick Robinson All rights reserved. This program and the accompanying materials are made available under the terms of
+ * the GNU Public License v3.0 which accompanies this distribution, and is available at http://www.gnu.org/licenses/gpl.html
  ******************************************************************************/
 package uk.co.nickthecoder.ithrust;
 
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Role;
-import uk.co.nickthecoder.itchy.extras.ShadowText;
+import uk.co.nickthecoder.itchy.makeup.Shadow;
 import uk.co.nickthecoder.itchy.property.Property;
 import uk.co.nickthecoder.itchy.role.Explosion;
+import uk.co.nickthecoder.itchy.role.Projectile;
 import uk.co.nickthecoder.jame.RGBA;
 
 public class Gate extends AbstractRole
@@ -29,7 +29,7 @@ public class Gate extends AbstractRole
     public double exitDirection = 90;
 
     private boolean doRoutesBack = true;
-    
+
     @Override
     public void onBirth()
     {
@@ -124,12 +124,15 @@ public class Gate extends AbstractRole
             }
         }
 
-        Actor message = new ShadowText()
-            .text(text).fontSize(32).color(new RGBA(190, 190, 190))
-            .projectile(getActor()).fade(2)
+        Actor message = new Projectile(getActor())
+            .companion("message").text(text).fontSize(32).color(new RGBA(190, 190, 190)).fade(2)
             .createActor();
 
+        message.getAppearance().setMakeup( new Shadow().offset(2, 2).color(RGBA.BLACK));
+        message.getAppearance().fixAppearance();
+        
         new Explosion(message)
+            .pose(message.getAppearance().getPose())
             .projectiles(15)
             .adjustZOrder(-1)
             .spin(-.2, .2)

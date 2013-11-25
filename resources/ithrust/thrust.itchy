@@ -212,8 +212,13 @@
       <pose name="off" pose="gate"/>
       <pose name="on" pose="gate-green"/>
       <pose name="standby" pose="gate-amber"/>
+      <string name="message">gateMessage</string>
       <sound name="collected" sound="ballCollected" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="opening" sound="gateOpen" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
+    </costume>
+    <costume name="gateMessage" defaultZOrder="0">
+      <string name="default">gate message</string>
+      <font name="default" font="veraBold"/>
     </costume>
     <costume name="keyA" defaultZOrder="0">
       <pose name="default" pose="keyA"/>

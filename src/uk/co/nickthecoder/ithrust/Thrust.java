@@ -43,16 +43,11 @@ public class Thrust extends AbstractDirector
 
     public ZOrderStage escapeRouteStage;
 
-    // TODO Can we use Game's glass stage?
-    public ZOrderStage glassStage;
-
     public StageView backgroundView;
 
     public StageView foregroundView;
 
     public StageView escapeRouteView;
-
-    public StageView glassView;
 
     private Neighbourhood neighbourhood;
 
@@ -71,12 +66,10 @@ public class Thrust extends AbstractDirector
 
         this.backgroundStage = new ZOrderStage("background");
         this.foregroundStage = new ZOrderStage("foreground");
-        this.glassStage = new ZOrderStage("glass");
         this.escapeRouteStage = new ZOrderStage("escapeRoute");
 
         this.backgroundView = new StageView(screenRect, this.backgroundStage);
         this.foregroundView = new StageView(screenRect, this.foregroundStage);
-        this.glassView = new StageView(screenRect, this.glassStage);
         this.escapeRouteView = new StageView(screenRect, this.escapeRouteStage);
 
         GenericCompoundView<View> views = this.game.getViews();
@@ -93,10 +86,8 @@ public class Thrust extends AbstractDirector
         this.mainView.enableMouseListener(this.game);
         views.add(this.foregroundView);
         views.add(this.escapeRouteView);
-        views.add(this.glassView);
 
         stages.add(this.foregroundStage);
-        stages.add(this.glassStage);
         stages.add(this.escapeRouteStage);
     }
 
@@ -131,15 +122,6 @@ public class Thrust extends AbstractDirector
         this.previousLevelShip = null;
         startScene("start");
     }
-
-    // TODO Put this back
-//    @Override
-//    public void testScene( String sceneName )
-//    {
-//        this.previousLevelShip = null;
-//        this.previousSceneName = null;
-//        super.testScene(sceneName);
-//    }
 
     public String getPreviousScene()
     {

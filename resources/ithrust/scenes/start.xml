@@ -1,104 +1,110 @@
-<scene showMouse="true" role="">
+<scene showMouse="true" role="" background="#000000ff">
+  <properties/>
   <layer name="background">
-    <actor costume="fuelFactory" x="808" y="742" direction="0.0" startEvent="default">
+    <actor costume="fuelFactory" x="808" y="742" direction="0.0" heading="0.0" startEvent="default" zOrder="1">
       <property name="fuel" value="1"/>
       <property name="quantity" value="-1"/>
       <property name="delay" value="5"/>
     </actor>
-    <actor costume="stone1a" x="94" y="379" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="120" y="196" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="256" y="90" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="473" y="97" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="686" y="73" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="771" y="239" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="729" y="458" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="450" y="650" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="491" y="848" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="629" y="1009" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="884" y="704" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="876" y="1094" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="1106" y="1062" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="1290" y="941" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="1338" y="716" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="1309" y="484" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="1282" y="243" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="1408" y="-163" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="773" y="-3" direction="0.0" startEvent="default"/>
-    <actor costume="gate" x="1752" y="-15" direction="0.0" startEvent="default">
+    <actor costume="stone1a" x="94" y="379" direction="0.0" heading="0.0" startEvent="default" zOrder="2"/>
+    <actor costume="stone1a" x="120" y="196" direction="0.0" heading="0.0" startEvent="default" zOrder="3"/>
+    <actor costume="stone1b" x="256" y="90" direction="0.0" heading="0.0" startEvent="default" zOrder="4"/>
+    <actor costume="stone1d" x="473" y="97" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="stone1b" x="686" y="73" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
+    <actor costume="stone1a" x="771" y="239" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
+    <actor costume="stone1a" x="729" y="458" direction="0.0" heading="0.0" startEvent="default" zOrder="8"/>
+    <actor costume="stone1c" x="450" y="650" direction="0.0" heading="0.0" startEvent="default" zOrder="9"/>
+    <actor costume="stone1c" x="491" y="848" direction="0.0" heading="0.0" startEvent="default" zOrder="10"/>
+    <actor costume="stone1b" x="629" y="1009" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
+    <actor costume="stone1b" x="884" y="704" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
+    <actor costume="stone1b" x="876" y="1094" direction="0.0" heading="0.0" startEvent="default" zOrder="13"/>
+    <actor costume="stone1d" x="1106" y="1062" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
+    <actor costume="stone1a" x="1290" y="941" direction="0.0" heading="0.0" startEvent="default" zOrder="15"/>
+    <actor costume="stone1a" x="1338" y="716" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
+    <actor costume="stone1c" x="1309" y="484" direction="0.0" heading="0.0" startEvent="default" zOrder="17"/>
+    <actor costume="stone1c" x="1282" y="243" direction="0.0" heading="0.0" startEvent="default" zOrder="18"/>
+    <actor costume="stone1b" x="1408" y="-163" direction="0.0" heading="0.0" startEvent="default" zOrder="19"/>
+    <actor costume="stone1d" x="773" y="-3" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <actor costume="gate" x="1752" y="-15" direction="0.0" heading="0.0" startEvent="default" zOrder="21">
       <property name="requiredWater" value="0"/>
       <property name="exitDirection" value="90.0"/>
       <property name="nextLevel" value="start-lakeside"/>
       <property name="requiredFuel" value="0"/>
     </actor>
-    <actor costume="gate" x="457" y="215" direction="0.0" startEvent="default">
+    <actor costume="gate" x="457" y="215" direction="0.0" heading="0.0" startEvent="default" zOrder="22">
       <property name="requiredWater" value="0"/>
       <property name="exitDirection" value="90.0"/>
       <property name="nextLevel" value="menu"/>
       <property name="requiredFuel" value="0"/>
     </actor>
-    <actor costume="stone1c" x="739" y="619" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="289" y="550" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="154" y="504" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="1206" y="348" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="992" y="-101" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="1580" y="-35" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="1160" y="-188" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="1579" y="161" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="1639" y="383" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="1409" y="948" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="1661" y="878" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="1873" y="795" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="2029" y="640" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="2058" y="415" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="2030" y="213" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="1974" y="36" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="1839" y="-83" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="1647" y="-143" direction="0.0" startEvent="default"/>
-    <text text="Lakeside" font="boycott" size="22" color="#ffffff" x="1750" y="59" direction="0.0" startEvent="default"/>
+    <actor costume="stone1c" x="739" y="619" direction="0.0" heading="0.0" startEvent="default" zOrder="23"/>
+    <actor costume="stone1b" x="289" y="550" direction="0.0" heading="0.0" startEvent="default" zOrder="24"/>
+    <actor costume="stone1b" x="154" y="504" direction="0.0" heading="0.0" startEvent="default" zOrder="25"/>
+    <actor costume="stone1d" x="1206" y="348" direction="0.0" heading="0.0" startEvent="default" zOrder="26"/>
+    <actor costume="stone1d" x="992" y="-101" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
+    <actor costume="stone1a" x="1580" y="-35" direction="0.0" heading="0.0" startEvent="default" zOrder="28"/>
+    <actor costume="stone1d" x="1160" y="-188" direction="0.0" heading="0.0" startEvent="default" zOrder="29"/>
+    <actor costume="stone1c" x="1579" y="161" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
+    <actor costume="stone1c" x="1639" y="383" direction="0.0" heading="0.0" startEvent="default" zOrder="31"/>
+    <actor costume="stone1d" x="1409" y="948" direction="0.0" heading="0.0" startEvent="default" zOrder="32"/>
+    <actor costume="stone1d" x="1661" y="878" direction="0.0" heading="0.0" startEvent="default" zOrder="33"/>
+    <actor costume="stone1d" x="1873" y="795" direction="0.0" heading="0.0" startEvent="default" zOrder="34"/>
+    <actor costume="stone1a" x="2029" y="640" direction="0.0" heading="0.0" startEvent="default" zOrder="35"/>
+    <actor costume="stone1a" x="2058" y="415" direction="0.0" heading="0.0" startEvent="default" zOrder="36"/>
+    <actor costume="stone1c" x="2030" y="213" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
+    <actor costume="stone1c" x="1974" y="36" direction="0.0" heading="0.0" startEvent="default" zOrder="38"/>
+    <actor costume="stone1b" x="1839" y="-83" direction="0.0" heading="0.0" startEvent="default" zOrder="39"/>
+    <actor costume="stone1b" x="1647" y="-143" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
+    <text text="Lakeside" font="boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="1750" y="59" direction="0.0" heading="0.0" startEvent="default" zOrder="41"/>
   </layer>
   <layer name="main">
-    <text text="Home" font="boycott" size="22" color="#ffffff" x="460" y="287" direction="0.0" startEvent="default"/>
-    <actor costume="ship1" x="362" y="324" direction="90.0" startEvent="default"/>
+    <text text="Home" font="boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="460" y="287" direction="0.0" heading="0.0" startEvent="default" zOrder="42"/>
+    <actor costume="ship1" x="362" y="324" direction="90.0" heading="90.0" startEvent="default" zOrder="43"/>
   </layer>
   <layer name="foreground">
-    <text text="" font="boycott" size="22" color="#ffffff" x="394" y="250" direction="0.0" startEvent="default"/>
+    <text text="" font="boycott" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="394" y="250" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
   </layer>
   <layer name="escapeRoute">
-    <actor costume="escapeRoute" x="419" y="253" direction="155.60139312576229" startEvent="default" scale="0.7159090909090909"/>
-    <actor costume="escapeRoute" x="588" y="371" direction="-179.95677651631664" startEvent="default"/>
-    <actor costume="escapeRoute" x="474" y="270" direction="68.96248897457819" startEvent="default"/>
-    <actor costume="escapeRoute" x="505" y="223" direction="0.0" startEvent="default" scale="0.4789272030651341"/>
-    <actor costume="escapeRoute" x="630" y="598" direction="-101.6893691754392" startEvent="default"/>
-    <actor costume="escapeRoute" x="559" y="481" direction="83.08877288097531" startEvent="default"/>
-    <actor costume="escapeRoute" x="656" y="829" direction="-97.76516601842535" startEvent="default"/>
-    <actor costume="escapeRoute" x="592" y="708" direction="48.57633437499736" startEvent="default"/>
-    <actor costume="escapeRoute" x="837" y="960" direction="-146.80243420778356" startEvent="default"/>
-    <actor costume="escapeRoute" x="751" y="878" direction="0.0" startEvent="default"/>
-    <actor costume="escapeRoute" x="1060" y="929" direction="170.90972307917767" startEvent="default"/>
-    <actor costume="escapeRoute" x="982" y="884" direction="-32.7352262721076" startEvent="default"/>
-    <actor costume="escapeRoute" x="1107" y="715" direction="103.04734386374848" startEvent="default"/>
-    <actor costume="escapeRoute" x="1177" y="762" direction="-122.57405713457253" startEvent="default"/>
-    <actor costume="escapeRoute" x="1110" y="484" direction="92.38594403038881" startEvent="default"/>
-    <actor costume="escapeRoute" x="1058" y="571" direction="-107.05693222590016" startEvent="default" scale="0.9233576642335767"/>
-    <actor costume="escapeRoute" x="879" y="442" direction="9.090276920822323" startEvent="default"/>
-    <actor costume="escapeRoute" x="929" y="198" direction="102.71110370207865" startEvent="default"/>
-    <actor costume="escapeRoute" x="995" y="358" direction="-80.98256557197317" startEvent="default" scale="0.8"/>
-    <actor costume="escapeRoute" x="1107" y="62" direction="145.30484646876602" startEvent="default"/>
-    <actor costume="escapeRoute" x="1019" y="175" direction="-45.0" startEvent="default"/>
-    <actor costume="escapeRoute" x="1331" y="21" direction="171.31364541876337" startEvent="default"/>
-    <actor costume="escapeRoute" x="1187" y="22" direction="21.037511025421818" startEvent="default"/>
-    <actor costume="escapeRoute" x="1407" y="247" direction="-110.09523119190483" startEvent="default"/>
-    <actor costume="escapeRoute" x="1405" y="108" direction="73.07248693585296" startEvent="default"/>
-    <actor costume="escapeRoute" x="1485" y="472" direction="-107.85031830221683" startEvent="default"/>
-    <actor costume="escapeRoute" x="1561" y="689" direction="-111.80140948635182" startEvent="default"/>
-    <actor costume="escapeRoute" x="1475" y="335" direction="75.57922687248903" startEvent="default"/>
-    <actor costume="escapeRoute" x="1539" y="556" direction="36.46923439005187" startEvent="default"/>
-    <actor costume="escapeRoute" x="1752" y="578" direction="147.20046872738078" startEvent="default"/>
-    <actor costume="escapeRoute" x="1726" y="687" direction="-42.87890360333855" startEvent="default"/>
-    <actor costume="escapeRoute" x="1814" y="398" direction="108.43494882292202" startEvent="default" scale="0.79375"/>
-    <actor costume="escapeRoute" x="1896" y="527" direction="-104.0362434679265" startEvent="default"/>
-    <actor costume="escapeRoute" x="1764" y="178" direction="81.3843518158359" startEvent="default"/>
-    <actor costume="escapeRoute" x="1834" y="294" direction="-101.15465973892832" startEvent="default"/>
-    <actor costume="escapeRoute" x="1750" y="41" direction="86.18592516570965" startEvent="default" scale="0.5789473684210527"/>
+    <actor costume="escapeRoute" x="419" y="253" direction="155.60139312576229" heading="155.60139312576229" startEvent="default" zOrder="45" scale="0.7159090909090909"/>
+    <actor costume="escapeRoute" x="588" y="371" direction="-179.95677651631664" heading="-179.95677651631664" startEvent="default" zOrder="46"/>
+    <actor costume="escapeRoute" x="474" y="270" direction="68.96248897457819" heading="68.96248897457819" startEvent="default" zOrder="47"/>
+    <actor costume="escapeRoute" x="505" y="223" direction="0.0" heading="0.0" startEvent="default" zOrder="48" scale="0.4789272030651341"/>
+    <actor costume="escapeRoute" x="630" y="598" direction="-101.6893691754392" heading="-101.6893691754392" startEvent="default" zOrder="49"/>
+    <actor costume="escapeRoute" x="559" y="481" direction="83.08877288097531" heading="83.08877288097531" startEvent="default" zOrder="50"/>
+    <actor costume="escapeRoute" x="656" y="829" direction="-97.76516601842535" heading="-97.76516601842535" startEvent="default" zOrder="51"/>
+    <actor costume="escapeRoute" x="592" y="708" direction="48.57633437499736" heading="48.57633437499736" startEvent="default" zOrder="52"/>
+    <actor costume="escapeRoute" x="837" y="960" direction="-146.80243420778356" heading="-146.80243420778356" startEvent="default" zOrder="53"/>
+    <actor costume="escapeRoute" x="751" y="878" direction="0.0" heading="0.0" startEvent="default" zOrder="54"/>
+    <actor costume="escapeRoute" x="1060" y="929" direction="170.90972307917767" heading="170.90972307917767" startEvent="default" zOrder="55"/>
+    <actor costume="escapeRoute" x="982" y="884" direction="-32.7352262721076" heading="-32.7352262721076" startEvent="default" zOrder="56"/>
+    <actor costume="escapeRoute" x="1107" y="715" direction="103.04734386374848" heading="103.04734386374848" startEvent="default" zOrder="57"/>
+    <actor costume="escapeRoute" x="1177" y="762" direction="-122.57405713457253" heading="-122.57405713457253" startEvent="default" zOrder="58"/>
+    <actor costume="escapeRoute" x="1110" y="484" direction="92.38594403038881" heading="92.38594403038881" startEvent="default" zOrder="59"/>
+    <actor costume="escapeRoute" x="1058" y="571" direction="-107.05693222590016" heading="-107.05693222590016" startEvent="default" zOrder="60" scale="0.9233576642335767"/>
+    <actor costume="escapeRoute" x="879" y="442" direction="9.090276920822323" heading="9.090276920822323" startEvent="default" zOrder="61"/>
+    <actor costume="escapeRoute" x="929" y="198" direction="102.71110370207865" heading="102.71110370207865" startEvent="default" zOrder="62"/>
+    <actor costume="escapeRoute" x="995" y="358" direction="-80.98256557197317" heading="-80.98256557197317" startEvent="default" zOrder="63" scale="0.8"/>
+    <actor costume="escapeRoute" x="1107" y="62" direction="145.30484646876602" heading="145.30484646876602" startEvent="default" zOrder="64"/>
+    <actor costume="escapeRoute" x="1019" y="175" direction="-45.0" heading="-45.0" startEvent="default" zOrder="65"/>
+    <actor costume="escapeRoute" x="1331" y="21" direction="171.31364541876337" heading="171.31364541876337" startEvent="default" zOrder="66"/>
+    <actor costume="escapeRoute" x="1187" y="22" direction="21.037511025421818" heading="21.037511025421818" startEvent="default" zOrder="67"/>
+    <actor costume="escapeRoute" x="1407" y="247" direction="-110.09523119190483" heading="-110.09523119190483" startEvent="default" zOrder="68"/>
+    <actor costume="escapeRoute" x="1405" y="108" direction="73.07248693585296" heading="73.07248693585296" startEvent="default" zOrder="69"/>
+    <actor costume="escapeRoute" x="1485" y="472" direction="-107.85031830221683" heading="-107.85031830221683" startEvent="default" zOrder="70"/>
+    <actor costume="escapeRoute" x="1561" y="689" direction="-111.80140948635182" heading="-111.80140948635182" startEvent="default" zOrder="71"/>
+    <actor costume="escapeRoute" x="1475" y="335" direction="75.57922687248903" heading="75.57922687248903" startEvent="default" zOrder="72"/>
+    <actor costume="escapeRoute" x="1539" y="556" direction="36.46923439005187" heading="36.46923439005187" startEvent="default" zOrder="73"/>
+    <actor costume="escapeRoute" x="1752" y="578" direction="147.20046872738078" heading="147.20046872738078" startEvent="default" zOrder="74"/>
+    <actor costume="escapeRoute" x="1726" y="687" direction="-42.87890360333855" heading="-42.87890360333855" startEvent="default" zOrder="75"/>
+    <actor costume="escapeRoute" x="1814" y="398" direction="108.43494882292202" heading="108.43494882292202" startEvent="default" zOrder="76" scale="0.79375"/>
+    <actor costume="escapeRoute" x="1896" y="527" direction="-104.0362434679265" heading="-104.0362434679265" startEvent="default" zOrder="77"/>
+    <actor costume="escapeRoute" x="1764" y="178" direction="81.3843518158359" heading="81.3843518158359" startEvent="default" zOrder="78"/>
+    <actor costume="escapeRoute" x="1834" y="294" direction="-101.15465973892832" heading="-101.15465973892832" startEvent="default" zOrder="79"/>
+    <actor costume="escapeRoute" x="1750" y="41" direction="86.18592516570965" heading="86.18592516570965" startEvent="default" zOrder="80" scale="0.5789473684210527"/>
+    <actor costume="fuelFactory" x="245" y="149" direction="0.0" heading="0.0" startEvent="default" zOrder="81">
+      <property name="fuel" value="1"/>
+      <property name="quantity" value="-1"/>
+      <property name="delay" value="2"/>
+    </actor>
   </layer>
 </scene>
