@@ -43,7 +43,6 @@ public class Ball extends AbstractRole implements Fragile
         addTag("ball");
 
         createFragments();
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
 
         BallProperties properties = (BallProperties) getActor().getCostume().getProperties();
         this.fuel = properties.fuel;
@@ -63,7 +62,7 @@ public class Ball extends AbstractRole implements Fragile
         if (this.moving) {
 
             // Damp down the velocity when touching liquids
-            if (getActor().pixelOverlap("liquid").size() > 0) {
+            if (getCollisionStrategy().collisions(getActor(), "liquid").size() > 0) {
                 this.speedX *= 0.95;
                 this.speedY *= 0.95;
                 this.speedY += Thrust.gravity / 5; // Make the ball buoyant
@@ -72,20 +71,20 @@ public class Ball extends AbstractRole implements Fragile
             }
 
             getActor().moveBy(this.speedX, this.speedY);
-            getActor().getCollisionStrategy().update();
+            getCollisionStrategy().update();
 
-            if (!getActor().pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+            if (!getCollisionStrategy().collisions(getActor(), SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
                 hit();
                 return;
             }
 
-            for (Role role : getActor().pixelOverlap("gate")) {
+            for (Role role : getCollisionStrategy().collisions(getActor(), "gate")) {
                 Gate gate = (Gate) role;
                 getActor().setRole(new EnterGate(gate));
                 return;
             }
 
-            if (!getActor().pixelOverlap("soft").isEmpty()) {
+            if (!getCollisionStrategy().collisions(getActor(), "soft").isEmpty()) {
                 if (this.rod == null) {
                     double speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
                     if (speed < this.landingSpeed) {
@@ -173,7 +172,7 @@ public class Ball extends AbstractRole implements Fragile
                 Ball.this.speedY *= 0.98;
                 getActor().moveBy(Ball.this.speedX, Ball.this.speedY);
                 getActor().moveTowards(this.gate.getActor(), this.gateSpeed);
-                getActor().getCollisionStrategy().update();
+                getCollisionStrategy().update();
 
                 if (getActor().distance(this.gate.getActor()) < this.gateSpeed) {
                     getActor().moveTo(this.gate.getActor());

@@ -19,7 +19,7 @@ public class Bucket extends Ball
     {
         if (this.empty) {
 
-            if (getActor().pixelOverlap("water").size() > 0) {
+            if (getCollisionStrategy().collisions(getActor(), "water").size() > 0) {
                 BucketProperties properties = (BucketProperties) getActor().getCostume().getProperties();
                 event("fillWithWater");
                 this.weight += properties.waterWeight;

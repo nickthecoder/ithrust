@@ -47,12 +47,6 @@ public class Rod extends AbstractRole
     }
 
     @Override
-    public void onBirth()
-    {
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(this.getActor()));
-    }
-
-    @Override
     public void tick()
     {
         getActor().moveTo(this.ship.getActor());
@@ -96,8 +90,8 @@ public class Rod extends AbstractRole
 
             } else {
 
-                getActor().getCollisionStrategy().update();
-                if (!getActor().pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+                getCollisionStrategy().update();
+                if (!getCollisionStrategy().collisions(getActor(), SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
                     this.disconnect();
                     return;
                 }

@@ -22,7 +22,6 @@ public class Droplet extends Projectile
     public void onBirth()
     {
         super.onAttach();
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
         this.oy = getActor().getY();
     }
 
@@ -31,10 +30,10 @@ public class Droplet extends Projectile
     {
         super.tick();
 
-        getActor().getCollisionStrategy().update();
+        getCollisionStrategy().update();
 
         if (this.oy - getActor().getY() > 20) {
-            if (!getActor().pixelOverlap("solid", "liquid").isEmpty()) {
+            if (!getCollisionStrategy().collisions(getActor(), "solid", "liquid").isEmpty()) {
 
                 new Explosion(getActor())
                     .projectiles(10)

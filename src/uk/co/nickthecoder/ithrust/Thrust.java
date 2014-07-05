@@ -10,7 +10,6 @@ import java.util.List;
 
 import uk.co.nickthecoder.itchy.AbstractDirector;
 import uk.co.nickthecoder.itchy.Actor;
-import uk.co.nickthecoder.itchy.ActorCollisionStrategy;
 import uk.co.nickthecoder.itchy.GenericCompoundView;
 import uk.co.nickthecoder.itchy.Game;
 import uk.co.nickthecoder.itchy.Resources;
@@ -18,10 +17,11 @@ import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.itchy.ZOrderStage;
+import uk.co.nickthecoder.itchy.collision.ActorCollisionStrategy;
+import uk.co.nickthecoder.itchy.collision.Neighbourhood;
+import uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy;
+import uk.co.nickthecoder.itchy.collision.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.extras.SceneTransition;
-import uk.co.nickthecoder.itchy.neighbourhood.Neighbourhood;
-import uk.co.nickthecoder.itchy.neighbourhood.NeighbourhoodCollisionStrategy;
-import uk.co.nickthecoder.itchy.neighbourhood.StandardNeighbourhood;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
 import uk.co.nickthecoder.jame.event.KeyboardEvent;
@@ -29,8 +29,6 @@ import uk.co.nickthecoder.jame.event.Keys;
 
 public class Thrust extends AbstractDirector
 {
-    public static final int NEIGHBOURHOOD_SQUARE_SIZE = 60;
-
     public static double gravity = -0.02;;
 
     public static final File RESOURCES = new File("resources/ithrust/thrust.itchy");
@@ -49,8 +47,6 @@ public class Thrust extends AbstractDirector
 
     public StageView escapeRouteView;
 
-    private Neighbourhood neighbourhood;
-
     public static final RGBA BACKGROUND = new RGBA(30, 30, 30);
 
     private Ship previousLevelShip;
@@ -60,7 +56,6 @@ public class Thrust extends AbstractDirector
     @Override
     public void onStarted()
     {
-        this.neighbourhood = new StandardNeighbourhood(NEIGHBOURHOOD_SQUARE_SIZE);
 
         Rect screenRect = new Rect(0, 0, this.game.getWidth(), this.game.getHeight());
 
@@ -96,11 +91,6 @@ public class Thrust extends AbstractDirector
     {
         director = this;
         super.onActivate();
-    }
-
-    public ActorCollisionStrategy createCollisionStrategy( Actor actor )
-    {
-        return new NeighbourhoodCollisionStrategy(actor, this.neighbourhood);
     }
 
     public void centerOn( Actor actor )

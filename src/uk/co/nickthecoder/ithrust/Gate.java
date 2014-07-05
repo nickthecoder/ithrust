@@ -35,7 +35,6 @@ public class Gate extends AbstractRole
     {
         addTag("gate");
         updateState();
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
     }
 
     @Override

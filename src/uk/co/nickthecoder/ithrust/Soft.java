@@ -14,7 +14,6 @@ public class Soft extends AbstractRole
     {
         addTag("soft");
         addTag("solid");
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
     }
 
     @Override

@@ -103,7 +103,6 @@ public class Ship extends AbstractRole implements Fragile
         addTag("fragile");
         addTag("solid");
         addTag("ship");
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
         this.pickupDistance = getActor().getCostume().getPose("rod").getSurface().getWidth();
 
     }
@@ -188,7 +187,7 @@ public class Ship extends AbstractRole implements Fragile
                 fire();
             }
 
-            for (Role role : getActor().pixelOverlap("gate")) {
+            for (Role role : getCollisionStrategy().collisions(getActor(),"gate")) {
                 Gate gate = (Gate) role;
                 this.disconnect();
                 getActor().setRole(new NextLevel(gate));
@@ -198,7 +197,7 @@ public class Ship extends AbstractRole implements Fragile
 
         this.speedY += Thrust.gravity;
         getActor().moveBy(this.speedX, this.speedY);
-        getActor().getCollisionStrategy().update();
+        getCollisionStrategy().update();
 
         this.currentRotationSpeed *= this.rotationDamper;
         if (Itchy.isKeyDown(Keys.LEFT)) {
@@ -213,7 +212,7 @@ public class Ship extends AbstractRole implements Fragile
         }
         turn(this.currentRotationSpeed);
 
-        if (!getActor().pixelOverlap("soft").isEmpty()) {
+        if (!getCollisionStrategy().collisions(getActor(), "soft").isEmpty()) {
             if (this.rod == null) {
                 double speed = Math.sqrt(this.speedX * this.speedX + this.speedY * this.speedY);
                 double upright = Math.abs(getActor().getAppearance().getDirection() - 90) % 360.0;
@@ -240,12 +239,12 @@ public class Ship extends AbstractRole implements Fragile
             Thrust.director.centerOn(getActor());
         }
 
-        if (!getActor().pixelOverlap("liquid").isEmpty()) {
+        if (!getCollisionStrategy().collisions(getActor(),"liquid").isEmpty()) {
             hit();
             return;
         }
 
-        if (!getActor().pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+        if (!getCollisionStrategy().collisions(getActor(),SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
             if (!this.cheating) {
                 hit();
                 return;
@@ -469,7 +468,7 @@ public class Ship extends AbstractRole implements Fragile
             Ship.this.speedY *= DEAD_SLOW_DOWN;
 
             getActor().moveBy(Ship.this.speedX, Ship.this.speedY);
-            getActor().getCollisionStrategy().update();
+            getCollisionStrategy().update();
 
         }
 
@@ -569,7 +568,7 @@ public class Ship extends AbstractRole implements Fragile
             Ship.this.speedY *= 0.98;
             getActor().moveBy(Ship.this.speedX, Ship.this.speedY);
             getActor().moveTowards(this.gate.getActor(), this.speed);
-            getActor().getCollisionStrategy().update();
+            getCollisionStrategy().update();
             getActor().getAppearance().adjustDirection(this.turnSpeed);
             this.turnSpeed *= 1.005;
             this.turnSpeed += 0.03;

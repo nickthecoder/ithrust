@@ -8,11 +8,11 @@ package uk.co.nickthecoder.ithrust;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
-import uk.co.nickthecoder.itchy.PlainRole;
 import uk.co.nickthecoder.itchy.animation.Animation;
 import uk.co.nickthecoder.itchy.animation.AnimationListener;
 import uk.co.nickthecoder.itchy.extras.Timer;
 import uk.co.nickthecoder.itchy.property.Property;
+import uk.co.nickthecoder.itchy.role.PlainRole;
 
 public abstract class BallFactory extends AbstractRole
 {
@@ -28,7 +28,6 @@ public abstract class BallFactory extends AbstractRole
     public void onBirth()
     {
         addTag("solid");
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
         createBall();
     }
 

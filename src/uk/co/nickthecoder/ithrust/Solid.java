@@ -14,7 +14,6 @@ public class Solid extends AbstractRole
     public void onAttach()
     {
         addTag("solid");
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
     }
 
     @Override

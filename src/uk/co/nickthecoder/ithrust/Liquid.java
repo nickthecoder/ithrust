@@ -13,7 +13,6 @@ public class Liquid extends AbstractRole
     @Override
     public void onBirth()
     {
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
         addTag("liquid");
 
         if (getActor().getCostume().getString("water") != null) {

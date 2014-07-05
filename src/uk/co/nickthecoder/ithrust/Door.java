@@ -81,7 +81,6 @@ public class Door extends AbstractRole implements Fragile
         if (this.shootable) {
             addTag("fragile");
         }
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
 
         if (!StringUtils.isBlank(this.buddyId)) {
             for (Role role : AbstractRole.allByTag("door")) {
@@ -127,7 +126,7 @@ public class Door extends AbstractRole implements Fragile
 
             this.tickCount += this.direction;
 
-            getActor().getCollisionStrategy().update();
+            getCollisionStrategy().update();
         }
     }
 

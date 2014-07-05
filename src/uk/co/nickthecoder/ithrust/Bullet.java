@@ -26,16 +26,15 @@ public class Bullet extends Projectile implements Fragile
     public void onAttach()
     {
         addTag("fragile");
-        getActor().setCollisionStrategy(Thrust.director.createCollisionStrategy(getActor()));
     }
 
     @Override
     public void tick()
     {
         super.tick();
-        getActor().getCollisionStrategy().update();
+        getCollisionStrategy().update();
 
-        for (Role role: getActor().pixelOverlap(TARGET_TAGS, EXCLUDE_TAGS)) {
+        for (Role role: getCollisionStrategy().collisions(getActor(), TARGET_TAGS, EXCLUDE_TAGS)) {
 
             if (role instanceof Fragile) {
                 ((Fragile) role).hit();
@@ -43,7 +42,7 @@ public class Bullet extends Projectile implements Fragile
             this.hit();
         }
 
-        if (!getActor().pixelOverlap(SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
+        if (!getCollisionStrategy().collisions(getActor(), SOLID_TAGS, EXCLUDE_TAGS).isEmpty()) {
             this.hit();
         }
     }
