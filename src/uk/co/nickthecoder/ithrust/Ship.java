@@ -10,6 +10,7 @@ import java.util.Iterator;
 import uk.co.nickthecoder.itchy.AbstractRole;
 import uk.co.nickthecoder.itchy.Actor;
 import uk.co.nickthecoder.itchy.Costume;
+import uk.co.nickthecoder.itchy.Input;
 import uk.co.nickthecoder.itchy.Itchy;
 import uk.co.nickthecoder.itchy.Role;
 import uk.co.nickthecoder.itchy.Stage;
@@ -19,7 +20,6 @@ import uk.co.nickthecoder.itchy.role.Explosion;
 import uk.co.nickthecoder.itchy.role.Follower;
 import uk.co.nickthecoder.itchy.util.CubicSpline;
 import uk.co.nickthecoder.jame.Sound;
-import uk.co.nickthecoder.jame.event.Keys;
 
 public class Ship extends AbstractRole implements Fragile
 {
@@ -62,6 +62,22 @@ public class Ship extends AbstractRole implements Fragile
     private Timer fireTimer;
 
     private Gate startGate;
+    
+    private Input thrustForwards;
+    
+    private Input turnLeft;
+    
+    private Input turnRight;
+    
+    private Input switchEnds;
+    
+    private Input extendRod;
+    
+    private Input releaseRod;
+    
+    private Input fire;
+    
+    private Input cheat;
 
     @Override
     public void onBirth()
@@ -92,6 +108,15 @@ public class Ship extends AbstractRole implements Fragile
                 getActor().kill();
             }
         }
+        
+        this.thrustForwards = Input.find("thrust");
+        this.turnLeft = Input.find("left");
+        this.turnRight = Input.find("right");
+        this.switchEnds = Input.find("switchEnds");
+        this.extendRod = Input.find("extendRod");
+        this.releaseRod = Input.find("releaseRod");
+        this.fire = Input.find("fire");
+        this.cheat = Input.find("cheat");
     }
 
     /**
@@ -154,35 +179,35 @@ public class Ship extends AbstractRole implements Fragile
 
         if (!this.switchingEnds) {
 
-            if (isConnected() && Itchy.isKeyDown(Keys.q)) {
+            if (isConnected() && this.switchEnds.pressed()) {
                 if (this.rod.ball instanceof BallWithShip) {
                     beginSwitchEnds();
                 }
             }
 
-            if (Itchy.isKeyDown(Keys.UP)) {
+            if (this.thrustForwards.pressed()) {
                 this.event("thrust");
                 this.thrust();
             } else {
                 this.endEvent("thrust");
             }
 
-            if ((this.rod == null) && (Itchy.isKeyDown(Keys.a))) {
+            if ((this.rod == null) && this.extendRod.pressed()) {
                 Ball ball = (Ball) getActor().nearest("ball");
                 if ((ball != null) &&
                     (ball.getActor().distanceTo(getActor()) < this.pickupDistance)) {
                     this.rod = new Rod(this, ball);
                 }
             }
-            if ((this.rod != null) && (Itchy.isKeyDown(Keys.z))) {
+            if ((this.rod != null) && this.releaseRod.pressed()) {
                 this.rod.disconnect();
             }
 
-            if (Itchy.isKeyDown(Keys.c) && Itchy.isKeyDown(Keys.h) && Itchy.isKeyDown(Keys.e)) {
+            if (this.cheat.pressed()) {
                 this.cheating = true;
             }
 
-            if ((Itchy.isKeyDown(Keys.SPACE)) && (this.fireTimer.isFinished())) {
+            if (this.fire.pressed() && (this.fireTimer.isFinished())) {
                 this.fireTimer.reset();
                 fire();
             }
@@ -200,10 +225,10 @@ public class Ship extends AbstractRole implements Fragile
         getCollisionStrategy().update();
 
         this.currentRotationSpeed *= this.rotationDamper;
-        if (Itchy.isKeyDown(Keys.LEFT)) {
+        if (this.turnLeft.pressed()) {
             event("rotate");
             this.currentRotationSpeed += this.rotationSpeed;
-        } else if (Itchy.isKeyDown(Keys.RIGHT)) {
+        } else if (this.turnRight.pressed()) {
             event("rotate");
             this.currentRotationSpeed -= this.rotationSpeed;
         } else {

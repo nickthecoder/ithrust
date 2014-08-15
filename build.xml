@@ -6,25 +6,17 @@
 
     <path id="project.class.path">
         <fileset dir="lib">
-            <include name="*.jar"/>
+            <include name="*.jar" />
         </fileset>
     </path>
-	
+
     <target name="build">
-        <mkdir dir="../build"/>
-        <javac
-            srcdir="src"
-            destdir="build"
-            classpathref="project.class.path"
-            deprecation="on"
-        	debug="on"
-        	debugLevel="lines,vars,source"
-        	includeantruntime="false"
-        />
+        <mkdir dir="../build" />
+        <javac srcdir="src" destdir="build" classpathref="project.class.path" deprecation="on" debug="on" debugLevel="lines,vars,source" includeantruntime="false" />
         <jar jarfile="${jarfile}">
             <fileset dir="build">
-                <include name="**/*.class"/>
-          </fileset>
+                <include name="**/*.class" />
+            </fileset>
         </jar>
     </target>
 
@@ -38,5 +30,5 @@
             </fileset>
         </delete>
     </target>
-	
+
 </project>

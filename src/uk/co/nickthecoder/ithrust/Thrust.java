@@ -17,10 +17,6 @@ import uk.co.nickthecoder.itchy.Stage;
 import uk.co.nickthecoder.itchy.StageView;
 import uk.co.nickthecoder.itchy.View;
 import uk.co.nickthecoder.itchy.ZOrderStage;
-import uk.co.nickthecoder.itchy.collision.ActorCollisionStrategy;
-import uk.co.nickthecoder.itchy.collision.Neighbourhood;
-import uk.co.nickthecoder.itchy.collision.NeighbourhoodCollisionStrategy;
-import uk.co.nickthecoder.itchy.collision.StandardNeighbourhood;
 import uk.co.nickthecoder.itchy.extras.SceneTransition;
 import uk.co.nickthecoder.jame.RGBA;
 import uk.co.nickthecoder.jame.Rect;
@@ -95,10 +91,10 @@ public class Thrust extends AbstractDirector
 
     public void centerOn( Actor actor )
     {
-        this.backgroundView.ceterOn(actor);
-        this.mainView.ceterOn(actor);
-        this.foregroundView.ceterOn(actor);
-        this.escapeRouteView.ceterOn(actor);
+        this.backgroundView.centerOn(actor);
+        this.mainView.centerOn(actor);
+        this.foregroundView.centerOn(actor);
+        this.escapeRouteView.centerOn(actor);
     }
 
     public void training()
