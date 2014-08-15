@@ -1,5 +1,5 @@
 <resources>
-  <game directorClassName="uk.co.nickthecoder.ithrust.Thrust" height="600" initialScene="menu" title="Thrust" width="800"/>
+  <game title="Thrust" width="800" height="600" initialScene="menu" directorClassName="uk.co.nickthecoder.ithrust.Thrust"/>
   <fonts>
     <font name="blackCasper" filename="fonts/BlackCasper/BlackCasper.ttf"/>
     <font name="boycott" filename="fonts/Boycott/Boycott.ttf"/>
@@ -129,10 +129,10 @@
     </animation>
   </animations>
   <costumes>
-    <costume name="background" defaultZOrder="0">
+    <costume name="background" defaultZOrder="0" order="0">
       <pose name="default" pose="background"/>
     </costume>
-    <costume name="ball" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Ball">
+    <costume name="ball" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Ball">
       <sound name="death" sound="explode" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="fillWithWater" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="taught" sound="ding" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
@@ -143,71 +143,71 @@
       <animation name="unwrapping" animation="unwrapping"/>
       <animation name="wrapping" animation="wrapping"/>
     </costume>
-    <costume name="bucket" defaultZOrder="0" extends="ball" role="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
+    <costume name="bucket" defaultZOrder="0" order="0" extends="ball" role="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
       <pose name="contents" pose="waterDroplet"/>
       <pose name="default" pose="bucket"/>
       <pose name="fillWithWater" pose="bucketOfWater"/>
       <properties fuel="0" water="0" weight="0.5" volume="1" waterWeight="3.0"/>
     </costume>
-    <costume name="bucket2" defaultZOrder="0" extends="ball" role="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
+    <costume name="bucket2" defaultZOrder="0" order="0" extends="ball" role="uk.co.nickthecoder.ithrust.Bucket" properties="uk.co.nickthecoder.ithrust.BucketProperties">
       <pose name="contents" pose="waterDroplet"/>
       <pose name="default" pose="bucket2"/>
       <pose name="fillWithWater" pose="bucketOfWater2"/>
       <properties fuel="0" water="0" weight="1.0" volume="3" waterWeight="6.0"/>
     </costume>
-    <costume name="bucketFactory" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.BucketFactory">
+    <costume name="bucketFactory" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.BucketFactory">
       <pose name="default" pose="bucketFactory"/>
       <string name="ballCostume">bucket</string>
       <animation name="appear" animation="popup120"/>
     </costume>
-    <costume name="button" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Door">
+    <costume name="button" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="button"/>
       <string name="angle">90</string>
       <string name="slide">0</string>
       <string name="ticks">20</string>
     </costume>
-    <costume name="door1a" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door1a" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door1a"/>
       <string name="slide">150</string>
     </costume>
-    <costume name="door1b" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door1b" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door1b"/>
       <string name="slide">150</string>
     </costume>
-    <costume name="door2a" defaultZOrder="0" extends="door1a" role="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door2a" defaultZOrder="0" order="0" extends="door1a" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door2a"/>
       <string name="slide">205</string>
     </costume>
-    <costume name="door2b" defaultZOrder="0" extends="door1b" role="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door2b" defaultZOrder="0" order="0" extends="door1b" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door2b"/>
       <string name="slide">205</string>
     </costume>
-    <costume name="door3a" defaultZOrder="0" extends="door1a" role="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door3a" defaultZOrder="0" order="0" extends="door1a" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door3a"/>
       <string name="slide">253</string>
     </costume>
-    <costume name="door3b" defaultZOrder="0" extends="door1b" role="uk.co.nickthecoder.ithrust.Door">
+    <costume name="door3b" defaultZOrder="0" order="0" extends="door1b" role="uk.co.nickthecoder.ithrust.Door">
       <pose name="default" pose="door3b"/>
       <string name="slide">253</string>
     </costume>
-    <costume name="droplet" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.DropletFactory">
+    <costume name="droplet" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.DropletFactory">
       <pose name="default" pose="droplet"/>
       <pose name="fragments" pose="droplet-fragment"/>
       <sound name="death" sound="drip" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
     </costume>
-    <costume name="escapeRoute" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.EscapeRoute">
+    <costume name="escapeRoute" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.EscapeRoute">
       <pose name="default" pose="escapeRoute"/>
       <pose name="reverse" pose="escapeRoute2"/>
     </costume>
-    <costume name="fuel" defaultZOrder="0" extends="ball" role="uk.co.nickthecoder.ithrust.Ball" properties="uk.co.nickthecoder.ithrust.BallProperties">
+    <costume name="fuel" defaultZOrder="0" order="0" extends="ball" role="uk.co.nickthecoder.ithrust.Ball" properties="uk.co.nickthecoder.ithrust.BallProperties">
       <pose name="default" pose="fuel"/>
       <properties fuel="1" water="0" weight="3.0"/>
     </costume>
-    <costume name="fuelFactory" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.FuelFactory">
+    <costume name="fuelFactory" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.FuelFactory">
       <pose name="default" pose="fuelFactory"/>
       <animation name="appear" animation="popup60"/>
     </costume>
-    <costume name="gate" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Gate">
+    <costume name="gate" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Gate">
       <pose name="default" pose="gate"/>
       <pose name="off" pose="gate"/>
       <pose name="on" pose="gate-green"/>
@@ -216,38 +216,38 @@
       <sound name="collected" sound="ballCollected" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
       <sound name="opening" sound="gateOpen" fadeOutSeconds="1.0" fadeOnDeath="false" multipleRole="IGNORE_SECOND" priority="1"/>
     </costume>
-    <costume name="gateMessage" defaultZOrder="0">
+    <costume name="gateMessage" defaultZOrder="0" order="0">
       <string name="default">gate message</string>
-      <font name="default" font="veraBold"/>
+      <font name="default" font="veraBold" marginBottom="0" color="#ffffffff" fontSize="14" marginLeft="0" marginRight="0" marginTop="0"/>
     </costume>
-    <costume name="keyA" defaultZOrder="0">
+    <costume name="keyA" defaultZOrder="0" order="0">
       <pose name="default" pose="keyA"/>
     </costume>
-    <costume name="keyEscape" defaultZOrder="0">
+    <costume name="keyEscape" defaultZOrder="0" order="0">
       <pose name="default" pose="keyEscape"/>
     </costume>
-    <costume name="keyLeft" defaultZOrder="0">
+    <costume name="keyLeft" defaultZOrder="0" order="0">
       <pose name="default" pose="keyLeft"/>
     </costume>
-    <costume name="keyRight" defaultZOrder="0">
+    <costume name="keyRight" defaultZOrder="0" order="0">
       <pose name="default" pose="keyRight"/>
     </costume>
-    <costume name="keySpace" defaultZOrder="0">
+    <costume name="keySpace" defaultZOrder="0" order="0">
       <pose name="default" pose="keySpace"/>
     </costume>
-    <costume name="keyUp" defaultZOrder="0">
+    <costume name="keyUp" defaultZOrder="0" order="0">
       <pose name="default" pose="keyUp"/>
     </costume>
-    <costume name="keyZ" defaultZOrder="0">
+    <costume name="keyZ" defaultZOrder="0" order="0">
       <pose name="default" pose="keyZ"/>
     </costume>
-    <costume name="keys" defaultZOrder="0">
+    <costume name="keys" defaultZOrder="0" order="0">
       <pose name="default" pose="keys"/>
     </costume>
-    <costume name="pod" defaultZOrder="0">
+    <costume name="pod" defaultZOrder="0" order="0">
       <pose name="default" pose="pod"/>
     </costume>
-    <costume name="ship" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
+    <costume name="ship" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="bullet" pose="bullet1"/>
       <pose name="escapePod" pose="pod"/>
       <pose name="exhaust" pose="puff"/>
@@ -260,43 +260,43 @@
       <animation name="travelGate" animation="travelGate"/>
       <properties firePeriod="0.0" landingSpeed="2.0" rotationDamper="0.2" rotationSpeed="0.0" thrust="0.0" weight="0.0" wrappedCostumeName="wrappedShip1"/>
     </costume>
-    <costume name="ship1" defaultZOrder="0" extends="ship" role="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
+    <costume name="ship1" defaultZOrder="0" order="0" extends="ship" role="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="default" pose="ship1"/>
       <properties firePeriod="0.2" landingSpeed="2.0" rotationDamper="0.2" rotationSpeed="2.0" thrust="0.2" weight="3.0" wrappedCostumeName="wrappedShip1"/>
     </costume>
-    <costume name="ship2" defaultZOrder="0" extends="ship" role="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
+    <costume name="ship2" defaultZOrder="0" order="0" extends="ship" role="uk.co.nickthecoder.ithrust.Ship" properties="uk.co.nickthecoder.ithrust.ShipProperties">
       <pose name="default" pose="ship2"/>
       <properties firePeriod="0.2" landingSpeed="2.0" rotationDamper="0.2" rotationSpeed="0.3" thrust="2.0" weight="0.1" wrappedCostumeName="wrappedShip2"/>
     </costume>
-    <costume name="soft" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Soft">
+    <costume name="soft" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Soft">
       <pose name="default" pose="soft"/>
     </costume>
-    <costume name="stone1a" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Solid">
+    <costume name="stone1a" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Solid">
       <pose name="default" pose="stone1a"/>
     </costume>
-    <costume name="stone1b" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Solid">
+    <costume name="stone1b" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Solid">
       <pose name="default" pose="stone1b"/>
     </costume>
-    <costume name="stone1c" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Solid">
+    <costume name="stone1c" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Solid">
       <pose name="default" pose="stone1c"/>
     </costume>
-    <costume name="stone1d" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Solid">
+    <costume name="stone1d" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Solid">
       <pose name="default" pose="stone1d"/>
     </costume>
-    <costume name="tile1" defaultZOrder="0">
+    <costume name="tile1" defaultZOrder="0" order="0">
       <pose name="default" pose="tile1"/>
     </costume>
-    <costume name="water" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Liquid">
+    <costume name="water" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Liquid">
       <pose name="default" pose="water"/>
       <string name="water">true</string>
     </costume>
-    <costume name="waterSurface" defaultZOrder="0" role="uk.co.nickthecoder.ithrust.Liquid">
+    <costume name="waterSurface" defaultZOrder="0" order="0" role="uk.co.nickthecoder.ithrust.Liquid">
       <pose name="default" pose="waterSurface"/>
     </costume>
-    <costume name="wrappedShip" defaultZOrder="0" extends="ball" role="uk.co.nickthecoder.ithrust.BallWithShip">
+    <costume name="wrappedShip" defaultZOrder="0" order="0" extends="ball" role="uk.co.nickthecoder.ithrust.BallWithShip">
       <pose name="shell" pose="water"/>
     </costume>
-    <costume name="wrappedShip1" defaultZOrder="0" extends="wrappedShip" role="uk.co.nickthecoder.ithrust.BallWithShip">
+    <costume name="wrappedShip1" defaultZOrder="0" order="0" extends="wrappedShip" role="uk.co.nickthecoder.ithrust.BallWithShip">
       <pose name="contents" pose="ship1"/>
       <pose name="default" pose="wrappedShip1"/>
       <string name="rotationSpeed">2</string>
@@ -304,7 +304,7 @@
       <string name="thrust">0.2</string>
       <string name="unwrappedCostume">ship1</string>
     </costume>
-    <costume name="wrappedShip2" defaultZOrder="0" extends="wrappedShip" role="uk.co.nickthecoder.ithrust.BallWithShip">
+    <costume name="wrappedShip2" defaultZOrder="0" order="0" extends="wrappedShip" role="uk.co.nickthecoder.ithrust.BallWithShip">
       <pose name="contents" pose="ship2"/>
       <pose name="default" pose="wrappedShip2"/>
       <string name="rotationSpeed">3</string>
@@ -326,4 +326,14 @@
     <scene name="training-ships"/>
     <scene name="training-water"/>
   </scenes>
+  <inputs>
+    <input name="cheat" keys="shift+ctrl+alt+c"/>
+    <input name="extendRod" keys="a"/>
+    <input name="fire" keys="SPACE"/>
+    <input name="left" keys="LEFT"/>
+    <input name="releaseRod" keys="z"/>
+    <input name="right" keys="RIGHT"/>
+    <input name="switchEnds" keys="q"/>
+    <input name="thrust" keys="UP"/>
+  </inputs>
 </resources>

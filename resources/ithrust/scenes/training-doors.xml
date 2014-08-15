@@ -1,6 +1,7 @@
-<scene showMouse="true" role="">
+<scene showMouse="true" role="" background="#000000ff">
+  <properties/>
   <layer name="background">
-    <actor costume="door1b" x="726" y="350" direction="90.0" startEvent="default">
+    <actor costume="door1b" x="726" y="350" direction="90.0" heading="90.0" startEvent="default" zOrder="1">
       <property name="buddyId" value="door5d"/>
       <property name="id" value="door5c"/>
       <property name="ticks" value="100"/>
@@ -11,7 +12,7 @@
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="door1a" x="726" y="34" direction="-90.0" startEvent="default">
+    <actor costume="door1a" x="726" y="34" direction="-90.0" heading="-90.0" startEvent="default" zOrder="2">
       <property name="buddyId" value="door5c"/>
       <property name="id" value="door5b"/>
       <property name="ticks" value="100"/>
@@ -22,7 +23,7 @@
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="door3a" x="528" y="592" direction="90.0" startEvent="default">
+    <actor costume="door3a" x="528" y="592" direction="90.0" heading="90.0" startEvent="default" zOrder="3">
       <property name="buddyId" value="door5a"/>
       <property name="id" value="door5e"/>
       <property name="ticks" value="100"/>
@@ -33,7 +34,7 @@
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="door3b" x="528" y="-191" direction="-90.0" startEvent="default">
+    <actor costume="door3b" x="528" y="-191" direction="-90.0" heading="-90.0" startEvent="default" zOrder="4">
       <property name="buddyId" value="door5e"/>
       <property name="id" value="door5d"/>
       <property name="ticks" value="100"/>
@@ -44,11 +45,11 @@
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="stone1a" x="78" y="256" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="220" y="131" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="441" y="17" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="571" y="404" direction="0.0" startEvent="default"/>
-    <actor costume="door1b" x="360" y="568" direction="0.0" startEvent="default">
+    <actor costume="stone1a" x="78" y="256" direction="0.0" heading="0.0" startEvent="default" zOrder="5"/>
+    <actor costume="stone1d" x="220" y="131" direction="0.0" heading="0.0" startEvent="default" zOrder="6"/>
+    <actor costume="stone1d" x="441" y="17" direction="0.0" heading="0.0" startEvent="default" zOrder="7"/>
+    <actor costume="stone1d" x="571" y="404" direction="0.0" heading="0.0" startEvent="default" zOrder="8"/>
+    <actor costume="door1b" x="360" y="568" direction="0.0" heading="0.0" startEvent="default" zOrder="9">
       <property name="buddyId" value="door1a"/>
       <property name="id" value="door1b"/>
       <property name="ticks" value="100"/>
@@ -59,7 +60,7 @@
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="door1a" x="43" y="568" direction="180.0" startEvent="default">
+    <actor costume="door1a" x="43" y="568" direction="180.0" heading="180.0" startEvent="default" zOrder="10">
       <property name="buddyId" value="door1b"/>
       <property name="id" value="door1a"/>
       <property name="ticks" value="100"/>
@@ -70,24 +71,24 @@
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="stone1a" x="431" y="513" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="22" y="464" direction="0.0" startEvent="default"/>
-    <text text="Shoot the doors" font="vera" size="22" color="#ffffff" x="219" y="503" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="-34" y="681" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="411" y="712" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="-60" y="911" direction="0.0" startEvent="default"/>
-    <actor costume="door1a" x="362" y="1434" direction="90.0" startEvent="default">
+    <actor costume="stone1a" x="431" y="513" direction="0.0" heading="0.0" startEvent="default" zOrder="11"/>
+    <actor costume="stone1a" x="22" y="464" direction="0.0" heading="0.0" startEvent="default" zOrder="12"/>
+    <text text="Shoot the doors" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="219" y="503" direction="0.0" heading="0.0" startEvent="default" zOrder="13"/>
+    <actor costume="stone1a" x="-34" y="681" direction="0.0" heading="0.0" startEvent="default" zOrder="14"/>
+    <actor costume="stone1a" x="411" y="712" direction="0.0" heading="0.0" startEvent="default" zOrder="15"/>
+    <actor costume="stone1a" x="-60" y="911" direction="0.0" heading="0.0" startEvent="default" zOrder="16"/>
+    <actor costume="door1a" x="362" y="1434" direction="90.0" heading="90.0" startEvent="default" zOrder="17">
       <property name="buddyId" value="door3c"/>
       <property name="id" value="door3b"/>
       <property name="ticks" value="100"/>
       <property name="closeAfter" value="0.0"/>
       <property name="lift" value="0.0"/>
-      <property name="slide" value="60.0"/>
+      <property name="slide" value="80.0"/>
       <property name="shootable" value="false"/>
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="button" x="118" y="1382" direction="0.0" startEvent="default">
+    <actor costume="button" x="118" y="1382" direction="0.0" heading="0.0" startEvent="default" zOrder="18">
       <property name="buddyId" value="door3b"/>
       <property name="id" value="door3a"/>
       <property name="ticks" value="20"/>
@@ -98,14 +99,14 @@
       <property name="ajar" value="10"/>
       <property name="angle" value="90.0"/>
     </actor>
-    <actor costume="stone1a" x="394" y="862" direction="0.0" startEvent="default"/>
-    <text text="Some doors close" font="vera" size="22" color="#ffffff" x="98" y="974" direction="0.0" startEvent="default"/>
-    <text text="automatically" font="vera" size="22" color="#ffffff" x="97" y="946" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="-21" y="1313" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="118" y="1444" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="371" y="1446" direction="0.0" startEvent="default"/>
-    <text text="Some doors have" font="vera" size="22" color="#ffffff" x="158" y="1323" direction="0.0" startEvent="default"/>
-    <actor costume="button" x="974" y="257" direction="179.60629385477384" startEvent="default">
+    <actor costume="stone1a" x="394" y="862" direction="0.0" heading="0.0" startEvent="default" zOrder="19"/>
+    <text text="Some doors close" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="98" y="974" direction="0.0" heading="0.0" startEvent="default" zOrder="20"/>
+    <text text="automatically" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="97" y="946" direction="0.0" heading="0.0" startEvent="default" zOrder="21"/>
+    <actor costume="stone1c" x="-21" y="1313" direction="0.0" heading="0.0" startEvent="default" zOrder="22"/>
+    <actor costume="stone1b" x="118" y="1444" direction="0.0" heading="0.0" startEvent="default" zOrder="23"/>
+    <actor costume="stone1d" x="371" y="1446" direction="0.0" heading="0.0" startEvent="default" zOrder="24"/>
+    <text text="Some doors have" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="158" y="1323" direction="0.0" heading="0.0" startEvent="default" zOrder="25"/>
+    <actor costume="button" x="974" y="257" direction="179.60629385477384" heading="179.60629385477384" startEvent="default" zOrder="26">
       <property name="buddyId" value="door5b"/>
       <property name="id" value="door5a"/>
       <property name="ticks" value="20"/>
@@ -116,9 +117,9 @@
       <property name="ajar" value="10"/>
       <property name="angle" value="90.0"/>
     </actor>
-    <text text="buttons to shoot" font="vera" size="22" color="#ffffff" x="161" y="1299" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="607" y="1367" direction="0.0" startEvent="default"/>
-    <actor costume="door1a" x="-70" y="1020" direction="180.0" startEvent="default">
+    <text text="buttons to shoot" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="161" y="1299" direction="0.0" heading="0.0" startEvent="default" zOrder="27"/>
+    <actor costume="stone1d" x="607" y="1367" direction="0.0" heading="0.0" startEvent="default" zOrder="28"/>
+    <actor costume="door1a" x="-70" y="1020" direction="180.0" heading="180.0" startEvent="default" zOrder="29">
       <property name="buddyId" value="door2a"/>
       <property name="id" value="door2b"/>
       <property name="ticks" value="70"/>
@@ -129,34 +130,34 @@
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="stone1c" x="-78" y="1123" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="808" y="1291" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="987" y="1153" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="651" y="1001" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="1020" y="952" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="710" y="813" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="1072" y="737" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="732" y="446" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="761" y="661" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="1083" y="518" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="1037" y="296" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="923" y="116" direction="0.0" startEvent="default"/>
-    <actor costume="door1a" x="356" y="1107" direction="-90.0" startEvent="default">
+    <actor costume="stone1c" x="-78" y="1123" direction="0.0" heading="0.0" startEvent="default" zOrder="30"/>
+    <actor costume="stone1d" x="808" y="1291" direction="0.0" heading="0.0" startEvent="default" zOrder="31"/>
+    <actor costume="stone1a" x="987" y="1153" direction="0.0" heading="0.0" startEvent="default" zOrder="32"/>
+    <actor costume="stone1a" x="651" y="1001" direction="0.0" heading="0.0" startEvent="default" zOrder="33"/>
+    <actor costume="stone1a" x="1020" y="952" direction="0.0" heading="0.0" startEvent="default" zOrder="34"/>
+    <actor costume="stone1a" x="710" y="813" direction="0.0" heading="0.0" startEvent="default" zOrder="35"/>
+    <actor costume="stone1a" x="1072" y="737" direction="0.0" heading="0.0" startEvent="default" zOrder="36"/>
+    <actor costume="stone1c" x="732" y="446" direction="0.0" heading="0.0" startEvent="default" zOrder="37"/>
+    <actor costume="stone1a" x="761" y="661" direction="0.0" heading="0.0" startEvent="default" zOrder="38"/>
+    <actor costume="stone1c" x="1083" y="518" direction="0.0" heading="0.0" startEvent="default" zOrder="39"/>
+    <actor costume="stone1c" x="1037" y="296" direction="0.0" heading="0.0" startEvent="default" zOrder="40"/>
+    <actor costume="stone1b" x="923" y="116" direction="0.0" heading="0.0" startEvent="default" zOrder="41"/>
+    <actor costume="door1a" x="356" y="1107" direction="-90.0" heading="-90.0" startEvent="default" zOrder="42">
       <property name="buddyId" value="door3a"/>
       <property name="id" value="door3c"/>
       <property name="ticks" value="100"/>
       <property name="closeAfter" value="0.0"/>
       <property name="lift" value="0.0"/>
-      <property name="slide" value="60.0"/>
+      <property name="slide" value="80.0"/>
       <property name="shootable" value="false"/>
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="stone1b" x="693" y="25" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="-121" y="558" direction="0.0" startEvent="default"/>
-    <text text="This button operates" font="vera" size="22" color="#ffffff" x="885" y="379" direction="0.0" startEvent="default"/>
-    <text text="two sets of doors" font="vera" size="22" color="#ffffff" x="888" y="349" direction="0.0" startEvent="default"/>
-    <actor costume="door1b" x="246" y="1019" direction="0.0" startEvent="default">
+    <actor costume="stone1b" x="693" y="25" direction="0.0" heading="0.0" startEvent="default" zOrder="43"/>
+    <actor costume="stone1d" x="-121" y="558" direction="0.0" heading="0.0" startEvent="default" zOrder="44"/>
+    <text text="This button operates" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="885" y="379" direction="0.0" heading="0.0" startEvent="default" zOrder="45"/>
+    <text text="two sets of doors" font="vera" size="22" color="#ffffff" xAlignment="0.5" yAlignment="0.5" x="888" y="349" direction="0.0" heading="0.0" startEvent="default" zOrder="46"/>
+    <actor costume="door1b" x="246" y="1019" direction="0.0" heading="0.0" startEvent="default" zOrder="47">
       <property name="buddyId" value="door2b"/>
       <property name="id" value="door2a"/>
       <property name="ticks" value="100"/>
@@ -167,35 +168,35 @@
       <property name="ajar" value="20"/>
       <property name="angle" value="0.0"/>
     </actor>
-    <actor costume="stone1d" x="435" y="816" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="364" y="1091" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="-182" y="1017" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="-428" y="1095" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="-627" y="1165" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="393" y="1024" direction="0.0" startEvent="default"/>
-    <actor costume="keySpace" x="219" y="468" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="549" y="589" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="591" y="536" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="594" y="482" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="682" y="586" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="642" y="748" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="471" y="702" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="549" y="708" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="589" y="830" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="508" y="894" direction="0.0" startEvent="default"/>
-    <actor costume="stone1d" x="501" y="943" direction="0.0" startEvent="default"/>
-    <actor costume="stone1b" x="424" y="1024" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="564" y="1007" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="288" y="965" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="370" y="1574" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="386" y="1785" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="534" y="-126" direction="0.0" startEvent="default"/>
-    <actor costume="stone1a" x="486" y="-129" direction="0.0" startEvent="default"/>
-    <actor costume="stone1c" x="500" y="-340" direction="0.0" startEvent="default"/>
-    <actor costume="ship1" x="296" y="385" direction="90.0" startEvent="default"/>
+    <actor costume="stone1d" x="435" y="816" direction="0.0" heading="0.0" startEvent="default" zOrder="48"/>
+    <actor costume="stone1b" x="364" y="1091" direction="0.0" heading="0.0" startEvent="default" zOrder="49"/>
+    <actor costume="stone1d" x="-182" y="1017" direction="0.0" heading="0.0" startEvent="default" zOrder="50"/>
+    <actor costume="stone1d" x="-428" y="1095" direction="0.0" heading="0.0" startEvent="default" zOrder="51"/>
+    <actor costume="stone1d" x="-627" y="1165" direction="0.0" heading="0.0" startEvent="default" zOrder="52"/>
+    <actor costume="stone1c" x="393" y="1024" direction="0.0" heading="0.0" startEvent="default" zOrder="53"/>
+    <actor costume="keySpace" x="219" y="468" direction="0.0" heading="0.0" startEvent="default" zOrder="54"/>
+    <actor costume="stone1b" x="549" y="589" direction="0.0" heading="0.0" startEvent="default" zOrder="55"/>
+    <actor costume="stone1b" x="591" y="536" direction="0.0" heading="0.0" startEvent="default" zOrder="56"/>
+    <actor costume="stone1d" x="594" y="482" direction="0.0" heading="0.0" startEvent="default" zOrder="57"/>
+    <actor costume="stone1c" x="682" y="586" direction="0.0" heading="0.0" startEvent="default" zOrder="58"/>
+    <actor costume="stone1c" x="642" y="748" direction="0.0" heading="0.0" startEvent="default" zOrder="59"/>
+    <actor costume="stone1c" x="471" y="702" direction="0.0" heading="0.0" startEvent="default" zOrder="60"/>
+    <actor costume="stone1a" x="549" y="708" direction="0.0" heading="0.0" startEvent="default" zOrder="61"/>
+    <actor costume="stone1c" x="589" y="830" direction="0.0" heading="0.0" startEvent="default" zOrder="62"/>
+    <actor costume="stone1b" x="508" y="894" direction="0.0" heading="0.0" startEvent="default" zOrder="63"/>
+    <actor costume="stone1d" x="501" y="943" direction="0.0" heading="0.0" startEvent="default" zOrder="64"/>
+    <actor costume="stone1b" x="424" y="1024" direction="0.0" heading="0.0" startEvent="default" zOrder="65"/>
+    <actor costume="stone1a" x="564" y="1007" direction="0.0" heading="0.0" startEvent="default" zOrder="66"/>
+    <actor costume="stone1a" x="288" y="965" direction="0.0" heading="0.0" startEvent="default" zOrder="67"/>
+    <actor costume="stone1c" x="370" y="1574" direction="0.0" heading="0.0" startEvent="default" zOrder="68"/>
+    <actor costume="stone1a" x="386" y="1785" direction="0.0" heading="0.0" startEvent="default" zOrder="69"/>
+    <actor costume="stone1c" x="534" y="-126" direction="0.0" heading="0.0" startEvent="default" zOrder="70"/>
+    <actor costume="stone1a" x="486" y="-129" direction="0.0" heading="0.0" startEvent="default" zOrder="71"/>
+    <actor costume="stone1c" x="500" y="-340" direction="0.0" heading="0.0" startEvent="default" zOrder="72"/>
+    <actor costume="ship1" x="296" y="385" direction="90.0" heading="90.0" startEvent="default" zOrder="73"/>
   </layer>
   <layer name="main">
-    <actor costume="gate" x="171" y="252" direction="0.0" startEvent="default">
+    <actor costume="gate" x="171" y="252" direction="0.0" heading="0.0" startEvent="default" zOrder="74">
       <property name="requiredWater" value="0"/>
       <property name="exitDirection" value="90.0"/>
       <property name="nextLevel" value="training-hub"/>
@@ -203,22 +204,22 @@
     </actor>
   </layer>
   <layer name="escapeRoute">
-    <actor costume="escapeRoute" x="236" y="248" direction="-12.581622620130215" startEvent="default" scale="1.0063291139240507"/>
-    <actor costume="escapeRoute" x="462" y="201" direction="0.0" startEvent="default" scale="0.47315185662887776"/>
-    <actor costume="escapeRoute" x="778" y="202" direction="179.16054002388654" startEvent="default" scale="0.43609022556390975"/>
-    <actor costume="escapeRoute" x="900" y="333" direction="-131.71063618101556" startEvent="default" scale="0.7891567744561615"/>
-    <actor costume="escapeRoute" x="926" y="676" direction="-94.25336594478854" startEvent="default" scale="1.5119047619047619"/>
-    <actor costume="escapeRoute" x="187" y="315" direction="83.38231220113896" startEvent="default" scale="0.931517383114462"/>
-    <actor costume="escapeRoute" x="213" y="524" direction="92.52134411193799" startEvent="default" scale="0.3656716417910448"/>
-    <actor costume="escapeRoute" x="210" y="608" direction="106.36873846041867" startEvent="default" scale="0.8467153284671532"/>
-    <actor costume="escapeRoute" x="147" y="799" direction="106.92310514363416" startEvent="default" scale="0.7904411764705882"/>
-    <actor costume="escapeRoute" x="95" y="974" direction="92.52134411193799" startEvent="default" scale="0.3656716417910448"/>
-    <actor costume="escapeRoute" x="85" y="1060" direction="65.9241995794077" startEvent="default" scale="0.8388888888888889"/>
-    <actor costume="escapeRoute" x="165" y="1235" direction="11.522705390739908" startEvent="default" scale="0.7426470588235294"/>
-    <actor costume="escapeRoute" x="334" y="1273" direction="-0.060116344542584244" startEvent="default" scale="0.3656716417910448"/>
-    <actor costume="escapeRoute" x="422" y="1271" direction="-5.710593137499643" startEvent="default" scale="0.7985074626865671"/>
-    <actor costume="escapeRoute" x="603" y="1248" direction="-25.820991974189283" startEvent="default" scale="0.8777777777777778"/>
-    <actor costume="escapeRoute" x="790" y="1149" direction="-67.94022923920252" startEvent="default"/>
-    <actor costume="escapeRoute" x="882" y="920" direction="-78.0306895762324" startEvent="default"/>
+    <actor costume="escapeRoute" x="236" y="248" direction="-12.581622620130215" heading="-12.581622620130215" startEvent="default" zOrder="75" scale="1.0063291139240507"/>
+    <actor costume="escapeRoute" x="462" y="201" direction="0.0" heading="0.0" startEvent="default" zOrder="76" scale="0.47315185662887776"/>
+    <actor costume="escapeRoute" x="778" y="202" direction="179.16054002388654" heading="179.16054002388654" startEvent="default" zOrder="77" scale="0.43609022556390975"/>
+    <actor costume="escapeRoute" x="900" y="333" direction="-131.71063618101556" heading="-131.71063618101556" startEvent="default" zOrder="78" scale="0.7891567744561615"/>
+    <actor costume="escapeRoute" x="926" y="676" direction="-94.25336594478854" heading="-94.25336594478854" startEvent="default" zOrder="79" scale="1.5119047619047619"/>
+    <actor costume="escapeRoute" x="187" y="315" direction="83.38231220113896" heading="83.38231220113896" startEvent="default" zOrder="80" scale="0.931517383114462"/>
+    <actor costume="escapeRoute" x="213" y="524" direction="92.52134411193799" heading="92.52134411193799" startEvent="default" zOrder="81" scale="0.3656716417910448"/>
+    <actor costume="escapeRoute" x="210" y="608" direction="106.36873846041867" heading="106.36873846041867" startEvent="default" zOrder="82" scale="0.8467153284671532"/>
+    <actor costume="escapeRoute" x="147" y="799" direction="106.92310514363416" heading="106.92310514363416" startEvent="default" zOrder="83" scale="0.7904411764705882"/>
+    <actor costume="escapeRoute" x="95" y="974" direction="92.52134411193799" heading="92.52134411193799" startEvent="default" zOrder="84" scale="0.3656716417910448"/>
+    <actor costume="escapeRoute" x="85" y="1060" direction="65.9241995794077" heading="65.9241995794077" startEvent="default" zOrder="85" scale="0.8388888888888889"/>
+    <actor costume="escapeRoute" x="165" y="1235" direction="11.522705390739908" heading="11.522705390739908" startEvent="default" zOrder="86" scale="0.7426470588235294"/>
+    <actor costume="escapeRoute" x="334" y="1273" direction="-0.060116344542584244" heading="-0.060116344542584244" startEvent="default" zOrder="87" scale="0.3656716417910448"/>
+    <actor costume="escapeRoute" x="422" y="1271" direction="-5.710593137499643" heading="-5.710593137499643" startEvent="default" zOrder="88" scale="0.7985074626865671"/>
+    <actor costume="escapeRoute" x="603" y="1248" direction="-25.820991974189283" heading="-25.820991974189283" startEvent="default" zOrder="89" scale="0.8777777777777778"/>
+    <actor costume="escapeRoute" x="790" y="1149" direction="-67.94022923920252" heading="-67.94022923920252" startEvent="default" zOrder="90"/>
+    <actor costume="escapeRoute" x="882" y="920" direction="-78.0306895762324" heading="-78.0306895762324" startEvent="default" zOrder="91"/>
   </layer>
 </scene>
